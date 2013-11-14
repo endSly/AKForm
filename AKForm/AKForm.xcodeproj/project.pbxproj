@@ -30,8 +30,6 @@
 		1A2B8FAE183490BE00E1A5BB /* CSFormTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8F71183490BE00E1A5BB /* CSFormTextViewCell.m */; };
 		1A2B8FAF183490BE00E1A5BB /* CSFormToggleCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8F72183490BE00E1A5BB /* CSFormToggleCell.h */; };
 		1A2B8FB0183490BE00E1A5BB /* CSFormToggleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8F73183490BE00E1A5BB /* CSFormToggleCell.m */; };
-		1A2B8FB1183490BE00E1A5BB /* CSSpecialCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8F74183490BE00E1A5BB /* CSSpecialCell.h */; };
-		1A2B8FB2183490BE00E1A5BB /* CSSpecialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8F75183490BE00E1A5BB /* CSSpecialCell.m */; };
 		1A2B8FB3183490BE00E1A5BB /* CSForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8F76183490BE00E1A5BB /* CSForm.h */; };
 		1A2B8FB4183490BE00E1A5BB /* CSForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8F77183490BE00E1A5BB /* CSForm.m */; };
 		1A2B8FB5183490BE00E1A5BB /* CSFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8F78183490BE00E1A5BB /* CSFormField.h */; };
@@ -111,8 +109,6 @@
 		1A2B8F71183490BE00E1A5BB /* CSFormTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormTextViewCell.m; sourceTree = "<group>"; };
 		1A2B8F72183490BE00E1A5BB /* CSFormToggleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFormToggleCell.h; sourceTree = "<group>"; };
 		1A2B8F73183490BE00E1A5BB /* CSFormToggleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormToggleCell.m; sourceTree = "<group>"; };
-		1A2B8F74183490BE00E1A5BB /* CSSpecialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSpecialCell.h; sourceTree = "<group>"; };
-		1A2B8F75183490BE00E1A5BB /* CSSpecialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSpecialCell.m; sourceTree = "<group>"; };
 		1A2B8F76183490BE00E1A5BB /* CSForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSForm.h; sourceTree = "<group>"; };
 		1A2B8F77183490BE00E1A5BB /* CSForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSForm.m; sourceTree = "<group>"; };
 		1A2B8F78183490BE00E1A5BB /* CSFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFormField.h; sourceTree = "<group>"; };
@@ -235,8 +231,6 @@
 				1A2B8F71183490BE00E1A5BB /* CSFormTextViewCell.m */,
 				1A2B8F72183490BE00E1A5BB /* CSFormToggleCell.h */,
 				1A2B8F73183490BE00E1A5BB /* CSFormToggleCell.m */,
-				1A2B8F74183490BE00E1A5BB /* CSSpecialCell.h */,
-				1A2B8F75183490BE00E1A5BB /* CSSpecialCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -371,7 +365,6 @@
 				1A2B8F06183464A100E1A5BB /* AKForm.h in Headers */,
 				1A2B8FEC1834936200E1A5BB /* UIImage+ImageEffects.h in Headers */,
 				1A2B8FA1183490BE00E1A5BB /* CSFormCellDatePicker.h in Headers */,
-				1A2B8FB1183490BE00E1A5BB /* CSSpecialCell.h in Headers */,
 				1A2B8FD3183490BE00E1A5BB /* CSFormFieldText.h in Headers */,
 				1A2B8FC7183490BE00E1A5BB /* CSFormFieldExpandablePicker.h in Headers */,
 				1A2B8FBD183490BE00E1A5BB /* CSMetadata.h in Headers */,
@@ -474,7 +467,6 @@
 			files = (
 				1A2B8FE91834931200E1A5BB /* URBMediaFocusViewController.m in Sources */,
 				1A2B8FAC183490BE00E1A5BB /* CSFormSwitchCell.m in Sources */,
-				1A2B8FB2183490BE00E1A5BB /* CSSpecialCell.m in Sources */,
 				1A2B8FAE183490BE00E1A5BB /* CSFormTextViewCell.m in Sources */,
 				1A2B8FD4183490BE00E1A5BB /* CSFormFieldText.m in Sources */,
 				1A2B8FCC183490BE00E1A5BB /* CSFormFieldModal.m in Sources */,
