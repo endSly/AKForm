@@ -24,7 +24,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.label.text = [Something something];
+    self.label.text = [Something somethingEvenElse];
 }
 
 - (void)didReceiveMemoryWarning

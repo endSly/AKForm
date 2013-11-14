@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = 'AKForm'
-  s.version               = '0.0.4'
+  s.version               = '0.0.6'
   s.summary               = 'A refreshing iOS 7 form framework with the works'
   s.homepage              = 'https://github.com/mrackwitz/MRProgress'
   s.author                = { 'Ahmed Khalaf' => 'ahmed@arkuana.co' }
@@ -12,4 +12,6 @@ Pod::Spec.new do |s|
   s.requires_arc          = true
   s.ios.frameworks        = %w{UIKit}
   s.dependency 'NSDate+Helper'
+  s.dependency 'NSString-Hashes'
+  s.dependency 'PhoneNumberFormatter'
 end

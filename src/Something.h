@@ -11,5 +11,7 @@
 @interface Something : NSObject
 
 + (NSString *)something;
++ (NSString *)somethingElse;
++ (NSString *)somethingEvenElse;
 
 @end
