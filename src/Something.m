@@ -7,12 +7,13 @@
 //
 
 #import "Something.h"
+#import <NSDate+Helper.h>
 
 @implementation Something
 
 + (NSString *)something
 {
-    return @"It's working!";
+    return [NSDate stringForDisplayFromDate:[NSDate date]];
 }
 
 @end

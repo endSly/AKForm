@@ -20,7 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A2B8F151834669100E1A5BB /* libAKForm.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libAKForm.a; path = "../AKForm/build/Debug-iphoneos/libAKForm.a"; sourceTree = "<group>"; };
+		1A2B8F151834669100E1A5BB /* libAKForm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAKForm.a; path = "../AKForm/build/Debug-iphoneos/libAKForm.a"; sourceTree = "<group>"; };
+		1A2B8F5D1834765E00E1A5BB /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		1A5AAA8F183455CB00CEA9D7 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AAA92183455CB00CEA9D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1A5AAA94183455CB00CEA9D7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -73,6 +74,7 @@
 		1A5AAA91183455CB00CEA9D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A2B8F5D1834765E00E1A5BB /* libPods.a */,
 				1A2B8F151834669100E1A5BB /* libAKForm.a */,
 				1A5AAA92183455CB00CEA9D7 /* Foundation.framework */,
 				1A5AAA94183455CB00CEA9D7 /* CoreGraphics.framework */,

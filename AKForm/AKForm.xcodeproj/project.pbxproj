@@ -21,6 +21,7 @@
 		1A2B8F11183465A800E1A5BB /* Something.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Something.m; sourceTree = "<group>"; };
 		1A2B8F17183468B400E1A5BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		1A2B8F19183468BA00E1A5BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		1A2B8F5C183475B300E1A5BB /* AKForm.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = AKForm.podspec; path = ../../AKForm.podspec; sourceTree = "<group>"; };
 		1A5AAB1D1834572800CEA9D7 /* libAKForm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAKForm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AAB281834572800CEA9D7 /* AKForm-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AKForm-Prefix.pch"; sourceTree = "<group>"; };
 		BDDFD3B70D1149CFA37AFE90 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +93,7 @@
 		1A5AAB271834572800CEA9D7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1A2B8F5C183475B300E1A5BB /* AKForm.podspec */,
 				1A5AAB281834572800CEA9D7 /* AKForm-Prefix.pch */,
 			);
 			name = "Supporting Files";
