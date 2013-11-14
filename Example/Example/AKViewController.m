@@ -7,7 +7,6 @@
 //
 
 #import "AKViewController.h"
-#import "Something.h"
 
 @interface AKViewController ()
 @property(nonatomic, strong) IBOutlet UILabel *label;
@@ -24,7 +23,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.label.text = [Something somethingEvenElse];
 }
 
 - (void)didReceiveMemoryWarning

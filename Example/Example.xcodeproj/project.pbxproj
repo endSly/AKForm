@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A2B8F161834669100E1A5BB /* libAKForm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8F151834669100E1A5BB /* libAKForm.a */; };
+		1A2B8FF9183496C000E1A5BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8FF8183496C000E1A5BB /* Accelerate.framework */; };
 		1A5AAA93183455CB00CEA9D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5AAA92183455CB00CEA9D7 /* Foundation.framework */; };
 		1A5AAA95183455CB00CEA9D7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5AAA94183455CB00CEA9D7 /* CoreGraphics.framework */; };
 		1A5AAA97183455CB00CEA9D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5AAA96183455CB00CEA9D7 /* UIKit.framework */; };
@@ -23,6 +24,7 @@
 		101DC3B1278A40B48E5B9F2E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A2B8F151834669100E1A5BB /* libAKForm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAKForm.a; path = "../AKForm/build/Debug-iphoneos/libAKForm.a"; sourceTree = "<group>"; };
 		1A2B8F5D1834765E00E1A5BB /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		1A2B8FF8183496C000E1A5BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1A5AAA8F183455CB00CEA9D7 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AAA92183455CB00CEA9D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1A5AAA94183455CB00CEA9D7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A2B8FF9183496C000E1A5BB /* Accelerate.framework in Frameworks */,
 				1A2B8F161834669100E1A5BB /* libAKForm.a in Frameworks */,
 				1A5AAA95183455CB00CEA9D7 /* CoreGraphics.framework in Frameworks */,
 				1A5AAA97183455CB00CEA9D7 /* UIKit.framework in Frameworks */,
@@ -77,6 +80,7 @@
 		1A5AAA91183455CB00CEA9D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A2B8FF8183496C000E1A5BB /* Accelerate.framework */,
 				1A2B8F5D1834765E00E1A5BB /* libPods.a */,
 				1A2B8F151834669100E1A5BB /* libAKForm.a */,
 				1A5AAA92183455CB00CEA9D7 /* Foundation.framework */,
