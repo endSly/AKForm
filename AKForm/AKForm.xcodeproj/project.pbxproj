@@ -10,7 +10,8 @@
 		1A2B8F06183464A100E1A5BB /* AKForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8F03183464A100E1A5BB /* AKForm.h */; };
 		1A2B8F12183465A800E1A5BB /* Something.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8F10183465A800E1A5BB /* Something.h */; };
 		1A2B8F13183465A800E1A5BB /* Something.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8F11183465A800E1A5BB /* Something.m */; };
-		1A5AAB211834572800CEA9D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5AAB201834572800CEA9D7 /* Cocoa.framework */; };
+		1A2B8F18183468B400E1A5BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8F17183468B400E1A5BB /* UIKit.framework */; };
+		1A2B8F1A183468BA00E1A5BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8F19183468BA00E1A5BB /* Foundation.framework */; };
 		A12EE87A91BD4233A56B65B2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDFD3B70D1149CFA37AFE90 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -18,13 +19,10 @@
 		1A2B8F03183464A100E1A5BB /* AKForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKForm.h; sourceTree = "<group>"; };
 		1A2B8F10183465A800E1A5BB /* Something.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Something.h; sourceTree = "<group>"; };
 		1A2B8F11183465A800E1A5BB /* Something.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Something.m; sourceTree = "<group>"; };
+		1A2B8F17183468B400E1A5BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		1A2B8F19183468BA00E1A5BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		1A5AAB1D1834572800CEA9D7 /* libAKForm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAKForm.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A5AAB201834572800CEA9D7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		1A5AAB231834572800CEA9D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1A5AAB241834572800CEA9D7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		1A5AAB251834572800CEA9D7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		1A5AAB281834572800CEA9D7 /* AKForm-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AKForm-Prefix.pch"; sourceTree = "<group>"; };
-		1A5AAB311834572800CEA9D7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BDDFD3B70D1149CFA37AFE90 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62C7385727A485BB3845E8B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -34,7 +32,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A5AAB211834572800CEA9D7 /* Cocoa.framework in Frameworks */,
+				1A2B8F1A183468BA00E1A5BB /* Foundation.framework in Frameworks */,
+				1A2B8F18183468B400E1A5BB /* UIKit.framework in Frameworks */,
 				A12EE87A91BD4233A56B65B2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,22 +74,11 @@
 		1A5AAB1F1834572800CEA9D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1A5AAB201834572800CEA9D7 /* Cocoa.framework */,
-				1A5AAB311834572800CEA9D7 /* XCTest.framework */,
-				1A5AAB221834572800CEA9D7 /* Other Frameworks */,
+				1A2B8F19183468BA00E1A5BB /* Foundation.framework */,
+				1A2B8F17183468B400E1A5BB /* UIKit.framework */,
 				BDDFD3B70D1149CFA37AFE90 /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		1A5AAB221834572800CEA9D7 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1A5AAB231834572800CEA9D7 /* Foundation.framework */,
-				1A5AAB241834572800CEA9D7 /* CoreData.framework */,
-				1A5AAB251834572800CEA9D7 /* AppKit.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		1A5AAB261834572800CEA9D7 /* AKForm */ = {
