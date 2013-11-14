@@ -6,4 +6,4 @@
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "UIImage+Test.h"
+#import "Something.h"
