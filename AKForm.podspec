@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = 'AKForm'
-  s.version               = '0.0.8'
+  s.version               = '0.0.9'
   s.summary               = 'A refreshing iOS 7 form framework with the works'
   s.homepage              = 'https://github.com/mrackwitz/MRProgress'
   s.author                = { 'Ahmed Khalaf' => 'ahmed@arkuana.co' }
@@ -11,7 +11,11 @@ Pod::Spec.new do |s|
   s.platform              = :ios, '7.0'
   s.requires_arc          = true
   s.ios.frameworks        = %w{UIKit}
+
+  s.dependency 'HexColors'
+  s.dependency 'GKImagePicker', :podspec => 'PodSpecs/GKImagePicker.podspec'
+  s.dependency 'UIImage-Resize'
   s.dependency 'NSDate+Helper'
-  s.dependency 'NSString-Hashes'
-  s.dependency 'PhoneNumberFormatter'
+  s.dependency 'CJStringValidator'
+  s.dependency 'NSDate+Helper'
 end
