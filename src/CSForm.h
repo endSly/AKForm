@@ -20,6 +20,7 @@
 #import "CSFormFieldSegmented.h"
 
 @protocol CSFormDelegate
+@optional
 - (void)pressedNext;
 @end
 

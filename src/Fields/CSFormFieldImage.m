@@ -138,7 +138,7 @@
 - (void)didPickImage:(UIImage *)image
 {
     self.value = [CSFormValue value:image withType:CSFormValueImage];
-    [self performSelectorInBackground:@selector(__resizeAndSaveImage:) withObject:image];
+//    [self performSelectorInBackground:@selector(__resizeAndSaveImage:) withObject:image];
     [self updateThumbnailWithImage:image];
 }
 

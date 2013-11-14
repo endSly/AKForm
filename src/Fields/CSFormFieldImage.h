@@ -24,6 +24,26 @@
 @property(nonatomic, strong) id<CSFormFieldImageDelegate>delegate;
 @property(nonatomic, weak) id<CSFormCellImageStyleProvider>styleProvider;
 
+///---------------------------------------------------------------------------------------
+/// @name Managing the cell's label
+///---------------------------------------------------------------------------------------
+
+
+/**
+ *
+ *
+ *  @param key
+ *  @param title
+ *  @param placeholder
+ *  @param imageSize        The size of the image required. The image stored as the value
+                            will be exactly what was expected, so expect up/down scaling
+                            depending on the size of the original image.
+ *  @param thumbnailStyle
+ *  @param delegate
+ *  @param styleProvider
+ *
+ *  @return
+ */
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder

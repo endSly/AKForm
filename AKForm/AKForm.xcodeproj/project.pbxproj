@@ -164,6 +164,7 @@
 		1A2B8FEE1834941600E1A5BB /* UIImageView+CircleMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CircleMask.h"; sourceTree = "<group>"; };
 		1A2B8FEF1834941600E1A5BB /* UIImageView+CircleMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CircleMask.m"; sourceTree = "<group>"; };
 		1A2B8FF61834953300E1A5BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		1A2B8FFA1834A4E900E1A5BB /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		1A5AAB1D1834572800CEA9D7 /* libAKForm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAKForm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AAB281834572800CEA9D7 /* AKForm-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AKForm-Prefix.pch"; sourceTree = "<group>"; };
 		BDDFD3B70D1149CFA37AFE90 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,6 +334,7 @@
 			children = (
 				1A2B8F5C183475B300E1A5BB /* AKForm.podspec */,
 				1A5AAB281834572800CEA9D7 /* AKForm-Prefix.pch */,
+				1A2B8FFA1834A4E900E1A5BB /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -584,6 +586,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C62C7385727A485BB3845E8B /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AKForm/AKForm-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -595,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C62C7385727A485BB3845E8B /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AKForm/AKForm-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
