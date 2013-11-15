@@ -6,9 +6,9 @@
 //
 //
 
-#import "CSFormFieldDescriptive.h"
-#import "CSFormCellLabel.h"
+#import "AKFormFieldDescriptive.h"
+#import "AKFormCellLabel.h"
 
-@interface CSFormFieldModal : CSFormFieldDescriptive
+@interface CSFormFieldModal : AKFormFieldDescriptive
 
 @end

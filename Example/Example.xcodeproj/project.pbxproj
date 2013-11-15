@@ -14,9 +14,9 @@
 		1A5AAA97183455CB00CEA9D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5AAA96183455CB00CEA9D7 /* UIKit.framework */; };
 		1A5AAA9D183455CB00CEA9D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AAA9B183455CB00CEA9D7 /* InfoPlist.strings */; };
 		1A5AAA9F183455CB00CEA9D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AAA9E183455CB00CEA9D7 /* main.m */; };
-		1A5AAAA3183455CB00CEA9D7 /* AKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AAAA2183455CB00CEA9D7 /* AKAppDelegate.m */; };
+		1A5AAAA3183455CB00CEA9D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AAAA2183455CB00CEA9D7 /* AppDelegate.m */; };
 		1A5AAAA6183455CB00CEA9D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AAAA4183455CB00CEA9D7 /* Main.storyboard */; };
-		1A5AAAA9183455CB00CEA9D7 /* AKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AAAA8183455CB00CEA9D7 /* AKViewController.m */; };
+		1A5AAAA9183455CB00CEA9D7 /* ImageFieldsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */; };
 		1A5AAAAB183455CB00CEA9D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AAAAA183455CB00CEA9D7 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -33,11 +33,11 @@
 		1A5AAA9C183455CB00CEA9D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1A5AAA9E183455CB00CEA9D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1A5AAAA0183455CB00CEA9D7 /* Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Prefix.pch"; sourceTree = "<group>"; };
-		1A5AAAA1183455CB00CEA9D7 /* AKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKAppDelegate.h; sourceTree = "<group>"; };
-		1A5AAAA2183455CB00CEA9D7 /* AKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AKAppDelegate.m; sourceTree = "<group>"; };
+		1A5AAAA1183455CB00CEA9D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1A5AAAA2183455CB00CEA9D7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1A5AAAA5183455CB00CEA9D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1A5AAAA7183455CB00CEA9D7 /* AKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKViewController.h; sourceTree = "<group>"; };
-		1A5AAAA8183455CB00CEA9D7 /* AKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AKViewController.m; sourceTree = "<group>"; };
+		1A5AAAA7183455CB00CEA9D7 /* ImageFieldsForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageFieldsForm.h; sourceTree = "<group>"; };
+		1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageFieldsForm.m; sourceTree = "<group>"; };
 		1A5AAAAA183455CB00CEA9D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1A5AAAB1183455CB00CEA9D7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A7D43B451C9343DD89E68A2F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -95,11 +95,10 @@
 		1A5AAA98183455CB00CEA9D7 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				1A5AAAA1183455CB00CEA9D7 /* AKAppDelegate.h */,
-				1A5AAAA2183455CB00CEA9D7 /* AKAppDelegate.m */,
+				1A5AAAA1183455CB00CEA9D7 /* AppDelegate.h */,
+				1A5AAAA2183455CB00CEA9D7 /* AppDelegate.m */,
+				1A9B216318361498000A7C34 /* Field Types */,
 				1A5AAAA4183455CB00CEA9D7 /* Main.storyboard */,
-				1A5AAAA7183455CB00CEA9D7 /* AKViewController.h */,
-				1A5AAAA8183455CB00CEA9D7 /* AKViewController.m */,
 				1A5AAAAA183455CB00CEA9D7 /* Images.xcassets */,
 				1A5AAA99183455CB00CEA9D7 /* Supporting Files */,
 			);
@@ -115,6 +114,15 @@
 				1A5AAAA0183455CB00CEA9D7 /* Example-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1A9B216318361498000A7C34 /* Field Types */ = {
+			isa = PBXGroup;
+			children = (
+				1A5AAAA7183455CB00CEA9D7 /* ImageFieldsForm.h */,
+				1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */,
+			);
+			name = "Field Types";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,8 +226,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A5AAAA3183455CB00CEA9D7 /* AKAppDelegate.m in Sources */,
-				1A5AAAA9183455CB00CEA9D7 /* AKViewController.m in Sources */,
+				1A5AAAA3183455CB00CEA9D7 /* AppDelegate.m in Sources */,
+				1A5AAAA9183455CB00CEA9D7 /* ImageFieldsForm.m in Sources */,
 				1A5AAA9F183455CB00CEA9D7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

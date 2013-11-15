@@ -51,7 +51,7 @@
 
 - (void)switchValueChanged:(UISwitch *)switchControl
 {
-    self.value = [CSFormValue value:@(switchControl.on) withType:CSFormValueBool];
+    self.value = [AKFormValue value:@(switchControl.on) withType:AKFormValueBool];
     [self.delegate didChangeValueOfSwitchOnField:self toOn:switchControl.on];
 }
 

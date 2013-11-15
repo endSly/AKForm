@@ -10,7 +10,7 @@
 #import "CSFormToggleCell.h"
 
 @protocol CSFormFieldSegmentedDelegate
-- (void)didSelectSegmentIndex:(NSInteger)selectedIndex onField:(CSFormField *)row;
+- (void)didSelectSegmentIndex:(NSInteger)selectedIndex onField:(AKFormField *)row;
 @end
 
 @interface CSFormFieldSegmented : CSFormFieldToggle
@@ -27,7 +27,7 @@
 @property(nonatomic, strong) id<CSFormFieldSegmentedDelegate>delegate;
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
-         metadataCollection:(CSMetadataCollection *)metadataCollection
+         metadataCollection:(AKFormMetadataCollection *)metadataCollection
                    delegate:(id<CSFormFieldSegmentedDelegate>)delegate;
 
 @end

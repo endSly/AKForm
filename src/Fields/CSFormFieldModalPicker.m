@@ -13,7 +13,7 @@
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder
-         metadataCollection:(CSMetadataCollection *)metadataCollection
+         metadataCollection:(AKFormMetadataCollection *)metadataCollection
                    delegate:(id<CSFormFieldModalPickerDelegate>)delegate
 {
     self = [super initWithKey:key title:title];
@@ -28,9 +28,9 @@
 
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
 {
-    CSFormCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_LABEL];
+    AKFormCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_LABEL];
     if (!cell) {
-        cell = [[CSFormCellLabel alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[AKFormCellLabel alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CELL_IDENTIFIER_LABEL];
     }
     
@@ -64,7 +64,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
 	}
     
-    CSMetadata *metadata = [self.metadataCollection metadataAtIndex:indexPath.row];
+    AKFormMetadata *metadata = [self.metadataCollection metadataAtIndex:indexPath.row];
     cell.textLabel.text = metadata.name;
     cell.accessoryType = [[self.value metadataCollectionValue] containsMetadata:metadata] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
@@ -78,7 +78,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    CSMetadata *metadata = [self.metadataCollection metadataAtIndex:indexPath.row];
+    AKFormMetadata *metadata = [self.metadataCollection metadataAtIndex:indexPath.row];
     
     if ([[self.value metadataCollectionValue] containsMetadata:metadata]) {
         [[self.value metadataCollectionValue] removeMetadata:metadata];

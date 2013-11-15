@@ -12,7 +12,7 @@
 
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
-         metadataCollection:(CSMetadataCollection *)metadataCollection
+         metadataCollection:(AKFormMetadataCollection *)metadataCollection
                    delegate:(id<CSFormFieldSegmentedDelegate>)delegate
 {
     self = [super initWithKey:key title:title];
@@ -60,8 +60,8 @@
 
 - (void)segmentedValueChanged:(UISegmentedControl *)segmentedControl
 {
-    CSMetadata *metadata = [self.metadataCollection metadataAtIndex:segmentedControl.selectedSegmentIndex];
-    self.value = [CSFormValue value:metadata withType:CSFormValueBool];
+    AKFormMetadata *metadata = [self.metadataCollection metadataAtIndex:segmentedControl.selectedSegmentIndex];
+    self.value = [AKFormValue value:metadata withType:AKFormValueBool];
     [self.delegate didSelectSegmentIndex:segmentedControl.selectedSegmentIndex onField:self];
 }
 

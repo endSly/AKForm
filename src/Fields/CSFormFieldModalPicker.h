@@ -19,7 +19,7 @@
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder
-         metadataCollection:(CSMetadataCollection *)metadataCollection
+         metadataCollection:(AKFormMetadataCollection *)metadataCollection
                    delegate:(id<CSFormFieldModalPickerDelegate>)delegate;
 
 @end

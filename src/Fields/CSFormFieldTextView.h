@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "CSFormFieldDescriptive.h"
+#import "AKFormFieldDescriptive.h"
 #import "CSFormTextViewCell.h"
 
-@interface CSFormFieldTextView : CSFormFieldDescriptive <UITextViewDelegate>
+@interface CSFormFieldTextView : AKFormFieldDescriptive <UITextViewDelegate>
 
 @property(nonatomic, assign) CGFloat textViewHeight;
 
