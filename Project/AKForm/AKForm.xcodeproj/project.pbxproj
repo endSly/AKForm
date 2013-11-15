@@ -68,6 +68,7 @@
 		1A9B225118361C16000A7C34 /* CSFormFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B221618361C16000A7C34 /* CSFormFieldTextView.m */; };
 		1A9B225218361C16000A7C34 /* CSFormFieldToggle.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B221718361C16000A7C34 /* CSFormFieldToggle.h */; };
 		1A9B225318361C16000A7C34 /* CSFormFieldToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B221818361C16000A7C34 /* CSFormFieldToggle.m */; };
+		1AA5B67218366C9A00421A67 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA5B67118366C9A00421A67 /* QuartzCore.framework */; };
 		A12EE87A91BD4233A56B65B2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDFD3B70D1149CFA37AFE90 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +138,7 @@
 		1A9B221618361C16000A7C34 /* CSFormFieldTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormFieldTextView.m; sourceTree = "<group>"; };
 		1A9B221718361C16000A7C34 /* CSFormFieldToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFormFieldToggle.h; sourceTree = "<group>"; };
 		1A9B221818361C16000A7C34 /* CSFormFieldToggle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormFieldToggle.m; sourceTree = "<group>"; };
+		1AA5B67118366C9A00421A67 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		BDDFD3B70D1149CFA37AFE90 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62C7385727A485BB3845E8B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AA5B67218366C9A00421A67 /* QuartzCore.framework in Frameworks */,
 				1A2B8FF71834953300E1A5BB /* Accelerate.framework in Frameworks */,
 				1A2B8F1A183468BA00E1A5BB /* Foundation.framework in Frameworks */,
 				1A2B8F18183468B400E1A5BB /* UIKit.framework in Frameworks */,
@@ -178,6 +181,7 @@
 		1A5AAB1F1834572800CEA9D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AA5B67118366C9A00421A67 /* QuartzCore.framework */,
 				1A2B8FF61834953300E1A5BB /* Accelerate.framework */,
 				1A2B8F19183468BA00E1A5BB /* Foundation.framework */,
 				1A2B8F17183468B400E1A5BB /* UIKit.framework */,
