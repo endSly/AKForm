@@ -68,18 +68,6 @@
 		1A2B8FD6183490BE00E1A5BB /* CSFormFieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8F9A183490BE00E1A5BB /* CSFormFieldTextView.m */; };
 		1A2B8FD7183490BE00E1A5BB /* CSFormFieldToggle.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8F9B183490BE00E1A5BB /* CSFormFieldToggle.h */; };
 		1A2B8FD8183490BE00E1A5BB /* CSFormFieldToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8F9C183490BE00E1A5BB /* CSFormFieldToggle.m */; };
-		1A2B8FE21834931200E1A5BB /* UIDeviceHardware.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8FDA1834931200E1A5BB /* UIDeviceHardware.h */; };
-		1A2B8FE31834931200E1A5BB /* UIDeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8FDB1834931200E1A5BB /* UIDeviceHardware.m */; };
-		1A2B8FE41834931200E1A5BB /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8FDC1834931200E1A5BB /* UIImage+ImageEffects.h */; };
-		1A2B8FE51834931200E1A5BB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8FDD1834931200E1A5BB /* UIImage+ImageEffects.m */; };
-		1A2B8FE61834931200E1A5BB /* UIView-JTViewToImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8FDE1834931200E1A5BB /* UIView-JTViewToImage.h */; };
-		1A2B8FE71834931200E1A5BB /* UIView-JTViewToImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8FDF1834931200E1A5BB /* UIView-JTViewToImage.m */; };
-		1A2B8FE81834931200E1A5BB /* URBMediaFocusViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8FE01834931200E1A5BB /* URBMediaFocusViewController.h */; };
-		1A2B8FE91834931200E1A5BB /* URBMediaFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8FE11834931200E1A5BB /* URBMediaFocusViewController.m */; };
-		1A2B8FEC1834936200E1A5BB /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8FEA1834936200E1A5BB /* UIImage+ImageEffects.h */; };
-		1A2B8FED1834936200E1A5BB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8FEB1834936200E1A5BB /* UIImage+ImageEffects.m */; };
-		1A2B8FF01834941600E1A5BB /* UIImageView+CircleMask.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2B8FEE1834941600E1A5BB /* UIImageView+CircleMask.h */; };
-		1A2B8FF11834941600E1A5BB /* UIImageView+CircleMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B8FEF1834941600E1A5BB /* UIImageView+CircleMask.m */; };
 		1A2B8FF71834953300E1A5BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8FF61834953300E1A5BB /* Accelerate.framework */; };
 		A12EE87A91BD4233A56B65B2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDFD3B70D1149CFA37AFE90 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -147,18 +135,6 @@
 		1A2B8F9A183490BE00E1A5BB /* CSFormFieldTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormFieldTextView.m; sourceTree = "<group>"; };
 		1A2B8F9B183490BE00E1A5BB /* CSFormFieldToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFormFieldToggle.h; sourceTree = "<group>"; };
 		1A2B8F9C183490BE00E1A5BB /* CSFormFieldToggle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormFieldToggle.m; sourceTree = "<group>"; };
-		1A2B8FDA1834931200E1A5BB /* UIDeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDeviceHardware.h; sourceTree = "<group>"; };
-		1A2B8FDB1834931200E1A5BB /* UIDeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDeviceHardware.m; sourceTree = "<group>"; };
-		1A2B8FDC1834931200E1A5BB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		1A2B8FDD1834931200E1A5BB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		1A2B8FDE1834931200E1A5BB /* UIView-JTViewToImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView-JTViewToImage.h"; sourceTree = "<group>"; };
-		1A2B8FDF1834931200E1A5BB /* UIView-JTViewToImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView-JTViewToImage.m"; sourceTree = "<group>"; };
-		1A2B8FE01834931200E1A5BB /* URBMediaFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URBMediaFocusViewController.h; sourceTree = "<group>"; };
-		1A2B8FE11834931200E1A5BB /* URBMediaFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URBMediaFocusViewController.m; sourceTree = "<group>"; };
-		1A2B8FEA1834936200E1A5BB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		1A2B8FEB1834936200E1A5BB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		1A2B8FEE1834941600E1A5BB /* UIImageView+CircleMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CircleMask.h"; sourceTree = "<group>"; };
-		1A2B8FEF1834941600E1A5BB /* UIImageView+CircleMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CircleMask.m"; sourceTree = "<group>"; };
 		1A2B8FF61834953300E1A5BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		1A2B8FFA1834A4E900E1A5BB /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		1A5AAB1D1834572800CEA9D7 /* libAKForm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAKForm.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,7 +177,6 @@
 				1A2B8F83183490BE00E1A5BB /* CSMetadataCollection.m */,
 				1A2B8F84183490BE00E1A5BB /* Fields */,
 				1A2B8F5F183490BE00E1A5BB /* Cells */,
-				1A2B8FD91834931200E1A5BB /* Third Party */,
 				1A2B8F03183464A100E1A5BB /* AKForm.h */,
 			);
 			name = src;
@@ -266,25 +241,6 @@
 			path = Fields;
 			sourceTree = "<group>";
 		};
-		1A2B8FD91834931200E1A5BB /* Third Party */ = {
-			isa = PBXGroup;
-			children = (
-				1A2B8FEE1834941600E1A5BB /* UIImageView+CircleMask.h */,
-				1A2B8FEF1834941600E1A5BB /* UIImageView+CircleMask.m */,
-				1A2B8FEA1834936200E1A5BB /* UIImage+ImageEffects.h */,
-				1A2B8FEB1834936200E1A5BB /* UIImage+ImageEffects.m */,
-				1A2B8FDA1834931200E1A5BB /* UIDeviceHardware.h */,
-				1A2B8FDB1834931200E1A5BB /* UIDeviceHardware.m */,
-				1A2B8FDC1834931200E1A5BB /* UIImage+ImageEffects.h */,
-				1A2B8FDD1834931200E1A5BB /* UIImage+ImageEffects.m */,
-				1A2B8FDE1834931200E1A5BB /* UIView-JTViewToImage.h */,
-				1A2B8FDF1834931200E1A5BB /* UIView-JTViewToImage.m */,
-				1A2B8FE01834931200E1A5BB /* URBMediaFocusViewController.h */,
-				1A2B8FE11834931200E1A5BB /* URBMediaFocusViewController.m */,
-			);
-			path = "Third Party";
-			sourceTree = "<group>";
-		};
 		1A5AAB141834572800CEA9D7 = {
 			isa = PBXGroup;
 			children = (
@@ -340,18 +296,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A2B8FE61834931200E1A5BB /* UIView-JTViewToImage.h in Headers */,
 				1A2B8FC5183490BE00E1A5BB /* CSFormFieldExpandableDate.h in Headers */,
 				1A2B8FB3183490BE00E1A5BB /* CSForm.h in Headers */,
 				1A2B8FCF183490BE00E1A5BB /* CSFormFieldSegmented.h in Headers */,
 				1A2B8FC3183490BE00E1A5BB /* CSFormFieldExpandable.h in Headers */,
-				1A2B8FF01834941600E1A5BB /* UIImageView+CircleMask.h in Headers */,
 				1A2B8FAF183490BE00E1A5BB /* CSFormToggleCell.h in Headers */,
 				1A2B8FAB183490BE00E1A5BB /* CSFormSwitchCell.h in Headers */,
-				1A2B8FE81834931200E1A5BB /* URBMediaFocusViewController.h in Headers */,
 				1A2B8FB9183490BE00E1A5BB /* CSFormValue.h in Headers */,
 				1A2B8FA9183490BE00E1A5BB /* CSFormCellTextField.h in Headers */,
-				1A2B8FE21834931200E1A5BB /* UIDeviceHardware.h in Headers */,
 				1A2B8FB7183490BE00E1A5BB /* CSFormSection.h in Headers */,
 				1A2B8FAD183490BE00E1A5BB /* CSFormTextViewCell.h in Headers */,
 				1A2B8FA3183490BE00E1A5BB /* CSFormCellImage.h in Headers */,
@@ -363,7 +315,6 @@
 				1A2B8F9D183490BE00E1A5BB /* CSFormBaseCell.h in Headers */,
 				1A2B8FD1183490BE00E1A5BB /* CSFormFieldSwitch.h in Headers */,
 				1A2B8F06183464A100E1A5BB /* AKForm.h in Headers */,
-				1A2B8FEC1834936200E1A5BB /* UIImage+ImageEffects.h in Headers */,
 				1A2B8FA1183490BE00E1A5BB /* CSFormCellDatePicker.h in Headers */,
 				1A2B8FD3183490BE00E1A5BB /* CSFormFieldText.h in Headers */,
 				1A2B8FC7183490BE00E1A5BB /* CSFormFieldExpandablePicker.h in Headers */,
@@ -373,7 +324,6 @@
 				1A2B8FA5183490BE00E1A5BB /* CSFormCellLabel.h in Headers */,
 				1A2B8FD5183490BE00E1A5BB /* CSFormFieldTextView.h in Headers */,
 				1A2B8FCB183490BE00E1A5BB /* CSFormFieldModal.h in Headers */,
-				1A2B8FE41834931200E1A5BB /* UIImage+ImageEffects.h in Headers */,
 				1A2B8FA7183490BE00E1A5BB /* CSFormCellPickerView.h in Headers */,
 				1A2B8FBF183490BE00E1A5BB /* CSMetadataCollection.h in Headers */,
 			);
@@ -465,7 +415,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A2B8FE91834931200E1A5BB /* URBMediaFocusViewController.m in Sources */,
 				1A2B8FAC183490BE00E1A5BB /* CSFormSwitchCell.m in Sources */,
 				1A2B8FAE183490BE00E1A5BB /* CSFormTextViewCell.m in Sources */,
 				1A2B8FD4183490BE00E1A5BB /* CSFormFieldText.m in Sources */,
@@ -474,14 +423,12 @@
 				1A2B8FA8183490BE00E1A5BB /* CSFormCellPickerView.m in Sources */,
 				1A2B8FC0183490BE00E1A5BB /* CSMetadataCollection.m in Sources */,
 				1A2B8FCA183490BE00E1A5BB /* CSFormFieldImage.m in Sources */,
-				1A2B8FE31834931200E1A5BB /* UIDeviceHardware.m in Sources */,
 				1A2B8FA6183490BE00E1A5BB /* CSFormCellLabel.m in Sources */,
 				1A2B8FB4183490BE00E1A5BB /* CSForm.m in Sources */,
 				1A2B8FC4183490BE00E1A5BB /* CSFormFieldExpandable.m in Sources */,
 				1A2B8FD0183490BE00E1A5BB /* CSFormFieldSegmented.m in Sources */,
 				1A2B8FA4183490BE00E1A5BB /* CSFormCellImage.m in Sources */,
 				1A2B8FB0183490BE00E1A5BB /* CSFormToggleCell.m in Sources */,
-				1A2B8FF11834941600E1A5BB /* UIImageView+CircleMask.m in Sources */,
 				1A2B8FB8183490BE00E1A5BB /* CSFormSection.m in Sources */,
 				1A2B8FCE183490BE00E1A5BB /* CSFormFieldModalPicker.m in Sources */,
 				1A2B8FB6183490BE00E1A5BB /* CSFormField.m in Sources */,
@@ -491,12 +438,9 @@
 				1A2B8FD6183490BE00E1A5BB /* CSFormFieldTextView.m in Sources */,
 				1A2B8FC6183490BE00E1A5BB /* CSFormFieldExpandableDate.m in Sources */,
 				1A2B8FC2183490BE00E1A5BB /* CSFormFieldDescriptive.m in Sources */,
-				1A2B8FE51834931200E1A5BB /* UIImage+ImageEffects.m in Sources */,
 				1A2B8FA0183490BE00E1A5BB /* CSFormCell.m in Sources */,
 				1A2B8FA2183490BE00E1A5BB /* CSFormCellDatePicker.m in Sources */,
 				1A2B8FBE183490BE00E1A5BB /* CSMetadata.m in Sources */,
-				1A2B8FE71834931200E1A5BB /* UIView-JTViewToImage.m in Sources */,
-				1A2B8FED1834936200E1A5BB /* UIImage+ImageEffects.m in Sources */,
 				1A2B8FD2183490BE00E1A5BB /* CSFormFieldSwitch.m in Sources */,
 				1A2B8FBA183490BE00E1A5BB /* CSFormValue.m in Sources */,
 				1A2B8FD8183490BE00E1A5BB /* CSFormFieldToggle.m in Sources */,

@@ -7,7 +7,6 @@
 //
 
 #import "CSFormCellImage.h"
-#import "UIImageView+CircleMask.h"
 
 #define DEFAULT_LABEL_STYLE             CSFormCellImageLabelStyleLeft
 #define DEFAULT_THUMBNAIL_STYLE         CSFormCellImageThumbnailStyleCircle
@@ -37,7 +36,7 @@
             self.labelStyle = DEFAULT_LABEL_STYLE;
         }
 
-        self.thumbnail = [[UIImageView alloc] init];
+        self.thumbnail = [[FXImageView alloc] init];
         self.thumbnail.contentMode = UIViewContentModeScaleAspectFill;
         self.thumbnail.clipsToBounds = YES;
         self.thumbnail.userInteractionEnabled = YES;
@@ -69,9 +68,9 @@
 {
     [self.thumbnail setImage:image];
     if (self.thumbnailStyle == CSFormCellImageThumbnailStyleCircle) {
-        [self.thumbnail maskWithCircle];
+        self.thumbnail.cornerRadius = self.thumbnail.frame.size.width / 2.f;
     } else {
-        [self.thumbnail removeMask];
+        self.thumbnail.cornerRadius = 0.0;
     }
 }
 
