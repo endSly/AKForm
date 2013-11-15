@@ -60,7 +60,7 @@
     //with context switcher
     AKFormSection *accompanyingSection;
     
-    BOOL alreadyFoundOne = NO;
+//    BOOL alreadyFoundOne = NO;
     
 //commented out for now, we'll deal with this when we get to context togglers
 //    for (AKFormField *field in section.fields) {
@@ -417,7 +417,7 @@
     if (cell && [cell isKindOfClass:[AKFormCell class]]) {
         AKFormCell *formCell = (AKFormCell *)cell;
         [formCell invalidate];
-#warning ALSO scroll to tableview area that has cell
+//#warning ALSO scroll to tableview area that has cell
     }
 }
 
@@ -427,7 +427,7 @@
         AKFormValueValidator *failedValidator;
         AKFormField *validationFailedField = [section fieldFailedWithValidator:&failedValidator];
         if (validationFailedField && failedValidator) {
-#warning INVALIDATE the field here (so that when cells are recreated, styles persist)
+//#warning INVALIDATE the field here (so that when cells are recreated, styles persist)
             [self invalidateCellForField:validationFailedField];
             return failedValidator;
         }
