@@ -13,8 +13,6 @@
 #import "AKFormCell.h"
 #import "AKFormValueValidator.h"
 
-@class AKFormField;
-
 /**
  *  An abstract parent class for all the other field classes. This class encapsulates the
  *  common properties for all form fields. It isn't meant to be created directly, but
