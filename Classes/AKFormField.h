@@ -10,8 +10,8 @@
 
 #import "AKFormValue.h"
 #import "AKFormMetadataCollection.h"
-#import "AKFormCell.h"
 #import "AKFormValueValidator.h"
+#import "AKFormCell.h"
 
 /**
  *  An abstract parent class for all the other field classes. This class encapsulates the
