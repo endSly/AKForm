@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "AKForm"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A refreshing iOS 7 form framework with the works."
 
   s.description  = <<-DESC
@@ -35,7 +35,6 @@ Pod::Spec.new do |s|
   s.dependency 'UIImage-Resize'
   s.dependency 'NSDate+Helper'
   s.dependency 'CJStringValidator'
-  s.dependency 'FXImageView'
   s.dependency 'GKImagePicker@arkuana'
   s.dependency 'URBMediaFocusViewController@arkuana'
 
