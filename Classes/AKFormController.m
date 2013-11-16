@@ -10,7 +10,7 @@
 #import "CSFormBaseCell.h"
 #import "CSFormFieldSwitch.h"
 
-#import "AKFormValueValidator.h"
+#import "AKFormValidator.h"
 
 @interface AKFormController ()
 @property(nonatomic, strong) NSMutableArray *sections;
@@ -408,10 +408,10 @@
     }
 }
 
-- (AKFormValueValidator *)failedValidator
+- (AKFormValidator *)failedValidator
 {
     for (AKFormSection *section in self.sections) {
-        AKFormValueValidator *failedValidator;
+        AKFormValidator *failedValidator;
         AKFormField *validationFailedField = [section fieldFailedWithValidator:&failedValidator];
         if (validationFailedField && failedValidator) {
 //#warning INVALIDATE the field here (so that when cells are recreated, styles persist)
@@ -562,6 +562,23 @@
     }
 }
 
+- (BOOL)validateForm
+{
+    [self.view endEditing:YES];
+    
+    if ([self failedValidator]) {
+        AKFormValidator *failedValidator = [self failedValidator];
+        [[[UIAlertView alloc] initWithTitle:failedValidator.failMessageTitle
+                                   message:failedValidator.failMessage
+                                  delegate:nil
+                         cancelButtonTitle:@"OK"
+                         otherButtonTitles:nil] show];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 #pragma mark - Unsorted
 #pragma mark -
 #pragma mark - Text Field Cell Delegate
@@ -572,7 +589,7 @@
     if (nextField) {
         [self makeFirstResponder:nextField];
     } else {
-        [self pressedNext];
+        [self validateForm];
     }
     return YES;
 }

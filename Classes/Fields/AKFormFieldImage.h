@@ -20,6 +20,10 @@
 
 @property(nonatomic, weak) AKFormController *formController;
 
+/// Things to Note
+/// Image thumbnail will allow as much space as possible for the label while making sure it is still visible,
+// so just make sure your labels aren't too long
+
 ///---------------------------------------------------------------------------------------
 /// @name Managing the cell's label
 ///---------------------------------------------------------------------------------------
@@ -39,12 +43,12 @@
  *
  *  @return
  */
-- (instancetype)initWithKey:(NSString *)key
-                      title:(NSString *)title
-                placeholder:(NSString *)placeholder
-                  imageSize:(CGSize)imageSize
-             thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
-             formController:(id<CSFormCellImageStyleProvider>)formController;
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+                   imageSize:(CGSize)imageSize
+              thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
+              formController:(AKFormController *)formController;
 
 - (void)select;
 

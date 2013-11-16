@@ -10,7 +10,7 @@
 
 #import "AKFormValue.h"
 #import "AKFormMetadataCollection.h"
-#import "AKFormValueValidator.h"
+#import "AKFormValidator.h"
 #import "AKFormCell.h"
 
 /**
@@ -72,11 +72,11 @@
 /**
  *  The array of validation blocks that are used for this field when validating this form.
  *  The field's value will be passed into each of these validator blocks.
- *  @see AKFormValueValidator
+ *  @see AKFormValidator
  */
 @property(nonatomic, strong) NSArray *validators;
 
-- (AKFormValueValidator *)failedValidator;
+- (AKFormValidator *)failedValidator;
 - (BOOL)isFilled;
 
 

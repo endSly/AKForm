@@ -19,16 +19,13 @@
 #import "CSFormFieldSwitch.h"
 #import "CSFormFieldSegmented.h"
 
-@protocol CSFormDelegate
-@optional
-- (void)pressedNext;
-@end
+@interface AKFormController : UITableViewController <CSFormCellTextFieldDelegate, CSFormFieldModalPickerDelegate, CSFormFieldSwitchDelegate, CSFormFieldSegmentedDelegate, CSFormCellImageStyleProvider>
 
-@interface AKFormController : UITableViewController <CSFormDelegate, CSFormCellTextFieldDelegate, CSFormFieldModalPickerDelegate, CSFormFieldSwitchDelegate, CSFormFieldSegmentedDelegate, CSFormCellImageStyleProvider>
+- (BOOL)validateForm;
 
 - (void)addSection:(AKFormSection *)section;
 
-- (AKFormValueValidator *)failedValidator;
+- (AKFormValidator *)failedValidator;
 - (NSMutableDictionary *)populateUserInfo:(NSMutableDictionary *)userInfo;
 - (NSIndexPath *)indexPathForField:(AKFormField *)aField;
 

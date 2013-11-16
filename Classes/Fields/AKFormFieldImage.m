@@ -17,6 +17,16 @@
 
 @implementation AKFormFieldImage
 
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+                   imageSize:(CGSize)imageSize
+              thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
+              formController:(AKFormController *)formController
+{
+    return [[AKFormFieldImage alloc] initWithKey:key title:title placeholder:placeholder imageSize:imageSize thumbnailStyle:thumbnailStyle formController:formController];
+}
+
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder

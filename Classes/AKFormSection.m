@@ -8,7 +8,7 @@
 
 #import "AKFormSection.h"
 #import "AKFormFieldExpandablePicker.h"
-#import "AKFormValueValidator.h"
+#import "AKFormValidator.h"
 
 @interface AKFormSection()
 @property(nonatomic, strong) NSMutableArray *fields;
@@ -221,10 +221,10 @@
     return [self setExpandedStateOfFieldAtRowNumber:rowNumber toExpanded:NO];
 }
 
-- (AKFormField *)fieldFailedWithValidator:(AKFormValueValidator **)validator
+- (AKFormField *)fieldFailedWithValidator:(AKFormValidator **)validator
 {
     for (AKFormField *field in self.fields) {
-        AKFormValueValidator *failedValidator = [field failedValidator];
+        AKFormValidator *failedValidator = [field failedValidator];
         if (failedValidator) {
             *validator = failedValidator;
             return field;

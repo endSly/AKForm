@@ -75,9 +75,9 @@
 #pragma mark - Validating a Field
 ///---------------------------------------------------------------------------------------
 
-- (AKFormValueValidator *)failedValidator
+- (AKFormValidator *)failedValidator
 {
-    for (AKFormValueValidator *validator in self.validators) {
+    for (AKFormValidator *validator in self.validators) {
         if (!validator.validationBlock(self.value)) {
             return validator;
         }

@@ -22,8 +22,8 @@
 		1A9B222318361C16000A7C34 /* AKFormSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21E618361C16000A7C34 /* AKFormSection.m */; };
 		1A9B222418361C16000A7C34 /* AKFormValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21E718361C16000A7C34 /* AKFormValue.h */; };
 		1A9B222518361C16000A7C34 /* AKFormValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21E818361C16000A7C34 /* AKFormValue.m */; };
-		1A9B222618361C16000A7C34 /* AKFormValueValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21E918361C16000A7C34 /* AKFormValueValidator.h */; };
-		1A9B222718361C16000A7C34 /* AKFormValueValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21EA18361C16000A7C34 /* AKFormValueValidator.m */; };
+		1A9B222618361C16000A7C34 /* AKFormValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21E918361C16000A7C34 /* AKFormValidator.h */; };
+		1A9B222718361C16000A7C34 /* AKFormValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21EA18361C16000A7C34 /* AKFormValidator.m */; };
 		1A9B222818361C16000A7C34 /* AKFormCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21EC18361C16000A7C34 /* AKFormCell.h */; };
 		1A9B222918361C16000A7C34 /* AKFormCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21ED18361C16000A7C34 /* AKFormCell.m */; };
 		1A9B222A18361C16000A7C34 /* AKFormCellDatePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21EE18361C16000A7C34 /* AKFormCellDatePicker.h */; };
@@ -93,8 +93,8 @@
 		1A9B21E618361C16000A7C34 /* AKFormSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormSection.m; sourceTree = "<group>"; };
 		1A9B21E718361C16000A7C34 /* AKFormValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormValue.h; sourceTree = "<group>"; };
 		1A9B21E818361C16000A7C34 /* AKFormValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormValue.m; sourceTree = "<group>"; };
-		1A9B21E918361C16000A7C34 /* AKFormValueValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormValueValidator.h; sourceTree = "<group>"; };
-		1A9B21EA18361C16000A7C34 /* AKFormValueValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormValueValidator.m; sourceTree = "<group>"; };
+		1A9B21E918361C16000A7C34 /* AKFormValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormValidator.h; sourceTree = "<group>"; };
+		1A9B21EA18361C16000A7C34 /* AKFormValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormValidator.m; sourceTree = "<group>"; };
 		1A9B21EC18361C16000A7C34 /* AKFormCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormCell.h; sourceTree = "<group>"; };
 		1A9B21ED18361C16000A7C34 /* AKFormCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormCell.m; sourceTree = "<group>"; };
 		1A9B21EE18361C16000A7C34 /* AKFormCellDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormCellDatePicker.h; sourceTree = "<group>"; };
@@ -226,8 +226,8 @@
 				1A9B21E618361C16000A7C34 /* AKFormSection.m */,
 				1A9B21E718361C16000A7C34 /* AKFormValue.h */,
 				1A9B21E818361C16000A7C34 /* AKFormValue.m */,
-				1A9B21E918361C16000A7C34 /* AKFormValueValidator.h */,
-				1A9B21EA18361C16000A7C34 /* AKFormValueValidator.m */,
+				1A9B21E918361C16000A7C34 /* AKFormValidator.h */,
+				1A9B21EA18361C16000A7C34 /* AKFormValidator.m */,
 				1A9B21EB18361C16000A7C34 /* Cells */,
 				1A9B220018361C16000A7C34 /* Fields */,
 			);
@@ -325,7 +325,7 @@
 				1A9B223A18361C16000A7C34 /* CSFormToggleCell.h in Headers */,
 				1A9B222018361C16000A7C34 /* AKFormMetadataCollection.h in Headers */,
 				1A9B221A18361C16000A7C34 /* AKFormController.h in Headers */,
-				1A9B222618361C16000A7C34 /* AKFormValueValidator.h in Headers */,
+				1A9B222618361C16000A7C34 /* AKFormValidator.h in Headers */,
 				1A9B223E18361C16000A7C34 /* AKFormFieldExpandable.h in Headers */,
 				1A9B224618361C16000A7C34 /* AKFormFieldText.h in Headers */,
 				1A9B224A18361C16000A7C34 /* CSFormFieldModalPicker.h in Headers */,
@@ -443,7 +443,7 @@
 				1A9B223D18361C16000A7C34 /* AKFormFieldDescriptive.m in Sources */,
 				1A9B222D18361C16000A7C34 /* AKFormCellImage.m in Sources */,
 				1A9B224118361C16000A7C34 /* AKFormFieldExpandableDate.m in Sources */,
-				1A9B222718361C16000A7C34 /* AKFormValueValidator.m in Sources */,
+				1A9B222718361C16000A7C34 /* AKFormValidator.m in Sources */,
 				1A9B222918361C16000A7C34 /* AKFormCell.m in Sources */,
 				1A9B224F18361C16000A7C34 /* CSFormFieldSwitch.m in Sources */,
 				1A9B224318361C16000A7C34 /* AKFormFieldExpandablePicker.m in Sources */,

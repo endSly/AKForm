@@ -74,7 +74,7 @@
 /// @name Validating a Section
 ///---------------------------------------------------------------------------------------
 
-- (AKFormField *)fieldFailedWithValidator:(AKFormValueValidator **)validator;
+- (AKFormField *)fieldFailedWithValidator:(AKFormValidator **)validator;
 
 ///---------------------------------------------------------------------------------------
 /// @name Generating table view cells
