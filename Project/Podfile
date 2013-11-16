@@ -9,5 +9,5 @@ pod 'NSDate+Helper'
 pod 'CJStringValidator'
 pod 'FXImageView'
 
-pod 'GKImagePicker@arkuana'
+pod 'GKImagePicker@arkuana', :git => 'https://github.com/arkuana/GKImagePicker.git'
 pod 'URBMediaFocusViewController@arkuana'

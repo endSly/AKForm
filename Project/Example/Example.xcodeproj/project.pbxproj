@@ -18,6 +18,7 @@
 		1A5AAAA6183455CB00CEA9D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AAAA4183455CB00CEA9D7 /* Main.storyboard */; };
 		1A5AAAA9183455CB00CEA9D7 /* ImageFieldsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */; };
 		1A5AAAAB183455CB00CEA9D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AAAAA183455CB00CEA9D7 /* Images.xcassets */; };
+		1AA5B67C1837C3CE00421A67 /* TextFieldsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5B67B1837C3CE00421A67 /* TextFieldsForm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageFieldsForm.m; sourceTree = "<group>"; };
 		1A5AAAAA183455CB00CEA9D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1A5AAAB1183455CB00CEA9D7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		1AA5B67A1837C3CE00421A67 /* TextFieldsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldsForm.h; sourceTree = "<group>"; };
+		1AA5B67B1837C3CE00421A67 /* TextFieldsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldsForm.m; sourceTree = "<group>"; };
 		A7D43B451C9343DD89E68A2F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +122,8 @@
 		1A9B216318361498000A7C34 /* Field Types */ = {
 			isa = PBXGroup;
 			children = (
+				1AA5B67A1837C3CE00421A67 /* TextFieldsForm.h */,
+				1AA5B67B1837C3CE00421A67 /* TextFieldsForm.m */,
 				1A5AAAA7183455CB00CEA9D7 /* ImageFieldsForm.h */,
 				1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */,
 			);
@@ -229,6 +234,7 @@
 				1A5AAAA3183455CB00CEA9D7 /* AppDelegate.m in Sources */,
 				1A5AAAA9183455CB00CEA9D7 /* ImageFieldsForm.m in Sources */,
 				1A5AAA9F183455CB00CEA9D7 /* main.m in Sources */,
+				1AA5B67C1837C3CE00421A67 /* TextFieldsForm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AKFormCell.h"
-#import <FXImageView.h>
 
 #define CELL_IDENTIFIER_IMAGE           @"imageCell"
 
@@ -58,7 +57,7 @@ typedef NS_ENUM(NSInteger, CSFormCellImageMode) {
 ///---------------------------------------------------------------------------------------
 
 @property(nonatomic, strong) UILabel *label;
-@property(nonatomic, strong) FXImageView *thumbnail;
+@property(nonatomic, strong) UIImageView *thumbnail;
 
 @property(nonatomic, weak) id<CSFormCellImageDelegate> delegate;
 

@@ -14,7 +14,6 @@
 {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    NSLog(@"Status bar style is %d", (int)[UIApplication sharedApplication].statusBarStyle);
     return YES;
 }
 							

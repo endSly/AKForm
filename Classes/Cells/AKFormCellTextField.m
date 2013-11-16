@@ -29,11 +29,7 @@
     if (self) {
 
         self.styleProvider = styleProvider;
-        if (styleProvider && [styleProvider respondsToSelector:@selector(styleForTextFieldCell:)]) {
-            self.style = [styleProvider styleForTextFieldCell:self];
-        } else {
-            self.style = DEFAULT_STYLE;
-        }
+        [self styleTextField];
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -46,6 +42,7 @@
         [self styleTextField];
         [self.contentView addSubview:self.textField];
         
+        [self styleTextAlignments];
         [self setupInitialStyle];
         
         UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCell:)];
@@ -73,12 +70,10 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    //we may have to readjust the frames if this has dynamic width (once reused, as the
-    // new label may have changed length)
-    if (self.style == CSFormCellTextFieldStyleLabelWithDynamicWidth) {
-        [self styleFrames];
-    }
+    [self styleTextAlignments];
+    [self styleLabel];
+    [self styleTextField];
+    [self styleFrames];
 }
 
 /**
@@ -117,7 +112,6 @@
 {
     [self updateMode];
     [self styleFrames];
-    [self styleTextAlignments];
 }
 
 - (void)styleTextAlignments
@@ -164,6 +158,9 @@
             } else {
                 labelWidth = DEFAULT_TITLE_WIDTH;
             }
+            labelWidth = MAX(MINIMUM_TITLE_WIDTH, labelWidth);
+            CGFloat maxLabelWidth = contentFrame.size.width - PADDING_HORIZONTAL - MINIMUM_VALUE_WIDTH;
+            labelWidth = MIN(labelWidth, maxLabelWidth);
             self.label.frame = CGRectMake(contentFrame.origin.x, contentFrame.origin.y, labelWidth, contentFrame.size.height);
             break;
         case CSFormCellTextFieldStyleLabelWithDynamicWidth:
@@ -182,8 +179,9 @@
     if (self.style != CSFormCellTextFieldStyleNoLabel) {
         textFieldX += PADDING_HORIZONTAL;
     }
+    CGFloat textFieldWidth = MAX(MINIMUM_VALUE_WIDTH, contentFrame.size.width - textFieldX);
     self.textField.frame = CGRectMake(contentFrame.origin.x + textFieldX, contentFrame.origin.y,
-                                      contentFrame.size.width - textFieldX, contentFrame.size.height);
+                                      textFieldWidth, contentFrame.size.height);
 }
 
 /**
@@ -229,6 +227,12 @@
  */
 - (void)styleTextField
 {
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForTextFieldCell:)]) {
+        self.style = [self.styleProvider styleForTextFieldCell:self];
+    } else {
+        self.style = DEFAULT_STYLE;
+    }
+
     //font
     if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldCell:textFieldFontForMode:)]) {
         self.textField.font = [self.styleProvider textFieldCell:self textFieldFontForMode:self.mode];

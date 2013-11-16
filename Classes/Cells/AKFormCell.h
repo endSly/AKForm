@@ -15,6 +15,7 @@
 #define DEFAULT_TEXTCOLOR_VALUE         [UIColor blackColor]
 
 #define DEFAULT_TITLE_WIDTH             100.f
+#define MINIMUM_TITLE_WIDTH             50.f
 #define MINIMUM_VALUE_WIDTH             50.f
 
 #define PADDING_HORIZONTAL              15.f

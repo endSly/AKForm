@@ -13,6 +13,19 @@
 #define DEFAULT_MODE                    CSFormCellImageModeEmpty
 #define DEFAULT_IMAGE_SIZE              CGSizeMake(320, 320)
 
+
+@interface UIImageView (Mask)
+- (void)setTheRadius:(CGFloat)cornerRadius;
+@end
+@implementation UIImageView (mask)
+- (void)setTheRadius:(CGFloat)cornerRadius
+{
+    CALayer *imageLayer = self.layer;
+    [imageLayer setCornerRadius:cornerRadius];
+    [imageLayer setMasksToBounds:YES];
+}
+@end
+
 @interface AKFormCellImage()
 @property(nonatomic, assign) CSFormCellImageLabelStyle labelStyle;
 @property(nonatomic, assign) CSFormCellImageMode mode;
@@ -30,13 +43,8 @@
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER_IMAGE];
     if (self) {
         self.styleProvider = styleProvider;
-        if (styleProvider && [styleProvider respondsToSelector:@selector(labelStyleForImageCell:)]) {
-            self.labelStyle = [styleProvider labelStyleForImageCell:self];
-        } else {
-            self.labelStyle = DEFAULT_LABEL_STYLE;
-        }
 
-        self.thumbnail = [[FXImageView alloc] init];
+        self.thumbnail = [[UIImageView alloc] init];
         self.thumbnail.contentMode = UIViewContentModeScaleAspectFill;
         self.thumbnail.clipsToBounds = YES;
         self.thumbnail.userInteractionEnabled = YES;
@@ -46,11 +54,9 @@
         UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedThumbnail:)];
         [self.thumbnail addGestureRecognizer:tgr];
 
-        if (self.labelStyle != CSFormCellImageLabelStyleNone) {
-            self.label = [[UILabel alloc] init];
-            [self styleLabel];
-            [self.contentView addSubview:self.label];
-        }
+        self.label = [[UILabel alloc] init];
+        [self styleLabel];
+        [self.contentView addSubview:self.label];
         
         self.thumbnailStyle = DEFAULT_THUMBNAIL_STYLE;
         self.imageSize = DEFAULT_IMAGE_SIZE;
@@ -67,11 +73,7 @@
 - (void)setThumbnailImage:(UIImage *)image
 {
     [self.thumbnail setImage:image];
-    if (self.thumbnailStyle == CSFormCellImageThumbnailStyleCircle) {
-        self.thumbnail.cornerRadius = self.thumbnail.frame.size.width / 2.f;
-    } else {
-        self.thumbnail.cornerRadius = 0.0;
-    }
+    [self styleThumbnailMask];
 }
 
 - (void)fillThumbnailImage:(UIImage *)image
@@ -94,8 +96,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self styleFrames];
     [self styleLabel];
+    [self styleFrames];
     [self styleThumbnail];
 }
 
@@ -221,16 +223,25 @@
 
     
     //now stretch the label across the remaining space
-    self.label.frame = CGRectMake(contentFrame.origin.x + thumbnailSize.width + PADDING_HORIZONTAL,
-                                  contentFrame.origin.y,
-                                  contentFrame.size.width - (thumbnailSize.width + PADDING_HORIZONTAL),
-                                  [self contentFrame].size.height);
+    CGRect labelFrame = CGRectMake(contentFrame.origin.x + thumbnailSize.width + PADDING_HORIZONTAL,
+                                   contentFrame.origin.y,
+                                   contentFrame.size.width - (thumbnailSize.width + PADDING_HORIZONTAL),
+                                   [self contentFrame].size.height);
+    self.label.frame = self.labelStyle == CSFormCellImageLabelStyleNone ? CGRectZero : labelFrame;
     
     self.thumbnail.frame = thumbnailFrame;
 }
 
 - (void)styleLabel
 {
+    if (self.styleProvider
+        && [self.styleProvider respondsToSelector:@selector(labelStyleForImageCell:)]) {
+        self.labelStyle = [self.styleProvider labelStyleForImageCell:self];
+    } else {
+        self.labelStyle = DEFAULT_LABEL_STYLE;
+    }
+    [self styleTextAlignments];
+    
     //font
     if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(imageCell:labelFontForMode:)]) {
         self.label.font = [self.styleProvider imageCell:self labelFontForMode:self.mode];
@@ -258,8 +269,18 @@
     }
 }
 
+- (void)styleThumbnailMask
+{
+    if (self.thumbnailStyle == CSFormCellImageThumbnailStyleCircle) {
+        [self.thumbnail setTheRadius:self.thumbnail.frame.size.width / 2.f];
+    } else {
+        [self.thumbnail setTheRadius:0.0];
+    }
+}
+
 - (void)styleThumbnail
 {
+    [self styleThumbnailMask];
     if (self.mode == CSFormCellImageModeEmpty) {
         if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(placeholderImageForImageCell:)]) {
             UIImage *placeholderImage = [self.styleProvider placeholderImageForImageCell:self];
@@ -279,3 +300,4 @@
 }
 
 @end
+

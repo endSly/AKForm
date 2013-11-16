@@ -12,9 +12,13 @@
 
 @interface ImageFieldsForm () <CSFormCellImageStyleProvider>
 - (IBAction)completeForm:(id)sender;
+- (void)setCellHeight:(CGFloat)height;
 @end
 
-@implementation ImageFieldsForm
+@implementation ImageFieldsForm {
+    CGFloat _height;
+    CSFormCellImageLabelStyle _labelStyle;
+}
 
 - (void)viewDidLoad
 {
@@ -60,7 +64,7 @@
         [self addSection:[self exampleFieldsSectionWithTitle:title
                                                    imageSize:sizeValue.CGSizeValue
                                               thumbnailSizes:thumbnailStyles]];
-    }
+    }    
 }
 
 - (AKFormSection *)exampleFieldsSectionWithTitle:(NSString *)title
@@ -132,31 +136,90 @@
 
 - (CGFloat)heightForImageCell:(AKFormCellImage *)cell
 {
-    return 100.f;
+    return _height;
 }
 
-@end
+- (void)setCellHeight:(CGFloat)height
+{
+    _height = height;
+    [self.tableView reloadData];
+}
 
-
-@interface LeftLabelImageFields : ImageFieldsForm
-@end
-
-@implementation LeftLabelImageFields
+- (void)setLabelStyle:(CSFormCellImageLabelStyle)labelStyle
+{
+    _labelStyle = labelStyle;
+    [self.tableView reloadData];
+}
 
 - (CSFormCellImageLabelStyle)labelStyleForImageCell:(AKFormCellImage *)cell
 {
-    return CSFormCellImageLabelStyleLeft;
+    return _labelStyle;
 }
+
+
 @end
 
 
-@interface RightLabelImageFields : ImageFieldsForm
+#define MIN_CELL_HEIGHT 30.f
+#define MAX_CELL_HEIGHT 300.f
+
+@interface ImageFieldsFormContainer ()
+@property(nonatomic, strong) IBOutlet ImageFieldsForm *form;
+- (IBAction)pressedValidate:(id)sender;
 @end
 
-@implementation RightLabelImageFields
+@implementation ImageFieldsFormContainer
 
-- (CSFormCellImageLabelStyle)labelStyleForImageCell:(AKFormCellImage *)cell
+- (void)viewWillAppear:(BOOL)animated
 {
-    return CSFormCellImageLabelStyleRight;
+    [super viewWillAppear:animated];
+    [self.segmentedControl setSelectedSegmentIndex:0];
+    [self.segmentedControl setSelectedSegmentIndex:1];
+    [self.segmentedControl setSelectedSegmentIndex:2];
+    [self.segmentedControl setSelectedSegmentIndex:0];
+    [self segmentedControlDidChangeSelectedSegmentIndex:self.segmentedControl];
+}
+
+- (IBAction)segmentedControlDidChangeSelectedSegmentIndex:(id)sender
+{
+    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+    switch (segmentedControl.selectedSegmentIndex) {
+        case 0:
+            [self.form setLabelStyle:CSFormCellImageLabelStyleLeft];
+            break;
+        case 1:
+            [self.form setLabelStyle:CSFormCellImageLabelStyleNone];
+            break;
+        case 2:
+            [self.form setLabelStyle:CSFormCellImageLabelStyleRight];
+            break;
+        default:
+            [self.form setLabelStyle:CSFormCellImageLabelStyleNone];
+            break;
+    }
+}
+
+- (IBAction)pressedValidate:(id)sender
+{
+    [self.form completeForm:sender];
+}
+
+- (IBAction)sliderValueDidChange:(id)sender
+{
+    UISlider *slider = (UISlider *)sender;
+    CGFloat height = ((MAX_CELL_HEIGHT - MIN_CELL_HEIGHT) * slider.value) + MIN_CELL_HEIGHT;
+    [self.form setCellHeight:height];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSString * segueName = segue.identifier;
+    if ([segueName isEqualToString: @"form_embed"]) {
+        self.form = (ImageFieldsForm *) [segue destinationViewController];
+
+        CGFloat sliderValue = (100.f - MIN_CELL_HEIGHT) / (MAX_CELL_HEIGHT - MIN_CELL_HEIGHT);
+        [self.slider setValue:sliderValue];
+        [self sliderValueDidChange:self.slider];
+    }
 }
 @end
