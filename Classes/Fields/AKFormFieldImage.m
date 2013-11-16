@@ -1,6 +1,6 @@
 //
 //  AKFormFieldImage.m
-//  CitySwagga
+//  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
 //  Copyright (c) 2013 arkuana. All rights reserved.
@@ -22,14 +22,11 @@
                 placeholder:(NSString *)placeholder
                   imageSize:(CGSize)imageSize
              thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
-                   delegate:(id<CSFormFieldImageDelegate>)delegate
-              styleProvider:(id<CSFormCellImageStyleProvider>)styleProvider
+             formController:(AKFormController *)formController
 {
     self = [super initWithKey:key title:title placeholder:placeholder];
     if (self) {
-        self.delegate = delegate;
-        self.styleProvider = styleProvider;
-        
+        self.formController = formController;
         self.imageSize = imageSize;
         self.thumbnailStyle = thumbnailStyle;
     }
@@ -48,7 +45,7 @@
 {
     AKFormCellImage *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_IMAGE];
     if (!cell) {
-        cell = [[AKFormCellImage alloc] initWithStyleProvider:self.styleProvider];
+        cell = [[AKFormCellImage alloc] initWithStyleProvider:(id)self.formController];
     }
 
     cell.valueDelegate = self;
@@ -89,7 +86,7 @@
     self.imagePicker = [[GKImagePicker alloc] init];
     self.imagePicker.cropSize = self.imageSize;
     self.imagePicker.delegate = self;
-    [self.imagePicker showActionSheetOnViewController:[self.delegate viewControllerToPresentOn]
+    [self.imagePicker showActionSheetOnViewController:(UIViewController *)self.formController
                                     onPopoverFromView:nil];
 }
 
@@ -110,7 +107,7 @@
         self.focusViewController.parallaxMode = YES;
         [self.focusViewController showImage:[self.value imageValue]
                                    fromView:cell.thumbnail
-                           inViewController:[self.delegate viewControllerToPresentOn]];
+                           inViewController:((UIViewController *)self.formController).navigationController];
     } else {
         [self select];
     }

@@ -1,6 +1,6 @@
 //
 //  AKFormFieldImage.h
-//  CitySwagga
+//  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
 //  Copyright (c) 2013 arkuana. All rights reserved.
@@ -11,18 +11,14 @@
 
 #import "GKImagePicker.h"
 
-@protocol CSFormFieldImageDelegate
-- (void)didPickImageOnField:(AKFormField *)row;
-- (UIViewController  *)viewControllerToPresentOn;
-@end
+@class  AKFormController;
 
 @interface AKFormFieldImage : AKFormFieldDescriptive <UIImagePickerControllerDelegate, GKImagePickerDelegate, CSFormCellImageDelegate>
 
 @property(nonatomic, assign) CGSize imageSize;
 @property(nonatomic, assign) CSFormCellImageThumbnailStyle thumbnailStyle;
 
-@property(nonatomic, strong) id<CSFormFieldImageDelegate>delegate;
-@property(nonatomic, weak) id<CSFormCellImageStyleProvider>styleProvider;
+@property(nonatomic, weak) AKFormController *formController;
 
 ///---------------------------------------------------------------------------------------
 /// @name Managing the cell's label
@@ -39,8 +35,7 @@
                             will be exactly what was expected, so expect up/down scaling
                             depending on the size of the original image.
  *  @param thumbnailStyle
- *  @param delegate
- *  @param styleProvider
+ *  @param formController
  *
  *  @return
  */
@@ -49,8 +44,7 @@
                 placeholder:(NSString *)placeholder
                   imageSize:(CGSize)imageSize
              thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
-                   delegate:(id<CSFormFieldImageDelegate>)delegate
-              styleProvider:(id<CSFormCellImageStyleProvider>)styleProvider;
+             formController:(id<CSFormCellImageStyleProvider>)formController;
 
 - (void)select;
 

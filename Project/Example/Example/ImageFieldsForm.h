@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AKForm.h>
 
-@interface ImageFieldsForm : UITableViewController
+@interface ImageFieldsForm : AKFormController
 
 @end

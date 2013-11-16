@@ -8,5 +8,6 @@ pod 'UIImage-Resize'
 pod 'NSDate+Helper'
 pod 'CJStringValidator'
 pod 'FXImageView'
+
 pod 'GKImagePicker@arkuana'
 pod 'URBMediaFocusViewController@arkuana'

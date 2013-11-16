@@ -10,8 +10,8 @@
 		1A2B8F18183468B400E1A5BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8F17183468B400E1A5BB /* UIKit.framework */; };
 		1A2B8F1A183468BA00E1A5BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8F19183468BA00E1A5BB /* Foundation.framework */; };
 		1A2B8FF71834953300E1A5BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8FF61834953300E1A5BB /* Accelerate.framework */; };
-		1A9B221A18361C16000A7C34 /* AKForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21DD18361C16000A7C34 /* AKForm.h */; };
-		1A9B221B18361C16000A7C34 /* AKForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21DE18361C16000A7C34 /* AKForm.m */; };
+		1A9B221A18361C16000A7C34 /* AKFormController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21DD18361C16000A7C34 /* AKFormController.h */; };
+		1A9B221B18361C16000A7C34 /* AKFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21DE18361C16000A7C34 /* AKFormController.m */; };
 		1A9B221C18361C16000A7C34 /* AKFormField.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21DF18361C16000A7C34 /* AKFormField.h */; };
 		1A9B221D18361C16000A7C34 /* AKFormField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21E018361C16000A7C34 /* AKFormField.m */; };
 		1A9B221E18361C16000A7C34 /* AKFormMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21E118361C16000A7C34 /* AKFormMetadata.h */; };
@@ -69,6 +69,7 @@
 		1A9B225218361C16000A7C34 /* CSFormFieldToggle.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B221718361C16000A7C34 /* CSFormFieldToggle.h */; };
 		1A9B225318361C16000A7C34 /* CSFormFieldToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B221818361C16000A7C34 /* CSFormFieldToggle.m */; };
 		1AA5B67218366C9A00421A67 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA5B67118366C9A00421A67 /* QuartzCore.framework */; };
+		1AA5B6771836FEC400421A67 /* AKForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AA5B6761836FEC400421A67 /* AKForm.h */; };
 		A12EE87A91BD4233A56B65B2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDFD3B70D1149CFA37AFE90 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -80,8 +81,8 @@
 		1A2B8FFA1834A4E900E1A5BB /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		1A5AAB1D1834572800CEA9D7 /* libAKForm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAKForm.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AAB281834572800CEA9D7 /* AKForm-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AKForm-Prefix.pch"; sourceTree = "<group>"; };
-		1A9B21DD18361C16000A7C34 /* AKForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKForm.h; sourceTree = "<group>"; };
-		1A9B21DE18361C16000A7C34 /* AKForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKForm.m; sourceTree = "<group>"; };
+		1A9B21DD18361C16000A7C34 /* AKFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormController.h; sourceTree = "<group>"; };
+		1A9B21DE18361C16000A7C34 /* AKFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormController.m; sourceTree = "<group>"; };
 		1A9B21DF18361C16000A7C34 /* AKFormField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormField.h; sourceTree = "<group>"; };
 		1A9B21E018361C16000A7C34 /* AKFormField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormField.m; sourceTree = "<group>"; };
 		1A9B21E118361C16000A7C34 /* AKFormMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormMetadata.h; sourceTree = "<group>"; };
@@ -139,6 +140,7 @@
 		1A9B221718361C16000A7C34 /* CSFormFieldToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFormFieldToggle.h; sourceTree = "<group>"; };
 		1A9B221818361C16000A7C34 /* CSFormFieldToggle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormFieldToggle.m; sourceTree = "<group>"; };
 		1AA5B67118366C9A00421A67 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		1AA5B6761836FEC400421A67 /* AKForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKForm.h; sourceTree = "<group>"; };
 		BDDFD3B70D1149CFA37AFE90 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62C7385727A485BB3845E8B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,8 +213,9 @@
 		1A9B21DC18361C16000A7C34 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1A9B21DD18361C16000A7C34 /* AKForm.h */,
-				1A9B21DE18361C16000A7C34 /* AKForm.m */,
+				1AA5B6761836FEC400421A67 /* AKForm.h */,
+				1A9B21DD18361C16000A7C34 /* AKFormController.h */,
+				1A9B21DE18361C16000A7C34 /* AKFormController.m */,
 				1A9B21DF18361C16000A7C34 /* AKFormField.h */,
 				1A9B21E018361C16000A7C34 /* AKFormField.m */,
 				1A9B21E118361C16000A7C34 /* AKFormMetadata.h */,
@@ -227,7 +230,6 @@
 				1A9B21EA18361C16000A7C34 /* AKFormValueValidator.m */,
 				1A9B21EB18361C16000A7C34 /* Cells */,
 				1A9B220018361C16000A7C34 /* Fields */,
-				1A9B221918361C16000A7C34 /* Third Party */,
 			);
 			name = Classes;
 			path = ../../Classes;
@@ -291,13 +293,6 @@
 			path = Fields;
 			sourceTree = "<group>";
 		};
-		1A9B221918361C16000A7C34 /* Third Party */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Third Party";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -317,6 +312,7 @@
 				1A9B224E18361C16000A7C34 /* CSFormFieldSwitch.h in Headers */,
 				1A9B223618361C16000A7C34 /* CSFormSwitchCell.h in Headers */,
 				1A9B223418361C16000A7C34 /* CSFormBaseCell.h in Headers */,
+				1AA5B6771836FEC400421A67 /* AKForm.h in Headers */,
 				1A9B225218361C16000A7C34 /* CSFormFieldToggle.h in Headers */,
 				1A9B222E18361C16000A7C34 /* AKFormCellLabel.h in Headers */,
 				1A9B225018361C16000A7C34 /* CSFormFieldTextView.h in Headers */,
@@ -328,7 +324,7 @@
 				1A9B223C18361C16000A7C34 /* AKFormFieldDescriptive.h in Headers */,
 				1A9B223A18361C16000A7C34 /* CSFormToggleCell.h in Headers */,
 				1A9B222018361C16000A7C34 /* AKFormMetadataCollection.h in Headers */,
-				1A9B221A18361C16000A7C34 /* AKForm.h in Headers */,
+				1A9B221A18361C16000A7C34 /* AKFormController.h in Headers */,
 				1A9B222618361C16000A7C34 /* AKFormValueValidator.h in Headers */,
 				1A9B223E18361C16000A7C34 /* AKFormFieldExpandable.h in Headers */,
 				1A9B224618361C16000A7C34 /* AKFormFieldText.h in Headers */,
@@ -441,7 +437,7 @@
 				1A9B222B18361C16000A7C34 /* AKFormCellDatePicker.m in Sources */,
 				1A9B223918361C16000A7C34 /* CSFormTextViewCell.m in Sources */,
 				1A9B223F18361C16000A7C34 /* AKFormFieldExpandable.m in Sources */,
-				1A9B221B18361C16000A7C34 /* AKForm.m in Sources */,
+				1A9B221B18361C16000A7C34 /* AKFormController.m in Sources */,
 				1A9B223318361C16000A7C34 /* AKFormCellTextField.m in Sources */,
 				1A9B224918361C16000A7C34 /* CSFormFieldModal.m in Sources */,
 				1A9B223D18361C16000A7C34 /* AKFormFieldDescriptive.m in Sources */,

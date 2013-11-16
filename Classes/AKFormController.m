@@ -1,51 +1,37 @@
 //
-//  AKForm.m
-//  CitySwagga
+//  AKFormController.m
+//  AKForm
 //
 //  Created by Ahmed Khalaf on 9/10/13.
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "AKForm.h"
+#import "AKFormController.h"
 #import "CSFormBaseCell.h"
 #import "CSFormFieldSwitch.h"
 
 #import "AKFormValueValidator.h"
 
-@interface AKForm ()
+@interface AKFormController ()
 @property(nonatomic, strong) NSMutableArray *sections;
 - (AKFormField *)fieldForIndexPath:(NSIndexPath *)indexPath;
 @end
 
-@implementation AKForm
-
-#pragma mark - Initializers & Constructors
-
-+ (instancetype)formWithSections:(NSArray *)sections
-{
-    return [[self alloc] initWithSections:sections];
+@implementation AKFormController {
+    UIStatusBarStyle _currentStatusBarStyle;
 }
 
-- (instancetype)init
+- (void)viewDidLoad
 {
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-    
+    [super viewDidLoad];
+    _currentStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
     self.sections = [NSMutableArray array];
-    return self;
 }
 
-- (instancetype)initWithSections:(NSArray *)sections
+- (void)viewWillAppear:(BOOL)animated
 {
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-    
-    self.sections = [NSMutableArray arrayWithArray:sections];
-    return self;
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:_currentStatusBarStyle];
 }
 
 #pragma mark - Convenience Helpers
@@ -331,11 +317,12 @@
                 }
             }
         } else if ([field isKindOfClass:[AKFormFieldImage class]]) {
-            AKFormFieldImage *imageField = (AKFormFieldImage *)field;
-            if (imageField.styleProvider &&
-                [imageField.styleProvider respondsToSelector:@selector(heightForImageCell:)]) {
-                return [imageField.styleProvider heightForImageCell:nil];
-            }
+//            AKFormFieldImage *imageField = (AKFormFieldImage *)field;
+            return [self heightForImageCell:nil];
+//            if (imageField.styleProvider &&
+//                [imageField.styleProvider respondsToSelector:@selector(heightForImageCell:)]) {
+//                return [imageField.styleProvider heightForImageCell:nil];
+//            }
         } else if ([field isKindOfClass:[CSFormFieldTextView class]]) {
             return [(CSFormFieldTextView *)field textViewHeight] + (CELL_PADDING_VERTICAL * 2.0);
         }
@@ -347,7 +334,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.viewController.view endEditing:YES];
+    [self.view endEditing:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     AKFormField *field = [self fieldForIndexPath:indexPath];
@@ -373,7 +360,7 @@
     } else if ([field isKindOfClass:[CSFormFieldModalPicker class]]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *nc = [storyboard instantiateViewControllerWithIdentifier:@"multipickerController"];
-        [self.viewController.navigationController presentViewController:nc animated:YES completion:nil];
+        [self.navigationController presentViewController:nc animated:YES completion:nil];
         
         UITableViewController *tvc = (UITableViewController *)nc.topViewController;
         CSFormFieldModalPicker *modalPickerField = (CSFormFieldModalPicker *)field;
@@ -391,7 +378,7 @@
 
 - (void)makeFirstResponder:(AKFormField *)aField
 {
-    [self.viewController.view endEditing:YES];
+    [self.view endEditing:YES];
     
     NSIndexPath *indexPath = [self indexPathForField:aField];
     if (aField) {
@@ -585,7 +572,7 @@
     if (nextField) {
         [self makeFirstResponder:nextField];
     } else {
-        [self.viewController pressedNext];
+        [self pressedNext];
     }
     return YES;
 }
@@ -593,24 +580,6 @@
 - (void)didBeginEditingOnTextFieldCell:(AKFormCellTextField *)cell
 {
     [self collapseCurrentlyExpandedField];
-}
-
-#pragma mark - Image Field Delegate
-
-- (UIViewController  *)viewControllerToPresentOn
-{
-    return self.viewController.navigationController;
-}
-
-- (void)didPickImageOnField:(AKFormField *)aField
-{
-    NSIndexPath *ip = [self indexPathForField:aField];
-    
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:ip];
-    if ([cell isKindOfClass:[AKFormCellImage class]]) {
-        AKFormCellImage *imageCell = (AKFormCellImage *)cell;
-        [imageCell fillThumbnailImage:[aField.value imageValue]];
-    }
 }
 
 #pragma mark - Modal Picker Field Delegate
