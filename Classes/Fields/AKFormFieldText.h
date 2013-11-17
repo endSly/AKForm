@@ -22,10 +22,10 @@
 @property(nonatomic, weak) id<CSFormCellTextFieldDelegate> delegate;
 @property(nonatomic, weak) id<CSFormCellTextFieldStyleProvider> styleProvider;
 
-- (instancetype)initWithKey:(NSString *)key
-                      title:(NSString *)title
-                placeholder:(NSString *)placeholder
-                   delegate:(id<CSFormCellTextFieldDelegate>)delegate
-              styleProvider:(id<CSFormCellTextFieldStyleProvider>)styleProvider;
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+                    delegate:(id<CSFormCellTextFieldDelegate>)delegate
+               styleProvider:(id<CSFormCellTextFieldStyleProvider>)styleProvider;
 
 @end

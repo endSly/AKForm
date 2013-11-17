@@ -8,6 +8,7 @@
 
 #import "AKFormValidator.h"
 #import "AKFormMetadata.h"
+#import <CJStringValidator/NSString+CJStringValidator.h>
 
 @implementation AKFormValidator
 
@@ -41,14 +42,19 @@
 
 #pragma mark - Required Field Validators
 
-+ (instancetype)requiredBlockWithFailMessage:(NSString *)message
++ (instancetype)requiredEmailValidator:(NSString *)failMessage
 {
-    return [AKFormValidator requiredValidatorWithMessage:message block:[AKFormValidator requiredBlock]];
+    return [AKFormValidator requiredValidatorWithMessage:failMessage block:[AKFormValidator requiredEmailBlock]];
 }
 
-+ (instancetype)requiredMetadataCollectionWithComponents:(NSInteger)numberOfComponents withMessage:(NSString *)message
++ (instancetype)requiredValidator:(NSString *)failMessage
 {
-    return [AKFormValidator requiredValidatorWithMessage:message block:[AKFormValidator requiredMetadataCollectionBlockWithComponents:numberOfComponents]];
+    return [AKFormValidator requiredValidatorWithMessage:failMessage block:[AKFormValidator requiredBlock]];
+}
+
++ (instancetype)requiredMetadataCollection:(NSString *)failMessage withComponents:(NSInteger)numberOfComponents
+{
+    return [AKFormValidator requiredValidatorWithMessage:failMessage block:[AKFormValidator requiredMetadataCollectionBlockWithComponents:numberOfComponents]];
 }
 
 #pragma mark - Required Field Validators (Private)
@@ -61,6 +67,17 @@
 }
 
 #pragma mark - Standard Validation Blocks (Private)
+
++ (ValidationBlock)requiredEmailBlock
+{
+    return ^BOOL(AKFormValue *value) {
+        if (!value || ![value isString]) {
+            return NO;
+        }
+        
+        return [[value stringValue] isEmail];
+    };
+}
 
 + (ValidationBlock)requiredBlock
 {

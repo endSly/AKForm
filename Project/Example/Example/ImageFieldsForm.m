@@ -80,7 +80,7 @@
                                                    thumbnailStyle:((NSNumber *)thumbnailSizes[i]).integerValue
                                                    formController:self];
         NSString *failMessage = [NSString stringWithFormat:@"Please choose image %d", i+1];
-        AKFormValidator *validator = [AKFormValidator requiredBlockWithFailMessage:failMessage];
+        AKFormValidator *validator = [AKFormValidator requiredValidator:failMessage];
         field.validators = @[validator];
         [fields addObject:field];
     }

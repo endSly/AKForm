@@ -10,6 +10,15 @@
 
 @implementation AKFormFieldText
 
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+                    delegate:(id<CSFormCellTextFieldDelegate>)delegate
+               styleProvider:(id<CSFormCellTextFieldStyleProvider>)styleProvider
+{
+    return [[AKFormFieldText alloc] initWithKey:key title:title placeholder:placeholder delegate:delegate styleProvider:styleProvider];
+}
+
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder

@@ -74,8 +74,8 @@ typedef BOOL (^ValidationBlock)(AKFormValue *value);
 /// @name Standard Blocks - Required Fields
 ///---------------------------------------------------------------------------------------
 
-+ (instancetype)requiredBlockWithFailMessage:(NSString *)message;
-+ (instancetype)requiredMetadataCollectionWithComponents:(NSInteger)numberOfComponents withMessage:(NSString *)message;
-
++ (instancetype)requiredValidator:(NSString *)failMessage;
++ (instancetype)requiredEmailValidator:(NSString *)failMessage;
++ (instancetype)requiredMetadataCollection:(NSString *)failMessage withComponents:(NSInteger)numberOfComponents;
 
 @end

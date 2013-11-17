@@ -33,24 +33,52 @@
 
 - (void)createForm
 {
+    [self addLabelStringLengthsSection];
+    [self addValidatorsSection];
+}
+
+- (void)addLabelStringLengthsSection
+{
     NSMutableArray *fields = [NSMutableArray array];
     
-    NSArray *labels = @[@"label", @"another label", @"a longer label", @"an even longer label", @"this label is far too long", @"this label is even longer than far longer" ];
+    NSArray *labels = @[@"Label", @"Another label", @"A longer label", @"An even longer label", @"This label is far too long", @"This label is even longer than the far longer one" ];
     for (NSString *label in labels) {
-        AKFormFieldText *field = [[AKFormFieldText alloc] initWithKey:label
-                                                                title:label
-                                                          placeholder:label
-                                                             delegate:self
-                                                        styleProvider:self];
-//        if (r==0) {
-//            AKFormValidator *validator = [AKFormValidator requiredBlockWithFailMessage:@"Please enter your first name"];
-//            field.validators = @[validator];
-//        }
+        AKFormFieldText *field = [AKFormFieldText fieldWithKey:label
+                                                         title:label
+                                                   placeholder:@"optional"
+                                                      delegate:self
+                                                 styleProvider:self];
         [fields addObject:field];
     }
     
     AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
-    section.headerTitle = @"LABEL WIDTHS";
+    section.headerTitle = @"LABEL STRING LENGTHS";
+    [self addSection:section];
+}
+
+- (void)addValidatorsSection
+{
+    NSMutableArray *fields = [NSMutableArray array];
+
+    AKFormFieldText *f1 = [AKFormFieldText fieldWithKey:@"label" title:@"Label"
+                                            placeholder:@"required"
+                                               delegate:self
+                                          styleProvider:self];
+    AKFormValidator *requiredValidator = [AKFormValidator requiredValidator:@"Please enter a value"];
+    f1.validators = @[requiredValidator];
+    [fields addObject:f1];
+    
+    AKFormFieldText *f2 = [AKFormFieldText fieldWithKey:@"email" title:@"Email"
+                                            placeholder:@"required email"
+                                               delegate:self
+                                          styleProvider:self];
+    AKFormValidator *emailValidator = [AKFormValidator requiredEmailValidator:@"Please enter a valid email"];
+    f2.validators = @[emailValidator];
+    [fields addObject:f2];
+    
+
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    section.headerTitle = @"VALIDATORS";
     [self addSection:section];
 }
 
