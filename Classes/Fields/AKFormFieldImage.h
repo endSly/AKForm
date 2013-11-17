@@ -10,10 +10,11 @@
 #import "AKFormCellImage.h"
 
 #import "GKImagePicker.h"
+#import "URBMediaFocusViewController.h"
 
 @class  AKFormController;
 
-@interface AKFormFieldImage : AKFormFieldDescriptive <UIImagePickerControllerDelegate, GKImagePickerDelegate, CSFormCellImageDelegate>
+@interface AKFormFieldImage : AKFormFieldDescriptive <UIImagePickerControllerDelegate, GKImagePickerDelegate, CSFormCellImageDelegate, URBMediaFocusViewControllerDelegate>
 
 @property(nonatomic, assign) CGSize imageSize;
 @property(nonatomic, assign) CSFormCellImageThumbnailStyle thumbnailStyle;

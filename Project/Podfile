@@ -7,5 +7,6 @@ pod 'HexColors'
 pod 'UIImage-Resize'
 pod 'NSDate+Helper'
 pod 'CJStringValidator'
-pod 'GKImagePicker@arkuana'
 pod 'URBMediaFocusViewController@arkuana'
+
+pod 'GKImagePicker@arkuana', :git => "https://github.com/arkuana/GKImagePicker.git"

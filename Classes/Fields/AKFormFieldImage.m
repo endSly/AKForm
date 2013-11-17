@@ -7,7 +7,6 @@
 //
 
 #import "AKFormFieldImage.h"
-#import "URBMediaFocusViewController.h"
 #import <UIImage+Resize.h>
 
 @interface AKFormFieldImage()
@@ -113,14 +112,26 @@
 - (void)didTapThumbnailOnImageCell:(AKFormCellImage *)cell
 {
     if (self.value && [self.value isImage]) {
+        UINavigationController *navigationController = ((UIViewController *)self.formController).navigationController;
+        navigationController.interactivePopGestureRecognizer.enabled = NO;
+        
         self.focusViewController = [[URBMediaFocusViewController alloc] init];
         self.focusViewController.parallaxMode = YES;
+        self.focusViewController.delegate = self;
         [self.focusViewController showImage:[self.value imageValue]
                                    fromView:cell.thumbnail
-                           inViewController:((UIViewController *)self.formController).navigationController];
+                           inViewController:navigationController];
     } else {
         [self select];
     }
+}
+
+#pragma mark - URBMediaFocusViewControllerDelegate
+
+- (void)mediaFocusViewControllerDidDisappear:(URBMediaFocusViewController *)mediaFocusViewController
+{
+    UINavigationController *navigationController = ((UIViewController *)self.formController).navigationController;
+    navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
 #pragma mark - GKImagePickerDelegate

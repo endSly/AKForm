@@ -15,16 +15,13 @@
 
 
 @interface UIImageView (Mask)
-- (void)setTheRadius:(CGFloat)cornerRadius;
+- (void)setCornerRadius:(CGFloat)cornerRadius;
 @end
-@implementation UIImageView (mask)
-- (void)setTheRadius:(CGFloat)cornerRadius
-{
-    CALayer *imageLayer = self.layer;
-    [imageLayer setCornerRadius:cornerRadius];
-    [imageLayer setMasksToBounds:YES];
-}
+
+@interface UIBezierPath (ZEPolygon)
++ (UIBezierPath *)bezierPathWithPolygonInRect:(CGRect)rect numberOfSides:(NSUInteger)numberOfSides;
 @end
+
 
 @interface AKFormCellImage()
 @property(nonatomic, assign) CSFormCellImageLabelStyle labelStyle;
@@ -272,9 +269,9 @@
 - (void)styleThumbnailMask
 {
     if (self.thumbnailStyle == CSFormCellImageThumbnailStyleCircle) {
-        [self.thumbnail setTheRadius:self.thumbnail.frame.size.width / 2.f];
+        [self.thumbnail setCornerRadius:self.thumbnail.frame.size.width / 2.f];
     } else {
-        [self.thumbnail setTheRadius:0.0];
+        [self.thumbnail setCornerRadius:0.0];
     }
 }
 
@@ -301,3 +298,13 @@
 
 @end
 
+
+@implementation UIImageView (Mask)
+
+- (void)setCornerRadius:(CGFloat)cornerRadius
+{
+    [self.layer setCornerRadius:cornerRadius];
+    [self.layer setMasksToBounds:YES];
+}
+
+@end
