@@ -14,6 +14,8 @@
 #import "AKFormFieldText.h"
 #import "AKFormFieldImage.h"
 #import "AKFormFieldExpandable.h"
+#import "AKFormFieldExpandableDate.h"
+#import "AKFormFieldExpandablePicker.h"
 #import "CSFormFieldModalPicker.h"
 #import "CSFormFieldTextView.h"
 #import "CSFormFieldSwitch.h"

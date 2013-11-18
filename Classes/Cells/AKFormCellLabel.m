@@ -28,11 +28,7 @@
 
         //set the style
         self.styleProvider = styleProvider;
-        if (styleProvider && [styleProvider respondsToSelector:@selector(styleForLabelCell:)]) {
-            self.style = [styleProvider styleForLabelCell:self];
-        } else {
-            self.style = DEFAULT_STYLE;
-        }
+        [self setStyle];
         
         self.titleLabel = [[UILabel alloc] init];
         [self styleTitleLabel];
@@ -55,7 +51,6 @@
 {
     [self setMode:AKFormCellLabelModeEmpty];
     [self styleFrames];
-    [self styleTextAlignments];
 }
 
 - (void)styleTextAlignments
@@ -93,6 +88,16 @@
 #pragma mark - (Private) Repeated Style Helpers
 ///---------------------------------------------------------------------------------------
 
+- (void)setStyle
+{
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForLabelCell:)]) {
+        self.style = [self.styleProvider styleForLabelCell:self];
+    } else {
+        self.style = DEFAULT_STYLE;
+    }
+    [self styleTextAlignments];
+}
+
 - (void)styleFrames
 {
     CGFloat labelWidth;
@@ -106,6 +111,9 @@
             } else {
                 labelWidth = DEFAULT_TITLE_WIDTH;
             }
+            labelWidth = MAX(MINIMUM_TITLE_WIDTH, labelWidth);
+            CGFloat maxLabelWidth = contentFrame.size.width - PADDING_HORIZONTAL - MINIMUM_VALUE_WIDTH;
+            labelWidth = MIN(labelWidth, maxLabelWidth);
             self.titleLabel.frame = CGRectMake(contentFrame.origin.x, contentFrame.origin.y, labelWidth, contentFrame.size.height);
             break;
         case AKFormCellLabelStyleTitleWithDynamicWidth:
@@ -148,8 +156,9 @@
         valueLabelX += PADDING_HORIZONTAL;
     }
     if (self.style != AKFormCellLabelStyleTwoLines) {
+        CGFloat valueLabelWidth = MAX(MINIMUM_VALUE_WIDTH, contentFrame.size.width - valueLabelX);
         self.valueLabel.frame = CGRectMake(contentFrame.origin.x + valueLabelX, contentFrame.origin.y,
-                                           contentFrame.size.width - valueLabelX, contentFrame.size.height);
+                                           valueLabelWidth, contentFrame.size.height);
     }
 }
 
@@ -225,10 +234,10 @@
 {
     [super layoutSubviews];
     
-    if (self.style == AKFormCellLabelStyleTitleWithDynamicWidth
-        || self.style == AKFormCellLabelStyleTwoLines) {
-        [self styleFrames];
-    }
+    [self setStyle];
+    [self styleTitleLabel];
+    [self styleValueLabel];
+    [self styleFrames];
 }
 
 - (void)setMode:(AKFormCellLabelMode)mode

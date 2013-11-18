@@ -121,7 +121,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AKFormField *field = self.fields[indexPath.row];
+    AKFormField *field = [self fieldAtRowNumber:indexPath.row];
+//    AKFormField *field = self.fields[indexPath.row];
     if (field) {
         [field willBeDisplayed];
     }

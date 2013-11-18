@@ -9,6 +9,7 @@
 #import "AKFormFieldExpandableDate.h"
 #import "AKFormCellDatePicker.h"
 #import <NSDate+Helper.h>
+#import <CJStringValidator/NSString+CJStringValidator.h>
 
 @implementation AKFormFieldExpandableDate
 
@@ -25,11 +26,34 @@
         self.datePickerMode = datePickerMode;
         self.styleProvider = styleProvider;
         self.placeholder = placeholder;
+        
+        if (!self.dateDisplayFormat || [self.dateDisplayFormat isEmpty]) {
+            [self setDefaultDateDisplayFormat];
+        }
     }
     
     return self;
 }
 
+- (void)setDefaultDateDisplayFormat
+{
+    switch (self.datePickerMode) {
+        case UIDatePickerModeDate:
+            self.dateDisplayFormat = @"MMM dd, yyyy";
+            break;
+        case UIDatePickerModeTime:
+            self.dateDisplayFormat = @"h:mm a";
+            break;
+        case UIDatePickerModeDateAndTime:
+            self.dateDisplayFormat = @"MMM dd, yyyy (h:mm a)";
+            break;
+        case UIDatePickerModeCountDownTimer:
+            self.dateDisplayFormat = @"h:mm a";
+            break;
+        default:
+            break;
+    }
+}
 
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
 {
@@ -101,7 +125,8 @@
     if (labelCell) {
         if ([self.value isDate]) {
             NSDate *date = [self.value dateValue];
-            labelCell.valueLabel.text = [date stringWithFormat:self.dateDisplayFormat];
+            NSString *dateString = [date stringWithFormat:self.dateDisplayFormat];
+            labelCell.valueLabel.text = dateString;
         }
         [labelCell setMode:AKFormCellLabelModeEditing];
     }
