@@ -237,9 +237,10 @@
 {
     switch (mode) {
         case CSFormCellTextFieldModeEmpty:
+            return [UIColor lightGrayColor];
         case CSFormCellTextFieldModeFilled:
         case CSFormCellTextFieldModeReadOnly:
-            return [UIColor darkGrayColor];
+            return [UIColor grayColor];
             break;
         case CSFormCellTextFieldModeEditing:
             return [UIColor colorWithHexString:@"#E67D2C"];

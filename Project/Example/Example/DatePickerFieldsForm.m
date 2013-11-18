@@ -87,17 +87,17 @@
     [self.tableView reloadData];
 }
 
-- (CGFloat)titleLabelWidthForLabelCell:(AKFormCellLabel *)cell
+- (CGFloat)titleLabelWidthForLabelCell
 {
     return _labelWidth;
 }
 
-- (AKFormCellLabelStyle)styleForLabelCell:(AKFormCellLabel *)cell
+- (AKFormCellLabelStyle)styleForLabelCell
 {
     return _labelCellStyle;
 }
 
-- (UIFont *)labelCell:(AKFormCellLabel *)cell titleLabelFontForMode:(AKFormCellLabelMode)mode
+- (UIFont *)titleLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
 {
     switch (mode) {
         case CSFormCellTextFieldModeEmpty:
@@ -112,12 +112,16 @@
     }
 }
 
-- (UIFont *)labelCell:(AKFormCellLabel *)cell valueLabelFontForMode:(AKFormCellLabelMode)mode
+- (UIFont *)valueLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
 {
-    return [UIFont systemFontOfSize:17.f];
+    if (style == AKFormCellLabelStyleTwoLines) {
+        return [UIFont systemFontOfSize:13.f];
+    } else {
+        return [UIFont systemFontOfSize:17.f];
+    }
 }
 
-- (UIColor *)labelCell:(AKFormCellLabel *)cell titleLabelTextColorForMode:(AKFormCellLabelMode)mode
+- (UIColor *)titleLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
 {
     if (mode == CSFormCellTextFieldModeInvalid) {
         return [UIColor colorWithHexString:HEX_COLOR_RED];
@@ -126,13 +130,15 @@
     }
 }
 
-- (UIColor *)labelCell:(AKFormCellLabel *)cell valueLabelTextColorForMode:(AKFormCellLabelMode)mode
+- (UIColor *)valueLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
 {
     switch (mode) {
         case CSFormCellTextFieldModeEmpty:
+            return [UIColor lightGrayColor];
+            break;
         case CSFormCellTextFieldModeFilled:
         case CSFormCellTextFieldModeReadOnly:
-            return [UIColor darkGrayColor];
+            return [UIColor grayColor];
             break;
         case CSFormCellTextFieldModeEditing:
             return [UIColor colorWithHexString:@"#E67D2C"];
@@ -175,16 +181,16 @@
     self.slider.enabled = YES;
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
-            [self.form setLabelCellStyle:AKFormCellLabelStyleNoTitle];
-            break;
-        case 1:
             [self.form setLabelCellStyle:AKFormCellLabelStyleTitleWithStaticWidth1];
             break;
-        case 2:
+        case 1:
             [self.form setLabelCellStyle:AKFormCellLabelStyleTitleWithStaticWidth2];
             break;
-        case 3:
+        case 2:
             [self.form setLabelCellStyle:AKFormCellLabelStyleTitleWithStaticWidth3];
+            break;
+        case 3:
+            [self.form setLabelCellStyle:AKFormCellLabelStyleNoTitle];
             break;
         case 4:
             [self.form setLabelCellStyle:AKFormCellLabelStyleTitleWithDynamicWidth];
@@ -192,6 +198,7 @@
             break;
         case 5:
             [self.form setLabelCellStyle:AKFormCellLabelStyleTwoLines];
+            self.slider.enabled = NO;
             break;
     }
 }
@@ -214,7 +221,7 @@
     if ([segueName isEqualToString: @"form_embed"]) {
         self.form = (DatePickerFieldsForm *) [segue destinationViewController];
         
-        CGFloat sliderValue = (135.f - MIN_LABEL_WIDTH) / (MAX_LABEL_WIDTH - MIN_LABEL_WIDTH);
+        CGFloat sliderValue = (50.f - MIN_LABEL_WIDTH) / (MAX_LABEL_WIDTH - MIN_LABEL_WIDTH);
         [self.slider setValue:sliderValue];
         [self sliderValueDidChange:self.slider];
     }

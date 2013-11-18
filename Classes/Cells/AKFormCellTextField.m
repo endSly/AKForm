@@ -153,8 +153,8 @@
         case CSFormCellTextFieldStyleLabelWithStaticWidth1:
         case CSFormCellTextFieldStyleLabelWithStaticWidth2:
         case CSFormCellTextFieldStyleLabelWithStaticWidth3:
-            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextFieldCell:)]) {
-                labelWidth = [self.styleProvider labelWidthForTextFieldCell:self];
+            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextFieldCell)]) {
+                labelWidth = [self.styleProvider labelWidthForTextFieldCell];
             } else {
                 labelWidth = DEFAULT_TITLE_WIDTH;
             }
@@ -191,8 +191,8 @@
 - (void)styleLabel
 {
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldCell:labelFontForMode:)]) {
-        self.label.font = [self.styleProvider textFieldCell:self labelFontForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:style:)]) {
+        self.label.font = [self.styleProvider labelFontForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
             case CSFormCellTextFieldModeEditing:
@@ -206,8 +206,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldCell:labelTextColorForMode:)]) {
-        self.label.textColor = [self.styleProvider textFieldCell:self labelTextColorForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:style:)]) {
+        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
             case CSFormCellTextFieldModeEditing:
@@ -227,15 +227,15 @@
  */
 - (void)styleTextField
 {
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForTextFieldCell:)]) {
-        self.style = [self.styleProvider styleForTextFieldCell:self];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForTextFieldCell)]) {
+        self.style = [self.styleProvider styleForTextFieldCell];
     } else {
         self.style = DEFAULT_STYLE;
     }
 
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldCell:textFieldFontForMode:)]) {
-        self.textField.font = [self.styleProvider textFieldCell:self textFieldFontForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldFontForMode:style:)]) {
+        self.textField.font = [self.styleProvider textFieldFontForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
             case CSFormCellTextFieldModeEditing:
@@ -249,8 +249,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldCell:textFieldTextColorForMode:)]) {
-        self.textField.textColor = [self.styleProvider textFieldCell:self textFieldTextColorForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldTextColorForMode:style:)]) {
+        self.textField.textColor = [self.styleProvider textFieldTextColorForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
             case CSFormCellTextFieldModeEditing:

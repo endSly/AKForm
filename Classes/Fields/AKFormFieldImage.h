@@ -18,7 +18,7 @@
 
 @property(nonatomic, assign) CGSize imageSize;
 @property(nonatomic, assign) CSFormCellImageThumbnailStyle thumbnailStyle;
-
+@property(nonatomic, strong) NSString *placeholderImageName;
 @property(nonatomic, weak) AKFormController *formController;
 
 /// Things to Note
@@ -46,7 +46,8 @@
  */
 + (instancetype)fieldWithKey:(NSString *)key
                        title:(NSString *)title
-                 placeholder:(NSString *)placeholder
+             placeholderText:(NSString *)placeholderText
+        placeholderImageName:(NSString *)placeholderImageName
                    imageSize:(CGSize)imageSize
               thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
               formController:(AKFormController *)formController;

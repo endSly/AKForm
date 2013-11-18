@@ -232,16 +232,16 @@
 - (void)styleLabel
 {
     if (self.styleProvider
-        && [self.styleProvider respondsToSelector:@selector(labelStyleForImageCell:)]) {
-        self.labelStyle = [self.styleProvider labelStyleForImageCell:self];
+        && [self.styleProvider respondsToSelector:@selector(labelStyleForImageCell)]) {
+        self.labelStyle = [self.styleProvider labelStyleForImageCell];
     } else {
         self.labelStyle = DEFAULT_LABEL_STYLE;
     }
     [self styleTextAlignments];
     
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(imageCell:labelFontForMode:)]) {
-        self.label.font = [self.styleProvider imageCell:self labelFontForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:)]) {
+        self.label.font = [self.styleProvider labelFontForMode:self.mode];
     } else {
         switch (self.mode) {
             case CSFormCellImageModeEmpty:
@@ -253,8 +253,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(imageCell:labelTextColorForMode:)]) {
-        self.label.textColor = [self.styleProvider imageCell:self labelTextColorForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:)]) {
+        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode];
     } else {
         switch (self.mode) {
             case CSFormCellImageModeEmpty:
@@ -279,10 +279,8 @@
 {
     [self styleThumbnailMask];
     if (self.mode == CSFormCellImageModeEmpty) {
-        if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(placeholderImageForImageCell:)]) {
-            UIImage *placeholderImage = [self.styleProvider placeholderImageForImageCell:self];
-            [self setThumbnailImage:placeholderImage];
-        }
+        UIImage *placeholderImage = [UIImage imageNamed:self.placeholderImageName];
+        [self setThumbnailImage:placeholderImage];
     }
 }
 

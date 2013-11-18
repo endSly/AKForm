@@ -90,8 +90,8 @@
 
 - (void)setStyle
 {
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForLabelCell:)]) {
-        self.style = [self.styleProvider styleForLabelCell:self];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForLabelCell)]) {
+        self.style = [self.styleProvider styleForLabelCell];
     } else {
         self.style = DEFAULT_STYLE;
     }
@@ -106,8 +106,8 @@
         case AKFormCellLabelStyleTitleWithStaticWidth1:
         case AKFormCellLabelStyleTitleWithStaticWidth2:
         case AKFormCellLabelStyleTitleWithStaticWidth3:
-            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(titleLabelWidthForLabelCell:)]) {
-                labelWidth = [self.styleProvider titleLabelWidthForLabelCell:self];
+            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(titleLabelWidthForLabelCell)]) {
+                labelWidth = [self.styleProvider titleLabelWidthForLabelCell];
             } else {
                 labelWidth = DEFAULT_TITLE_WIDTH;
             }
@@ -165,8 +165,8 @@
 - (void)styleTitleLabel
 {
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelCell:titleLabelFontForMode:)]) {
-        self.titleLabel.font = [self.styleProvider labelCell:self titleLabelFontForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(titleLabelFontForMode:style:)]) {
+        self.titleLabel.font = [self.styleProvider titleLabelFontForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
             case AKFormCellLabelModeEditing:
@@ -180,8 +180,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelCell:titleLabelTextColorForMode:)]) {
-        self.titleLabel.textColor = [self.styleProvider labelCell:self titleLabelTextColorForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(titleLabelTextColorForMode:style:)]) {
+        self.titleLabel.textColor = [self.styleProvider titleLabelTextColorForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
             case AKFormCellLabelModeEditing:
@@ -198,8 +198,8 @@
 - (void)styleValueLabel
 {
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelCell:valueLabelFontForMode:)]) {
-        self.valueLabel.font = [self.styleProvider labelCell:self valueLabelFontForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(valueLabelFontForMode:style:)]) {
+        self.valueLabel.font = [self.styleProvider valueLabelFontForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
             case AKFormCellLabelModeEditing:
@@ -213,8 +213,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelCell:valueLabelTextColorForMode:)]) {
-        self.valueLabel.textColor = [self.styleProvider labelCell:self valueLabelTextColorForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(valueLabelTextColorForMode:style:)]) {
+        self.valueLabel.textColor = [self.styleProvider valueLabelTextColorForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
             case AKFormCellLabelModeEditing:

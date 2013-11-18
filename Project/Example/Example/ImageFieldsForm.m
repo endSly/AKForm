@@ -74,11 +74,12 @@
     NSMutableArray *fields = [NSMutableArray array];
     for (int i=0; i<thumbnailSizes.count; i++) {
         AKFormFieldImage *field = [AKFormFieldImage fieldWithKey:[NSString stringWithFormat:@"image_%d", i+1]
-                                                            title:[NSString stringWithFormat:@"Image %d", i+1]
-                                                      placeholder:[NSString stringWithFormat:@"Choose Image %d", i+1]
-                                                        imageSize:imageSize
-                                                   thumbnailStyle:((NSNumber *)thumbnailSizes[i]).integerValue
-                                                   formController:self];
+                                                           title:[NSString stringWithFormat:@"Image %d", i+1]
+                                                 placeholderText:[NSString stringWithFormat:@"Choose Image %d", i+1]
+                                            placeholderImageName:[NSString stringWithFormat:@"Placeholder%d", i+1]
+                                                       imageSize:imageSize
+                                                  thumbnailStyle:((NSNumber *)thumbnailSizes[i]).integerValue
+                                                  formController:self];
         NSString *failMessage = [NSString stringWithFormat:@"Please choose image %d", i+1];
         AKFormValidator *validator = [AKFormValidator requiredValidator:failMessage];
         field.validators = @[validator];
@@ -112,12 +113,12 @@
 #pragma mark -
 #pragma mark Image Cell—Style Provider
 
-- (UIFont *)imageCell:(AKFormCellImage *)cell labelFontForMode:(CSFormCellImageMode)mode
+- (UIFont *)labelFontForMode:(CSFormCellImageMode)mode
 {
     return [UIFont systemFontOfSize:17.f];
 }
 
-- (UIColor *)imageCell:(AKFormCellImage *)cell labelTextColorForMode:(CSFormCellImageMode)mode
+- (UIColor *)labelTextColorForMode:(CSFormCellImageMode)mode
 {
     switch (mode) {
         case CSFormCellImageModeEmpty:
@@ -129,12 +130,7 @@
     }
 }
 
-- (UIImage *)placeholderImageForImageCell:(AKFormCellImage *)cell
-{
-    return [UIImage imageNamed:@"PlaceholderProfile2"];
-}
-
-- (CGFloat)heightForImageCell:(AKFormCellImage *)cell
+- (CGFloat)heightForImageCell
 {
     return _height;
 }
@@ -151,7 +147,7 @@
     [self.tableView reloadData];
 }
 
-- (CSFormCellImageLabelStyle)labelStyleForImageCell:(AKFormCellImage *)cell
+- (CSFormCellImageLabelStyle)labelStyleForImageCell
 {
     return _labelStyle;
 }

@@ -98,7 +98,7 @@ typedef NS_ENUM(NSInteger, CSFormCellTextFieldMode) {
  *  @return A `CSFormCellTextFieldStyle` to be used for the cell.
  *  @see CSFormCellTextFieldStyle
  */
-- (CSFormCellTextFieldStyle)styleForTextFieldCell:(AKFormCellTextField *)cell;
+- (CSFormCellTextFieldStyle)styleForTextFieldCell;
 
 ///---------------------------------------------------------------------------------------
 /// @name Dimensions
@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, CSFormCellTextFieldMode) {
  *
  *  @return A static width to be used for the label.
  */
-- (CGFloat)labelWidthForTextFieldCell:(AKFormCellTextField *)cell;
+- (CGFloat)labelWidthForTextFieldCell;
 
 /**
  *  Provides a height for the entire cell.
@@ -120,7 +120,7 @@ typedef NS_ENUM(NSInteger, CSFormCellTextFieldMode) {
  *
  *  @return A height to be used for this cell.
  */
-- (CGFloat)heightForTextFieldCell:(AKFormCellTextField *)cell;
+- (CGFloat)heightForTextFieldCell;
 
 ///---------------------------------------------------------------------------------------
 /// @name Fonts
@@ -134,8 +134,7 @@ typedef NS_ENUM(NSInteger, CSFormCellTextFieldMode) {
  *
  *  @return A font to be used for the label.
  */
-- (UIFont *)textFieldCell:(AKFormCellTextField *)cell
-         labelFontForMode:(CSFormCellTextFieldMode)mode;
+- (UIFont *)labelFontForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style;
 
 /**
  *  Provides a font for the text field.
@@ -145,8 +144,7 @@ typedef NS_ENUM(NSInteger, CSFormCellTextFieldMode) {
  *
  *  @return A font to be used for the text field.
  */
-- (UIFont *)textFieldCell:(AKFormCellTextField *)cell
-     textFieldFontForMode:(CSFormCellTextFieldMode)mode;
+- (UIFont *)textFieldFontForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style;
 
 ///---------------------------------------------------------------------------------------
 /// @name Text Colors
@@ -160,8 +158,7 @@ typedef NS_ENUM(NSInteger, CSFormCellTextFieldMode) {
  *
  *  @return A color to be used for the label.
  */
-- (UIColor *)textFieldCell:(AKFormCellTextField *)cell
-     labelTextColorForMode:(CSFormCellTextFieldMode)mode;
+- (UIColor *)labelTextColorForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style;
 
 /**
  *  Provides a text color for the text field.
@@ -171,9 +168,7 @@ typedef NS_ENUM(NSInteger, CSFormCellTextFieldMode) {
  *
  *  @return A color to be used for the text field.
  */
-- (UIColor *)textFieldCell:(AKFormCellTextField *)cell
- textFieldTextColorForMode:(CSFormCellTextFieldMode)mode;
-
+- (UIColor *)textFieldTextColorForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style;
 @end
 
 /**

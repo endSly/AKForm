@@ -100,28 +100,28 @@ typedef NS_ENUM(NSInteger, AKFormCellLabelMode) {
 /// @name Cell Style
 ///---------------------------------------------------------------------------------------
 
-- (AKFormCellLabelStyle)styleForLabelCell:(AKFormCellLabel *)cell;
+- (AKFormCellLabelStyle)styleForLabelCell;
 
 ///---------------------------------------------------------------------------------------
 /// @name Dimensions
 ///---------------------------------------------------------------------------------------
 
-- (CGFloat)titleLabelWidthForLabelCell:(AKFormCellLabel *)cell;
-- (CGFloat)heightForLabelCell:(AKFormCellLabel *)cell;
+- (CGFloat)titleLabelWidthForLabelCell;
+- (CGFloat)heightForLabelCell;
 
 ///---------------------------------------------------------------------------------------
 /// @name Fonts
 ///---------------------------------------------------------------------------------------
 
-- (UIFont *)labelCell:(AKFormCellLabel *)cell titleLabelFontForMode:(AKFormCellLabelMode)mode;
-- (UIFont *)labelCell:(AKFormCellLabel *)cell valueLabelFontForMode:(AKFormCellLabelMode)mode;
+- (UIFont *)titleLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style;
+- (UIFont *)valueLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style;
 
 ///---------------------------------------------------------------------------------------
 /// @name Text Colors
 ///---------------------------------------------------------------------------------------
 
-- (UIColor *)labelCell:(AKFormCellLabel *)cell titleLabelTextColorForMode:(AKFormCellLabelMode)mode;
-- (UIColor *)labelCell:(AKFormCellLabel *)cell valueLabelTextColorForMode:(AKFormCellLabelMode)mode;
+- (UIColor *)titleLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style;
+- (UIColor *)valueLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style;
 
 @end
 

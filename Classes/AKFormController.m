@@ -321,8 +321,8 @@
     AKFormField *field = [self fieldForIndexPath:indexPath];
     if ([field isKindOfClass:[AKFormFieldText class]]) {
         AKFormFieldText *textField = (AKFormFieldText *)field;
-        if (textField.styleProvider && [textField.styleProvider respondsToSelector:@selector(heightForTextFieldCell:)]) {
-            return [textField.styleProvider heightForTextFieldCell:nil];
+        if (textField.styleProvider && [textField.styleProvider respondsToSelector:@selector(heightForTextFieldCell)]) {
+            return [textField.styleProvider heightForTextFieldCell];
         }
     } else {
         if ([field isKindOfClass:[AKFormFieldExpandable class]]) {
@@ -333,13 +333,13 @@
                 //if this is the label cell
                 AKFormFieldExpandable *expandableField = (AKFormFieldExpandable *)field;
                 if (expandableField.styleProvider &&
-                    [expandableField.styleProvider respondsToSelector:@selector(heightForLabelCell:)]) {
-                    return [expandableField.styleProvider heightForLabelCell:nil];
+                    [expandableField.styleProvider respondsToSelector:@selector(heightForLabelCell)]) {
+                    return [expandableField.styleProvider heightForLabelCell];
                 }
             }
         } else if ([field isKindOfClass:[AKFormFieldImage class]]) {
 //            AKFormFieldImage *imageField = (AKFormFieldImage *)field;
-            return [self heightForImageCell:nil];
+            return [self heightForImageCell];
 //            if (imageField.styleProvider &&
 //                [imageField.styleProvider respondsToSelector:@selector(heightForImageCell:)]) {
 //                return [imageField.styleProvider heightForImageCell:nil];

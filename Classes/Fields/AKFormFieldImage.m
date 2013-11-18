@@ -18,26 +18,29 @@
 
 + (instancetype)fieldWithKey:(NSString *)key
                        title:(NSString *)title
-                 placeholder:(NSString *)placeholder
+             placeholderText:(NSString *)placeholderText
+        placeholderImageName:(NSString *)placeholderImageName
                    imageSize:(CGSize)imageSize
               thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
               formController:(AKFormController *)formController
 {
-    return [[AKFormFieldImage alloc] initWithKey:key title:title placeholder:placeholder imageSize:imageSize thumbnailStyle:thumbnailStyle formController:formController];
+    return [[AKFormFieldImage alloc] initWithKey:key title:title placeholderText:placeholderText placeholderImageName:placeholderImageName imageSize:imageSize thumbnailStyle:thumbnailStyle formController:formController];
 }
 
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
-                placeholder:(NSString *)placeholder
+            placeholderText:(NSString *)placeholderText
+       placeholderImageName:(NSString *)placeholderImageName
                   imageSize:(CGSize)imageSize
              thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
              formController:(AKFormController *)formController
 {
-    self = [super initWithKey:key title:title placeholder:placeholder];
+    self = [super initWithKey:key title:title placeholder:placeholderText];
     if (self) {
         self.formController = formController;
         self.imageSize = imageSize;
         self.thumbnailStyle = thumbnailStyle;
+        self.placeholderImageName = placeholderImageName;
     }
     return self;
 }
@@ -62,6 +65,7 @@
 
     cell.imageSize = self.imageSize;
     cell.thumbnailStyle = self.thumbnailStyle;
+    cell.placeholderImageName = self.placeholderImageName;
     
     self.cell = cell;
     return cell;
