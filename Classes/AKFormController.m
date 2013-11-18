@@ -11,6 +11,7 @@
 #import "CSFormFieldSwitch.h"
 
 #import "AKFormValidator.h"
+#import <DAKeyboardControl/DAKeyboardControl.h>
 
 @interface AKFormController ()
 @property(nonatomic, strong) NSMutableArray *sections;
@@ -26,6 +27,26 @@
     [super viewDidLoad];
     _currentStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
     self.sections = [NSMutableArray array];
+    
+    //adds a pan-to-dismiss gesture to the keyboard
+//    __weak __typeof(&*self)weakSelf = self;
+    [self.tableView addKeyboardPanningWithActionHandler:nil];
+//    self.tableView.willOpenBlock = ^(CGRect keyboardFrameInView) {
+//        NSLog(@"Will open");
+//    };
+//    self.tableView.didOpenBlock = ^(CGRect keyboardFrameInView) {
+//        NSLog(@"Did open");
+//    };
+//    self.tableView.openingBlock = ^(CGRect keyboardFrameInView) {
+//        NSLog(@"Opening");
+//        weakSelf.tableView.scrollEnabled = YES;
+//    };
+//    self.tableView.didCloseBlock = ^(CGRect keyboardFrameInView) {
+//        weakSelf.tableView.scrollEnabled = YES;
+//    };
+//    self.tableView.closingBlock = ^(CGRect keyboardFrameInView) {
+//        weakSelf.tableView.scrollEnabled = NO;
+//    };
 }
 
 - (void)viewWillAppear:(BOOL)animated

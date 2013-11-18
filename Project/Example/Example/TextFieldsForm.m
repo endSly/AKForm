@@ -35,6 +35,7 @@
 {
     [self addLabelStringLengthsSection];
     [self addValidatorsSection];
+    [self addInputStylesSection];
 }
 
 - (void)addLabelStringLengthsSection
@@ -56,25 +57,102 @@
     [self addSection:section];
 }
 
+- (void)addInputStylesSection
+{
+    NSMutableArray *fields = [NSMutableArray array];
+
+    //Number Field
+    AKFormFieldText *numberField = [AKFormFieldText fieldWithKey:@"number"
+                                                           title:@"Number"
+                                                     placeholder:@"optional"
+                                                        delegate:self
+                                                   styleProvider:self];
+    numberField.keyboardType = UIKeyboardTypeDecimalPad;
+    [fields addObject:numberField];
+
+    //Secure Field
+    AKFormFieldText *secureField = [AKFormFieldText fieldWithKey:@"secure"
+                                                           title:@"Secure"
+                                                     placeholder:@"optional"
+                                                        delegate:self
+                                                   styleProvider:self];
+    secureField.secureTextEntry = YES;
+    [fields addObject:secureField];
+
+    //The Works Field
+    AKFormFieldText *theWorksField = [AKFormFieldText fieldWithKey:@"the_works"
+                                                             title:@"The Works"
+                                                       placeholder:@"optional"
+                                                          delegate:self
+                                                     styleProvider:self];
+    theWorksField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    theWorksField.autocorrectionType = UITextAutocorrectionTypeYes;
+    theWorksField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    theWorksField.returnKeyType = UIReturnKeySend;
+    [fields addObject:theWorksField];
+
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    section.headerTitle = @"INPUT STYLES";
+    [self addSection:section];
+}
+
 - (void)addValidatorsSection
 {
     NSMutableArray *fields = [NSMutableArray array];
 
-    AKFormFieldText *f1 = [AKFormFieldText fieldWithKey:@"label" title:@"Label"
-                                            placeholder:@"required"
-                                               delegate:self
-                                          styleProvider:self];
+    //Required Field
+    AKFormFieldText *requiredField = [AKFormFieldText fieldWithKey:@"label"
+                                                             title:@"Label"
+                                                       placeholder:@"required"
+                                                          delegate:self
+                                                     styleProvider:self];
     AKFormValidator *requiredValidator = [AKFormValidator requiredValidator:@"Please enter a value"];
-    f1.validators = @[requiredValidator];
-    [fields addObject:f1];
+    requiredField.validators = @[requiredValidator];
+    [fields addObject:requiredField];
     
-    AKFormFieldText *f2 = [AKFormFieldText fieldWithKey:@"email" title:@"Email"
-                                            placeholder:@"required email"
-                                               delegate:self
-                                          styleProvider:self];
-    AKFormValidator *emailValidator = [AKFormValidator requiredEmailValidator:@"Please enter a valid email"];
-    f2.validators = @[emailValidator];
-    [fields addObject:f2];
+    //Email Field
+    AKFormFieldText *emailField = [AKFormFieldText fieldWithKey:@"email"
+                                                          title:@"Email"
+                                                    placeholder:@"required email"
+                                                       delegate:self
+                                                  styleProvider:self];
+    AKFormValidator *emailValidator = [AKFormValidator emailValidator:@"Please enter a valid email"];
+    emailField.validators = @[emailValidator];
+    [fields addObject:emailField];
+
+    //Password Field
+    AKFormFieldText *passwordField = [AKFormFieldText fieldWithKey:@"password"
+                                                             title:@"Password"
+                                                       placeholder:@"password"
+                                                          delegate:self
+                                                     styleProvider:self];
+    AKFormValidator *passwordValidator = [AKFormValidator passwordStrengthValidator:@"Please enter a password of at least 6 characters with at least 1 uppercase, lowercase, numerical and symbolic character"
+                                                                      minimumLength:6
+                                                                       alphanumeric:YES
+                                                                         hasSymbols:YES
+                                                                          bothCases:YES];
+    passwordField.validators = @[passwordValidator];
+    [fields addObject:passwordField];
+    
+    //Password Confirmation Field
+    AKFormFieldText *passwordConfirmField = [AKFormFieldText fieldWithKey:@"confirm password" title:@"Confirm"
+                                                              placeholder:@"confirm password"
+                                                                 delegate:self
+                                                            styleProvider:self];
+    AKFormValidator *passwordConfirmValidator = [[AKFormValidator alloc] init];
+    passwordConfirmValidator.failMessage = @"Please make sure the password confirmation matches";
+    passwordConfirmValidator.failMessageTitle = @"Password Mismatch";
+    
+    passwordConfirmValidator.validationBlock = ^BOOL(AKFormValue *value) {
+        if (value && [value isString]
+            && passwordField.value
+            && [passwordField.value isString]) {
+            return [[value stringValue] isEqualToString:[passwordField.value stringValue]];
+        }
+        return NO;
+    };
+    passwordConfirmField.validators = @[passwordConfirmValidator];
+    [fields addObject:passwordConfirmField];
     
 
     AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];

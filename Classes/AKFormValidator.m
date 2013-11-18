@@ -42,31 +42,70 @@
 
 #pragma mark - Required Field Validators
 
-+ (instancetype)requiredEmailValidator:(NSString *)failMessage
++ (instancetype)emailValidator:(NSString *)failMessage
 {
-    return [AKFormValidator requiredValidatorWithMessage:failMessage block:[AKFormValidator requiredEmailBlock]];
+    return [[AKFormValidator alloc] initWithValidationBlock:[AKFormValidator requiredEmailBlock]
+                                                failMessage:failMessage
+                                           failMessageTitle:FAILED_TITLE_INVALID_EMAIL];
+}
+
++ (instancetype)passwordStrengthValidator:(NSString *)failMessage
+                            minimumLength:(NSUInteger)minimumLength
+                             alphanumeric:(BOOL)alphanumeric
+                               hasSymbols:(BOOL)hasSymbols
+                                bothCases:(BOOL)bothCases
+{
+    ValidationBlock validationBlock = [AKFormValidator passwordStrengthBlockForMinimumLength:minimumLength
+                                                                                alphanumeric:alphanumeric
+                                                                                  hasSymbols:hasSymbols
+                                                                                   bothCases:bothCases];
+    return [[AKFormValidator alloc] initWithValidationBlock:validationBlock
+                                                failMessage:failMessage
+                                           failMessageTitle:FAILED_TITLE_WEAK_PASSWORD];
 }
 
 + (instancetype)requiredValidator:(NSString *)failMessage
 {
-    return [AKFormValidator requiredValidatorWithMessage:failMessage block:[AKFormValidator requiredBlock]];
+    return [[AKFormValidator alloc] initWithValidationBlock:[AKFormValidator requiredBlock]
+                                                failMessage:failMessage
+                                           failMessageTitle:FAILED_TITLE_MISSING_FIELD];
 }
 
 + (instancetype)requiredMetadataCollection:(NSString *)failMessage withComponents:(NSInteger)numberOfComponents
 {
-    return [AKFormValidator requiredValidatorWithMessage:failMessage block:[AKFormValidator requiredMetadataCollectionBlockWithComponents:numberOfComponents]];
-}
-
-#pragma mark - Required Field Validators (Private)
-
-+ (instancetype)requiredValidatorWithMessage:(NSString *)message block:(ValidationBlock)block
-{
-    return [[AKFormValidator alloc] initWithValidationBlock:block
-                                                     failMessage:message
-                                                failMessageTitle:FAILED_TITLE_MISSING_FIELD];
+    return [[AKFormValidator alloc] initWithValidationBlock:[AKFormValidator requiredMetadataCollectionBlockWithComponents:numberOfComponents]
+                                                failMessage:failMessage
+                                           failMessageTitle:FAILED_TITLE_MISSING_FIELD];
 }
 
 #pragma mark - Standard Validation Blocks (Private)
+
++ (ValidationBlock)passwordStrengthBlockForMinimumLength:(NSUInteger)minimumLength
+                                            alphanumeric:(BOOL)alphanumeric
+                                              hasSymbols:(BOOL)hasSymbols
+                                               bothCases:(BOOL)bothCases
+{
+    return ^BOOL(AKFormValue *value) {
+        if (!value || ![value isString]) {
+            return NO;
+        }
+        NSString *password = [value stringValue];
+        
+        if (![password isMinLength:minimumLength]) {
+            return NO;
+        }
+        
+        if (alphanumeric && ![password isAlphanumeric]) {
+            return NO;
+        }
+        
+        if (bothCases && ![password hasBothCases]) {
+            return NO;
+        }
+        
+        return YES;
+    };
+}
 
 + (ValidationBlock)requiredEmailBlock
 {

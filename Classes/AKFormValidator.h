@@ -16,7 +16,10 @@ typedef NS_ENUM(NSInteger, AKFormValidatorType) {
 };
 
 #define FAILED_TITLE_MISSING_FIELD      @"Missing field"
+#define FAILED_TITLE_INVALID_EMAIL      @"Invalid Email"
+#define FAILED_TITLE_WEAK_PASSWORD      @"Weak Password"
 #define FAILED_TITLE_DEFAULT            @"Validation Error"
+
 #define FAILED_MESSAGE_DEFAULT          @"There was a validation error. Please try again."
 #define DEFAULT_VALIDATOR_TYPE          AKFormValidatorTypeDestructive
 
@@ -75,7 +78,13 @@ typedef BOOL (^ValidationBlock)(AKFormValue *value);
 ///---------------------------------------------------------------------------------------
 
 + (instancetype)requiredValidator:(NSString *)failMessage;
-+ (instancetype)requiredEmailValidator:(NSString *)failMessage;
 + (instancetype)requiredMetadataCollection:(NSString *)failMessage withComponents:(NSInteger)numberOfComponents;
+
++ (instancetype)emailValidator:(NSString *)failMessage;
++ (instancetype)passwordStrengthValidator:(NSString *)failMessage
+                            minimumLength:(NSUInteger)minimumLength
+                             alphanumeric:(BOOL)alphanumeric
+                               hasSymbols:(BOOL)hasSymbols
+                                bothCases:(BOOL)bothCases;
 
 @end
