@@ -41,8 +41,8 @@ typedef NS_ENUM(NSInteger, CSFormCellImageMode) {
 
 @protocol CSFormCellImageDelegate <NSObject>
 - (void)didTapThumbnailOnImageCell:(AKFormCellImage *)cell;
-- (NSString *)placeholderStringForLabelCell:(AKFormCellImage *)cell;
-- (NSString *)labelStringForLabelCell:(AKFormCellImage *)cell;
+- (NSString *)placeholderStringForImageCell:(AKFormCellImage *)cell;
+- (NSString *)labelStringForImageCell:(AKFormCellImage *)cell;
 @end
 
 @interface AKFormCellImage : AKFormCell

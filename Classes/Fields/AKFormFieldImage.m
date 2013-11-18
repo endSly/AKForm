@@ -103,12 +103,12 @@
                                     onPopoverFromView:nil];
 }
 
-- (NSString *)labelStringForLabelCell:(AKFormCellImage *)cell
+- (NSString *)labelStringForImageCell:(AKFormCellImage *)cell
 {
     return self.title;
 }
 
-- (NSString *)placeholderStringForLabelCell:(AKFormCellImage *)cell
+- (NSString *)placeholderStringForImageCell:(AKFormCellImage *)cell
 {
     return self.placeholder;
 }

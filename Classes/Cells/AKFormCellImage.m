@@ -169,17 +169,17 @@
 
 - (CGFloat)longestLabelWidth
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(labelStringForLabelCell:)]
-        && [self.delegate respondsToSelector:@selector(placeholderStringForLabelCell:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(labelStringForImageCell:)]
+        && [self.delegate respondsToSelector:@selector(placeholderStringForImageCell:)]) {
 
         UILabel *labelLabel = [[UILabel alloc] init];
         labelLabel.font = self.label.font;
-        labelLabel.text = [self.delegate labelStringForLabelCell:self];
+        labelLabel.text = [self.delegate labelStringForImageCell:self];
         [labelLabel sizeToFit];
         
         UILabel *placeholderLabel = [[UILabel alloc] init];
         placeholderLabel.font = self.label.font;
-        placeholderLabel.text = [self.delegate placeholderStringForLabelCell:self];
+        placeholderLabel.text = [self.delegate placeholderStringForImageCell:self];
         [placeholderLabel sizeToFit];
         
         return MAX(labelLabel.frame.size.width, placeholderLabel.frame.size.width);
