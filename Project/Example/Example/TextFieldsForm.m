@@ -194,17 +194,17 @@
     [self.tableView reloadData];
 }
 
-- (CGFloat)labelWidthForTextFieldCell:(AKFormCellTextField *)cell
+- (CGFloat)labelWidthForTextFieldCell
 {
     return _labelWidth;
 }
 
-- (CSFormCellTextFieldStyle)styleForTextFieldCell:(AKFormCellTextField *)cell
+- (CSFormCellTextFieldStyle)styleForTextFieldCell
 {
     return _textFieldStyle;
 }
 
-- (UIFont *)textFieldCell:(AKFormCellTextField *)cell labelFontForMode:(CSFormCellTextFieldMode)mode
+- (UIFont *)labelFontForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style
 {
     switch (mode) {
         case CSFormCellTextFieldModeEmpty:
@@ -219,7 +219,7 @@
     }
 }
 
-- (UIColor *)textFieldCell:(AKFormCellTextField *)cell labelTextColorForMode:(CSFormCellTextFieldMode)mode
+- (UIColor *)labelTextColorForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style
 {
     if (mode == CSFormCellTextFieldModeInvalid) {
         return [UIColor colorWithHexString:HEX_COLOR_RED];
@@ -228,12 +228,12 @@
     }
 }
 
-- (UIFont *)textFieldCell:(AKFormCellTextField *)cell textFieldFontForMode:(CSFormCellTextFieldMode)mode
+- (UIFont *)textFieldFontForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style
 {
     return [UIFont systemFontOfSize:17.f];
 }
 
-- (UIColor *)textFieldCell:(AKFormCellTextField *)cell textFieldTextColorForMode:(CSFormCellTextFieldMode)mode
+- (UIColor *)textFieldTextColorForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style
 {
     switch (mode) {
         case CSFormCellTextFieldModeEmpty:

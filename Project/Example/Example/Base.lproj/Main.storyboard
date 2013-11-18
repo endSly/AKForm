@@ -135,7 +135,7 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Row Height" id="0LQ-2z-ErO">
+                                    <barButtonItem enabled="NO" title="Row Height" id="0LQ-2z-ErO">
                                         <color key="tintColor" red="0.90196079019999997" green="0.49019607900000001" blue="0.17254902420000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="7CY-pF-Mm2">
@@ -232,7 +232,7 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Label Width" id="2UL-1I-P3r">
+                                    <barButtonItem enabled="NO" title="Label Width" id="2UL-1I-P3r">
                                         <color key="tintColor" red="0.90196079019999997" green="0.49019607900000001" blue="0.17254902420000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="cv4-82-WKp">
@@ -330,7 +330,7 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Label Width" id="OSb-sP-lRy">
+                                    <barButtonItem enabled="NO" title="Label Width" id="OSb-sP-lRy">
                                         <color key="tintColor" red="0.90196079019999997" green="0.49019607900000001" blue="0.17254902420000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="13o-lW-1WC">
