@@ -177,32 +177,23 @@
         [labelCell setMode:AKFormCellLabelModeEditing];
     }
     
-    //if this is the starting date in a time period
+    //if we're attached to a 'period end' field
     if (self.periodEndDateField) {
-        //set the picked date as the minimum for the end date
+        
+        //set the picked date as the minimum for it
         self.periodEndDateField.minimumDate = cell.datePickerView.date;
 
-        //pick the end date or choose today if none is available
+        //push back the 'period end' field's date if it's before the new minimum
         NSDate *endDate = [self.periodEndDateField.value dateValue] ? [self.periodEndDateField.value dateValue] : [NSDate date];
-
-        //now we choose the later date of that and the picked date
-        //(to make sure we still honor it being the minimum)
         NSDate *laterDate = [endDate compare:cell.datePickerView.date] == NSOrderedAscending ? cell.datePickerView.date : endDate;
-
-        //now we SET that date in the periodEndDateField
         self.periodEndDateField.value = [AKFormValue value:laterDate withType:AKFormValueDate];
+        
+        //update the label cell
         AKFormCellLabel *endDateLabelCell = [self.periodEndDateField labelCell];
         if (endDateLabelCell) {
-            if ([self.periodEndDateField.value isDate]) {
-                endDateLabelCell.valueLabel.text = [self.periodEndDateField dateString];
-            }
+            endDateLabelCell.valueLabel.text = [self.periodEndDateField dateString];
             [endDateLabelCell setMode:AKFormCellLabelModeFilled];
         }
-
-        //and update that fields label
-//        AKFormCellLabel *label = [self.delegate labelCellForField:self.periodEndDateField];
-//        label.valueLabel.text = [laterDate stringWithFormat:self.periodEndDateField.dateDisplayFormat];
-//        [label setMode:AKFormCellLabelModeFilled];
     }
 }
 
