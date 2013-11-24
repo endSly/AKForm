@@ -16,12 +16,12 @@
 #import "AKFormFieldExpandable.h"
 #import "AKFormFieldDate.h"
 #import "AKFormFieldExpandablePicker.h"
-#import "CSFormFieldModalPicker.h"
+#import "AKFormFieldModalPicker.h"
 #import "CSFormFieldTextView.h"
 #import "CSFormFieldSwitch.h"
 #import "CSFormFieldSegmented.h"
 
-@interface AKFormController : UITableViewController <CSFormCellTextFieldDelegate, CSFormFieldModalPickerDelegate, CSFormFieldSwitchDelegate, CSFormFieldSegmentedDelegate, CSFormCellImageStyleProvider>
+@interface AKFormController : UITableViewController <CSFormCellTextFieldDelegate, CSFormFieldSwitchDelegate, CSFormFieldSegmentedDelegate, CSFormCellImageStyleProvider>
 
 - (BOOL)validateForm;
 

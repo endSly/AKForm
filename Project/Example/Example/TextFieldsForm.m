@@ -33,9 +33,9 @@
 
 - (void)createForm
 {
-    [self addLabelStringLengthsSection];
-    [self addValidatorsSection];
     [self addInputStylesSection];
+    [self addValidatorsSection];
+    [self addLabelStringLengthsSection];
 }
 
 - (void)addLabelStringLengthsSection

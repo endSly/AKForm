@@ -24,6 +24,17 @@
     return self;
 }
 
+- (instancetype)initWithKey:(NSString *)key
+                      title:(NSString *)title
+                placeholder:(NSString *)placeholder
+{
+    self = [self initWithKey:key title:title];
+    if (self) {
+        self.placeholder = placeholder;
+    }
+    return self;
+}
+
 ///---------------------------------------------------------------------------------------
 #pragma mark - Generating a Table View Cell from a Form Field
 ///---------------------------------------------------------------------------------------

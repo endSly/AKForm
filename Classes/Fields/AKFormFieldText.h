@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "AKFormFieldDescriptive.h"
+#import "AKFormField.h"
 #import "AKFormCellTextField.h"
 
-@interface AKFormFieldText : AKFormFieldDescriptive
+@interface AKFormFieldText : AKFormField
 
 @property(nonatomic) UIKeyboardType keyboardType;
 @property(nonatomic) UITextAutocapitalizationType autocapitalizationType;

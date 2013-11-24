@@ -378,13 +378,13 @@
             [self expandFieldAtIndexPath:indexPath];
         }
     } else if ([field isKindOfClass:[AKFormFieldText class]]) {
-    } else if ([field isKindOfClass:[CSFormFieldModalPicker class]]) {
+    } else if ([field isKindOfClass:[AKFormFieldModalPicker class]]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *nc = [storyboard instantiateViewControllerWithIdentifier:@"multipickerController"];
         [self.navigationController presentViewController:nc animated:YES completion:nil];
         
         UITableViewController *tvc = (UITableViewController *)nc.topViewController;
-        CSFormFieldModalPicker *modalPickerField = (CSFormFieldModalPicker *)field;
+        AKFormFieldModalPicker *modalPickerField = (AKFormFieldModalPicker *)field;
         tvc.tableView.delegate = modalPickerField;
         tvc.tableView.dataSource = modalPickerField;
         

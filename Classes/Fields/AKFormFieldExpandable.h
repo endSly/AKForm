@@ -6,20 +6,21 @@
 //
 //
 
-#import "AKFormFieldDescriptive.h"
+#import "AKFormField.h"
+
 #import "AKFormCellPickerView.h"
 #import "AKFormCellLabel.h"
 
 @class AKFormFieldExpandable;
 
-@interface AKFormFieldExpandable : AKFormFieldDescriptive
+#import "AKFormFieldLabelled.h"
+
+@interface AKFormFieldExpandable : AKFormFieldLabelled
 
 @property(nonatomic) BOOL isExpanded;
-@property(nonatomic, weak) id<AKFormCellLabelStyleProvider> styleProvider;
 
 @property(nonatomic, weak) UITableViewCell *expandedCell;
 
-- (AKFormCellLabel *)labelCell;
 
 - (UITableViewCell *)expandedCellForTableView:(UITableView *)tableView;
 

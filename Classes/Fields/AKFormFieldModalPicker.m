@@ -1,25 +1,38 @@
 //
-//  CSFormFieldModalPicker.m
+//  AKFormFieldModalPicker.m
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "CSFormFieldModalPicker.h"
+#import "AKFormFieldModalPicker.h"
 
-@implementation CSFormFieldModalPicker
+@implementation AKFormFieldModalPicker
+
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+          metadataCollection:(AKFormMetadataCollection *)metadataCollection
+               styleProvider:(id<AKFormCellLabelStyleProvider>)styleProvider
+{
+    return [[AKFormFieldModalPicker alloc] initWithKey:key
+                                                 title:title
+                                           placeholder:placeholder
+                                    metadataCollection:metadataCollection
+                                         styleProvider:styleProvider];
+}
 
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder
          metadataCollection:(AKFormMetadataCollection *)metadataCollection
-                   delegate:(id<CSFormFieldModalPickerDelegate>)delegate
+              styleProvider:(id<AKFormCellLabelStyleProvider>)styleProvider;
 {
     self = [super initWithKey:key title:title];
     if (self) {
         self.metadataCollection = metadataCollection;
-        self.delegate = delegate;
+        self.styleProvider = styleProvider;
         self.placeholder = placeholder;
     }
     
@@ -28,18 +41,30 @@
 
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
 {
-    AKFormCellLabel *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_LABEL];
-    if (!cell) {
-        cell = [[AKFormCellLabel alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CELL_IDENTIFIER_LABEL];
+    AKFormCellLabel *cell = (AKFormCellLabel *)[super cellForTableView:tableView];
+    
+    //set the value
+    if (self.value && [self.value isMetadata]) {
+        AKFormMetadata *metadata = [self.value metadataValue];
+        cell.valueLabel.text = [metadata description];
+    } else if (self.value && [self.value isMetadataCollection]) {
+        AKFormMetadataCollection *metadataCollection = [self.value metadataCollectionValue];
+        cell.valueLabel.text = [metadataCollection description];
+    } else {
+        cell.valueLabel.text = self.placeholder;
     }
     
-//    [cell setLabelString:self.title];
-    
-//    cell.rightLabel.text = [self.value stringValue];
+    //set the mode
+    if (self.value && ([self.value isMetadata] || [self.value isMetadataCollection])) {
+        [cell setMode:AKFormCellLabelModeFilled];
+    } else {
+        [cell setMode:AKFormCellLabelModeEmpty];
+    }
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    [cell layoutSubviews];
     
-    self.cell = cell;
     return cell;
 }
 
@@ -88,7 +113,7 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
-    [self.delegate didSelectItemOnModalPicker];
+//    [self.delegate didSelectItemOnModalPicker];
 }
 
 @end

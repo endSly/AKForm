@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "AKFormFieldDescriptive.h"
+#import "AKFormField.h"
 #import "AKFormCellImage.h"
 
 #import "GKImagePicker.h"
@@ -14,7 +14,7 @@
 
 @class  AKFormController;
 
-@interface AKFormFieldImage : AKFormFieldDescriptive <UIImagePickerControllerDelegate, GKImagePickerDelegate, CSFormCellImageDelegate, URBMediaFocusViewControllerDelegate>
+@interface AKFormFieldImage : AKFormField <UIImagePickerControllerDelegate, GKImagePickerDelegate, CSFormCellImageDelegate, URBMediaFocusViewControllerDelegate>
 
 @property(nonatomic, assign) CGSize imageSize;
 @property(nonatomic, assign) CSFormCellImageThumbnailStyle thumbnailStyle;
