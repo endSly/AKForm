@@ -19,6 +19,7 @@
 		1A5AAAA9183455CB00CEA9D7 /* ImageFieldsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */; };
 		1A5AAAAB183455CB00CEA9D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AAAAA183455CB00CEA9D7 /* Images.xcassets */; };
 		1AA5B67C1837C3CE00421A67 /* TextFieldsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA5B67B1837C3CE00421A67 /* TextFieldsForm.m */; };
+		1AB6EF791841D399001C312B /* ExpandablePickerFieldsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB6EF781841D399001C312B /* ExpandablePickerFieldsForm.m */; };
 		1ABEAA6E1839BA3700F03350 /* DatePickerFieldsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEAA6D1839BA3700F03350 /* DatePickerFieldsForm.m */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,8 @@
 		1A5AAAB1183455CB00CEA9D7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		1AA5B67A1837C3CE00421A67 /* TextFieldsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldsForm.h; sourceTree = "<group>"; };
 		1AA5B67B1837C3CE00421A67 /* TextFieldsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldsForm.m; sourceTree = "<group>"; };
+		1AB6EF771841D399001C312B /* ExpandablePickerFieldsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandablePickerFieldsForm.h; sourceTree = "<group>"; };
+		1AB6EF781841D399001C312B /* ExpandablePickerFieldsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandablePickerFieldsForm.m; sourceTree = "<group>"; };
 		1ABEAA6C1839BA3700F03350 /* DatePickerFieldsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerFieldsForm.h; sourceTree = "<group>"; };
 		1ABEAA6D1839BA3700F03350 /* DatePickerFieldsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerFieldsForm.m; sourceTree = "<group>"; };
 		A7D43B451C9343DD89E68A2F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */,
 				1ABEAA6C1839BA3700F03350 /* DatePickerFieldsForm.h */,
 				1ABEAA6D1839BA3700F03350 /* DatePickerFieldsForm.m */,
+				1AB6EF771841D399001C312B /* ExpandablePickerFieldsForm.h */,
+				1AB6EF781841D399001C312B /* ExpandablePickerFieldsForm.m */,
 			);
 			name = "Field Types";
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 			files = (
 				1A5AAAA3183455CB00CEA9D7 /* AppDelegate.m in Sources */,
 				1A5AAAA9183455CB00CEA9D7 /* ImageFieldsForm.m in Sources */,
+				1AB6EF791841D399001C312B /* ExpandablePickerFieldsForm.m in Sources */,
 				1A5AAA9F183455CB00CEA9D7 /* main.m in Sources */,
 				1ABEAA6E1839BA3700F03350 /* DatePickerFieldsForm.m in Sources */,
 				1AA5B67C1837C3CE00421A67 /* TextFieldsForm.m in Sources */,

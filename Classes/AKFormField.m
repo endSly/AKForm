@@ -58,11 +58,15 @@
     self.value = value;
 }
 
-- (void)didSelectMetadata:(AKFormMetadata *)metadata inComponent:(NSUInteger)component
+- (void)didSelectMetadata:(AKFormMetadata *)metadata inComponent:(NSUInteger)component inCollection:(AKFormMetadataCollection *)collection
 {
     if (!self.value || ![self.value isMetadataCollection]) {
         //if we don't already have a value, create a metadata collection with this selected value
         AKFormMetadataCollection *newCollection = [[AKFormMetadataCollection alloc] init];
+        newCollection.descriptionSeparator = collection.descriptionSeparator;
+        newCollection.descriptionPrefix = collection.descriptionPrefix;
+        newCollection.descriptionSuffix = collection.descriptionSuffix;
+        
         [newCollection setMetadata:metadata inComponent:component];
         self.value = [AKFormValue value:newCollection withType:AKFormValueMetadataCollection];
     } else {

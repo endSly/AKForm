@@ -10,6 +10,19 @@
 
 @implementation AKFormFieldExpandablePicker
 
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+          metadataCollection:(AKFormMetadataCollection *)metadataCollection
+               styleProvider:(id<AKFormCellLabelStyleProvider>)styleProvider
+{
+    return [[AKFormFieldExpandablePicker alloc] initWithKey:key
+                                                      title:title
+                                                placeholder:placeholder
+                                         metadataCollection:metadataCollection
+                                              styleProvider:styleProvider];
+}
+
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder
@@ -91,6 +104,10 @@
                                withType:AKFormValueMetadata];
     } else {
         AKFormMetadataCollection *newCollection = [[AKFormMetadataCollection alloc] init];
+        newCollection.descriptionSeparator = self.metadataCollection.descriptionSeparator;
+        newCollection.descriptionPrefix = self.metadataCollection.descriptionPrefix;
+        newCollection.descriptionSuffix = self.metadataCollection.descriptionSuffix;
+        
         for (int component=0; component < [self.metadataCollection numberOfComponents]; component++) {
             AKFormMetadata *randomMetadata = [self.metadataCollection randomMetadataInComponent:component];
             [newCollection setMetadata:randomMetadata inComponent:component];

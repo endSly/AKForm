@@ -23,7 +23,7 @@
 
 @protocol CSFormCellValueDelegate <NSObject>
 - (void)didInputValue:(AKFormValue *)value;
-- (void)didSelectMetadata:(AKFormMetadata *)metadata inComponent:(NSUInteger)component;
+- (void)didSelectMetadata:(AKFormMetadata *)metadata inComponent:(NSUInteger)component inCollection:(AKFormMetadataCollection *)collection;
 - (AKFormValue *)inputValue;
 @end
 

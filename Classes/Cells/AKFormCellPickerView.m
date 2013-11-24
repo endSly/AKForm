@@ -58,8 +58,8 @@
             [self.valueDelegate didInputValue:[AKFormValue value:metadata withType:AKFormValueMetadata]];
         }
     } else {
-        if (self.valueDelegate && [self.valueDelegate respondsToSelector:@selector(didSelectMetadata:inComponent:)]) {
-            [self.valueDelegate didSelectMetadata:metadata inComponent:component];
+        if (self.valueDelegate && [self.valueDelegate respondsToSelector:@selector(didSelectMetadata:inComponent:inCollection:)]) {
+            [self.valueDelegate didSelectMetadata:metadata inComponent:component inCollection:self.metadataCollection];
         }
     }
     

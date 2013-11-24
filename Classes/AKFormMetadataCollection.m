@@ -8,6 +8,10 @@
 
 #import "AKFormMetadataCollection.h"
 
+#define DEFAULT_DESCRIPTION_SEPARATOR @", "
+#define DEFAULT_DESCRIPTION_PREFIX @""
+#define DEFAULT_DESCRIPTION_SUFFIX @""
+
 @interface AKFormMetadataCollection()
 /**
  *  The internal multidimensional mutable array that is used to manage the collection.
@@ -424,32 +428,28 @@
 - (NSString *)description
 {
     if (self.array && self.array.count > 0) {
-        NSMutableString *description;
-        if ([self isDual]
-            && [self numberOfMetadataForComponent:0] == 1
-            && [self numberOfMetadataForComponent:1] == 1) {
-            description = [NSMutableString stringWithFormat:@"%@ %@",
-                           [[self metadataAtIndex:0 inComponent:0] name],
-                           [[self metadataAtIndex:0 inComponent:1] name]];
-        } else {
-            for (NSArray *metadataArray in self.array) {
-                if (![self isSingular]) {
-                    [description appendString:@"["];
-                }
-                for (AKFormMetadata *metadata in metadataArray) {
-                    [description appendString:[metadata name]];
-                    if ([metadataArray indexOfObject:metadata] != metadataArray.count-1) {
-                        [description appendString:@", "];
-                    }
-                }
-                if (![self isSingular]) {
-                    [description appendString:@"]"];
-                    if ([self.array indexOfObject:metadataArray] != self.array.count-1) {
-                        [description appendString:@", "];
-                    }
+
+        NSMutableString *description = [NSMutableString string];
+        NSString *separatorString = self.descriptionSeparator != nil ? self.descriptionSeparator : DEFAULT_DESCRIPTION_SEPARATOR;
+        NSString *prefixString = self.descriptionPrefix != nil ? self.descriptionPrefix : DEFAULT_DESCRIPTION_PREFIX;
+        NSString *suffixString = self.descriptionSuffix != nil ? self.descriptionSuffix : DEFAULT_DESCRIPTION_SUFFIX;
+    
+        description = [NSMutableString string];
+        [description appendString:prefixString];
+        
+        for (int i=0; i<self.array.count; i++) {
+            NSArray *metadataArray = self.array[i];
+            
+            for (AKFormMetadata *metadata in metadataArray) {
+                [description appendString:[metadata name]];
+            }
+            if (![self isSingular]) {
+                if (i != self.array.count-1) {
+                    [description appendString:separatorString];
                 }
             }
         }
+        [description appendString:suffixString];
         return description;
     } else {
         return @"";

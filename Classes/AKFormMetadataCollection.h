@@ -22,6 +22,10 @@
  */
 @interface AKFormMetadataCollection : NSObject
 
+@property(nonatomic, strong) NSString *descriptionSeparator;
+@property(nonatomic, strong) NSString *descriptionPrefix;
+@property(nonatomic, strong) NSString *descriptionSuffix;
+
 ///---------------------------------------------------------------------------------------
 /// @name Creating Metadata Collections
 ///---------------------------------------------------------------------------------------
