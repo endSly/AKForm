@@ -1,29 +1,50 @@
 //
-//  AKFormFieldExpandableDate.m
+//  AKFormFieldDate.m
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "AKFormFieldExpandableDate.h"
+#import "AKFormFieldDate.h"
 #import "AKFormCellDatePicker.h"
 #import <NSDate+Helper.h>
-#import <CJStringValidator/NSString+CJStringValidator.h>
+#import <NSString+CJStringValidator.h>
 
-@implementation AKFormFieldExpandableDate
+#import <MHPrettyDate.h>
+
+@implementation AKFormFieldDate
+
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+              datePickerMode:(UIDatePickerMode)datePickerMode
+                 displayType:(AKFormFieldDateDisplayType)displayType
+               displayFormat:(NSString *)displayFormat
+               styleProvider:(id<AKFormCellLabelStyleProvider>)styleProvider
+{
+    return [[AKFormFieldDate alloc] initWithKey:key
+                                          title:title
+                                    placeholder:placeholder
+                                 datePickerMode:datePickerMode
+                                    displayType:displayType
+                                  displayFormat:displayFormat
+                                  styleProvider:styleProvider];
+}
 
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder
              datePickerMode:(UIDatePickerMode)datePickerMode
+                displayType:(AKFormFieldDateDisplayType)displayType
               displayFormat:(NSString *)displayFormat
               styleProvider:(id<AKFormCellLabelStyleProvider>)styleProvider
 {
     self = [super initWithKey:key title:title];
     if (self) {
-        self.dateDisplayFormat = displayFormat;
         self.datePickerMode = datePickerMode;
+        self.displayType = displayType;
+        self.dateDisplayFormat = displayFormat;
         self.styleProvider = styleProvider;
         self.placeholder = placeholder;
         
@@ -55,17 +76,44 @@
     }
 }
 
+- (NSString *)dateString
+{
+    if (!self.value || ![self.value isDate]) {
+        if (self.placeholder) {
+            return self.placeholder;
+        } else {
+            return @"";
+        }
+    }
+    
+    NSDate *date = [self.value dateValue];
+    switch (self.displayType) {
+        case AKFormFieldDateDisplayNoTime:
+            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatNoTime];
+            break;
+        case AKFormFieldDateDisplayWithTime:
+            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatWithTime];
+            break;
+        case AKFormFieldDateDisplayTodayTimeOnly:
+            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatTodayTimeOnly];
+            break;
+        case AKFormFieldDateDisplayRelative:
+            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateLongRelativeTime];
+            break;
+        case AKFormFieldDateDisplayRelativeShort:
+            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateShortRelativeTime];
+            break;
+        case AKFormFieldDateDisplayCustom:
+            return [date stringWithFormat:self.dateDisplayFormat];
+            break;
+    }
+}
+
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
 {
     AKFormCellLabel *cell = (AKFormCellLabel *)[super cellForTableView:tableView];
     
-    //set the value
-    if (self.value && [self.value isDate]) {
-        NSDate *date = [self.value dateValue];
-        cell.valueLabel.text = [date stringWithFormat:self.dateDisplayFormat];
-    } else {
-        cell.valueLabel.text = self.placeholder;
-    }
+    cell.valueLabel.text = [self dateString];
     
     //set the mode
     if (self.isExpanded) {
@@ -124,9 +172,7 @@
     AKFormCellLabel *labelCell = [self labelCell];
     if (labelCell) {
         if ([self.value isDate]) {
-            NSDate *date = [self.value dateValue];
-            NSString *dateString = [date stringWithFormat:self.dateDisplayFormat];
-            labelCell.valueLabel.text = dateString;
+            labelCell.valueLabel.text = [self dateString];
         }
         [labelCell setMode:AKFormCellLabelModeEditing];
     }
@@ -148,8 +194,7 @@
         AKFormCellLabel *endDateLabelCell = [self.periodEndDateField labelCell];
         if (endDateLabelCell) {
             if ([self.periodEndDateField.value isDate]) {
-                NSDate *date = [self.periodEndDateField.value dateValue];
-                endDateLabelCell.valueLabel.text = [date stringWithFormat:self.periodEndDateField.dateDisplayFormat];
+                endDateLabelCell.valueLabel.text = [self.periodEndDateField dateString];
             }
             [endDateLabelCell setMode:AKFormCellLabelModeFilled];
         }

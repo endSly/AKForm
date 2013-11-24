@@ -7,7 +7,8 @@ pod 'HexColors'
 pod 'UIImage-Resize'
 pod 'NSDate+Helper'
 pod 'URBMediaFocusViewController@arkuana'
-pod 'DAKeyboardControl', :git => 'https://github.com/isyiwang/DAKeyboardControl.git'
 pod 'GKImagePicker@arkuana'
+pod 'MHPrettyDate'
 
+pod 'DAKeyboardControl', :git => 'https://github.com/isyiwang/DAKeyboardControl.git'
 pod 'CJStringValidator', :git => "https://github.com/arkuana/CJStringValidator.git"

@@ -48,8 +48,8 @@
 		1A9B223D18361C16000A7C34 /* AKFormFieldDescriptive.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B220218361C16000A7C34 /* AKFormFieldDescriptive.m */; };
 		1A9B223E18361C16000A7C34 /* AKFormFieldExpandable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B220318361C16000A7C34 /* AKFormFieldExpandable.h */; };
 		1A9B223F18361C16000A7C34 /* AKFormFieldExpandable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B220418361C16000A7C34 /* AKFormFieldExpandable.m */; };
-		1A9B224018361C16000A7C34 /* AKFormFieldExpandableDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B220518361C16000A7C34 /* AKFormFieldExpandableDate.h */; };
-		1A9B224118361C16000A7C34 /* AKFormFieldExpandableDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B220618361C16000A7C34 /* AKFormFieldExpandableDate.m */; };
+		1A9B224018361C16000A7C34 /* AKFormFieldDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B220518361C16000A7C34 /* AKFormFieldDate.h */; };
+		1A9B224118361C16000A7C34 /* AKFormFieldDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B220618361C16000A7C34 /* AKFormFieldDate.m */; };
 		1A9B224218361C16000A7C34 /* AKFormFieldExpandablePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B220718361C16000A7C34 /* AKFormFieldExpandablePicker.h */; };
 		1A9B224318361C16000A7C34 /* AKFormFieldExpandablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B220818361C16000A7C34 /* AKFormFieldExpandablePicker.m */; };
 		1A9B224418361C16000A7C34 /* AKFormFieldImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B220918361C16000A7C34 /* AKFormFieldImage.h */; };
@@ -119,8 +119,8 @@
 		1A9B220218361C16000A7C34 /* AKFormFieldDescriptive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldDescriptive.m; sourceTree = "<group>"; };
 		1A9B220318361C16000A7C34 /* AKFormFieldExpandable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldExpandable.h; sourceTree = "<group>"; };
 		1A9B220418361C16000A7C34 /* AKFormFieldExpandable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldExpandable.m; sourceTree = "<group>"; };
-		1A9B220518361C16000A7C34 /* AKFormFieldExpandableDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldExpandableDate.h; sourceTree = "<group>"; };
-		1A9B220618361C16000A7C34 /* AKFormFieldExpandableDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldExpandableDate.m; sourceTree = "<group>"; };
+		1A9B220518361C16000A7C34 /* AKFormFieldDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldDate.h; sourceTree = "<group>"; };
+		1A9B220618361C16000A7C34 /* AKFormFieldDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldDate.m; sourceTree = "<group>"; };
 		1A9B220718361C16000A7C34 /* AKFormFieldExpandablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldExpandablePicker.h; sourceTree = "<group>"; };
 		1A9B220818361C16000A7C34 /* AKFormFieldExpandablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldExpandablePicker.m; sourceTree = "<group>"; };
 		1A9B220918361C16000A7C34 /* AKFormFieldImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldImage.h; sourceTree = "<group>"; };
@@ -269,8 +269,8 @@
 				1A9B220218361C16000A7C34 /* AKFormFieldDescriptive.m */,
 				1A9B220318361C16000A7C34 /* AKFormFieldExpandable.h */,
 				1A9B220418361C16000A7C34 /* AKFormFieldExpandable.m */,
-				1A9B220518361C16000A7C34 /* AKFormFieldExpandableDate.h */,
-				1A9B220618361C16000A7C34 /* AKFormFieldExpandableDate.m */,
+				1A9B220518361C16000A7C34 /* AKFormFieldDate.h */,
+				1A9B220618361C16000A7C34 /* AKFormFieldDate.m */,
 				1A9B220718361C16000A7C34 /* AKFormFieldExpandablePicker.h */,
 				1A9B220818361C16000A7C34 /* AKFormFieldExpandablePicker.m */,
 				1A9B220918361C16000A7C34 /* AKFormFieldImage.h */,
@@ -318,7 +318,7 @@
 				1A9B225018361C16000A7C34 /* CSFormFieldTextView.h in Headers */,
 				1A9B222218361C16000A7C34 /* AKFormSection.h in Headers */,
 				1A9B222818361C16000A7C34 /* AKFormCell.h in Headers */,
-				1A9B224018361C16000A7C34 /* AKFormFieldExpandableDate.h in Headers */,
+				1A9B224018361C16000A7C34 /* AKFormFieldDate.h in Headers */,
 				1A9B224418361C16000A7C34 /* AKFormFieldImage.h in Headers */,
 				1A9B221E18361C16000A7C34 /* AKFormMetadata.h in Headers */,
 				1A9B223C18361C16000A7C34 /* AKFormFieldDescriptive.h in Headers */,
@@ -442,7 +442,7 @@
 				1A9B224918361C16000A7C34 /* CSFormFieldModal.m in Sources */,
 				1A9B223D18361C16000A7C34 /* AKFormFieldDescriptive.m in Sources */,
 				1A9B222D18361C16000A7C34 /* AKFormCellImage.m in Sources */,
-				1A9B224118361C16000A7C34 /* AKFormFieldExpandableDate.m in Sources */,
+				1A9B224118361C16000A7C34 /* AKFormFieldDate.m in Sources */,
 				1A9B222718361C16000A7C34 /* AKFormValidator.m in Sources */,
 				1A9B222918361C16000A7C34 /* AKFormCell.m in Sources */,
 				1A9B224F18361C16000A7C34 /* CSFormFieldSwitch.m in Sources */,

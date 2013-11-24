@@ -33,21 +33,152 @@
 
 - (void)createForm
 {
+    [self addDateFormatsSection];
+    [self addPeriodsSection];
     [self addLabelStringLengthsSection];
+}
+
+- (void)addPeriodsSection
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    AKFormFieldDate *startField = [AKFormFieldDate fieldWithKey:@"date"
+                                                          title:@"Start Time"
+                                                    placeholder:@"optional"
+                                                 datePickerMode:UIDatePickerModeDateAndTime
+                                                    displayType:AKFormFieldDateDisplayWithTime
+                                                  displayFormat:nil
+                                                  styleProvider:self];
+    [fields addObject:startField];
+    
+    AKFormFieldDate *endField = [AKFormFieldDate fieldWithKey:@"date"
+                                                        title:@"End Time"
+                                                  placeholder:@"optional"
+                                               datePickerMode:UIDatePickerModeDateAndTime
+                                                  displayType:AKFormFieldDateDisplayWithTime
+                                                displayFormat:nil
+                                                styleProvider:self];
+    [fields addObject:endField];
+    startField.periodEndDateField = endField;
+
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    section.headerTitle = @"DATE PERIODS";
+    section.footerTitle = @"Associating a field with a 'period end' field will make sure that 'end field' is always on or after it.";
+    [self addSection:section];
+}
+
+- (void)addDateFormatsSection
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    AKFormFieldDate *dateField = [AKFormFieldDate fieldWithKey:@"date"
+                                                         title:@"No Time"
+                                                   placeholder:@"optional"
+                                                datePickerMode:UIDatePickerModeDate
+                                                   displayType:AKFormFieldDateDisplayNoTime
+                                                 displayFormat:nil
+                                                 styleProvider:self];
+    [fields addObject:dateField];
+
+    AKFormFieldDate *dateField2 = [AKFormFieldDate fieldWithKey:@"date"
+                                                         title:@"With Time"
+                                                   placeholder:@"optional"
+                                                datePickerMode:UIDatePickerModeDateAndTime
+                                                   displayType:AKFormFieldDateDisplayWithTime
+                                                 displayFormat:nil
+                                                 styleProvider:self];
+    [fields addObject:dateField2];
+
+    AKFormFieldDate *dateField3 = [AKFormFieldDate fieldWithKey:@"date"
+                                                          title:@"Today Time Only"
+                                                    placeholder:@"optional"
+                                                 datePickerMode:UIDatePickerModeDateAndTime
+                                                    displayType:AKFormFieldDateDisplayTodayTimeOnly
+                                                  displayFormat:nil
+                                                  styleProvider:self];
+    [fields addObject:dateField3];
+    
+    AKFormFieldDate *dateField4 = [AKFormFieldDate fieldWithKey:@"date"
+                                                          title:@"Relative"
+                                                    placeholder:@"optional"
+                                                 datePickerMode:UIDatePickerModeDateAndTime
+                                                    displayType:AKFormFieldDateDisplayRelative
+                                                  displayFormat:nil
+                                                  styleProvider:self];
+    [fields addObject:dateField4];
+
+    AKFormFieldDate *dateField5 = [AKFormFieldDate fieldWithKey:@"date"
+                                                          title:@"Relative Short"
+                                                    placeholder:@"optional"
+                                                 datePickerMode:UIDatePickerModeDateAndTime
+                                                    displayType:AKFormFieldDateDisplayRelativeShort
+                                                  displayFormat:nil
+                                                  styleProvider:self];
+    [fields addObject:dateField5];
+
+    AKFormFieldDate *dateField6 = [AKFormFieldDate fieldWithKey:@"date"
+                                                          title:@"Custom Format"
+                                                    placeholder:@"optional"
+                                                 datePickerMode:UIDatePickerModeDateAndTime
+                                                    displayType:AKFormFieldDateDisplayCustom
+                                                  displayFormat:@"EEE, MMM d, yyyy"
+                                                  styleProvider:self];
+    [fields addObject:dateField6];
+
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    section.headerTitle = @"DATE FORMATS";
+    [self addSection:section];
 }
 
 - (void)addLabelStringLengthsSection
 {
     NSMutableArray *fields = [NSMutableArray array];
     
-    AKFormFieldExpandableDate *dateField = [[AKFormFieldExpandableDate alloc] initWithKey:@"date"
-                                                                                    title:@"Date"
-                                                                              placeholder:@"optional"
-                                                                           datePickerMode:UIDatePickerModeDateAndTime 
-                                                                            displayFormat:nil
-                                                                            styleProvider:self];
+    AKFormFieldDate *dateField = [AKFormFieldDate fieldWithKey:@"date"
+                                                         title:@"Date"
+                                                   placeholder:@"optional"
+                                                datePickerMode:UIDatePickerModeDate
+                                                   displayType:AKFormFieldDateDisplayCustom
+                                                 displayFormat:@"EEE, MMM d, yyyy"
+                                                 styleProvider:self];
     [fields addObject:dateField];
-    
+
+    AKFormFieldDate *dateField2 = [AKFormFieldDate fieldWithKey:@"date"
+                                                         title:@"From Date"
+                                                   placeholder:@"optional"
+                                                datePickerMode:UIDatePickerModeDate
+                                                   displayType:AKFormFieldDateDisplayCustom
+                                                 displayFormat:@"EEE, MMM d, yyyy"
+                                                 styleProvider:self];
+    [fields addObject:dateField2];
+
+    AKFormFieldDate *dateField3 = [AKFormFieldDate fieldWithKey:@"date"
+                                                          title:@"Date of Birth"
+                                                    placeholder:@"optional"
+                                                 datePickerMode:UIDatePickerModeDate
+                                                    displayType:AKFormFieldDateDisplayCustom
+                                                  displayFormat:@"EEE, MMM d, yyyy"
+                                                  styleProvider:self];
+    [fields addObject:dateField3];
+
+    AKFormFieldDate *dateField4 = [AKFormFieldDate fieldWithKey:@"date"
+                                                          title:@"Your Date of Birth"
+                                                    placeholder:@"optional"
+                                                 datePickerMode:UIDatePickerModeDate
+                                                    displayType:AKFormFieldDateDisplayCustom
+                                                  displayFormat:@"EEE, MMM d, yyyy"
+                                                  styleProvider:self];
+    [fields addObject:dateField4];
+
+    AKFormFieldDate *dateField5 = [AKFormFieldDate fieldWithKey:@"date"
+                                                          title:@"Please Enter Your Date of Birth"
+                                                    placeholder:@"optional"
+                                                 datePickerMode:UIDatePickerModeDate
+                                                    displayType:AKFormFieldDateDisplayCustom
+                                                  displayFormat:@"EEE, MMM d, yyyy"
+                                                  styleProvider:self];
+    [fields addObject:dateField5];
+
     AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
     section.headerTitle = @"LABEL STRING LENGTHS";
     [self addSection:section];
@@ -221,7 +352,7 @@
     if ([segueName isEqualToString: @"form_embed"]) {
         self.form = (DatePickerFieldsForm *) [segue destinationViewController];
         
-        CGFloat sliderValue = (50.f - MIN_LABEL_WIDTH) / (MAX_LABEL_WIDTH - MIN_LABEL_WIDTH);
+        CGFloat sliderValue = (150.f - MIN_LABEL_WIDTH) / (MAX_LABEL_WIDTH - MIN_LABEL_WIDTH);
         [self.slider setValue:sliderValue];
         [self sliderValueDidChange:self.slider];
     }
