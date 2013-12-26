@@ -212,7 +212,7 @@
         [self.array removeObjectAtIndex:component];
         
         //now remove any trailing 'placeholder' arrays
-        for (NSUInteger i=self.array.count-1; i>0; i--) {
+        for (int i=self.array.count-1; i>0; i--) {
             if ([self.array[i] count] == 0) {
                 [self.array removeObjectAtIndex:i];
             } else {
@@ -440,8 +440,12 @@
         for (int i=0; i<self.array.count; i++) {
             NSArray *metadataArray = self.array[i];
             
-            for (AKFormMetadata *metadata in metadataArray) {
+            for (int j=0; j<metadataArray.count; j++) {
+                AKFormMetadata *metadata = (AKFormMetadata *)metadataArray[j];
                 [description appendString:[metadata name]];
+                if (j != metadataArray.count-1) {
+                    [description appendString:separatorString];
+                }
             }
             if (![self isSingular]) {
                 if (i != self.array.count-1) {

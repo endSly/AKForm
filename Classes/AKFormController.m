@@ -379,20 +379,50 @@
         }
     } else if ([field isKindOfClass:[AKFormFieldText class]]) {
     } else if ([field isKindOfClass:[AKFormFieldModalPicker class]]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UINavigationController *nc = [storyboard instantiateViewControllerWithIdentifier:@"multipickerController"];
+        AKFormFieldModalPicker *pickerField = (AKFormFieldModalPicker *)field;
+        UITableViewController *tvc = [self modalPickerControllerForField:(AKFormFieldModalPicker *)field];
+        UINavigationController *nc = [self modalNavigationControllerForViewController:tvc withDoneButton:pickerField.multiplePicks];
         [self.navigationController presentViewController:nc animated:YES completion:nil];
-        
-        UITableViewController *tvc = (UITableViewController *)nc.topViewController;
-        AKFormFieldModalPicker *modalPickerField = (AKFormFieldModalPicker *)field;
-        tvc.tableView.delegate = modalPickerField;
-        tvc.tableView.dataSource = modalPickerField;
-        
-        tvc.navigationItem.title = modalPickerField.title;
     } else if ([field isKindOfClass:[AKFormFieldImage class]]) {
         AKFormFieldImage *imageField = (AKFormFieldImage *)field;
         [imageField select];
     }
+}
+
+- (UITableViewController *)modalPickerControllerForField:(AKFormFieldModalPicker *)field
+{
+    AKFormFieldModalPicker *modalPickerField = (AKFormFieldModalPicker *)field;
+    
+    UITableViewController *tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    tableViewController.tableView.delegate = modalPickerField;
+    tableViewController.tableView.dataSource = modalPickerField;
+    tableViewController.navigationItem.title = modalPickerField.title;
+    return tableViewController;
+}
+
+- (UINavigationController *)modalNavigationControllerForViewController:(UIViewController *)viewController withDoneButton:(BOOL)withDoneButton
+{
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pressedCancel:)];
+    viewController.navigationItem.leftBarButtonItem.tintColor = [[UIView appearance] tintColor];
+    
+    if (withDoneButton) {
+        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pressedDone:)];
+        viewController.navigationItem.rightBarButtonItem.tintColor = [[UIView appearance] tintColor];
+    }
+    return navigationController;
+}
+
+#pragma mark - Modal Button Actions
+
+- (void)pressedCancel:(id)sender
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)pressedDone:(id)sender
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Prev/Next stuff

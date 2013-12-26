@@ -10,10 +10,13 @@
 
 @interface AKFormFieldModalPicker : AKFormFieldModal <UITableViewDelegate, UITableViewDataSource>
 
+@property(nonatomic) BOOL multiplePicks;
+
 + (instancetype)fieldWithKey:(NSString *)key
                        title:(NSString *)title
                  placeholder:(NSString *)placeholder
           metadataCollection:(AKFormMetadataCollection *)metadataCollection
+               multiplePicks:(BOOL)multiplePicks
                styleProvider:(id<AKFormCellLabelStyleProvider>)styleProvider;
 
 @end

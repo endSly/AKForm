@@ -14,6 +14,7 @@
 {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIView appearance] setTintColor:[UIColor orangeColor]];
     return YES;
 }
 							
