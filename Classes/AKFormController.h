@@ -21,7 +21,7 @@
 #import "CSFormFieldSwitch.h"
 #import "CSFormFieldSegmented.h"
 
-@interface AKFormController : UITableViewController <CSFormCellTextFieldDelegate, CSFormFieldSwitchDelegate, CSFormFieldSegmentedDelegate, CSFormCellImageStyleProvider, AKFormModalPickerFieldDelegate>
+@interface AKFormController : UITableViewController <CSFormCellTextFieldDelegate, CSFormFieldSwitchDelegate, CSFormFieldSegmentedDelegate, CSFormCellImageStyleProvider>
 
 - (void)pressedCancelOnModalField:(id)sender;
 - (void)pressedDoneOnModalField:(id)sender;

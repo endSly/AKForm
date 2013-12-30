@@ -44,7 +44,10 @@
     }
 
     if (collection.array) {
-        c.array = [[NSMutableArray alloc] initWithArray:collection.array copyItems:YES];
+        c.array = [NSMutableArray arrayWithCapacity:collection.array.count];
+        for (NSMutableArray *subArray in collection.array) {
+            [c.array addObject:[[NSMutableArray alloc] initWithArray:subArray copyItems:YES]];
+        }
     }
     return c;
 }

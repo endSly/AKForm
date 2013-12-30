@@ -29,28 +29,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     _currentStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
     self.sections = [NSMutableArray array];
     
     //adds a pan-to-dismiss gesture to the keyboard
-//    __weak __typeof(&*self)weakSelf = self;
     [self.tableView addKeyboardPanningWithActionHandler:nil];
-//    self.tableView.willOpenBlock = ^(CGRect keyboardFrameInView) {
-//        NSLog(@"Will open");
-//    };
-//    self.tableView.didOpenBlock = ^(CGRect keyboardFrameInView) {
-//        NSLog(@"Did open");
-//    };
-//    self.tableView.openingBlock = ^(CGRect keyboardFrameInView) {
-//        NSLog(@"Opening");
-//        weakSelf.tableView.scrollEnabled = YES;
-//    };
-//    self.tableView.didCloseBlock = ^(CGRect keyboardFrameInView) {
-//        weakSelf.tableView.scrollEnabled = YES;
-//    };
-//    self.tableView.closingBlock = ^(CGRect keyboardFrameInView) {
-//        weakSelf.tableView.scrollEnabled = NO;
-//    };
+    
+    //subscribe to notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pressedDoneOnModalField:)
+                                                 name:AKNOTIFICATION_MODAL_PRESSED_DONE
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -441,7 +431,9 @@
         return;
     } else if ([self.modalField isKindOfClass:[AKFormFieldModalPicker class]]) {
         AKFormFieldModalPicker *pickerField = (AKFormFieldModalPicker *)self.modalField;
-        AKFormValue *value = pickerField.value;
+        
+        //revert the dirty value
+        pickerField.dirtyMetadataCollection = [AKFormMetadataCollection metadataCollectionWithMetadataCollection:[pickerField.value metadataCollectionValue]];
 
         NSLog(@"### CANCEL button");
         NSLog(@"Value: %@", [pickerField.value debugDescription]);

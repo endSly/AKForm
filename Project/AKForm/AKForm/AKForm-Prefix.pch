@@ -6,4 +6,7 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+
+#define AKNOTIFICATION_MODAL_PRESSED_DONE   @"AKNOTIFICATION_MODAL_PRESSED_DONE"
+
 #endif

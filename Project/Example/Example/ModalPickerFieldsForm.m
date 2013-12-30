@@ -244,7 +244,15 @@
 - (IBAction)pressedValidate:(id)sender;
 @end
 
-@implementation ModalPickerFieldsFormContainer
+@implementation ModalPickerFieldsFormContainer {
+    NSInteger _selectedSegment;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    _selectedSegment = 0;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -255,8 +263,7 @@
     for (int i=0; i<6; i++) {
         [self.segmentedControl setSelectedSegmentIndex:i];
     }
-    [self.segmentedControl setSelectedSegmentIndex:0];
-    
+    [self.segmentedControl setSelectedSegmentIndex:_selectedSegment];
     [self segmentedControlDidChangeSelectedSegmentIndex:self.segmentedControl];
 }
 
@@ -264,6 +271,7 @@
 {
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
     self.slider.enabled = YES;
+    _selectedSegment = segmentedControl.selectedSegmentIndex;
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
             [self.form setLabelCellStyle:AKFormCellLabelStyleTitleWithStaticWidth1];

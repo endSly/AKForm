@@ -137,9 +137,7 @@
         cell.textLabel.textColor = self.checkmarkTintColor;
         
         // we also need to send a message to dismiss us
-        if (self.delegate && [self.delegate respondsToSelector:@selector(pressedDoneOnModalField:)]) {
-            [self.delegate pressedDoneOnModalField:nil];
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:AKNOTIFICATION_MODAL_PRESSED_DONE object:nil];
     }
     
 //    [self updateLabelCell];
