@@ -23,7 +23,7 @@
  *
  *  This class is associated with a dictionary represenation on the server.
  */
-@interface AKFormMetadata : NSObject
+@interface AKFormMetadata : NSObject <NSCopying>
 
 ///---------------------------------------------------------------------------------------
 /// @name Creating Metadata

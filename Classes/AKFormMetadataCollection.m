@@ -27,6 +27,28 @@
 #pragma mark - Creating Metadata Arrays
 ///---------------------------------------------------------------------------------------
 
++ (instancetype)metadataCollectionWithMetadataCollection:(AKFormMetadataCollection *)collection
+{
+    AKFormMetadataCollection *c = [[AKFormMetadataCollection alloc] init];
+    
+    if (collection.descriptionSeparator) {
+        c.descriptionSeparator = [NSString stringWithString:collection.descriptionSeparator];
+    }
+    
+    if (collection.descriptionPrefix) {
+    c.descriptionPrefix = [NSString stringWithString:collection.descriptionPrefix];
+    }
+
+    if (collection.descriptionSuffix) {
+        c.descriptionSuffix = [NSString stringWithString:collection.descriptionSuffix];
+    }
+
+    if (collection.array) {
+        c.array = [[NSMutableArray alloc] initWithArray:collection.array copyItems:YES];
+    }
+    return c;
+}
+
 + (instancetype)metadataCollectionWithArray:(NSArray *)array
 {
     return [self metadataCollectionWithArrays:array, nil];
@@ -482,6 +504,16 @@
     } else {
         return @"<AKFormMetadataCollection: empty>";
     }
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    AKFormMetadataCollection *collection = [AKFormMetadataCollection allocWithZone:zone];
+    collection->_descriptionSeparator = [_descriptionSeparator copyWithZone:zone];
+    collection->_descriptionPrefix = [_descriptionPrefix copyWithZone:zone];
+    collection->_descriptionSuffix = [_descriptionSuffix copyWithZone:zone];
+    collection->_array = [NSMutableArray arrayWithArray:_array];
+    return collection;
 }
 
 @end

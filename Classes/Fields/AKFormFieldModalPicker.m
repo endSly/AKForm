@@ -8,6 +8,9 @@
 
 #import "AKFormFieldModalPicker.h"
 
+@interface AKFormFieldModalPicker ()
+@end
+
 @implementation AKFormFieldModalPicker
 
 + (instancetype)fieldWithKey:(NSString *)key
@@ -46,24 +49,8 @@
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
 {
     AKFormCellLabel *cell = (AKFormCellLabel *)[super cellForTableView:tableView];
-    
-    //set the value
-    if (self.value && [self.value isMetadataCollection]) {
-        AKFormMetadataCollection *metadataCollection = [self.value metadataCollectionValue];
-        cell.valueLabel.text = [metadataCollection description];
-    } else {
-        cell.valueLabel.text = self.placeholder;
-    }
-    
-    //set the mode
-    if (self.value && [self.value isMetadataCollection]) {
-        [cell setMode:AKFormCellLabelModeFilled];
-    } else {
-        [cell setMode:AKFormCellLabelModeEmpty];
-    }
-
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [cell layoutSubviews];
+    [self updateLabelCell:cell];
+    [self styleLabelCell:cell];
     return cell;
 }
 
@@ -79,6 +66,8 @@
     return [self.metadataCollection numberOfMetadata];
 }
 
+#define COLOR_TEXT_UNSELECTED [UIColor darkGrayColor]
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	static NSString *CellIdentifier = @"Cell";
@@ -90,9 +79,11 @@
     
     AKFormMetadata *metadata = [self.metadataCollection metadataAtIndex:indexPath.row];
     cell.textLabel.text = metadata.name;
-    cell.tintColor = [[UIView appearance] tintColor];
-    cell.textLabel.textColor = [UIColor darkGrayColor];
-    cell.accessoryType = [[self.value metadataCollectionValue] containsMetadata:metadata] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    cell.tintColor = self.checkmarkTintColor;
+    
+    BOOL selected = [[self.value metadataCollectionValue] containsMetadata:metadata];
+    cell.textLabel.textColor = selected ? self.checkmarkTintColor : COLOR_TEXT_UNSELECTED;
+    cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
 	return cell;
 }
@@ -107,49 +98,94 @@
     AKFormMetadata *metadata = [self.metadataCollection metadataAtIndex:indexPath.row];
 
     //create the value if it's blank
-    if (!self.value || ![self.value isMetadataCollection]) {
+//    if (!self.value || ![self.value isMetadataCollection]) {
+    if (!self.dirtyMetadataCollection) {
         //if we don't already have a value, create a metadata collection with this selected value
-        AKFormMetadataCollection *newCollection = [[AKFormMetadataCollection alloc] init];
-        newCollection.descriptionSeparator = self.metadataCollection.descriptionSeparator;
-        newCollection.descriptionPrefix = self.metadataCollection.descriptionPrefix;
-        newCollection.descriptionSuffix = self.metadataCollection.descriptionSuffix;
-        self.value = [AKFormValue value:newCollection withType:AKFormValueMetadataCollection];
+        self.dirtyMetadataCollection = [[AKFormMetadataCollection alloc] init];
+        self.dirtyMetadataCollection.descriptionSeparator = self.metadataCollection.descriptionSeparator;
+        self.dirtyMetadataCollection.descriptionPrefix = self.metadataCollection.descriptionPrefix;
+        self.dirtyMetadataCollection.descriptionSuffix = self.metadataCollection.descriptionSuffix;
     }
     
     //update the metadata collection in the value
     if (self.multiplePicks) {
-        if ([[self.value metadataCollectionValue] containsMetadata:metadata]) {
-            [[self.value metadataCollectionValue] removeMetadata:metadata];
+        if ([self.dirtyMetadataCollection containsMetadata:metadata]) {
+            [self.dirtyMetadataCollection removeMetadata:metadata];
             cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.textColor = COLOR_TEXT_UNSELECTED;
         } else {
-            [[self.value metadataCollectionValue] addMetadata:metadata];
+            [self.dirtyMetadataCollection addMetadata:metadata];
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            cell.textLabel.textColor = self.checkmarkTintColor;
         }
     } else {
-        int n = [[self.value metadataCollectionValue] numberOfMetadata];
+        int n = [self.dirtyMetadataCollection numberOfMetadata];
         if (n != NSNotFound && n != 0) {
-            AKFormMetadata *currentMetadata = [[self.value metadataCollectionValue] metadataAtIndex:0];
+            AKFormMetadata *currentMetadata = [self.dirtyMetadataCollection metadataAtIndex:0];
             
             //undo the last checkmark
             int r = [self.metadataCollection indexOfMetadata:currentMetadata];
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:r inSection:0]];
             cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.textColor = COLOR_TEXT_UNSELECTED;
             
             //also remove it
-            [[self.value metadataCollectionValue] removeMetadata:currentMetadata];
+            [self.dirtyMetadataCollection removeMetadata:currentMetadata];
         }
-        [[self.value metadataCollectionValue] addMetadata:metadata];
+        [self.dirtyMetadataCollection addMetadata:metadata];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.textLabel.textColor = self.checkmarkTintColor;
         
         // we also need to send a message to dismiss us
+        if (self.delegate && [self.delegate respondsToSelector:@selector(pressedDoneOnModalField:)]) {
+            [self.delegate pressedDoneOnModalField:nil];
+        }
     }
     
-    //update the label cell
+//    [self updateLabelCell];
+}
+
+- (void)updateLabelCell
+{
     AKFormCellLabel *labelCell = [self labelCell];
+    [self updateLabelCell:labelCell];
+}
+
+- (void)updateLabelCell:(AKFormCellLabel *)labelCell
+{
     if (labelCell) {
         AKFormMetadataCollection *collection = [self.value metadataCollectionValue];
-        labelCell.valueLabel.text = [collection description];
+        if ([collection numberOfMetadata] > 0) {
+            labelCell.valueLabel.text = [collection description];
+        } else {
+            labelCell.valueLabel.text = self.placeholder;
+        }
     }
+    
+    [self styleLabelCell:labelCell];
+}
+
+- (void)styleLabelCell:(AKFormCellLabel *)cell
+{
+    int n = [[self.value metadataCollectionValue] numberOfMetadata];
+    BOOL hasValue = self.value && [self.value isMetadataCollection] && n > 0 && n != NSNotFound;
+    //set the value
+    if (hasValue) {
+        AKFormMetadataCollection *metadataCollection = [self.value metadataCollectionValue];
+        cell.valueLabel.text = [metadataCollection description];
+    } else {
+        cell.valueLabel.text = self.placeholder;
+    }
+    
+    //set the mode
+    if (hasValue) {
+        [cell setMode:AKFormCellLabelModeFilled];
+    } else {
+        [cell setMode:AKFormCellLabelModeEmpty];
+    }
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    [cell layoutSubviews];
 }
 
 @end

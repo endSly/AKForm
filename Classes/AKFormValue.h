@@ -57,6 +57,8 @@ typedef NS_ENUM(NSInteger, AKFormValueType) {
  */
 + (instancetype)value:(id)aValue withType:(AKFormValueType)type;
 
++ (instancetype)valueWithValue:(AKFormValue *)value;
+
 ///---------------------------------------------------------------------------------------
 /// @name Accessing Form Values
 ///---------------------------------------------------------------------------------------

@@ -8,9 +8,18 @@
 
 #import "AKFormFieldModal.h"
 
+@protocol AKFormModalPickerFieldDelegate <NSObject>
+- (void)pressedDoneOnModalField:(id)sender;
+@end
+
 @interface AKFormFieldModalPicker : AKFormFieldModal <UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic) BOOL multiplePicks;
+@property(nonatomic, strong) UIColor *checkmarkTintColor;
+@property(nonatomic, weak) id<AKFormModalPickerFieldDelegate> delegate;
+@property(nonatomic, strong) AKFormMetadataCollection *dirtyMetadataCollection;
+
+- (void)updateLabelCell;
 
 + (instancetype)fieldWithKey:(NSString *)key
                        title:(NSString *)title

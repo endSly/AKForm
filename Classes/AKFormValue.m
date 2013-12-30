@@ -22,6 +22,11 @@
 #pragma mark - Creating Form Values
 ///---------------------------------------------------------------------------------------
 
++ (instancetype)valueWithValue:(AKFormValue *)value
+{
+    return [AKFormValue value:[value.value copy] withType:value.type];
+}
+
 + (instancetype)value:(id)aValue withType:(AKFormValueType)type
 {
     switch (type) {
@@ -234,6 +239,39 @@
 - (BOOL)isMetadataCollection
 {
     return self.type == AKFormValueMetadataCollection;
+}
+
+- (NSString *)stringForType:(AKFormValueType)type
+{
+    switch (type) {
+        case AKFormValueBool:
+            return @"Bool";
+        case AKFormValueDate:
+            return @"Date";
+        case AKFormValueImage:
+            return @"Image";
+        case AKFormValueMetadata:
+            return @"Metadata";
+        case AKFormValueMetadataCollection:
+            return @"Metadata Collection";
+        case AKFormValueString:
+            return @"String";
+        case AKFormValueUnknown:
+            return @"Unknown";
+    }
+}
+
+- (NSString *)debugDescription
+{
+    //Field: {
+    //  Type: Something
+    //  Value: Something
+    //}
+    NSMutableString *description = [NSMutableString stringWithFormat:@"\nField <%p>: {", self];
+    [description appendFormat:@"\n\tType: %@", [self stringForType:self.type]];
+    [description appendFormat:@"\n\tValue: %@", [self.value debugDescription]];
+    [description appendString:@"\n}"];
+    return description;
 }
 
 @end

@@ -20,7 +20,7 @@
  *  transmitted to a server. Conversely, it can also be created from an array 
  *  representation that is received from the server.
  */
-@interface AKFormMetadataCollection : NSObject
+@interface AKFormMetadataCollection : NSObject <NSCopying>
 
 @property(nonatomic, strong) NSString *descriptionSeparator;
 @property(nonatomic, strong) NSString *descriptionPrefix;
@@ -29,6 +29,8 @@
 ///---------------------------------------------------------------------------------------
 /// @name Creating Metadata Collections
 ///---------------------------------------------------------------------------------------
+
++ (instancetype)metadataCollectionWithMetadataCollection:(AKFormMetadataCollection *)collection;
 
 /**  Creates and returns a metadata collection using the provided array representation.
  This method call is essentially the same as calling 

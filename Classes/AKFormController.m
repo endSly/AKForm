@@ -15,6 +15,10 @@
 
 @interface AKFormController ()
 @property(nonatomic, strong) NSMutableArray *sections;
+
+@property(nonatomic, weak) AKFormFieldModal *modalField;
+@property(nonatomic, strong) AKFormValue *modalOldValue;
+
 - (AKFormField *)fieldForIndexPath:(NSIndexPath *)indexPath;
 @end
 
@@ -379,10 +383,25 @@
         }
     } else if ([field isKindOfClass:[AKFormFieldText class]]) {
     } else if ([field isKindOfClass:[AKFormFieldModalPicker class]]) {
+        self.modalField = (AKFormFieldModalPicker *)field;
+        self.modalOldValue = [AKFormValue valueWithValue:field.value];
+        
         AKFormFieldModalPicker *pickerField = (AKFormFieldModalPicker *)field;
+        pickerField.checkmarkTintColor = self.navigationController.navigationBar.barTintColor;
+        
         UITableViewController *tvc = [self modalPickerControllerForField:(AKFormFieldModalPicker *)field];
+        
         UINavigationController *nc = [self modalNavigationControllerForViewController:tvc withDoneButton:pickerField.multiplePicks];
+        nc.navigationBar.barTintColor = self.navigationController.navigationBar.barTintColor;
+        nc.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
+
+        UIColor *titleColor = [self.navigationController.navigationBar.titleTextAttributes objectForKey:NSForegroundColorAttributeName];
+        if (titleColor) {
+            [nc.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : titleColor}];
+        }
+        
         [self.navigationController presentViewController:nc animated:YES completion:nil];
+        
     } else if ([field isKindOfClass:[AKFormFieldImage class]]) {
         AKFormFieldImage *imageField = (AKFormFieldImage *)field;
         [imageField select];
@@ -400,14 +419,15 @@
     return tableViewController;
 }
 
-- (UINavigationController *)modalNavigationControllerForViewController:(UIViewController *)viewController withDoneButton:(BOOL)withDoneButton
+- (UINavigationController *)modalNavigationControllerForViewController:(UIViewController *)viewController
+                                                        withDoneButton:(BOOL)withDoneButton
 {
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pressedCancel:)];
+    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pressedCancelOnModalField:)];
     viewController.navigationItem.leftBarButtonItem.tintColor = [[UIView appearance] tintColor];
     
     if (withDoneButton) {
-        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pressedDone:)];
+        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pressedDoneOnModalField:)];
         viewController.navigationItem.rightBarButtonItem.tintColor = [[UIView appearance] tintColor];
     }
     return navigationController;
@@ -415,13 +435,47 @@
 
 #pragma mark - Modal Button Actions
 
-- (void)pressedCancel:(id)sender
+- (void)pressedCancelOnModalField:(id)sender
 {
+    if (!self.modalField) {
+        return;
+    } else if ([self.modalField isKindOfClass:[AKFormFieldModalPicker class]]) {
+        AKFormFieldModalPicker *pickerField = (AKFormFieldModalPicker *)self.modalField;
+        AKFormValue *value = pickerField.value;
+
+        NSLog(@"### CANCEL button");
+        NSLog(@"Value: %@", [pickerField.value debugDescription]);
+        NSLog(@"Dirty Value; %@", [pickerField.dirtyMetadataCollection debugDescription]);
+        NSLog(@"---");
+
+//        self.modalField.value = [AKFormValue valueWithValue:self.modalOldValue];
+//        [(AKFormFieldModalPicker *)self.modalField updateLabelCell];
+    }
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)pressedDone:(id)sender
+- (void)pressedDoneOnModalField:(id)sender
 {
+    if (!self.modalField) {
+        return;
+    } else if ([self.modalField isKindOfClass:[AKFormFieldModalPicker class]]) {
+
+        AKFormFieldModalPicker *pickerField = (AKFormFieldModalPicker *)self.modalField;
+
+        NSLog(@"### DONE button, before assigning picker's value");
+        NSLog(@"Value: %@", [pickerField.value debugDescription]);
+        NSLog(@"Dirty Value; %@", [pickerField.dirtyMetadataCollection debugDescription]);
+        NSLog(@"---");
+        
+        pickerField.value = [AKFormValue value:[AKFormMetadataCollection metadataCollectionWithMetadataCollection:pickerField.dirtyMetadataCollection]
+                                      withType:AKFormValueMetadataCollection];
+        [pickerField updateLabelCell];
+
+        NSLog(@"### after assigning picker's value");
+        NSLog(@"Value: %@", [pickerField.value debugDescription]);
+        NSLog(@"Dirty Value; %@", [pickerField.dirtyMetadataCollection debugDescription]);
+        NSLog(@"---");
+    }
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

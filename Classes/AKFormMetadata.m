@@ -128,4 +128,11 @@
     }
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    AKFormMetadata *metadata = [[AKFormMetadata allocWithZone:zone] init];
+    metadata->_serverID = [_serverID copyWithZone:zone];
+    metadata->_name = [_name copyWithZone:zone];
+    return metadata;
+}
 @end
