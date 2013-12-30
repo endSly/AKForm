@@ -8,7 +8,7 @@
 
 #import "AKFormFieldExpandable.h"
 
-@interface AKFormFieldExpandablePicker : AKFormFieldExpandable <CSFormCellPickerViewDelegate>
+@interface AKFormFieldExpandablePicker : AKFormFieldExpandable <AKFormCellPickerViewDelegate>
 
 @property(nonatomic, strong) NSString *formatString;
 

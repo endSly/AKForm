@@ -1,5 +1,5 @@
 //
-//  CSFormFieldToggle.h
+//  AKFormFieldToggle.h
 //  
 //
 //  Created by Ahmed Khalaf on 31/10/2013.
@@ -13,6 +13,6 @@
  *  themselves reflect this). They are also able to hide/show other fields
  *  within the form.
  */
-@interface CSFormFieldToggle : AKFormField
+@interface AKFormFieldToggle : AKFormField
 
 @end

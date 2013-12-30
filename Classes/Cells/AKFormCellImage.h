@@ -11,35 +11,35 @@
 
 #define CELL_IDENTIFIER_IMAGE           @"imageCell"
 
-typedef NS_ENUM(NSInteger, CSFormCellImageLabelStyle) {
-    CSFormCellImageLabelStyleNone,
-    CSFormCellImageLabelStyleLeft,
-    CSFormCellImageLabelStyleRight
+typedef NS_ENUM(NSInteger, AKFormCellImageLabelStyle) {
+    AKFormCellImageLabelStyleNone,
+    AKFormCellImageLabelStyleLeft,
+    AKFormCellImageLabelStyleRight
 };
 
-typedef NS_ENUM(NSInteger, CSFormCellImageThumbnailStyle) {
-    CSFormCellImageThumbnailStyleCircle,
-    CSFormCellImageThumbnailStyleSquare,
-    CSFormCellImageThumbnailStyleScaled
+typedef NS_ENUM(NSInteger, AKFormCellImageThumbnailStyle) {
+    AKFormCellImageThumbnailStyleCircle,
+    AKFormCellImageThumbnailStyleSquare,
+    AKFormCellImageThumbnailStyleScaled
 };
 
-typedef NS_ENUM(NSInteger, CSFormCellImageMode) {
-    CSFormCellImageModeEmpty,
-    CSFormCellImageModeFilled,
-    CSFormCellImageModeReadOnly
+typedef NS_ENUM(NSInteger, AKFormCellImageMode) {
+    AKFormCellImageModeEmpty,
+    AKFormCellImageModeFilled,
+    AKFormCellImageModeReadOnly
 };
 
 @class AKFormCellImage;
 
-@protocol CSFormCellImageStyleProvider <NSObject>
+@protocol AKFormCellImageStyleProvider <NSObject>
 @optional
-- (CSFormCellImageLabelStyle)labelStyleForImageCell;
+- (AKFormCellImageLabelStyle)labelStyleForImageCell;
 - (CGFloat)heightForImageCell;
-- (UIFont *)labelFontForMode:(CSFormCellImageMode)mode;
-- (UIColor *)labelTextColorForMode:(CSFormCellImageMode)mode;
+- (UIFont *)labelFontForMode:(AKFormCellImageMode)mode;
+- (UIColor *)labelTextColorForMode:(AKFormCellImageMode)mode;
 @end
 
-@protocol CSFormCellImageDelegate <NSObject>
+@protocol AKFormCellImageDelegate <NSObject>
 - (void)didTapThumbnailOnImageCell:(AKFormCellImage *)cell;
 - (NSString *)placeholderStringForImageCell:(AKFormCellImage *)cell;
 - (NSString *)labelStringForImageCell:(AKFormCellImage *)cell;
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, CSFormCellImageMode) {
 
 //image cell specific stuff
 @property(nonatomic, assign) CGSize imageSize;
-@property(nonatomic, assign) CSFormCellImageThumbnailStyle thumbnailStyle;
+@property(nonatomic, assign) AKFormCellImageThumbnailStyle thumbnailStyle;
 
 ///---------------------------------------------------------------------------------------
 /// @name Cell Elements
@@ -58,9 +58,9 @@ typedef NS_ENUM(NSInteger, CSFormCellImageMode) {
 @property(nonatomic, strong) UILabel *label;
 @property(nonatomic, strong) UIImageView *thumbnail;
 @property(nonatomic, strong) NSString *placeholderImageName;
-@property(nonatomic, weak) id<CSFormCellImageDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellImageDelegate> delegate;
 
-- (instancetype)initWithStyleProvider:(id<CSFormCellImageStyleProvider>)styleProvider;
+- (instancetype)initWithStyleProvider:(id<AKFormCellImageStyleProvider>)styleProvider;
 
 - (void)fillThumbnailImage:(UIImage *)image;
 - (void)clearThumbnail;

@@ -13,8 +13,8 @@
 + (instancetype)fieldWithKey:(NSString *)key
                        title:(NSString *)title
                  placeholder:(NSString *)placeholder
-                    delegate:(id<CSFormCellTextFieldDelegate>)delegate
-               styleProvider:(id<CSFormCellTextFieldStyleProvider>)styleProvider
+                    delegate:(id<AKFormCellTextFieldDelegate>)delegate
+               styleProvider:(id<AKFormCellTextFieldStyleProvider>)styleProvider
 {
     return [[AKFormFieldText alloc] initWithKey:key title:title placeholder:placeholder delegate:delegate styleProvider:styleProvider];
 }
@@ -22,8 +22,8 @@
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
                 placeholder:(NSString *)placeholder
-                   delegate:(id<CSFormCellTextFieldDelegate>)delegate
-              styleProvider:(id<CSFormCellTextFieldStyleProvider>)styleProvider
+                   delegate:(id<AKFormCellTextFieldDelegate>)delegate
+              styleProvider:(id<AKFormCellTextFieldStyleProvider>)styleProvider
 {
     self = [super initWithKey:key title:title placeholder:placeholder];
     if (self) {

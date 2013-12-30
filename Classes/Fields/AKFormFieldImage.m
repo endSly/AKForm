@@ -21,7 +21,7 @@
              placeholderText:(NSString *)placeholderText
         placeholderImageName:(NSString *)placeholderImageName
                    imageSize:(CGSize)imageSize
-              thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
+              thumbnailStyle:(AKFormCellImageThumbnailStyle)thumbnailStyle
               formController:(AKFormController *)formController
 {
     return [[AKFormFieldImage alloc] initWithKey:key title:title placeholderText:placeholderText placeholderImageName:placeholderImageName imageSize:imageSize thumbnailStyle:thumbnailStyle formController:formController];
@@ -32,7 +32,7 @@
             placeholderText:(NSString *)placeholderText
        placeholderImageName:(NSString *)placeholderImageName
                   imageSize:(CGSize)imageSize
-             thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
+             thumbnailStyle:(AKFormCellImageThumbnailStyle)thumbnailStyle
              formController:(AKFormController *)formController
 {
     self = [super initWithKey:key title:title placeholder:placeholderText];

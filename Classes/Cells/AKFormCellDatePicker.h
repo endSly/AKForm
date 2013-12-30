@@ -13,7 +13,7 @@
 
 @class AKFormCellDatePicker;
 
-@protocol CSFormCellDatePickerDelegate <CSFormCellDelegate>
+@protocol AKFormCellDatePickerDelegate <AKFormCellDelegate>
 - (void)didChangeValueForDatePickerCell:(AKFormCellDatePicker *)cell;
 @end
 
@@ -24,6 +24,6 @@
 ///---------------------------------------------------------------------------------------
 
 @property(nonatomic, strong) UIDatePicker *datePickerView;
-@property(nonatomic, weak) id<CSFormCellDatePickerDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellDatePickerDelegate> delegate;
 
 @end

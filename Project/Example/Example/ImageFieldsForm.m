@@ -10,14 +10,14 @@
 
 #define HEX_COLOR_GREY_PLACEHOLDER  @"#ccccd1"
 
-@interface ImageFieldsForm () <CSFormCellImageStyleProvider>
+@interface ImageFieldsForm () <AKFormCellImageStyleProvider>
 - (IBAction)completeForm:(id)sender;
 - (void)setCellHeight:(CGFloat)height;
 @end
 
 @implementation ImageFieldsForm {
     CGFloat _height;
-    CSFormCellImageLabelStyle _labelStyle;
+    AKFormCellImageLabelStyle _labelStyle;
 }
 
 - (void)viewDidLoad
@@ -31,9 +31,9 @@
 
 - (void)createForm
 {
-    NSArray *thumbnailStyles = @[@(CSFormCellImageThumbnailStyleCircle),
-                                 @(CSFormCellImageThumbnailStyleSquare),
-                                 @(CSFormCellImageThumbnailStyleScaled)];
+    NSArray *thumbnailStyles = @[@(AKFormCellImageThumbnailStyleCircle),
+                                 @(AKFormCellImageThumbnailStyleSquare),
+                                 @(AKFormCellImageThumbnailStyleScaled)];
     
     CGFloat smallSide = 100.f;
     CGFloat standardSide = 320.f;
@@ -113,18 +113,18 @@
 #pragma mark -
 #pragma mark Image Cell—Style Provider
 
-- (UIFont *)labelFontForMode:(CSFormCellImageMode)mode
+- (UIFont *)labelFontForMode:(AKFormCellImageMode)mode
 {
     return [UIFont systemFontOfSize:17.f];
 }
 
-- (UIColor *)labelTextColorForMode:(CSFormCellImageMode)mode
+- (UIColor *)labelTextColorForMode:(AKFormCellImageMode)mode
 {
     switch (mode) {
-        case CSFormCellImageModeEmpty:
+        case AKFormCellImageModeEmpty:
             return [UIColor colorWithHexString:HEX_COLOR_GREY_PLACEHOLDER];
-        case CSFormCellImageModeFilled:
-        case CSFormCellImageModeReadOnly:
+        case AKFormCellImageModeFilled:
+        case AKFormCellImageModeReadOnly:
             return [UIColor darkGrayColor];
             break;
     }
@@ -141,13 +141,13 @@
     [self.tableView reloadData];
 }
 
-- (void)setLabelStyle:(CSFormCellImageLabelStyle)labelStyle
+- (void)setLabelStyle:(AKFormCellImageLabelStyle)labelStyle
 {
     _labelStyle = labelStyle;
     [self.tableView reloadData];
 }
 
-- (CSFormCellImageLabelStyle)labelStyleForImageCell
+- (AKFormCellImageLabelStyle)labelStyleForImageCell
 {
     return _labelStyle;
 }
@@ -181,16 +181,16 @@
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
-            [self.form setLabelStyle:CSFormCellImageLabelStyleLeft];
+            [self.form setLabelStyle:AKFormCellImageLabelStyleLeft];
             break;
         case 1:
-            [self.form setLabelStyle:CSFormCellImageLabelStyleNone];
+            [self.form setLabelStyle:AKFormCellImageLabelStyleNone];
             break;
         case 2:
-            [self.form setLabelStyle:CSFormCellImageLabelStyleRight];
+            [self.form setLabelStyle:AKFormCellImageLabelStyleRight];
             break;
         default:
-            [self.form setLabelStyle:CSFormCellImageLabelStyleNone];
+            [self.form setLabelStyle:AKFormCellImageLabelStyleNone];
             break;
     }
 }

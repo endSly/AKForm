@@ -14,10 +14,10 @@
 
 @class  AKFormController;
 
-@interface AKFormFieldImage : AKFormField <UIImagePickerControllerDelegate, GKImagePickerDelegate, CSFormCellImageDelegate, URBMediaFocusViewControllerDelegate>
+@interface AKFormFieldImage : AKFormField <UIImagePickerControllerDelegate, GKImagePickerDelegate, AKFormCellImageDelegate, URBMediaFocusViewControllerDelegate>
 
 @property(nonatomic, assign) CGSize imageSize;
-@property(nonatomic, assign) CSFormCellImageThumbnailStyle thumbnailStyle;
+@property(nonatomic, assign) AKFormCellImageThumbnailStyle thumbnailStyle;
 @property(nonatomic, strong) NSString *placeholderImageName;
 @property(nonatomic, weak) AKFormController *formController;
 
@@ -49,7 +49,7 @@
              placeholderText:(NSString *)placeholderText
         placeholderImageName:(NSString *)placeholderImageName
                    imageSize:(CGSize)imageSize
-              thumbnailStyle:(CSFormCellImageThumbnailStyle)thumbnailStyle
+              thumbnailStyle:(AKFormCellImageThumbnailStyle)thumbnailStyle
               formController:(AKFormController *)formController;
 
 - (void)select;

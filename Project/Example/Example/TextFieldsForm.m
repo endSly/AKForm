@@ -11,15 +11,15 @@
 #define HEX_COLOR_GREY_PLACEHOLDER  @"#ccccd1"
 #define HEX_COLOR_RED               @"#790c06"
 
-@interface TextFieldsForm () <CSFormCellTextFieldStyleProvider>
+@interface TextFieldsForm () <AKFormCellTextFieldStyleProvider>
 - (IBAction)completeForm:(id)sender;
 - (void)setLabelWidth:(CGFloat)labelWidth;
-- (void)setTextFieldStyle:(CSFormCellTextFieldStyle)textFieldStyle;
+- (void)setTextFieldStyle:(AKFormCellTextFieldStyle)textFieldStyle;
 @end
 
 @implementation TextFieldsForm {
     CGFloat _labelWidth;
-    CSFormCellTextFieldStyle _textFieldStyle;
+    AKFormCellTextFieldStyle _textFieldStyle;
 }
 
 - (void)viewDidLoad
@@ -188,7 +188,7 @@
     [self.tableView reloadData];
 }
 
-- (void)setTextFieldStyle:(CSFormCellTextFieldStyle)textFieldStyle
+- (void)setTextFieldStyle:(AKFormCellTextFieldStyle)textFieldStyle
 {
     _textFieldStyle = textFieldStyle;
     [self.tableView reloadData];
@@ -199,52 +199,52 @@
     return _labelWidth;
 }
 
-- (CSFormCellTextFieldStyle)styleForTextFieldCell
+- (AKFormCellTextFieldStyle)styleForTextFieldCell
 {
     return _textFieldStyle;
 }
 
-- (UIFont *)labelFontForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style
+- (UIFont *)labelFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style
 {
     switch (mode) {
-        case CSFormCellTextFieldModeEmpty:
-        case CSFormCellTextFieldModeFilled:
-        case CSFormCellTextFieldModeReadOnly:
+        case AKFormCellTextFieldModeEmpty:
+        case AKFormCellTextFieldModeFilled:
+        case AKFormCellTextFieldModeReadOnly:
             return [UIFont systemFontOfSize:17.f];
             break;
-        case CSFormCellTextFieldModeEditing:
-        case CSFormCellTextFieldModeInvalid:
+        case AKFormCellTextFieldModeEditing:
+        case AKFormCellTextFieldModeInvalid:
             return [UIFont boldSystemFontOfSize:17.f];
             break;
     }
 }
 
-- (UIColor *)labelTextColorForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style
+- (UIColor *)labelTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style
 {
-    if (mode == CSFormCellTextFieldModeInvalid) {
+    if (mode == AKFormCellTextFieldModeInvalid) {
         return [UIColor colorWithHexString:HEX_COLOR_RED];
     } else {
         return [UIColor darkGrayColor];
     }
 }
 
-- (UIFont *)textFieldFontForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style
+- (UIFont *)textFieldFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style
 {
     return [UIFont systemFontOfSize:17.f];
 }
 
-- (UIColor *)textFieldTextColorForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style
+- (UIColor *)textFieldTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style
 {
     switch (mode) {
-        case CSFormCellTextFieldModeEmpty:
+        case AKFormCellTextFieldModeEmpty:
             return [UIColor lightGrayColor];
-        case CSFormCellTextFieldModeFilled:
-        case CSFormCellTextFieldModeReadOnly:
+        case AKFormCellTextFieldModeFilled:
+        case AKFormCellTextFieldModeReadOnly:
             return [UIColor grayColor];
             break;
-        case CSFormCellTextFieldModeEditing:
+        case AKFormCellTextFieldModeEditing:
             return [UIColor colorWithHexString:@"#E67D2C"];
-        case CSFormCellTextFieldModeInvalid:
+        case AKFormCellTextFieldModeInvalid:
             return [UIColor colorWithHexString:HEX_COLOR_RED];
             break;
     }
@@ -281,16 +281,16 @@
     self.slider.enabled = YES;
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
-            [self.form setTextFieldStyle:CSFormCellTextFieldStyleLabelWithStaticWidth1];
+            [self.form setTextFieldStyle:AKFormCellTextFieldStyleLabelWithStaticWidth1];
             break;
         case 1:
-            [self.form setTextFieldStyle:CSFormCellTextFieldStyleLabelWithStaticWidth2];
+            [self.form setTextFieldStyle:AKFormCellTextFieldStyleLabelWithStaticWidth2];
             break;
         case 2:
-            [self.form setTextFieldStyle:CSFormCellTextFieldStyleLabelWithStaticWidth3];
+            [self.form setTextFieldStyle:AKFormCellTextFieldStyleLabelWithStaticWidth3];
             break;
         default:
-            [self.form setTextFieldStyle:CSFormCellTextFieldStyleLabelWithDynamicWidth];
+            [self.form setTextFieldStyle:AKFormCellTextFieldStyleLabelWithDynamicWidth];
             self.slider.enabled = NO;
             break;
     }

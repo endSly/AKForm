@@ -14,7 +14,7 @@
 
 @class AKFormCellPickerView;
 
-@protocol CSFormCellPickerViewDelegate <CSFormCellDelegate>
+@protocol AKFormCellPickerViewDelegate <AKFormCellDelegate>
 - (void)didChangeValueForPickerViewCell:(AKFormCellPickerView *)cell;
 @end
 
@@ -25,7 +25,7 @@
 ///---------------------------------------------------------------------------------------
 
 @property(nonatomic, strong) UIPickerView *pickerView;
-@property(nonatomic, weak) id<CSFormCellPickerViewDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellPickerViewDelegate> delegate;
 @property(nonatomic, weak) AKFormMetadataCollection *metadataCollection;
 
 @end

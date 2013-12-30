@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, AKFormFieldDateDisplayType) {
     AKFormFieldDateDisplayCustom
 };
 
-@interface AKFormFieldDate : AKFormFieldExpandable <CSFormCellDatePickerDelegate>
+@interface AKFormFieldDate : AKFormFieldExpandable <AKFormCellDatePickerDelegate>
 
 @property(nonatomic) UIDatePickerMode datePickerMode;
 @property(nonatomic) AKFormFieldDateDisplayType displayType;

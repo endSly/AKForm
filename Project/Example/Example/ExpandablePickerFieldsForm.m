@@ -219,13 +219,13 @@
 - (UIFont *)titleLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
 {
     switch (mode) {
-        case CSFormCellTextFieldModeEmpty:
-        case CSFormCellTextFieldModeFilled:
-        case CSFormCellTextFieldModeReadOnly:
+        case AKFormCellTextFieldModeEmpty:
+        case AKFormCellTextFieldModeFilled:
+        case AKFormCellTextFieldModeReadOnly:
             return [UIFont systemFontOfSize:17.f];
             break;
-        case CSFormCellTextFieldModeEditing:
-        case CSFormCellTextFieldModeInvalid:
+        case AKFormCellTextFieldModeEditing:
+        case AKFormCellTextFieldModeInvalid:
             return [UIFont boldSystemFontOfSize:17.f];
             break;
     }
@@ -242,7 +242,7 @@
 
 - (UIColor *)titleLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
 {
-    if (mode == CSFormCellTextFieldModeInvalid) {
+    if (mode == AKFormCellTextFieldModeInvalid) {
         return [UIColor colorWithHexString:HEX_COLOR_RED];
     } else {
         return [UIColor darkGrayColor];
@@ -252,16 +252,16 @@
 - (UIColor *)valueLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
 {
     switch (mode) {
-        case CSFormCellTextFieldModeEmpty:
+        case AKFormCellTextFieldModeEmpty:
             return [UIColor lightGrayColor];
             break;
-        case CSFormCellTextFieldModeFilled:
-        case CSFormCellTextFieldModeReadOnly:
+        case AKFormCellTextFieldModeFilled:
+        case AKFormCellTextFieldModeReadOnly:
             return [UIColor grayColor];
             break;
-        case CSFormCellTextFieldModeEditing:
+        case AKFormCellTextFieldModeEditing:
             return [UIColor colorWithHexString:@"#E67D2C"];
-        case CSFormCellTextFieldModeInvalid:
+        case AKFormCellTextFieldModeInvalid:
             return [UIColor colorWithHexString:HEX_COLOR_RED];
             break;
     }

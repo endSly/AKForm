@@ -21,19 +21,19 @@
 #define PADDING_HORIZONTAL              15.f
 #define PADDING_VERTICAL                5.f
 
-@protocol CSFormCellValueDelegate <NSObject>
+@protocol AKFormCellValueDelegate <NSObject>
 - (void)didInputValue:(AKFormValue *)value;
 - (void)didSelectMetadata:(AKFormMetadata *)metadata inComponent:(NSUInteger)component inCollection:(AKFormMetadataCollection *)collection;
 - (AKFormValue *)inputValue;
 @end
 
-@protocol CSFormCellDelegate <NSObject>
+@protocol AKFormCellDelegate <NSObject>
 @end
 
 
 @interface AKFormCell : UITableViewCell
 
-@property(nonatomic, weak) id<CSFormCellValueDelegate> valueDelegate;
+@property(nonatomic, weak) id<AKFormCellValueDelegate> valueDelegate;
 
 ///---------------------------------------------------------------------------------------
 /// @name Determining the available frame for content

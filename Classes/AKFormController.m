@@ -8,7 +8,7 @@
 
 #import "AKFormController.h"
 #import "CSFormBaseCell.h"
-#import "CSFormFieldSwitch.h"
+#import "AKFormFieldSwitch.h"
 
 #import "AKFormValidator.h"
 #import <DAKeyboardControl/DAKeyboardControl.h>
@@ -66,8 +66,8 @@
 //commented out for now, we'll deal with this when we get to context togglers
 //    for (AKFormField *field in section.fields) {
 //        //only handles switches for now, we need to handle other toggles too, like segmented ones, and perhaps think of others?
-//        if ([field isKindOfClass:[CSFormFieldSwitch class]]) {
-//            CSFormFieldSwitch *switchField = (CSFormFieldSwitch *)field;
+//        if ([field isKindOfClass:[AKFormFieldSwitch class]]) {
+//            AKFormFieldSwitch *switchField = (AKFormFieldSwitch *)field;
 //            
 //            if (switchField.fieldsToHideOnOn || switchField.fieldsToShowOnOn) {
 //                if (alreadyFoundOne) {
@@ -705,7 +705,7 @@
 
 #pragma mark - Switch Field Delegate
 
-- (void)didChangeValueOfSwitchOnField:(CSFormFieldSwitch *)aField toOn:(BOOL)on
+- (void)didChangeValueOfSwitchOnField:(AKFormFieldSwitch *)aField toOn:(BOOL)on
 {
     AKFormSection *switchSection = [self sectionForField:aField];
     if (!switchSection) {

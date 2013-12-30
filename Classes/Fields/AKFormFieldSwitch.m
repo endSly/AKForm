@@ -1,22 +1,35 @@
 //
-//  CSFormFieldSwitch.m
+//  AKFormFieldSwitch.m
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "CSFormFieldSwitch.h"
+#import "AKFormFieldSwitch.h"
 
-@implementation CSFormFieldSwitch
+@implementation AKFormFieldSwitch
+
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                    delegate:(id<AKFormFieldSwitchDelegate>)delegate
+               styleProvider:(id<AKFormCellSwitchStyleProvider>)styleProvider
+{
+    return [[AKFormFieldSwitch alloc] initWithKey:key
+                                            title:title
+                                         delegate:delegate
+                                    styleProvider:styleProvider];
+}
 
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
-                   delegate:(id<CSFormFieldSwitchDelegate>)delegate
+                   delegate:(id<AKFormFieldSwitchDelegate>)delegate
+               styleProvider:(id<AKFormCellSwitchStyleProvider>)styleProvider
 {
     self = [super initWithKey:key title:title];
     if (self) {
         self.delegate = delegate;
+        self.styleProvider = styleProvider;
     }
     return self;
 }
@@ -30,19 +43,22 @@
  */
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
 {
-    CSFormSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_SWITCH];
+    AKFormCellSwitch *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_SWITCH];
     if (!cell) {
-        cell = [[CSFormSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:CELL_IDENTIFIER_SWITCH];
+        cell = [[AKFormCellSwitch alloc] initWithStyleProvider:self.styleProvider];
     }
     
-    [cell setLabelString:self.title];
+    cell.delegate = self.delegate;
+    cell.valueDelegate = self;
+    
+    cell.label.text = self.title;
     [cell.switchControl addTarget:self
                            action:@selector(switchValueChanged:)
                  forControlEvents:UIControlEventValueChanged];
     
     cell.switchControl.on = [self.value boolValue];
     
+    [cell layoutSubviews];
     self.cell = cell;
     return cell;
 }

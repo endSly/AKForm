@@ -165,7 +165,7 @@
     [self didChangeValueForDatePickerCell:cell];
 }
 
-#pragma mark - CSFormCellDatePickerDelegate
+#pragma mark - AKFormCellDatePickerDelegate
 
 - (void)didChangeValueForDatePickerCell:(AKFormCellDatePicker *)cell
 {

@@ -18,7 +18,7 @@
  *  common properties for all form fields. It isn't meant to be created directly, but
  *  does provide an initializer for its subclasses to utilize.
  */
-@interface AKFormField : NSObject <CSFormCellValueDelegate>
+@interface AKFormField : NSObject <AKFormCellValueDelegate>
 
 ///---------------------------------------------------------------------------------------
 /// @name Common Field Properties

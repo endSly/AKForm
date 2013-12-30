@@ -8,9 +8,9 @@
 
 #import "AKFormCellImage.h"
 
-#define DEFAULT_LABEL_STYLE             CSFormCellImageLabelStyleLeft
-#define DEFAULT_THUMBNAIL_STYLE         CSFormCellImageThumbnailStyleCircle
-#define DEFAULT_MODE                    CSFormCellImageModeEmpty
+#define DEFAULT_LABEL_STYLE             AKFormCellImageLabelStyleLeft
+#define DEFAULT_THUMBNAIL_STYLE         AKFormCellImageThumbnailStyleCircle
+#define DEFAULT_MODE                    AKFormCellImageModeEmpty
 #define DEFAULT_IMAGE_SIZE              CGSizeMake(320, 320)
 
 
@@ -24,9 +24,9 @@
 
 
 @interface AKFormCellImage()
-@property(nonatomic, assign) CSFormCellImageLabelStyle labelStyle;
-@property(nonatomic, assign) CSFormCellImageMode mode;
-@property(nonatomic, weak) id<CSFormCellImageStyleProvider> styleProvider;
+@property(nonatomic, assign) AKFormCellImageLabelStyle labelStyle;
+@property(nonatomic, assign) AKFormCellImageMode mode;
+@property(nonatomic, weak) id<AKFormCellImageStyleProvider> styleProvider;
 @end
 
 @implementation AKFormCellImage
@@ -35,7 +35,7 @@
 #pragma mark - Creating an Image Cell
 ///---------------------------------------------------------------------------------------
 
-- (instancetype)initWithStyleProvider:(id<CSFormCellImageStyleProvider>)styleProvider
+- (instancetype)initWithStyleProvider:(id<AKFormCellImageStyleProvider>)styleProvider
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER_IMAGE];
     if (self) {
@@ -76,14 +76,14 @@
 - (void)fillThumbnailImage:(UIImage *)image
 {
     if (image) {
-        [self setMode:CSFormCellImageModeFilled];
+        [self setMode:AKFormCellImageModeFilled];
         [self setThumbnailImage:image];
     }
 }
 
 - (void)clearThumbnail
 {
-    [self setMode:CSFormCellImageModeEmpty];
+    [self setMode:AKFormCellImageModeEmpty];
 }
 
 ///---------------------------------------------------------------------------------------
@@ -123,11 +123,11 @@
 - (void)styleAccessoryType
 {
     switch (self.mode) {
-        case CSFormCellImageModeReadOnly:
+        case AKFormCellImageModeReadOnly:
             self.accessoryType = UITableViewCellAccessoryNone;
             break;
-        case CSFormCellImageModeEmpty:
-        case CSFormCellImageModeFilled:
+        case AKFormCellImageModeEmpty:
+        case AKFormCellImageModeFilled:
             self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
     }
@@ -136,13 +136,13 @@
 - (void)styleTextAlignments
 {
     switch (self.labelStyle) {
-        case CSFormCellImageLabelStyleLeft:
+        case AKFormCellImageLabelStyleLeft:
             self.label.textAlignment = NSTextAlignmentLeft;
             break;
-        case CSFormCellImageLabelStyleRight:
+        case AKFormCellImageLabelStyleRight:
             self.label.textAlignment = NSTextAlignmentRight;
             break;
-        case CSFormCellImageLabelStyleNone:
+        case AKFormCellImageLabelStyleNone:
             break;
     }
 }
@@ -151,12 +151,12 @@
 {
     CGFloat side, neededWidth;
     switch (self.thumbnailStyle) {
-        case CSFormCellImageThumbnailStyleCircle:
-        case CSFormCellImageThumbnailStyleSquare:
+        case AKFormCellImageThumbnailStyleCircle:
+        case AKFormCellImageThumbnailStyleSquare:
             side = MIN(availableWidth, [self contentFrame].size.height);
             return CGSizeMake(side, side);
             break;
-        case CSFormCellImageThumbnailStyleScaled:
+        case AKFormCellImageThumbnailStyleScaled:
             neededWidth = self.imageSize.width * [self contentFrame].size.height / self.imageSize.height;
             if (neededWidth <= availableWidth) {
                 return CGSizeMake(neededWidth, [self contentFrame].size.height);
@@ -195,7 +195,7 @@
     CGFloat availableWidth = contentFrame.size.width - PADDING_HORIZONTAL;
     
     // give the label as much room as possible
-    if (self.labelStyle != CSFormCellImageLabelStyleNone) {
+    if (self.labelStyle != AKFormCellImageLabelStyleNone) {
         CGFloat longestLabelWidth = [self longestLabelWidth];
         if (availableWidth - longestLabelWidth < MINIMUM_VALUE_WIDTH) {
             self.label.frame = CGRectMake(self.label.frame.origin.x,
@@ -224,7 +224,7 @@
                                    contentFrame.origin.y,
                                    contentFrame.size.width - (thumbnailSize.width + PADDING_HORIZONTAL),
                                    [self contentFrame].size.height);
-    self.label.frame = self.labelStyle == CSFormCellImageLabelStyleNone ? CGRectZero : labelFrame;
+    self.label.frame = self.labelStyle == AKFormCellImageLabelStyleNone ? CGRectZero : labelFrame;
     
     self.thumbnail.frame = thumbnailFrame;
 }
@@ -244,9 +244,9 @@
         self.label.font = [self.styleProvider labelFontForMode:self.mode];
     } else {
         switch (self.mode) {
-            case CSFormCellImageModeEmpty:
-            case CSFormCellImageModeFilled:
-            case CSFormCellImageModeReadOnly:
+            case AKFormCellImageModeEmpty:
+            case AKFormCellImageModeFilled:
+            case AKFormCellImageModeReadOnly:
                 self.label.font = DEFAULT_FONT_TITLE;
                 break;
         }
@@ -257,9 +257,9 @@
         self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode];
     } else {
         switch (self.mode) {
-            case CSFormCellImageModeEmpty:
-            case CSFormCellImageModeFilled:
-            case CSFormCellImageModeReadOnly:
+            case AKFormCellImageModeEmpty:
+            case AKFormCellImageModeFilled:
+            case AKFormCellImageModeReadOnly:
                 self.label.textColor = DEFAULT_TEXTCOLOR_TITLE;
                 break;
         }
@@ -268,7 +268,7 @@
 
 - (void)styleThumbnailMask
 {
-    if (self.thumbnailStyle == CSFormCellImageThumbnailStyleCircle) {
+    if (self.thumbnailStyle == AKFormCellImageThumbnailStyleCircle) {
         [self.thumbnail setCornerRadius:self.thumbnail.frame.size.width / 2.f];
     } else {
         [self.thumbnail setCornerRadius:0.0];
@@ -278,7 +278,7 @@
 - (void)styleThumbnail
 {
     [self styleThumbnailMask];
-    if (self.mode == CSFormCellImageModeEmpty) {
+    if (self.mode == AKFormCellImageModeEmpty) {
         UIImage *placeholderImage = [UIImage imageNamed:self.placeholderImageName];
         [self setThumbnailImage:placeholderImage];
     }
@@ -288,7 +288,7 @@
 #pragma mark - (Private) Overrides
 ///---------------------------------------------------------------------------------------
 
-- (void)setMode:(CSFormCellImageMode)mode
+- (void)setMode:(AKFormCellImageMode)mode
 {
     _mode = mode;
     [self layoutSubviews];

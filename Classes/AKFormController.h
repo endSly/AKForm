@@ -18,10 +18,10 @@
 #import "AKFormFieldExpandablePicker.h"
 #import "AKFormFieldModalPicker.h"
 #import "CSFormFieldTextView.h"
-#import "CSFormFieldSwitch.h"
+#import "AKFormFieldSwitch.h"
 #import "CSFormFieldSegmented.h"
 
-@interface AKFormController : UITableViewController <CSFormCellTextFieldDelegate, CSFormFieldSwitchDelegate, CSFormFieldSegmentedDelegate, CSFormCellImageStyleProvider>
+@interface AKFormController : UITableViewController <AKFormCellTextFieldDelegate, AKFormFieldSwitchDelegate, CSFormFieldSegmentedDelegate, AKFormCellImageStyleProvider>
 
 - (void)pressedCancelOnModalField:(id)sender;
 - (void)pressedDoneOnModalField:(id)sender;

@@ -10,49 +10,46 @@
 
 #define CELL_IDENTIFIER_TEXTFIELD       @"textFieldCell"
 
-typedef NS_ENUM(NSInteger, CSFormCellTextFieldStyle) {
-    CSFormCellTextFieldStyleNoLabel,
-    CSFormCellTextFieldStyleLabelWithStaticWidth1,
-    CSFormCellTextFieldStyleLabelWithStaticWidth2,
-    CSFormCellTextFieldStyleLabelWithStaticWidth3,
-    CSFormCellTextFieldStyleLabelWithDynamicWidth
+typedef NS_ENUM(NSInteger, AKFormCellTextFieldStyle) {
+    AKFormCellTextFieldStyleNoLabel,
+    AKFormCellTextFieldStyleLabelWithStaticWidth1,
+    AKFormCellTextFieldStyleLabelWithStaticWidth2,
+    AKFormCellTextFieldStyleLabelWithStaticWidth3,
+    AKFormCellTextFieldStyleLabelWithDynamicWidth
 };
 
-typedef NS_ENUM(NSInteger, CSFormCellTextFieldMode) {
-    CSFormCellTextFieldModeEmpty,
-    CSFormCellTextFieldModeEditing,
-    CSFormCellTextFieldModeFilled,
-    CSFormCellTextFieldModeInvalid,
-    CSFormCellTextFieldModeReadOnly
+typedef NS_ENUM(NSInteger, AKFormCellTextFieldMode) {
+    AKFormCellTextFieldModeEmpty,
+    AKFormCellTextFieldModeEditing,
+    AKFormCellTextFieldModeFilled,
+    AKFormCellTextFieldModeInvalid,
+    AKFormCellTextFieldModeReadOnly
 };
 
 @class AKFormCellTextField;
 
-@protocol CSFormCellTextFieldStyleProvider <NSObject>
+@protocol AKFormCellTextFieldStyleProvider <NSObject>
 @optional
-- (CSFormCellTextFieldStyle)styleForTextFieldCell;
+- (AKFormCellTextFieldStyle)styleForTextFieldCell;
 - (CGFloat)labelWidthForTextFieldCell;
 - (CGFloat)heightForTextFieldCell;
-- (UIFont *)labelFontForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style;
-- (UIFont *)textFieldFontForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style;
-- (UIColor *)labelTextColorForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style;
-- (UIColor *)textFieldTextColorForMode:(CSFormCellTextFieldMode)mode style:(CSFormCellTextFieldStyle)style;
+- (UIFont *)labelFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style;
+- (UIFont *)textFieldFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style;
+- (UIColor *)labelTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style;
+- (UIColor *)textFieldTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style;
 @end
 
-#warning CHECK THESE DELEGATE METHODS
-@protocol CSFormCellTextFieldDelegate <CSFormCellDelegate>
+@protocol AKFormCellTextFieldDelegate <AKFormCellDelegate>
 - (void)didBeginEditingOnTextFieldCell:(AKFormCellTextField *)cell;
 - (BOOL)shouldReturnOnTextFieldCell:(AKFormCellTextField *)cell;
 @end
-
-
 
 @interface AKFormCellTextField : AKFormCell <UITextFieldDelegate>
 
 @property(nonatomic, strong) UILabel *label;
 @property(nonatomic, strong) UITextField *textField;
-@property(nonatomic, weak) id<CSFormCellTextFieldDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellTextFieldDelegate> delegate;
 
-- (instancetype)initWithStyleProvider:(id<CSFormCellTextFieldStyleProvider>)styleProvider;
+- (instancetype)initWithStyleProvider:(id<AKFormCellTextFieldStyleProvider>)styleProvider;
 
 @end

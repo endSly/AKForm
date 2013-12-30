@@ -19,13 +19,13 @@
 @property(nonatomic) BOOL secureTextEntry;
 @property(nonatomic) UITextFieldViewMode clearButtonMode;
 
-@property(nonatomic, weak) id<CSFormCellTextFieldDelegate> delegate;
-@property(nonatomic, weak) id<CSFormCellTextFieldStyleProvider> styleProvider;
+@property(nonatomic, weak) id<AKFormCellTextFieldDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellTextFieldStyleProvider> styleProvider;
 
 + (instancetype)fieldWithKey:(NSString *)key
                        title:(NSString *)title
                  placeholder:(NSString *)placeholder
-                    delegate:(id<CSFormCellTextFieldDelegate>)delegate
-               styleProvider:(id<CSFormCellTextFieldStyleProvider>)styleProvider;
+                    delegate:(id<AKFormCellTextFieldDelegate>)delegate
+               styleProvider:(id<AKFormCellTextFieldStyleProvider>)styleProvider;
 
 @end

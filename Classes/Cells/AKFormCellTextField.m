@@ -8,12 +8,12 @@
 
 #import "AKFormCellTextField.h"
 
-#define DEFAULT_STYLE                   CSFormCellTextFieldStyleLabelWithStaticWidth1
+#define DEFAULT_STYLE                   AKFormCellTextFieldStyleLabelWithStaticWidth1
 
 @interface AKFormCellTextField()
-@property(nonatomic, assign) CSFormCellTextFieldStyle style;
-@property(nonatomic, assign) CSFormCellTextFieldMode mode;
-@property(nonatomic, weak) id<CSFormCellTextFieldStyleProvider> styleProvider;
+@property(nonatomic, assign) AKFormCellTextFieldStyle style;
+@property(nonatomic, assign) AKFormCellTextFieldMode mode;
+@property(nonatomic, weak) id<AKFormCellTextFieldStyleProvider> styleProvider;
 - (void)tappedCell:(id)sender;
 @end
 
@@ -23,7 +23,7 @@
 #pragma mark - Creating a Text Field Cell
 ///---------------------------------------------------------------------------------------
 
-- (instancetype)initWithStyleProvider:(id<CSFormCellTextFieldStyleProvider>)styleProvider
+- (instancetype)initWithStyleProvider:(id<AKFormCellTextFieldStyleProvider>)styleProvider
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER_TEXTFIELD];
     if (self) {
@@ -58,7 +58,7 @@
 - (void)invalidate
 {
     [super invalidate];
-    [self setMode:CSFormCellTextFieldModeInvalid];
+    [self setMode:AKFormCellTextFieldModeInvalid];
 }
 
 ///---------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@
  *
  *  @param mode The mode in which this cell is in now.
  */
-- (void)setMode:(CSFormCellTextFieldMode)mode
+- (void)setMode:(AKFormCellTextFieldMode)mode
 {
     _mode = mode;
     [self styleLabel];
@@ -117,23 +117,23 @@
 - (void)styleTextAlignments
 {
     switch (self.style) {
-        case CSFormCellTextFieldStyleLabelWithDynamicWidth:
+        case AKFormCellTextFieldStyleLabelWithDynamicWidth:
             self.label.textAlignment = NSTextAlignmentLeft;
             self.textField.textAlignment = NSTextAlignmentRight;
             break;
-        case CSFormCellTextFieldStyleLabelWithStaticWidth1:
+        case AKFormCellTextFieldStyleLabelWithStaticWidth1:
             self.label.textAlignment = NSTextAlignmentLeft;
             self.textField.textAlignment = NSTextAlignmentLeft;
             break;
-        case CSFormCellTextFieldStyleLabelWithStaticWidth2:
+        case AKFormCellTextFieldStyleLabelWithStaticWidth2:
             self.label.textAlignment = NSTextAlignmentRight;
             self.textField.textAlignment = NSTextAlignmentLeft;
             break;
-        case CSFormCellTextFieldStyleLabelWithStaticWidth3:
+        case AKFormCellTextFieldStyleLabelWithStaticWidth3:
             self.label.textAlignment = NSTextAlignmentLeft;
             self.textField.textAlignment = NSTextAlignmentRight;
             break;
-        case CSFormCellTextFieldStyleNoLabel:
+        case AKFormCellTextFieldStyleNoLabel:
             self.textField.textAlignment = NSTextAlignmentLeft;
             break;
         default:
@@ -150,9 +150,9 @@
     CGFloat labelWidth;
     CGRect contentFrame = [self contentFrame];
     switch (self.style) {
-        case CSFormCellTextFieldStyleLabelWithStaticWidth1:
-        case CSFormCellTextFieldStyleLabelWithStaticWidth2:
-        case CSFormCellTextFieldStyleLabelWithStaticWidth3:
+        case AKFormCellTextFieldStyleLabelWithStaticWidth1:
+        case AKFormCellTextFieldStyleLabelWithStaticWidth2:
+        case AKFormCellTextFieldStyleLabelWithStaticWidth3:
             if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextFieldCell)]) {
                 labelWidth = [self.styleProvider labelWidthForTextFieldCell];
             } else {
@@ -163,7 +163,7 @@
             labelWidth = MIN(labelWidth, maxLabelWidth);
             self.label.frame = CGRectMake(contentFrame.origin.x, contentFrame.origin.y, labelWidth, contentFrame.size.height);
             break;
-        case CSFormCellTextFieldStyleLabelWithDynamicWidth:
+        case AKFormCellTextFieldStyleLabelWithDynamicWidth:
             [self.label sizeToFit];
             CGFloat maximumLabelWidth = contentFrame.size.width - (MINIMUM_VALUE_WIDTH + PADDING_HORIZONTAL);
             self.label.frame = CGRectMake(contentFrame.origin.x, contentFrame.origin.y,
@@ -171,12 +171,12 @@
                                           MAX(self.label.frame.size.height, contentFrame.size.height));
             
             break;
-        case CSFormCellTextFieldStyleNoLabel:
+        case AKFormCellTextFieldStyleNoLabel:
             self.label.frame = CGRectZero;
             break;
     }
     CGFloat textFieldX = self.label.frame.size.width;
-    if (self.style != CSFormCellTextFieldStyleNoLabel) {
+    if (self.style != AKFormCellTextFieldStyleNoLabel) {
         textFieldX += PADDING_HORIZONTAL;
     }
     CGFloat textFieldWidth = MAX(MINIMUM_VALUE_WIDTH, contentFrame.size.width - textFieldX);
@@ -195,11 +195,11 @@
         self.label.font = [self.styleProvider labelFontForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
-            case CSFormCellTextFieldModeEditing:
-            case CSFormCellTextFieldModeEmpty:
-            case CSFormCellTextFieldModeFilled:
-            case CSFormCellTextFieldModeReadOnly:
-            case CSFormCellTextFieldModeInvalid:
+            case AKFormCellTextFieldModeEditing:
+            case AKFormCellTextFieldModeEmpty:
+            case AKFormCellTextFieldModeFilled:
+            case AKFormCellTextFieldModeReadOnly:
+            case AKFormCellTextFieldModeInvalid:
                 self.label.font = DEFAULT_FONT_TITLE;
                 break;
         }
@@ -210,11 +210,11 @@
         self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
-            case CSFormCellTextFieldModeEditing:
-            case CSFormCellTextFieldModeEmpty:
-            case CSFormCellTextFieldModeFilled:
-            case CSFormCellTextFieldModeReadOnly:
-            case CSFormCellTextFieldModeInvalid:
+            case AKFormCellTextFieldModeEditing:
+            case AKFormCellTextFieldModeEmpty:
+            case AKFormCellTextFieldModeFilled:
+            case AKFormCellTextFieldModeReadOnly:
+            case AKFormCellTextFieldModeInvalid:
                 self.label.textColor = DEFAULT_TEXTCOLOR_TITLE;
                 break;
         }
@@ -238,11 +238,11 @@
         self.textField.font = [self.styleProvider textFieldFontForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
-            case CSFormCellTextFieldModeEditing:
-            case CSFormCellTextFieldModeEmpty:
-            case CSFormCellTextFieldModeFilled:
-            case CSFormCellTextFieldModeReadOnly:
-            case CSFormCellTextFieldModeInvalid:
+            case AKFormCellTextFieldModeEditing:
+            case AKFormCellTextFieldModeEmpty:
+            case AKFormCellTextFieldModeFilled:
+            case AKFormCellTextFieldModeReadOnly:
+            case AKFormCellTextFieldModeInvalid:
                 self.label.font = DEFAULT_FONT_VALUE;
                 break;
         }
@@ -253,11 +253,11 @@
         self.textField.textColor = [self.styleProvider textFieldTextColorForMode:self.mode style:self.style];
     } else {
         switch (self.mode) {
-            case CSFormCellTextFieldModeEditing:
-            case CSFormCellTextFieldModeEmpty:
-            case CSFormCellTextFieldModeFilled:
-            case CSFormCellTextFieldModeReadOnly:
-            case CSFormCellTextFieldModeInvalid:
+            case AKFormCellTextFieldModeEditing:
+            case AKFormCellTextFieldModeEmpty:
+            case AKFormCellTextFieldModeFilled:
+            case AKFormCellTextFieldModeReadOnly:
+            case AKFormCellTextFieldModeInvalid:
                 self.textField.textColor = DEFAULT_TEXTCOLOR_VALUE;
                 break;
         }
@@ -267,11 +267,11 @@
 - (void)updateMode
 {
     if ([self.textField isFirstResponder]) {
-        [self setMode:CSFormCellTextFieldModeEditing];
+        [self setMode:AKFormCellTextFieldModeEditing];
     } else if (self.textField.text.length > 0) {
-        [self setMode:CSFormCellTextFieldModeFilled];
+        [self setMode:AKFormCellTextFieldModeFilled];
     } else {
-        [self setMode:CSFormCellTextFieldModeEmpty];
+        [self setMode:AKFormCellTextFieldModeEmpty];
     }
 }
 
