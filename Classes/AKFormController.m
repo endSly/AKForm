@@ -569,7 +569,7 @@
 
 #pragma mark - Hide / Show Fields
 
-- (void)hideFields:(NSArray *)fieldsToHide inSection:(AKFormSection *)section
+- (void)hideFields:(NSArray *)fieldsToHide inSection:(AKFormSection *)section forSwitchCell:(AKFormCellSwitch *)switchCell
 {
     //first we need to resign first responder
     [self.view endEditing:YES];
@@ -587,6 +587,9 @@
         if (!indexPath) {
             continue;
         }
+        
+        // FIX: THIS ONE LINE IS WHAT FIXES THE TABLEVIEW FROM THINKING THE FIELD IS ALREADY ADDED
+        fieldToHide.cell = nil;
         
         [indexPaths addObject:indexPath];
         if ([fieldToHide isKindOfClass:[AKFormFieldExpandable class]]
@@ -609,6 +612,11 @@
         }
     }
 
+    [CATransaction begin];
+    [CATransaction setCompletionBlock: ^{
+        switchCell.switchControl.userInteractionEnabled = YES;
+    }];
+
     //delete fields BEFORE deleting the section
     [self.tableView deleteRowsAtIndexPaths:indexPaths
                           withRowAnimation:UITableViewRowAnimationFade];
@@ -619,9 +627,10 @@
         [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
                       withRowAnimation:UITableViewRowAnimationFade];
     }
+    [CATransaction commit];
 }
 
-- (void)showFields:(NSArray *)fieldsToShow inSection:(AKFormSection *)section forSwitchSection:(AKFormSection *)switchSection
+- (void)showFields:(NSArray *)fieldsToShow inSection:(AKFormSection *)section forSwitchCell:(AKFormCellSwitch *)switchCell inSection:(AKFormSection *)switchSection
 {
     if (!fieldsToShow) {
         return;
@@ -642,6 +651,7 @@
         //skip if the field already exists
         NSIndexPath *indexPath = [self indexPathForField:fieldToShow];
         if (indexPath) {
+            NSLog(@"     Field already exists: %@", fieldToShow.title);
             continue;
         }
         
@@ -655,32 +665,40 @@
             if (!lowestIndexPath || indexPath.row > lowestIndexPath.row) {
                 lowestIndexPath = indexPath;
             }
+        } else {
+            NSLog(@"     Couldn't get indexPath for: %@", fieldToShow.title);
         }
     }
     
+    NSLog(@"     Inserting %ud cells", indexPaths.count);;
+    [CATransaction begin];
+    [CATransaction setCompletionBlock: ^{
+        switchCell.switchControl.userInteractionEnabled = YES;
+    }];
     [self.tableView insertRowsAtIndexPaths:indexPaths
                           withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView scrollToRowAtIndexPath:lowestIndexPath
                           atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [CATransaction commit];
 }
 
-- (void)hideFieldsInMapTable:(NSMapTable *)fieldsToHide
+- (void)hideFieldsInMapTable:(NSMapTable *)fieldsToHide forSwitchCell:(AKFormCellSwitch *)switchCell
 {
     NSArray *keys = [[fieldsToHide keyEnumerator] allObjects];
     for (AKFormSection *section in keys) {
         NSLog(@" - Hiding fields in section %@", section.headerTitle);
         NSArray *fields = [fieldsToHide objectForKey:section];
-        [self hideFields:fields inSection:section];
+        [self hideFields:fields inSection:section forSwitchCell:switchCell];
     }
 }
 
-- (void)showFieldsInMapTable:(NSMapTable *)fieldsToShow forSwitchSection:(AKFormSection *)switchSection
+- (void)showFieldsInMapTable:(NSMapTable *)fieldsToShow forSwitchCell:(AKFormCellSwitch *)switchCell inSection:(AKFormSection *)switchSection
 {
     NSArray *keys = [[fieldsToShow keyEnumerator] allObjects];
     for (AKFormSection *section in keys) {
         NSLog(@" + Showing fields in section %@", section.headerTitle);
         NSArray *fields = [fieldsToShow objectForKey:section];
-        [self showFields:fields inSection:section forSwitchSection:switchSection];
+        [self showFields:fields inSection:section forSwitchCell:switchCell inSection:switchSection];
     }
 }
 
@@ -730,15 +748,12 @@
 
 #pragma mark - Switch Field Delegate
 
-- (void)renableSwitch:(UISwitch *)switchControl
-{
-    switchControl.userInteractionEnabled = YES;
-}
-
 - (void)didChangeValueOfSwitchOnField:(AKFormFieldSwitch *)aField toOn:(BOOL)on
 {
     NSLog(@"*** didChangeValueOfSwitchOnField ***");
-    
+
+    AKFormCellSwitch *switchCell = (AKFormCellSwitch *)aField.cell;
+
     AKFormSection *switchSection = [self sectionForField:aField];
     if (!switchSection) {
         return;
@@ -746,18 +761,12 @@
     
     if (on) {
         NSLog(@"Switching ON");
-        [self hideFieldsInMapTable:aField.fieldsToHideOnOn];
-        [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchSection:switchSection];
+        [self hideFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell];
+        [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
     } else {
         NSLog(@"Switching OFF");
-        [self hideFieldsInMapTable:aField.fieldsToShowOnOn];
-        [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchSection:switchSection];
-    }
-    
-    AKFormCellSwitch *switchCell = (AKFormCellSwitch *)aField.cell;
-    if (switchCell) {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(renableSwitch:) object:switchCell.switchControl];
-        [self performSelector:@selector(renableSwitch:) withObject:switchCell.switchControl afterDelay:0.25];
+        [self hideFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell];
+        [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell inSection:switchSection];
     }
     
     NSLog(@" ");
