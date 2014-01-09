@@ -1,19 +1,19 @@
 //
-//  CSFormFieldSegmented.m
+//  AKFormFieldSegmented.m
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "CSFormFieldSegmented.h"
+#import "AKFormFieldSegmented.h"
 
-@implementation CSFormFieldSegmented
+@implementation AKFormFieldSegmented
 
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
          metadataCollection:(AKFormMetadataCollection *)metadataCollection
-                   delegate:(id<CSFormFieldSegmentedDelegate>)delegate
+                   delegate:(id<AKFormFieldSegmentedDelegate>)delegate
 {
     self = [super initWithKey:key title:title];
     if (self) {

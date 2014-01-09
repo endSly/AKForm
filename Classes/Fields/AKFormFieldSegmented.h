@@ -1,5 +1,5 @@
 //
-//  CSFormFieldSegmented.h
+//  AKFormFieldSegmented.h
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
@@ -9,11 +9,11 @@
 #import "AKFormFieldToggle.h"
 #import "CSFormToggleCell.h"
 
-@protocol CSFormFieldSegmentedDelegate
+@protocol AKFormFieldSegmentedDelegate
 - (void)didSelectSegmentIndex:(NSInteger)selectedIndex onField:(AKFormField *)row;
 @end
 
-@interface CSFormFieldSegmented : AKFormFieldToggle
+@interface AKFormFieldSegmented : AKFormFieldToggle
 
 //doesn't do any toggling of other fields at the moment, because we need to be
 //able to define which fields get shown when a certain segment is tapped on...
@@ -24,10 +24,10 @@
 //       {MT}           {MT}         {MT}
 //
 // now each of those ^ map tables (MT) can contain 
-@property(nonatomic, strong) id<CSFormFieldSegmentedDelegate>delegate;
+@property(nonatomic, strong) id<AKFormFieldSegmentedDelegate>delegate;
 - (instancetype)initWithKey:(NSString *)key
                       title:(NSString *)title
          metadataCollection:(AKFormMetadataCollection *)metadataCollection
-                   delegate:(id<CSFormFieldSegmentedDelegate>)delegate;
+                   delegate:(id<AKFormFieldSegmentedDelegate>)delegate;
 
 @end
