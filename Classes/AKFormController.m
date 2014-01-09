@@ -668,6 +668,7 @@
 {
     NSArray *keys = [[fieldsToHide keyEnumerator] allObjects];
     for (AKFormSection *section in keys) {
+        NSLog(@" - Hiding fields in section %@", section.headerTitle);
         NSArray *fields = [fieldsToHide objectForKey:section];
         [self hideFields:fields inSection:section];
     }
@@ -677,6 +678,7 @@
 {
     NSArray *keys = [[fieldsToShow keyEnumerator] allObjects];
     for (AKFormSection *section in keys) {
+        NSLog(@" + Showing fields in section %@", section.headerTitle);
         NSArray *fields = [fieldsToShow objectForKey:section];
         [self showFields:fields inSection:section forSwitchSection:switchSection];
     }
@@ -728,20 +730,37 @@
 
 #pragma mark - Switch Field Delegate
 
+- (void)renableSwitch:(UISwitch *)switchControl
+{
+    switchControl.userInteractionEnabled = YES;
+}
+
 - (void)didChangeValueOfSwitchOnField:(AKFormFieldSwitch *)aField toOn:(BOOL)on
 {
+    NSLog(@"*** didChangeValueOfSwitchOnField ***");
+    
     AKFormSection *switchSection = [self sectionForField:aField];
     if (!switchSection) {
         return;
     }
     
     if (on) {
+        NSLog(@"Switching ON");
         [self hideFieldsInMapTable:aField.fieldsToHideOnOn];
         [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchSection:switchSection];
     } else {
+        NSLog(@"Switching OFF");
         [self hideFieldsInMapTable:aField.fieldsToShowOnOn];
         [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchSection:switchSection];
     }
+    
+    AKFormCellSwitch *switchCell = (AKFormCellSwitch *)aField.cell;
+    if (switchCell) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(renableSwitch:) object:switchCell.switchControl];
+        [self performSelector:@selector(renableSwitch:) withObject:switchCell.switchControl afterDelay:0.25];
+    }
+    
+    NSLog(@" ");
 }
 
 #pragma mark - Toggle Field Delegate

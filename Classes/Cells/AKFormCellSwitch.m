@@ -98,7 +98,12 @@
 
 - (void)tappedCell:(id)sender
 {
-    [self.switchControl setOn:!self.switchControl.on animated:YES];
+    //TODO: look into this
+    //NOTE: This bit of code was what was leaving the form in inconsistent states at times.
+    //      I think we may have to manually call the 'switchValueChanged' method when doing things this way
+//    if (self.switchControl.userInteractionEnabled) {
+//        [self.switchControl setOn:!self.switchControl.on animated:YES];
+//    }
 }
 
 ///---------------------------------------------------------------------------------------

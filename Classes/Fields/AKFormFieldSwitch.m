@@ -67,6 +67,9 @@
 
 - (void)switchValueChanged:(UISwitch *)switchControl
 {
+    NSLog(@"*** switchValueChanged ***");
+    switchControl.userInteractionEnabled = NO;
+    
     self.value = [AKFormValue value:@(switchControl.on) withType:AKFormValueBool];
     [self.delegate didChangeValueOfSwitchOnField:self toOn:switchControl.on];
 }
