@@ -33,5 +33,6 @@
 - (AKFormValidator *)failedValidator;
 - (NSMutableDictionary *)populateUserInfo:(NSMutableDictionary *)userInfo;
 - (NSIndexPath *)indexPathForField:(AKFormField *)aField;
+- (NSIndexPath *)indexPathForField:(AKFormField *)aField inSection:(AKFormSection *)section;
 
 @end

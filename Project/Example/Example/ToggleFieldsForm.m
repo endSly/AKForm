@@ -11,7 +11,7 @@
 #define HEX_COLOR_GREY_PLACEHOLDER  @"#ccccd1"
 #define HEX_COLOR_RED               @"#790c06"
 
-@interface ToggleFieldsForm () <AKFormCellSwitchStyleProvider>
+@interface ToggleFieldsForm () <AKFormCellSwitchStyleProvider, AKFormCellTextFieldStyleProvider>
 - (IBAction)completeForm:(id)sender;
 - (void)setLabelWidth:(CGFloat)labelWidth;
 - (void)setSwitchCellStyle:(AKFormCellSwitchStyle)switchCellStyle;
@@ -33,18 +33,90 @@
 
 - (void)createForm
 {
-    [self addStandardPickers];
+    [self addInSectionToggles];
+    [self addNewSectionToggles];
 }
 
-- (void)addStandardPickers
+- (NSArray *)fieldsToShow
 {
     NSMutableArray *fields = [NSMutableArray array];
     
+    //Number Field
+    AKFormFieldText *numberField = [AKFormFieldText fieldWithKey:@"number"
+                                                           title:@"Number"
+                                                     placeholder:@"optional"
+                                                        delegate:self
+                                                   styleProvider:self];
+    numberField.keyboardType = UIKeyboardTypeDecimalPad;
+    [fields addObject:numberField];
+    
+    //Secure Field
+    AKFormFieldText *secureField = [AKFormFieldText fieldWithKey:@"secure"
+                                                           title:@"Secure"
+                                                     placeholder:@"optional"
+                                                        delegate:self
+                                                   styleProvider:self];
+    secureField.secureTextEntry = YES;
+    [fields addObject:secureField];
+    
+    //The Works Field
+    AKFormFieldText *theWorksField = [AKFormFieldText fieldWithKey:@"the_works"
+                                                             title:@"The Works"
+                                                       placeholder:@"optional"
+                                                          delegate:self
+                                                     styleProvider:self];
+    theWorksField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    theWorksField.autocorrectionType = UITextAutocorrectionTypeYes;
+    theWorksField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    theWorksField.returnKeyType = UIReturnKeySend;
+    [fields addObject:theWorksField];
+    
+    return [NSArray arrayWithArray:fields];
+}
+
+- (void)addInSectionToggles
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    /** SWITCH **/
     AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch" title:@"Switch" delegate:self styleProvider:self];
     [fields addObject:switchField];
-
+    
     AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
-    section.headerTitle = @"SWITCHES";
+    section.headerTitle = @"WITHIN SECTION";
+    [self addSection:section];
+
+    NSMapTable *fieldsToShowOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
+                                                         valueOptions:NSMapTableStrongMemory];
+    [fieldsToShowOnOn setObject:[self fieldsToShow]
+                         forKey:section];
+    switchField.fieldsToShowOnOn = fieldsToShowOnOn;    
+    /**/
+}
+
+- (void)addNewSectionToggles
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    /** SWITCH **/
+    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch" title:@"Switch" delegate:self styleProvider:self];
+    
+    // toggled section
+    AKFormSection *toggledSection = [[AKFormSection alloc] initWithFields:nil];
+    toggledSection.headerTitle = @"NEW SECTION";
+    toggledSection.key = @"section";
+    
+    NSMapTable *fieldsToShowOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
+                                                         valueOptions:NSMapTableStrongMemory];
+    [fieldsToShowOnOn setObject:[self fieldsToShow]
+                         forKey:toggledSection];
+    switchField.fieldsToShowOnOn = fieldsToShowOnOn;
+    [fields addObject:switchField];
+    /**/
+    
+    
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    section.headerTitle = @"IN A NEW SECTION";
     [self addSection:section];
 }
 
@@ -97,6 +169,9 @@
     switch (mode) {
         case AKFormCellSwitchModeEditable:
         case AKFormCellSwitchModeReadOnly:
+            return [UIFont systemFontOfSize:17.f];
+            break;
+        default:
             return [UIFont systemFontOfSize:17.f];
             break;
     }

@@ -31,6 +31,8 @@
  */
 @property(nonatomic, strong) NSString *footerTitle;
 
+@property(nonatomic, strong) NSMutableArray *fields;
+
 - (instancetype)initWithFields:(NSArray *)fields;
 
 ///---------------------------------------------------------------------------------------

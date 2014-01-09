@@ -11,7 +11,6 @@
 #import "AKFormValidator.h"
 
 @interface AKFormSection()
-@property(nonatomic, strong) NSMutableArray *fields;
 @end
 
 @implementation AKFormSection
@@ -273,7 +272,20 @@
     }
     
     AKFormSection *section = (AKFormSection *)object;
-    return [self.key isEqualToString:section.key];
+    
+    if (!self.key) self.key = @"";
+    if (!self.headerTitle) self.headerTitle = @"";
+    if (!self.footerTitle) self.footerTitle = @"";
+    if (!section.key) section.key = @"";
+    if (!section.headerTitle) section.headerTitle = @"";
+    if (!section.footerTitle) section.footerTitle = @"";
+
+    BOOL keysEqual = [self.key isEqualToString:section.key];
+    BOOL headersEqual = [self.headerTitle isEqualToString:section.headerTitle];
+    BOOL footersEqual = [self.footerTitle isEqualToString:section.footerTitle];
+    BOOL fieldsEqual = [self.fields isEqualToArray:section.fields];
+    
+    return keysEqual && headersEqual && footersEqual && fieldsEqual;
 }
 
 @end

@@ -61,42 +61,42 @@
     //with context switcher
     AKFormSection *accompanyingSection;
     
-//    BOOL alreadyFoundOne = NO;
+    BOOL alreadyFoundOne = NO;
     
 //commented out for now, we'll deal with this when we get to context togglers
-//    for (AKFormField *field in section.fields) {
-//        //only handles switches for now, we need to handle other toggles too, like segmented ones, and perhaps think of others?
-//        if ([field isKindOfClass:[AKFormFieldSwitch class]]) {
-//            AKFormFieldSwitch *switchField = (AKFormFieldSwitch *)field;
-//            
-//            if (switchField.fieldsToHideOnOn || switchField.fieldsToShowOnOn) {
-//                if (alreadyFoundOne) {
-//                    [NSException raise:@"More than 1 content switching field in section" format:@"Field with key %@ in section %@ is the second content switching field. Only 1 is permitted", switchField.key, section.key];
-//                }
-//                
-//                //show the appropriate section
-//                NSMapTable *mappedFields;
-//                if ([switchField.value boolValue] && switchField.fieldsToShowOnOn) {
-//                    mappedFields = switchField.fieldsToShowOnOn;
-//                } else if (![switchField.value boolValue] && switchField.fieldsToHideOnOn) {
-//                    mappedFields = switchField.fieldsToHideOnOn;
-//                }
-//                
-//                NSArray *keys = [[mappedFields keyEnumerator] allObjects];
-//                for (AKFormSection *s in keys) {
-//                    NSArray *fields = [mappedFields objectForKey:s];
-//                    if ([section isEqual:s]) {
-//                        [section addFields:fields];
-//                    } else {
-//                        [s addFields:fields];
-//                        accompanyingSection = s;
-//                    }
-//                }
-//                
-//                alreadyFoundOne = YES;
-//            }
-//        }
-//    }
+    for (AKFormField *field in section.fields) {
+        //only handles switches for now, we need to handle other toggles too, like segmented ones, and perhaps think of others?
+        if ([field isKindOfClass:[AKFormFieldSwitch class]]) {
+            AKFormFieldSwitch *switchField = (AKFormFieldSwitch *)field;
+            
+            if (switchField.fieldsToHideOnOn || switchField.fieldsToShowOnOn) {
+                if (alreadyFoundOne) {
+                    [NSException raise:@"More than 1 content switching field in section" format:@"Field with key %@ in section %@ is the second content switching field. Only 1 is permitted", switchField.key, section.key];
+                }
+                
+                //show the appropriate section
+                NSMapTable *mappedFields;
+                if ([switchField.value boolValue] && switchField.fieldsToShowOnOn) {
+                    mappedFields = switchField.fieldsToShowOnOn;
+                } else if (![switchField.value boolValue] && switchField.fieldsToHideOnOn) {
+                    mappedFields = switchField.fieldsToHideOnOn;
+                }
+                
+                NSArray *keys = [[mappedFields keyEnumerator] allObjects];
+                for (AKFormSection *s in keys) {
+                    NSArray *fields = [mappedFields objectForKey:s];
+                    if ([section isEqual:s]) {
+                        [section addFields:fields];
+                    } else {
+                        [s addFields:fields];
+                        accompanyingSection = s;
+                    }
+                }
+                
+                alreadyFoundOne = YES;
+            }
+        }
+    }
 
     //add it last in case we've added fields to it (due to switch)
     [self.sections addObject:section];
@@ -127,6 +127,21 @@
 }
 
 #pragma mark - Convenience Helpers
+
+- (NSIndexPath *)indexPathForField:(AKFormField *)aField inSection:(AKFormSection *)section
+{
+    NSInteger r = [section.fields indexOfObject:aField];
+    if (r == NSNotFound) {
+        return nil;
+    }
+    
+    NSInteger s = [self.sections indexOfObject:section];
+    if (s == NSNotFound) {
+        return nil;
+    }
+    
+    return [NSIndexPath indexPathForRow:r inSection:s];
+}
 
 - (NSIndexPath *)indexPathForField:(AKFormField *)aField
 {
@@ -556,6 +571,9 @@
 
 - (void)hideFields:(NSArray *)fieldsToHide inSection:(AKFormSection *)section
 {
+    //first we need to resign first responder
+    [self.view endEditing:YES];
+    
     if (!fieldsToHide || ![self haveSection:section]) {
         return;
     }
@@ -565,7 +583,7 @@
     //first we collect the indexPaths (because removing them from the sections will affect those)
     for (AKFormField *fieldToHide in fieldsToHide) {
         NSIndexPath *indexPath = [self indexPathForField:fieldToHide];
-        //if field isn't actually present
+        //skip if field isn't actually present
         if (!indexPath) {
             continue;
         }
@@ -609,6 +627,7 @@
         return;
     }
     
+    //insert the new section if needed
     if (![self haveSection:section]) {
         NSInteger sectionIndex = [self insertSection:section afterSection:switchSection];
         [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
@@ -619,19 +638,23 @@
     NSMutableArray *indexPaths = [NSMutableArray array];
     
     for (AKFormField *fieldToShow in fieldsToShow) {
+
+        //skip if the field already exists
         NSIndexPath *indexPath = [self indexPathForField:fieldToShow];
-        //if field is actually already present
         if (indexPath) {
             continue;
         }
         
         [section addField:fieldToShow];
-        indexPath = [self indexPathForField:fieldToShow];
-        [indexPaths addObject:indexPath];
+        indexPath = [self indexPathForField:fieldToShow inSection:section];
+        
+        if (indexPath) {
+            [indexPaths addObject:indexPath];
 
-        // if the lowest index path hasn't been set, or this is lower than it
-        if (!lowestIndexPath || indexPath.row > lowestIndexPath.row) {
-            lowestIndexPath = indexPath;
+            // if the lowest index path hasn't been set, or this is lower than it
+            if (!lowestIndexPath || indexPath.row > lowestIndexPath.row) {
+                lowestIndexPath = indexPath;
+            }
         }
     }
     

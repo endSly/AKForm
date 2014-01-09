@@ -192,7 +192,8 @@
 {
     //font
     if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:style:)]) {
-        self.label.font = [self.styleProvider labelFontForMode:self.mode style:self.style];
+        UIFont *font = [self.styleProvider labelFontForMode:self.mode style:self.style];
+        self.label.font = font;
     } else {
         switch (self.mode) {
             case AKFormCellTextFieldModeEditing:
