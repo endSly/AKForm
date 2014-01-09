@@ -32,6 +32,10 @@ typedef NS_ENUM(NSInteger, AKFormCellSwitchMode) {
 - (UIColor *)switchTintColor;
 - (UIFont *)labelFontForMode:(AKFormCellSwitchMode)mode style:(AKFormCellSwitchStyle)style;
 - (UIColor *)labelTextColorForMode:(AKFormCellSwitchMode)mode style:(AKFormCellSwitchStyle)style;
+- (UITableViewRowAnimation)rowAnimationDeleteForSwitchCell;
+- (UITableViewRowAnimation)rowAnimationInsertForSwitchCell;
+- (UITableViewRowAnimation)sectionAnimationDeleteForSwitchCell;
+- (UITableViewRowAnimation)sectionAnimationInsertForSwitchCell;
 @end
 
 @protocol AKFormFieldSwitchDelegate;
@@ -43,7 +47,9 @@ typedef NS_ENUM(NSInteger, AKFormCellSwitchMode) {
 @property(nonatomic, strong) UISwitch *switchControl;
 
 @property(nonatomic, weak) id<AKFormFieldSwitchDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellSwitchStyleProvider> styleProvider;
 
 - (instancetype)initWithStyleProvider:(id<AKFormCellSwitchStyleProvider>)styleProvider;
+- (void)refreshSwitchControl;
 
 @end

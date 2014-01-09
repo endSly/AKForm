@@ -13,7 +13,6 @@
 @interface AKFormCellSwitch()
 @property(nonatomic, assign) AKFormCellSwitchStyle style;
 @property(nonatomic, assign) AKFormCellSwitchMode mode;
-@property(nonatomic, weak) id<AKFormCellSwitchStyleProvider> styleProvider;
 - (void)tappedCell:(id)sender;
 @end
 
@@ -41,8 +40,7 @@
         
         self.switchContainerView = [[UIView alloc] init];
         [self.contentView addSubview:self.switchContainerView];
-        self.switchControl = [[UISwitch alloc] init];
-        [self.switchContainerView addSubview:self.switchControl];
+        [self refreshSwitchControl];
         [self styleSwitch];
         
         [self styleTextAlignments];
@@ -52,6 +50,16 @@
         [self.contentView addGestureRecognizer:tgr];
     }
     return self;
+}
+
+- (void)refreshSwitchControl
+{
+    if (self.switchControl && self.switchControl.superview) {
+        [self.switchControl removeFromSuperview];
+        self.switchControl = nil;
+    }
+    self.switchControl = [[UISwitch alloc] init];
+    [self.switchContainerView addSubview:self.switchControl];
 }
 
 ///---------------------------------------------------------------------------------------

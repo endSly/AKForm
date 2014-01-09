@@ -11,7 +11,7 @@
 #define HEX_COLOR_GREY_PLACEHOLDER  @"#ccccd1"
 #define HEX_COLOR_RED               @"#790c06"
 
-@interface ToggleFieldsForm () <AKFormCellSwitchStyleProvider, AKFormCellTextFieldStyleProvider>
+@interface ToggleFieldsForm () <AKFormCellSwitchStyleProvider, AKFormCellTextFieldStyleProvider, AKFormCellLabelStyleProvider>
 - (IBAction)completeForm:(id)sender;
 - (void)setLabelWidth:(CGFloat)labelWidth;
 - (void)setSwitchCellStyle:(AKFormCellSwitchStyle)switchCellStyle;
@@ -33,11 +33,21 @@
 
 - (void)createForm
 {
-    [self addInSectionToggles];
-    [self addNewSectionToggles];
+    [self addTogglesWithinOn];
+    [self addTogglesWithinOff];
+    [self addTogglesWithinOnOff];
+    [self addTogglesNewOn];
+    [self addTogglesNewOff];
+    [self addTogglesNewOnOff];
+    [self addTogglesWithinOn];
+    [self addTogglesWithinOff];
+    [self addTogglesWithinOnOff];
+    [self addTogglesNewOn];
+    [self addTogglesNewOff];
+    [self addTogglesNewOnOff];
 }
 
-- (NSArray *)fieldsToShow
+- (NSArray *)fields
 {
     NSMutableArray *fields = [NSMutableArray array];
     
@@ -74,49 +84,175 @@
     return [NSArray arrayWithArray:fields];
 }
 
-- (void)addInSectionToggles
+- (NSArray *)fields2
 {
     NSMutableArray *fields = [NSMutableArray array];
     
-    /** SWITCH **/
-    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch" title:@"Switch" delegate:self styleProvider:self];
+    //Number Field
+    AKFormFieldText *numberField = [AKFormFieldText fieldWithKey:@"twitter"
+                                                           title:@"Twitter"
+                                                     placeholder:@"optional"
+                                                        delegate:self
+                                                   styleProvider:self];
+    numberField.keyboardType = UIKeyboardTypeTwitter;
+    [fields addObject:numberField];
+
+    //Image Field
+    AKFormFieldImage *imageField = [AKFormFieldImage fieldWithKey:@"image_1"
+                                                            title:@"Image"
+                                                  placeholderText:@"Choose Image"
+                                             placeholderImageName:@"Placeholder1"
+                                                        imageSize:CGSizeMake(320, 320)
+                                                   thumbnailStyle:AKFormCellImageThumbnailStyleCircle
+                                                   formController:self];
+    [fields addObject:imageField];
+
+    //Date Field
+    AKFormFieldDate *dateField = [AKFormFieldDate fieldWithKey:@"date"
+                                                        title:@"Date of Birth"
+                                                placeholder:@"optional"
+                                                datePickerMode:UIDatePickerModeDate
+                                                displayType:AKFormFieldDateDisplayCustom
+                                                displayFormat:@"EEE, MMM d, yyyy"
+                                                styleProvider:self];
+    [fields addObject:dateField];
+    
+    return [NSArray arrayWithArray:fields];
+}
+
+- (void)addTogglesWithinOn
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch1" title:@"Only on ON" delegate:self styleProvider:self];
     [fields addObject:switchField];
     
     AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
     section.headerTitle = @"WITHIN SECTION";
-    [self addSection:section];
 
     NSMapTable *fieldsToShowOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
                                                          valueOptions:NSMapTableStrongMemory];
-    [fieldsToShowOnOn setObject:[self fieldsToShow]
+    [fieldsToShowOnOn setObject:[self fields]
                          forKey:section];
     switchField.fieldsToShowOnOn = fieldsToShowOnOn;    
-    /**/
+    [self addSection:section];
 }
 
-- (void)addNewSectionToggles
+- (void)addTogglesWithinOff
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch2" title:@"Only on OFF" delegate:self styleProvider:self];
+    [fields addObject:switchField];
+    
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    
+    NSMapTable *fieldsToHideOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
+                                                         valueOptions:NSMapTableStrongMemory];
+    [fieldsToHideOnOn setObject:[self fields]
+                         forKey:section];
+    switchField.fieldsToHideOnOn = fieldsToHideOnOn;
+
+    [self addSection:section];
+}
+
+- (void)addTogglesWithinOnOff
 {
     NSMutableArray *fields = [NSMutableArray array];
     
     /** SWITCH **/
-    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch" title:@"Switch" delegate:self styleProvider:self];
+    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch3" title:@"ON & OFF" delegate:self styleProvider:self];
+    [fields addObject:switchField];
+    
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    
+    NSMapTable *fieldsToShowOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
+                                                         valueOptions:NSMapTableStrongMemory];
+    [fieldsToShowOnOn setObject:[self fields2]
+                         forKey:section];
+    switchField.fieldsToShowOnOn = fieldsToShowOnOn;
+
+    NSMapTable *fieldsToHideOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
+                                                         valueOptions:NSMapTableStrongMemory];
+    [fieldsToHideOnOn setObject:[self fields]
+                         forKey:section];
+    switchField.fieldsToHideOnOn = fieldsToHideOnOn;
+    [self addSection:section];    
+}
+
+- (void)addTogglesNewOn
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    /** SWITCH **/
+    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch4" title:@"Only on ON" delegate:self styleProvider:self];
     
     // toggled section
     AKFormSection *toggledSection = [[AKFormSection alloc] initWithFields:nil];
-    toggledSection.headerTitle = @"NEW SECTION";
     toggledSection.key = @"section";
     
     NSMapTable *fieldsToShowOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
                                                          valueOptions:NSMapTableStrongMemory];
-    [fieldsToShowOnOn setObject:[self fieldsToShow]
+    [fieldsToShowOnOn setObject:[self fields]
                          forKey:toggledSection];
     switchField.fieldsToShowOnOn = fieldsToShowOnOn;
     [fields addObject:switchField];
     /**/
     
-    
     AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
     section.headerTitle = @"IN A NEW SECTION";
+    [self addSection:section];
+}
+
+- (void)addTogglesNewOff
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    /** SWITCH **/
+    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch5" title:@"Only on OFF" delegate:self styleProvider:self];
+    
+    // toggled section
+    AKFormSection *toggledSection = [[AKFormSection alloc] initWithFields:nil];
+    toggledSection.key = @"section";
+    
+    NSMapTable *fieldsToHideOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
+                                                         valueOptions:NSMapTableStrongMemory];
+    [fieldsToHideOnOn setObject:[self fields]
+                         forKey:toggledSection];
+    switchField.fieldsToHideOnOn = fieldsToHideOnOn;
+    [fields addObject:switchField];
+    /**/
+    
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    [self addSection:section];
+}
+
+- (void)addTogglesNewOnOff
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    /** SWITCH **/
+    AKFormFieldSwitch *switchField = [AKFormFieldSwitch fieldWithKey:@"switch6" title:@"ON & OFF" delegate:self styleProvider:self];
+    
+    // toggled section
+    AKFormSection *toggledSection = [[AKFormSection alloc] initWithFields:nil];
+    toggledSection.key = @"section";
+    
+    NSMapTable *fieldsToShowOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
+                                                         valueOptions:NSMapTableStrongMemory];
+    [fieldsToShowOnOn setObject:[self fields]
+                         forKey:toggledSection];
+    switchField.fieldsToShowOnOn = fieldsToShowOnOn;
+
+    NSMapTable *fieldsToHideOnOn = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
+                                                         valueOptions:NSMapTableStrongMemory];
+    [fieldsToHideOnOn setObject:[self fields2]
+                         forKey:toggledSection];
+    switchField.fieldsToHideOnOn = fieldsToHideOnOn;
+    [fields addObject:switchField];
+    /**/
+    
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
     [self addSection:section];
 }
 
@@ -152,6 +288,26 @@
 {
     _switchCellStyle = switchCellStyle;
     [self.tableView reloadData];
+}
+
+- (UITableViewRowAnimation)rowAnimationDeleteForSwitchCell
+{
+    return UITableViewRowAnimationFade;
+}
+
+- (UITableViewRowAnimation)rowAnimationInsertForSwitchCell
+{
+    return UITableViewRowAnimationFade;
+}
+
+- (UITableViewRowAnimation)sectionAnimationDeleteForSwitchCell
+{
+    return UITableViewRowAnimationFade;
+}
+
+- (UITableViewRowAnimation)sectionAnimationInsertForSwitchCell
+{
+    return UITableViewRowAnimationFade;
 }
 
 - (CGFloat)labelWidthForSwitchCell
@@ -268,7 +424,7 @@
     if ([segueName isEqualToString: @"form_embed"]) {
         self.form = (ToggleFieldsForm *) [segue destinationViewController];
         
-        CGFloat sliderValue = (150.f - MIN_LABEL_WIDTH) / (MAX_LABEL_WIDTH - MIN_LABEL_WIDTH);
+        CGFloat sliderValue = (220.f - MIN_LABEL_WIDTH) / (MAX_LABEL_WIDTH - MIN_LABEL_WIDTH);
         [self.slider setValue:sliderValue];
         [self sliderValueDidChange:self.slider];
     }

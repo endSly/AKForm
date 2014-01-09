@@ -17,6 +17,7 @@
 @property(nonatomic, strong) NSMutableArray *sections;
 
 @property(nonatomic, weak) AKFormFieldModal *modalField;
+@property(nonatomic, weak) AKFormFieldToggle *toggleField;
 @property(nonatomic, strong) AKFormValue *modalOldValue;
 
 - (AKFormField *)fieldForIndexPath:(NSIndexPath *)indexPath;
@@ -24,13 +25,31 @@
 
 @implementation AKFormController {
     UIStatusBarStyle _currentStatusBarStyle;
+    UITableViewRowAnimation _toggleRowDeleteAnimation;
+    UITableViewRowAnimation _toggleRowInsertAnimation;
+    UITableViewRowAnimation _toggleSectionDeleteAnimation;
+    UITableViewRowAnimation _toggleSectionInsertAnimation;
+    UITableViewRowAnimation _expandRowInsertAnimation;
+    UITableViewRowAnimation _expandRowDeleteAnimation;
+    
+    BOOL _showToggleFieldsAfterHide;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    _showToggleFieldsAfterHide = NO;
+    
     _currentStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
+    
+    _toggleRowDeleteAnimation = UITableViewRowAnimationFade;
+    _toggleRowInsertAnimation = UITableViewRowAnimationFade;
+    _toggleSectionDeleteAnimation = UITableViewRowAnimationFade;
+    _toggleSectionInsertAnimation = UITableViewRowAnimationFade;
+    _expandRowDeleteAnimation = UITableViewRowAnimationFade;
+    _expandRowInsertAnimation = UITableViewRowAnimationFade;
+    
     self.sections = [NSMutableArray array];
     
     //adds a pan-to-dismiss gesture to the keyboard
@@ -40,6 +59,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pressedDoneOnModalField:)
                                                  name:AKNOTIFICATION_MODAL_PRESSED_DONE
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(deletedFieldsForToggleField:)
+                                                 name:AKNOTIFICATION_CELLS_DELETED
                                                object:nil];
 }
 
@@ -53,7 +77,7 @@
 
 
 
-// mention explicitly that content switching fields can only switch on off fields within their section, or other COMPLETE
+// TODO: document explicitly that content switching fields can only switch on off fields within their section, or other COMPLETE
 // sections (ie. not specific fields in OTHER sections that have other fields too)
 // THROWS exception if we have more than one switch with these actions on the same section? - why not though???!?!
 - (void)addSection:(AKFormSection *)section
@@ -221,8 +245,15 @@
     if (indexPath) {
         //TODO, think of what useful thing we may do with this return value from collapseFieldAtRowNumber
         [self.sections[indexPath.section] collapseFieldAtRowNumber:indexPath.row];
+        
+//        UITableViewRowAnimation rowAnimation;
+//        if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(rowAnimationDeleteForSwitchCell)]) {
+//            rowAnimation = [switchCell.styleProvider rowAnimationDeleteForSwitchCell];
+//        } else {
+//            rowAnimation = _toggleRowDeleteAnimation;
+//        }
         [self.tableView deleteRowsAtIndexPaths:@[[self indexPathAfter:indexPath]]
-                              withRowAnimation:UITableViewRowAnimationFade];
+                              withRowAnimation:_expandRowDeleteAnimation];
         return indexPath;
     }
     return nil;
@@ -241,8 +272,15 @@
     }
 
     NSIndexPath *indexPathToInsert = [self indexPathAfter:indexPath];
+
+//    UITableViewRowAnimation rowAnimation;
+//    if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(rowAnimationDeleteForSwitchCell)]) {
+//        rowAnimation = [switchCell.styleProvider rowAnimationDeleteForSwitchCell];
+//    } else {
+//        rowAnimation = _toggleRowDeleteAnimation;
+//    }
     [self.tableView insertRowsAtIndexPaths:@[indexPathToInsert]
-                          withRowAnimation:UITableViewRowAnimationFade];
+                          withRowAnimation:_expandRowInsertAnimation];
     [self.tableView scrollToRowAtIndexPath:indexPathToInsert
                           atScrollPosition:UITableViewScrollPositionNone
                                   animated:YES];
@@ -348,11 +386,9 @@
             }
         } else if ([field isKindOfClass:[AKFormFieldImage class]]) {
 //            AKFormFieldImage *imageField = (AKFormFieldImage *)field;
-            return [self heightForImageCell];
-//            if (imageField.styleProvider &&
-//                [imageField.styleProvider respondsToSelector:@selector(heightForImageCell:)]) {
-//                return [imageField.styleProvider heightForImageCell:nil];
-//            }
+            if ([self respondsToSelector:@selector(heightForImageCell)]) {
+                return [self heightForImageCell];
+            }
         } else if ([field isKindOfClass:[CSFormFieldTextView class]]) {
             return [(CSFormFieldTextView *)field textViewHeight] + (CELL_PADDING_VERTICAL * 2.0);
         }
@@ -582,7 +618,7 @@
     
     //first we collect the indexPaths (because removing them from the sections will affect those)
     for (AKFormField *fieldToHide in fieldsToHide) {
-        NSIndexPath *indexPath = [self indexPathForField:fieldToHide];
+        NSIndexPath *indexPath = [self indexPathForField:fieldToHide inSection:section];
         //skip if field isn't actually present
         if (!indexPath) {
             continue;
@@ -614,19 +650,36 @@
 
     [CATransaction begin];
     [CATransaction setCompletionBlock: ^{
+//        [[NSNotificationCenter defaultCenter] postNotificationName:AKNOTIFICATION_CELLS_DELETED object:nil];
         switchCell.switchControl.userInteractionEnabled = YES;
     }];
 
     //delete fields BEFORE deleting the section
+    UITableViewRowAnimation rowAnimation;
+    if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(rowAnimationDeleteForSwitchCell)]) {
+        rowAnimation = [switchCell.styleProvider rowAnimationDeleteForSwitchCell];
+    } else {
+        rowAnimation = _toggleRowDeleteAnimation;
+    }
+    
+    [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:indexPaths
-                          withRowAnimation:UITableViewRowAnimationFade];
-
+                          withRowAnimation:rowAnimation];
+    
     //if the section is now empty, remove it!
     if ([section numberOfFields] == 0) {
         NSUInteger sectionIndex = [self removeSection:section];
+
+        UITableViewRowAnimation rowAnimation;
+        if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(sectionAnimationDeleteForSwitchCell)]) {
+            rowAnimation = [switchCell.styleProvider sectionAnimationDeleteForSwitchCell];
+        } else {
+            rowAnimation = _toggleSectionDeleteAnimation;
+        }
         [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                      withRowAnimation:UITableViewRowAnimationFade];
+                      withRowAnimation:rowAnimation];
     }
+    [self.tableView endUpdates];
     [CATransaction commit];
 }
 
@@ -636,11 +689,19 @@
         return;
     }
     
+    [self.tableView beginUpdates];
+    
     //insert the new section if needed
     if (![self haveSection:section]) {
         NSInteger sectionIndex = [self insertSection:section afterSection:switchSection];
+        UITableViewRowAnimation rowAnimation;
+        if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(sectionAnimationInsertForSwitchCell)]) {
+            rowAnimation = [switchCell.styleProvider sectionAnimationInsertForSwitchCell];
+        } else {
+            rowAnimation = _toggleSectionInsertAnimation;
+        }
         [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                      withRowAnimation:UITableViewRowAnimationFade];
+                      withRowAnimation:rowAnimation];
     }
     
     NSIndexPath *lowestIndexPath;
@@ -649,7 +710,7 @@
     for (AKFormField *fieldToShow in fieldsToShow) {
 
         //skip if the field already exists
-        NSIndexPath *indexPath = [self indexPathForField:fieldToShow];
+        NSIndexPath *indexPath = [self indexPathForField:fieldToShow inSection:section];
         if (indexPath) {
             NSLog(@"     Field already exists: %@", fieldToShow.title);
             continue;
@@ -670,23 +731,42 @@
         }
     }
     
-    NSLog(@"     Inserting %ud cells", indexPaths.count);;
     [CATransaction begin];
     [CATransaction setCompletionBlock: ^{
+//        [[NSNotificationCenter defaultCenter] postNotificationName:AKNOTIFICATION_CELLS_INSERTED object:nil];
         switchCell.switchControl.userInteractionEnabled = YES;
     }];
-    [self.tableView insertRowsAtIndexPaths:indexPaths
-                          withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView scrollToRowAtIndexPath:lowestIndexPath
-                          atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
+    UITableViewRowAnimation rowAnimation;
+    if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(rowAnimationInsertForSwitchCell)]) {
+        rowAnimation = [switchCell.styleProvider rowAnimationInsertForSwitchCell];
+    } else {
+        rowAnimation = _toggleRowInsertAnimation;
+    }
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:rowAnimation];
+    [self.tableView endUpdates];
     [CATransaction commit];
+    
+    NSLog(@"Looking for %@", lowestIndexPath);
+    if ([self.tableView cellForRowAtIndexPath:lowestIndexPath]) {
+        [self.tableView scrollToRowAtIndexPath:lowestIndexPath
+                              atScrollPosition:UITableViewScrollPositionNone animated:YES];
+        NSLog(@"Found it");
+    } else {
+        // can't find the expanded cells, so lets scroll the switch cell
+        NSIndexPath *switchCellIndexPath = [self.tableView indexPathForCell:switchCell];
+        if (switchCellIndexPath) {
+            [self.tableView scrollToRowAtIndexPath:switchCellIndexPath
+                                  atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            
+        }
+    }
 }
 
 - (void)hideFieldsInMapTable:(NSMapTable *)fieldsToHide forSwitchCell:(AKFormCellSwitch *)switchCell
 {
     NSArray *keys = [[fieldsToHide keyEnumerator] allObjects];
     for (AKFormSection *section in keys) {
-        NSLog(@" - Hiding fields in section %@", section.headerTitle);
         NSArray *fields = [fieldsToHide objectForKey:section];
         [self hideFields:fields inSection:section forSwitchCell:switchCell];
     }
@@ -696,7 +776,6 @@
 {
     NSArray *keys = [[fieldsToShow keyEnumerator] allObjects];
     for (AKFormSection *section in keys) {
-        NSLog(@" + Showing fields in section %@", section.headerTitle);
         NSArray *fields = [fieldsToShow objectForKey:section];
         [self showFields:fields inSection:section forSwitchCell:switchCell inSection:switchSection];
     }
@@ -748,28 +827,41 @@
 
 #pragma mark - Switch Field Delegate
 
+- (void)deletedFieldsForToggleField:(id)sender
+{
+    if (_showToggleFieldsAfterHide) {
+        AKFormCellSwitch *switchCell = (AKFormCellSwitch *)self.toggleField.cell;
+        AKFormSection *switchSection = [self sectionForField:self.toggleField];
+        if (!switchSection) {
+            return;
+        }
+        
+        AKFormFieldSwitch *switchField = (AKFormFieldSwitch *)self.toggleField;
+        [self showFieldsInMapTable:switchCell.switchControl.on ? switchField.fieldsToShowOnOn : switchField.fieldsToHideOnOn
+                     forSwitchCell:switchCell
+                         inSection:switchSection];
+        _showToggleFieldsAfterHide = NO;
+    }
+}
+
 - (void)didChangeValueOfSwitchOnField:(AKFormFieldSwitch *)aField toOn:(BOOL)on
 {
-    NSLog(@"*** didChangeValueOfSwitchOnField ***");
-
+    self.toggleField = (AKFormFieldToggle *)aField;
+    
     AKFormCellSwitch *switchCell = (AKFormCellSwitch *)aField.cell;
-
     AKFormSection *switchSection = [self sectionForField:aField];
     if (!switchSection) {
         return;
     }
     
     if (on) {
-        NSLog(@"Switching ON");
         [self hideFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell];
         [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
     } else {
-        NSLog(@"Switching OFF");
         [self hideFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell];
         [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell inSection:switchSection];
     }
-    
-    NSLog(@" ");
+    _showToggleFieldsAfterHide = YES;
 }
 
 #pragma mark - Toggle Field Delegate

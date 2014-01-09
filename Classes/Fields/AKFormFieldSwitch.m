@@ -52,11 +52,13 @@
     cell.valueDelegate = self;
     
     cell.label.text = self.title;
+    [cell refreshSwitchControl];
     [cell.switchControl addTarget:self
                            action:@selector(switchValueChanged:)
                  forControlEvents:UIControlEventValueChanged];
     
-    cell.switchControl.on = [self.value boolValue];
+    BOOL isOn = [self.value boolValue];
+    cell.switchControl.on = isOn;
     
     [cell layoutSubviews];
     self.cell = cell;
@@ -67,7 +69,7 @@
 
 - (void)switchValueChanged:(UISwitch *)switchControl
 {
-    NSLog(@"*** switchValueChanged ***");
+    NSLog(@"switchValueChanged of %@ to %d", self.key, switchControl.on);
     switchControl.userInteractionEnabled = NO;
     
     self.value = [AKFormValue value:@(switchControl.on) withType:AKFormValueBool];

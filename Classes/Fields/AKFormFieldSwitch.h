@@ -15,6 +15,7 @@
 - (void)didChangeValueOfSwitchOnField:(AKFormFieldSwitch *)row toOn:(BOOL)on;
 @end
 
+
 @interface AKFormFieldSwitch : AKFormFieldToggle
 
 //placed here for now because its only switches that have on/off toggles.
