@@ -66,6 +66,11 @@
     [[UIApplication sharedApplication] setStatusBarStyle:_currentStatusBarStyle];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 #pragma mark - Convenience Helpers
 
 
@@ -424,6 +429,8 @@
                 AKFormCellTextBox *c = (AKFormCellTextBox *)f.cell;
                 
                 //layout subviews first in case the style changed
+                [tableView beginUpdates];
+                [tableView endUpdates];
                 [c layoutSubviews];
                 
                 CGFloat originY = c.textView.frame.origin.y;

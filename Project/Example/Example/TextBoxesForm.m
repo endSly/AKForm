@@ -37,6 +37,14 @@
 {
     [self addSingleSection];
     [self addMultipleSection];
+    [self addSingleSection];
+    [self addMultipleSection];
+    [self addSingleSection];
+    [self addMultipleSection];
+    [self addSingleSection];
+    [self addMultipleSection];
+    [self addSingleSection];
+    [self addMultipleSection];
 }
 
 - (void)addSingleSection
