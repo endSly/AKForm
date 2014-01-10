@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, AKFormCellTextBoxMode) {
 
 @protocol AKFormCellTextBoxDelegate <AKFormCellDelegate>
 - (void)didBeginEditingOnTextBoxCell:(AKFormCellTextBox *)cell;
-- (BOOL)shouldReturnOnTextBoxCell:(AKFormCellTextBox *)cell;
+- (void)textViewDidChangeOnTextBoxCell:(AKFormCellTextBox *)cell;
 @end
 
 @interface AKFormCellTextBox : AKFormCell <UITextViewDelegate>
@@ -53,6 +53,7 @@ typedef NS_ENUM(NSInteger, AKFormCellTextBoxMode) {
 @property(nonatomic, strong) UILabel *label;
 @property(nonatomic, strong) UITextView *textView;
 @property(nonatomic, weak) id<AKFormCellTextBoxDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellTextBoxStyleProvider> styleProvider;
 
 - (instancetype)initWithStyleProvider:(id<AKFormCellTextBoxStyleProvider>)styleProvider;
 

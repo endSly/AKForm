@@ -72,10 +72,11 @@
     
     cell.label.text = self.title;
     
+    self.cell = cell;
+        
     //now rearrange the layout!
     [cell layoutSubviews];
     
-    self.cell = cell;
     return cell;
 }
 

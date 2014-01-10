@@ -15,7 +15,6 @@
 @property(nonatomic, assign) AKFormCellTextBoxLabelStyle labelStyle;
 @property(nonatomic, assign) AKFormCellTextBoxHeightStyle heightStyle;
 @property(nonatomic, assign) AKFormCellTextBoxMode mode;
-@property(nonatomic, weak) id<AKFormCellTextBoxStyleProvider> styleProvider;
 - (void)tappedCell:(id)sender;
 @end
 
@@ -140,7 +139,7 @@
 
 - (void)styleFrames
 {
-    CGFloat labelWidth, textBoxX, textBoxWidth;
+    CGFloat labelWidth, labelX, textBoxX, textBoxY, textBoxWidth;
     CGRect contentFrame = [self contentFrame];
     switch (self.labelStyle) {
         case AKFormCellTextBoxLabelStyleOnLeftLeftAligned:
@@ -154,18 +153,20 @@
             CGFloat maxLabelWidth = contentFrame.size.width - PADDING_HORIZONTAL - MINIMUM_VALUE_WIDTH;
             labelWidth = MIN(labelWidth, maxLabelWidth);
             
-            textBoxX = self.label.frame.size.width;
+            textBoxX = labelWidth;
+            labelX = contentFrame.origin.x;
             break;
             
         case AKFormCellTextBoxLabelStyleOnTop:
             labelWidth = contentFrame.size.width;
+            labelX = contentFrame.origin.x;
             textBoxX = 0;
             break;
     }
 
     [self.label sizeToFit];
-    CGFloat labelHeight = MAX(self.label.frame.size.height, contentFrame.size.height);
-    self.label.frame = CGRectMake(contentFrame.origin.x,
+    CGFloat labelHeight = MIN(self.label.frame.size.height, contentFrame.size.height);
+    self.label.frame = CGRectMake(labelX,
                                   contentFrame.origin.y,
                                   labelWidth,
                                   labelHeight);
@@ -175,13 +176,18 @@
     if (self.labelStyle != AKFormCellTextBoxLabelStyleOnTop && self.label.frame.size.width > 0.f) {
         textBoxX += PADDING_HORIZONTAL;
         textBoxWidth = contentFrame.size.width - textBoxX;
+        textBoxY = 0;
+    } else {
         textBoxHeight = contentFrame.size.height - labelHeight - PADDING_VERTICAL;
+        textBoxY = labelHeight + PADDING_VERTICAL;
     }
     
     self.textView.frame = CGRectMake(contentFrame.origin.x + textBoxX,
-                                     contentFrame.origin.y,
+                                     contentFrame.origin.y + textBoxY,
                                      textBoxWidth,
                                      textBoxHeight);
+    
+    self.textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 /**
@@ -253,6 +259,14 @@
 ///---------------------------------------------------------------------------------------
 #pragma mark - (Private) Text Field Delegate
 ///---------------------------------------------------------------------------------------
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    [self updateMode];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textViewDidChangeOnTextBoxCell:)]) {
+        [self.delegate textViewDidChangeOnTextBoxCell:self];
+    }
+}
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {

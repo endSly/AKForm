@@ -14,7 +14,6 @@
 
 #define HEIGHT_STANDARD_PICKER  216.f
 #define CELL_HEIGHT_PICKER      HEIGHT_STANDARD_PICKER
-#define CELL_HEIGHT_TEXTVIEW    150.f
 
 /**
  *  This is a class that all other form cells are subclasses of.

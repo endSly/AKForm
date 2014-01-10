@@ -49,7 +49,9 @@
     self.sections = [NSMutableArray array];
     
     //adds a pan-to-dismiss gesture to the keyboard
-    [self.tableView addKeyboardPanningWithActionHandler:nil];
+//    [self.tableView addKeyboardPanningWithActionHandler:nil];
+    
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
     //subscribe to notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -401,10 +403,42 @@
                 return [self heightForImageCell];
             }
         } else if ([field isKindOfClass:[AKFormFieldTextBox class]]) {
-            AKFormFieldTextBox *textBoxField = (AKFormFieldTextBox *)field;
-            if (textBoxField.styleProvider &&
-                [textBoxField.styleProvider respondsToSelector:@selector(heightForTextBoxCell)]) {
-                return [textBoxField.styleProvider heightForTextBoxCell];
+            AKFormFieldTextBox *f = (AKFormFieldTextBox *)field;
+            if (f.styleProvider && [f.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell)] && [f.styleProvider heightStyleForTextBoxCell] == AKFormCellTextBoxHeightStyleManual) {
+                if (f.styleProvider && [f.styleProvider respondsToSelector:@selector(heightForTextBoxCell)]) {
+                    return [f.styleProvider heightForTextBoxCell];
+                } else {
+                    return CELL_HEIGHT_DEFAULT_TEXTVIEW;
+                }
+            } else {
+                //automatic
+                // --
+                // |Origin
+                // |---
+                // |Height
+                // |___
+                // --
+                //
+                // it will be the y origin + the height + padding vertical (for bottom margin)
+                
+                AKFormCellTextBox *c = (AKFormCellTextBox *)f.cell;
+                
+                //layout subviews first in case the style changed
+                [c layoutSubviews];
+                
+                CGFloat originY = c.textView.frame.origin.y;
+
+                CGFloat fixedWidth = c.textView.frame.size.width;
+                CGSize newSize = [c.textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+                CGFloat neededHeight = newSize.height;
+                
+                CGFloat cellHeight = originY + neededHeight + PADDING_VERTICAL;
+                NSLog(@"Cell height is %lf", cellHeight);
+                return cellHeight;
+//                CGRect newFrame = c.textView.frame;
+//                newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+//                c.textView.frame = newFrame;
+                
             }
         }
     }
@@ -823,6 +857,23 @@
 
 #pragma mark - Unsorted
 #pragma mark -
+#pragma mark - Text Box Cell Delegate
+
+- (void)didBeginEditingOnTextBoxCell:(AKFormCellTextBox *)cell
+{
+    [self collapseCurrentlyExpandedField];
+}
+
+- (void)textViewDidChangeOnTextBoxCell:(AKFormCellTextBox *)cell
+{
+    BOOL isAutomatic = cell.styleProvider && [cell.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell)] && [cell.styleProvider heightStyleForTextBoxCell] == AKFormCellTextBoxHeightStyleAutomatic;
+    if (isAutomatic) {
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+        [cell layoutSubviews];
+    }
+}
+
 #pragma mark - Text Field Cell Delegate
 
 - (BOOL)shouldReturnOnTextFieldCell:(AKFormCellTextField *)cell

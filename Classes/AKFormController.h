@@ -21,7 +21,7 @@
 #import "AKFormFieldSwitch.h"
 #import "AKFormFieldSegmented.h"
 
-@interface AKFormController : UITableViewController <AKFormCellTextFieldDelegate, AKFormFieldSwitchDelegate, AKFormFieldSegmentedDelegate, AKFormCellImageStyleProvider>
+@interface AKFormController : UITableViewController <AKFormCellTextFieldDelegate, AKFormFieldSwitchDelegate, AKFormFieldSegmentedDelegate, AKFormCellImageStyleProvider, AKFormCellTextBoxDelegate>
 
 - (void)pressedCancelOnModalField:(id)sender;
 - (void)pressedDoneOnModalField:(id)sender;

@@ -137,10 +137,10 @@
 		1A9B216318361498000A7C34 /* Field Types */ = {
 			isa = PBXGroup;
 			children = (
-				1A1E488B187FCC4D00E6B69E /* TextBoxesForm.h */,
-				1A1E488C187FCC4D00E6B69E /* TextBoxesForm.m */,
 				1AA5B67A1837C3CE00421A67 /* TextFieldsForm.h */,
 				1AA5B67B1837C3CE00421A67 /* TextFieldsForm.m */,
+				1A1E488B187FCC4D00E6B69E /* TextBoxesForm.h */,
+				1A1E488C187FCC4D00E6B69E /* TextBoxesForm.m */,
 				1A5AAAA7183455CB00CEA9D7 /* ImageFieldsForm.h */,
 				1A5AAAA8183455CB00CEA9D7 /* ImageFieldsForm.m */,
 				1ABEAA6C1839BA3700F03350 /* DatePickerFieldsForm.h */,

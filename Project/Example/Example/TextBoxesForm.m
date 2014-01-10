@@ -85,13 +85,11 @@
 - (void)setTextBoxHeightStyle:(AKFormCellTextBoxHeightStyle)textBoxHeightStyle
 {
     _textBoxHeightStyle = textBoxHeightStyle;
-    [self.tableView reloadData];
 }
 
 - (void)setTextBoxLabelStyle:(AKFormCellTextBoxLabelStyle)textBoxLabelStyle
 {
     _textBoxLabelStyle = textBoxLabelStyle;
-    [self.tableView reloadData];
 }
 
 - (CGFloat)labelWidthForTextFieldCell
@@ -155,14 +153,19 @@
     }
 }
 
+- (CGFloat)labelWidthForTextBoxCell
+{
+    return _labelWidth;
+}
+
 - (CGFloat)heightForTextBoxCell
 {
     switch (_textBoxHeightStyle) {
         case AKFormCellTextBoxHeightStyleAutomatic:
-            return 44.f;
+            return 0.f;
             break;
         case AKFormCellTextBoxHeightStyleManual:
-            return 100.f;
+            return 300.f;
             break;
     }
 }
@@ -224,6 +227,7 @@
             [self.form setTextBoxHeightStyle:AKFormCellTextBoxHeightStyleManual];
             break;
     }
+    [self.form.tableView reloadData];
 }
 
 - (IBAction)pressedValidate:(id)sender
