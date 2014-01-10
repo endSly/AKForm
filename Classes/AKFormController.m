@@ -400,8 +400,8 @@
             if ([self respondsToSelector:@selector(heightForImageCell)]) {
                 return [self heightForImageCell];
             }
-        } else if ([field isKindOfClass:[CSFormFieldTextView class]]) {
-            return [(CSFormFieldTextView *)field textViewHeight] + (CELL_PADDING_VERTICAL * 2.0);
+        } else if ([field isKindOfClass:[AKFormFieldTextBox class]]) {
+            return [(AKFormFieldTextBox *)field textViewHeight] + (CELL_PADDING_VERTICAL * 2.0);
         }
     }
     return CELL_HEIGHT_DEFAULT;

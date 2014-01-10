@@ -1,5 +1,5 @@
 //
-//  CSFormFieldTextView.h
+//  AKFormFieldTextBox.h
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
@@ -9,7 +9,7 @@
 #import "AKFormField.h"
 #import "CSFormTextViewCell.h"
 
-@interface CSFormFieldTextView : AKFormField <UITextViewDelegate>
+@interface AKFormFieldTextBox : AKFormField <UITextViewDelegate>
 
 @property(nonatomic, assign) CGFloat textViewHeight;
 

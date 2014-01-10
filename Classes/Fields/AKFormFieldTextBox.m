@@ -1,17 +1,17 @@
 //
-//  CSFormFieldTextView.m
+//  AKFormFieldTextBox.m
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "CSFormFieldTextView.h"
+#import "AKFormFieldTextBox.h"
 
 #define DEFAULT_TEXTVIEW_HEIGHT     150.f
 #define HEX_COLOR_GREY_PLACEHOLDER  @"#ccccd1"
 
-@implementation CSFormFieldTextView
+@implementation AKFormFieldTextBox
 
 - (instancetype)initWithKey:(NSString *)key
                 placeholder:(NSString *)placeholder
