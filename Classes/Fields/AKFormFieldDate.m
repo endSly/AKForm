@@ -11,7 +11,7 @@
 #import <NSDate+Helper.h>
 #import <NSString+CJStringValidator.h>
 
-#import <MHPrettyDate/MHPrettyDate.h>
+//#import <MHPrettyDate/MHPrettyDate.h>
 
 @implementation AKFormFieldDate
 
@@ -87,26 +87,30 @@
     }
     
     NSDate *date = [self.value dateValue];
-    switch (self.displayType) {
-        case AKFormFieldDateDisplayNoTime:
-            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatNoTime];
-            break;
-        case AKFormFieldDateDisplayWithTime:
-            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatWithTime];
-            break;
-        case AKFormFieldDateDisplayTodayTimeOnly:
-            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatTodayTimeOnly];
-            break;
-        case AKFormFieldDateDisplayRelative:
-            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateLongRelativeTime];
-            break;
-        case AKFormFieldDateDisplayRelativeShort:
-            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateShortRelativeTime];
-            break;
-        case AKFormFieldDateDisplayCustom:
-            return [date stringWithFormat:self.dateDisplayFormat];
-            break;
-    }
+
+    //only supporting custom display format until we've sorted out the MHPrettyDate reference thingie
+    return [date stringWithFormat:self.dateDisplayFormat];
+
+//    switch (self.displayType) {
+//        case AKFormFieldDateDisplayNoTime:
+//            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatNoTime];
+//            break;
+//        case AKFormFieldDateDisplayWithTime:
+//            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatWithTime];
+//            break;
+//        case AKFormFieldDateDisplayTodayTimeOnly:
+//            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateFormatTodayTimeOnly];
+//            break;
+//        case AKFormFieldDateDisplayRelative:
+//            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateLongRelativeTime];
+//            break;
+//        case AKFormFieldDateDisplayRelativeShort:
+//            return [MHPrettyDate prettyDateFromDate:date withFormat:MHPrettyDateShortRelativeTime];
+//            break;
+//        case AKFormFieldDateDisplayCustom:
+//            return [date stringWithFormat:self.dateDisplayFormat];
+//            break;
+//    }
 }
 
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
