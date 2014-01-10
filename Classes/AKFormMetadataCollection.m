@@ -237,7 +237,7 @@
         [self.array removeObjectAtIndex:component];
         
         //now remove any trailing 'placeholder' arrays
-        for (int i=self.array.count-1; i>0; i--) {
+        for (NSUInteger i=self.array.count-1; i>0; i--) {
             if ([self.array[i] count] == 0) {
                 [self.array removeObjectAtIndex:i];
             } else {
@@ -378,7 +378,7 @@
  */
 - (void)expandComponentsToFit:(NSUInteger)components
 {
-    for (int i=self.array.count; i<=components; i++) {
+    for (NSUInteger i=self.array.count; i<=components; i++) {
         self.array[i] = [NSMutableArray array];
     }
 }
@@ -402,7 +402,7 @@
         [self expandComponentsToFit:component];
     } else {
         //move the elements in front up one before setting it with an empty metadata
-        for (int i=self.array.count-1; i>=component; i--) {
+        for (NSUInteger i=self.array.count-1; i>=component; i--) {
             self.array[i+1] = self.array[i];
             //OR
             //self.array[i+1] = [NSMutableArray arrayWithArray:self.array[i]];

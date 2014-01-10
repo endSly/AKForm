@@ -31,15 +31,11 @@
     UITableViewRowAnimation _toggleSectionInsertAnimation;
     UITableViewRowAnimation _expandRowInsertAnimation;
     UITableViewRowAnimation _expandRowDeleteAnimation;
-    
-    BOOL _showToggleFieldsAfterHide;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    _showToggleFieldsAfterHide = NO;
     
     _currentStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
     
@@ -59,11 +55,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pressedDoneOnModalField:)
                                                  name:AKNOTIFICATION_MODAL_PRESSED_DONE
-                                               object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(deletedFieldsForToggleField:)
-                                                 name:AKNOTIFICATION_CELLS_DELETED
                                                object:nil];
 }
 
@@ -853,23 +844,6 @@
 
 #pragma mark - Switch Field Delegate
 
-- (void)deletedFieldsForToggleField:(id)sender
-{
-    if (_showToggleFieldsAfterHide) {
-        AKFormCellSwitch *switchCell = (AKFormCellSwitch *)self.toggleField.cell;
-        AKFormSection *switchSection = [self sectionForField:self.toggleField];
-        if (!switchSection) {
-            return;
-        }
-        
-        AKFormFieldSwitch *switchField = (AKFormFieldSwitch *)self.toggleField;
-        [self showFieldsInMapTable:switchCell.switchControl.on ? switchField.fieldsToShowOnOn : switchField.fieldsToHideOnOn
-                     forSwitchCell:switchCell
-                         inSection:switchSection];
-        _showToggleFieldsAfterHide = NO;
-    }
-}
-
 - (void)didChangeValueOfSwitchOnField:(AKFormFieldSwitch *)aField toOn:(BOOL)on
 {
     self.toggleField = (AKFormFieldToggle *)aField;
@@ -880,14 +854,27 @@
         return;
     }
     
+    CGFloat showDelay = 0.3;
+    
     if (on) {
-        [self hideFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell];
-        [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
+        if (aField.fieldsToHideOnOn && aField.fieldsToHideOnOn.count > 0) {
+            [self hideFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, showDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
+            });
+        } else {
+            [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
+        }
     } else {
-        [self hideFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell];
-        [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell inSection:switchSection];
+        if (aField.fieldsToShowOnOn && aField.fieldsToShowOnOn.count > 0) {
+            [self hideFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, showDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell inSection:switchSection];
+            });
+        } else {
+            [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell inSection:switchSection];
+        }
     }
-    _showToggleFieldsAfterHide = YES;
 }
 
 #pragma mark - Toggle Field Delegate

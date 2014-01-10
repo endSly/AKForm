@@ -119,12 +119,12 @@
             cell.textLabel.textColor = self.checkmarkTintColor;
         }
     } else {
-        int n = [self.dirtyMetadataCollection numberOfMetadata];
+        NSUInteger n = [self.dirtyMetadataCollection numberOfMetadata];
         if (n != NSNotFound && n != 0) {
             AKFormMetadata *currentMetadata = [self.dirtyMetadataCollection metadataAtIndex:0];
             
             //undo the last checkmark
-            int r = [self.metadataCollection indexOfMetadata:currentMetadata];
+            NSUInteger r = [self.metadataCollection indexOfMetadata:currentMetadata];
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:r inSection:0]];
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.textLabel.textColor = COLOR_TEXT_UNSELECTED;
@@ -165,7 +165,7 @@
 
 - (void)styleLabelCell:(AKFormCellLabel *)cell
 {
-    int n = [[self.value metadataCollectionValue] numberOfMetadata];
+    NSUInteger n = [[self.value metadataCollectionValue] numberOfMetadata];
     BOOL hasValue = self.value && [self.value isMetadataCollection] && n > 0 && n != NSNotFound;
     //set the value
     if (hasValue) {
