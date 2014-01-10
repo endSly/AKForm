@@ -22,6 +22,11 @@
 #import "AKFormFieldTextBox.h"
 #import "AKFormFieldSwitch.h"
 
+#define HEIGHT_STANDARD_PICKER  216.f
+#define CELL_HEIGHT_DEFAULT             44.f
+#define CELL_HEIGHT_DEFAULT_TEXTVIEW    60.f
+#define CELL_HEIGHT_PICKER              HEIGHT_STANDARD_PICKER
+
 @interface AKFormController : UITableViewController <AKFormCellTextFieldDelegate, AKFormFieldSwitchDelegate, AKFormCellImageStyleProvider, AKFormCellTextBoxDelegate>
 
 - (void)pressedCancelOnModalField:(id)sender;

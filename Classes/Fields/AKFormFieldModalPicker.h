@@ -8,6 +8,8 @@
 
 #import "AKFormFieldModal.h"
 
+#define AKNOTIFICATION_MODAL_PRESSED_DONE   @"AKNOTIFICATION_MODAL_PRESSED_DONE"
+
 @interface AKFormFieldModalPicker : AKFormFieldModal <UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic) BOOL multiplePicks;
