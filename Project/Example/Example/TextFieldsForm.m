@@ -44,7 +44,7 @@
     
     NSArray *labels = @[@"Label", @"Another label", @"A longer label", @"An even longer label", @"This label is far too long", @"This label is even longer than the far longer one" ];
     for (NSString *label in labels) {
-        AKFormFieldText *field = [AKFormFieldText fieldWithKey:label
+        AKFormFieldTextField *field = [AKFormFieldTextField fieldWithKey:label
                                                          title:label
                                                    placeholder:@"optional"
                                                       delegate:self
@@ -62,7 +62,7 @@
     NSMutableArray *fields = [NSMutableArray array];
 
     //Number Field
-    AKFormFieldText *numberField = [AKFormFieldText fieldWithKey:@"number"
+    AKFormFieldTextField *numberField = [AKFormFieldTextField fieldWithKey:@"number"
                                                            title:@"Number"
                                                      placeholder:@"optional"
                                                         delegate:self
@@ -71,7 +71,7 @@
     [fields addObject:numberField];
 
     //Secure Field
-    AKFormFieldText *secureField = [AKFormFieldText fieldWithKey:@"secure"
+    AKFormFieldTextField *secureField = [AKFormFieldTextField fieldWithKey:@"secure"
                                                            title:@"Secure"
                                                      placeholder:@"optional"
                                                         delegate:self
@@ -80,7 +80,7 @@
     [fields addObject:secureField];
 
     //The Works Field
-    AKFormFieldText *theWorksField = [AKFormFieldText fieldWithKey:@"the_works"
+    AKFormFieldTextField *theWorksField = [AKFormFieldTextField fieldWithKey:@"the_works"
                                                              title:@"The Works"
                                                        placeholder:@"optional"
                                                           delegate:self
@@ -101,7 +101,7 @@
     NSMutableArray *fields = [NSMutableArray array];
 
     //Required Field
-    AKFormFieldText *requiredField = [AKFormFieldText fieldWithKey:@"label"
+    AKFormFieldTextField *requiredField = [AKFormFieldTextField fieldWithKey:@"label"
                                                              title:@"Label"
                                                        placeholder:@"required"
                                                           delegate:self
@@ -111,7 +111,7 @@
     [fields addObject:requiredField];
     
     //Email Field
-    AKFormFieldText *emailField = [AKFormFieldText fieldWithKey:@"email"
+    AKFormFieldTextField *emailField = [AKFormFieldTextField fieldWithKey:@"email"
                                                           title:@"Email"
                                                     placeholder:@"required email"
                                                        delegate:self
@@ -121,7 +121,7 @@
     [fields addObject:emailField];
 
     //Password Field
-    AKFormFieldText *passwordField = [AKFormFieldText fieldWithKey:@"password"
+    AKFormFieldTextField *passwordField = [AKFormFieldTextField fieldWithKey:@"password"
                                                              title:@"Password"
                                                        placeholder:@"password"
                                                           delegate:self
@@ -135,7 +135,7 @@
     [fields addObject:passwordField];
     
     //Password Confirmation Field
-    AKFormFieldText *passwordConfirmField = [AKFormFieldText fieldWithKey:@"confirm password" title:@"Confirm"
+    AKFormFieldTextField *passwordConfirmField = [AKFormFieldTextField fieldWithKey:@"confirm password" title:@"Confirm"
                                                               placeholder:@"confirm password"
                                                                  delegate:self
                                                             styleProvider:self];

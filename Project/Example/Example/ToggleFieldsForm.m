@@ -52,7 +52,7 @@
     NSMutableArray *fields = [NSMutableArray array];
     
     //Number Field
-    AKFormFieldText *numberField = [AKFormFieldText fieldWithKey:@"number"
+    AKFormFieldTextField *numberField = [AKFormFieldTextField fieldWithKey:@"number"
                                                            title:@"Number"
                                                      placeholder:@"optional"
                                                         delegate:self
@@ -61,7 +61,7 @@
     [fields addObject:numberField];
     
     //Secure Field
-    AKFormFieldText *secureField = [AKFormFieldText fieldWithKey:@"secure"
+    AKFormFieldTextField *secureField = [AKFormFieldTextField fieldWithKey:@"secure"
                                                            title:@"Secure"
                                                      placeholder:@"optional"
                                                         delegate:self
@@ -70,7 +70,7 @@
     [fields addObject:secureField];
     
     //The Works Field
-    AKFormFieldText *theWorksField = [AKFormFieldText fieldWithKey:@"the_works"
+    AKFormFieldTextField *theWorksField = [AKFormFieldTextField fieldWithKey:@"the_works"
                                                              title:@"The Works"
                                                        placeholder:@"optional"
                                                           delegate:self
@@ -89,7 +89,7 @@
     NSMutableArray *fields = [NSMutableArray array];
     
     //Number Field
-    AKFormFieldText *numberField = [AKFormFieldText fieldWithKey:@"twitter"
+    AKFormFieldTextField *numberField = [AKFormFieldTextField fieldWithKey:@"twitter"
                                                            title:@"Twitter"
                                                      placeholder:@"optional"
                                                         delegate:self

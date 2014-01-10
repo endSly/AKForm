@@ -7,12 +7,25 @@
 //
 
 #import "AKFormField.h"
-#import "CSFormTextViewCell.h"
+#import "AKFormCellTextBox.h"
 
-@interface AKFormFieldTextBox : AKFormField <UITextViewDelegate>
+@interface AKFormFieldTextBox : AKFormField
 
-@property(nonatomic, assign) CGFloat textViewHeight;
+@property(nonatomic) UIKeyboardType keyboardType;
+@property(nonatomic) UITextAutocapitalizationType autocapitalizationType;
+@property(nonatomic) UITextAutocorrectionType autocorrectionType;
+@property(nonatomic) UITextSpellCheckingType spellCheckingType;
+@property(nonatomic) UIReturnKeyType returnKeyType;
+@property(nonatomic) BOOL secureTextEntry;
+@property(nonatomic) UITextFieldViewMode clearButtonMode;
 
-- (instancetype)initWithKey:(NSString *)key
-                placeholder:(NSString *)placeholder;
+@property(nonatomic, weak) id<AKFormCellTextBoxDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellTextBoxStyleProvider> styleProvider;
+
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+                    delegate:(id<AKFormCellTextBoxDelegate>)delegate
+               styleProvider:(id<AKFormCellTextBoxStyleProvider>)styleProvider;
+
 @end

@@ -377,8 +377,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AKFormField *field = [self fieldForIndexPath:indexPath];
-    if ([field isKindOfClass:[AKFormFieldText class]]) {
-        AKFormFieldText *textField = (AKFormFieldText *)field;
+    if ([field isKindOfClass:[AKFormFieldTextField class]]) {
+        AKFormFieldTextField *textField = (AKFormFieldTextField *)field;
         if (textField.styleProvider && [textField.styleProvider respondsToSelector:@selector(heightForTextFieldCell)]) {
             return [textField.styleProvider heightForTextFieldCell];
         }
@@ -401,7 +401,7 @@
                 return [self heightForImageCell];
             }
         } else if ([field isKindOfClass:[AKFormFieldTextBox class]]) {
-            return [(AKFormFieldTextBox *)field textViewHeight] + (CELL_PADDING_VERTICAL * 2.0);
+//            return [(AKFormFieldTextBox *)field textViewHeight] + (CELL_PADDING_VERTICAL * 2.0);
         }
     }
     return CELL_HEIGHT_DEFAULT;
@@ -439,7 +439,7 @@
         
         [tableView endUpdates];
 
-    } else if ([field isKindOfClass:[AKFormFieldText class]]) {
+    } else if ([field isKindOfClass:[AKFormFieldTextField class]]) {
     } else if ([field isKindOfClass:[AKFormFieldModalPicker class]]) {
         self.modalField = (AKFormFieldModalPicker *)field;
         self.modalOldValue = [AKFormValue valueWithValue:field.value];
@@ -547,7 +547,7 @@
     
     NSIndexPath *indexPath = [self indexPathForField:aField];
     if (aField) {
-        if ([aField isKindOfClass:[AKFormFieldText class]]) {
+        if ([aField isKindOfClass:[AKFormFieldTextField class]]) {
             UITableViewCell *cell;
             cell = [self.tableView cellForRowAtIndexPath:indexPath];
             if ([cell isKindOfClass:[AKFormCellTextField class]]) {

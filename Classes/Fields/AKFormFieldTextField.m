@@ -1,14 +1,14 @@
 //
-//  AKFormFieldText.m
+//  AKFormFieldTextField.m
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
 //  Copyright (c) 2013 arkuana. All rights reserved.
 //
 
-#import "AKFormFieldText.h"
+#import "AKFormFieldTextField.h"
 
-@implementation AKFormFieldText
+@implementation AKFormFieldTextField
 
 + (instancetype)fieldWithKey:(NSString *)key
                        title:(NSString *)title
@@ -16,7 +16,7 @@
                     delegate:(id<AKFormCellTextFieldDelegate>)delegate
                styleProvider:(id<AKFormCellTextFieldStyleProvider>)styleProvider
 {
-    return [[AKFormFieldText alloc] initWithKey:key title:title placeholder:placeholder delegate:delegate styleProvider:styleProvider];
+    return [[AKFormFieldTextField alloc] initWithKey:key title:title placeholder:placeholder delegate:delegate styleProvider:styleProvider];
 }
 
 - (instancetype)initWithKey:(NSString *)key

@@ -1,5 +1,5 @@
 //
-//  AKFormFieldText.h
+//  AKFormFieldTextField.h
 //  AKForm
 //
 //  Created by Ahmed Khalaf on 30/10/2013.
@@ -9,7 +9,7 @@
 #import "AKFormField.h"
 #import "AKFormCellTextField.h"
 
-@interface AKFormFieldText : AKFormField
+@interface AKFormFieldTextField : AKFormField
 
 @property(nonatomic) UIKeyboardType keyboardType;
 @property(nonatomic) UITextAutocapitalizationType autocapitalizationType;

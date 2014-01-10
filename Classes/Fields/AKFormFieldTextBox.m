@@ -8,65 +8,74 @@
 
 #import "AKFormFieldTextBox.h"
 
-#define DEFAULT_TEXTVIEW_HEIGHT     150.f
-#define HEX_COLOR_GREY_PLACEHOLDER  @"#ccccd1"
-
 @implementation AKFormFieldTextBox
 
-- (instancetype)initWithKey:(NSString *)key
-                placeholder:(NSString *)placeholder
++ (instancetype)fieldWithKey:(NSString *)key
+                       title:(NSString *)title
+                 placeholder:(NSString *)placeholder
+                    delegate:(id<AKFormCellTextBoxDelegate>)delegate
+               styleProvider:(id<AKFormCellTextBoxStyleProvider>)styleProvider
 {
-    self = [super initWithKey:key title:nil placeholder:placeholder];
+    return [[AKFormFieldTextBox alloc] initWithKey:key title:title placeholder:placeholder delegate:delegate styleProvider:styleProvider];
+}
+
+- (instancetype)initWithKey:(NSString *)key
+                      title:(NSString *)title
+                placeholder:(NSString *)placeholder
+                   delegate:(id<AKFormCellTextBoxDelegate>)delegate
+              styleProvider:(id<AKFormCellTextBoxStyleProvider>)styleProvider
+{
+    self = [super initWithKey:key title:title placeholder:placeholder];
     if (self) {
-        self.textViewHeight = DEFAULT_TEXTVIEW_HEIGHT;
+        self.delegate = delegate;
+        self.styleProvider = styleProvider;
+        
+        self.keyboardType = UIKeyboardTypeDefault;
+        self.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        self.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.spellCheckingType = UITextSpellCheckingTypeNo;
+        self.returnKeyType = UIReturnKeyNext;
+        self.clearButtonMode = UITextFieldViewModeNever;
+        self.secureTextEntry = NO;
     }
-    
     return self;
 }
 
 /**
- *  Returns a text view cell by first attempting to dequeue it from the provided tableView, or creating
+ *  Returns a field cell by first attempting to dequeue it from the provided tableView, or creating
  *  one if necessary.
  *
  *  @param tableView The tableView from which to try and dequeue the cell.
- *  @return The text view cell casted as a UITableViewcell.
+ *  @return The field cell casted as a UITableViewcell.
  */
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
 {
-    CSFormTextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_TEXTVIEW];
+    AKFormCellTextBox *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_TEXTBOX];
     if (!cell) {
-        cell = [[CSFormTextViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                         reuseIdentifier:CELL_IDENTIFIER_TEXTVIEW];
+        cell = [[AKFormCellTextBox alloc] initWithStyleProvider:self.styleProvider];
     }
     
-    cell.textView.delegate = self;
-    cell.textViewHeight = self.textViewHeight;
+    cell.delegate = self.delegate;
+    cell.valueDelegate = self;
     
-    if ([self.value stringValue] && [[self.value stringValue] length] > 0) {
-        cell.textView.textColor = [UIColor blackColor];
-        cell.textView.text = [self.value stringValue];
-    } else {
-        cell.textView.textColor = [UIColor colorWithHexString:HEX_COLOR_GREY_PLACEHOLDER];
-        cell.textView.text = self.placeholder;
-    }
+    cell.textField.keyboardType = self.keyboardType;
+    cell.textField.autocapitalizationType = self.autocapitalizationType;
+    cell.textField.autocorrectionType = self.autocorrectionType;
+    cell.textField.spellCheckingType = self.spellCheckingType;
+    cell.textField.returnKeyType = self.returnKeyType;
+    cell.textField.clearButtonMode = self.clearButtonMode;
+    cell.textField.secureTextEntry = self.secureTextEntry;
+    
+    cell.textField.placeholder = self.placeholder;
+    
+    cell.textField.text = [self.value stringValue];
+    cell.label.text = self.title;
+    
+    //now rearrange the layout!
+    [cell layoutSubviews];
     
     self.cell = cell;
     return cell;
-}
-
-#pragma mark - UITextViewDelegate
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if ([textView.textColor isEqual:[UIColor colorWithHexString:HEX_COLOR_GREY_PLACEHOLDER]]) {
-        textView.text = @"";
-        textView.textColor = [UIColor blackColor];
-    }
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    self.value = [AKFormValue value:textView.text withType:AKFormValueString];
 }
 
 @end
