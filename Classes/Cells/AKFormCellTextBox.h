@@ -10,12 +10,15 @@
 
 #define CELL_IDENTIFIER_TEXTBOX       @"textBoxCell"
 
-typedef NS_ENUM(NSInteger, AKFormCellTextBoxStyle) {
-    AKFormCellTextBoxStyleNoLabel,
-    AKFormCellTextBoxStyleLabelWithStaticWidth1,
-    AKFormCellTextBoxStyleLabelWithStaticWidth2,
-    AKFormCellTextBoxStyleLabelWithStaticWidth3,
-    AKFormCellTextBoxStyleLabelWithDynamicWidth
+typedef NS_ENUM(NSInteger, AKFormCellTextBoxLabelStyle) {
+    AKFormCellTextBoxLabelStyleOnLeftLeftAligned,
+    AKFormCellTextBoxLabelStyleOnLeftRightAligned,
+    AKFormCellTextBoxLabelStyleOnTop
+};
+
+typedef NS_ENUM(NSInteger, AKFormCellTextBoxHeightStyle) {
+    AKFormCellTextBoxHeightStyleAutomatic,
+    AKFormCellTextBoxHeightStyleManual
 };
 
 typedef NS_ENUM(NSInteger, AKFormCellTextBoxMode) {
@@ -30,24 +33,25 @@ typedef NS_ENUM(NSInteger, AKFormCellTextBoxMode) {
 
 @protocol AKFormCellTextBoxStyleProvider <NSObject>
 @optional
-- (AKFormCellTextBoxStyle)styleForTextFieldCell;
-- (CGFloat)labelWidthForTextFieldCell;
-- (CGFloat)heightForTextFieldCell;
-- (UIFont *)labelFontForMode:(AKFormCellTextBoxMode)mode style:(AKFormCellTextBoxStyle)style;
-- (UIFont *)textFieldFontForMode:(AKFormCellTextBoxMode)mode style:(AKFormCellTextBoxStyle)style;
-- (UIColor *)labelTextColorForMode:(AKFormCellTextBoxMode)mode style:(AKFormCellTextBoxStyle)style;
-- (UIColor *)textFieldTextColorForMode:(AKFormCellTextBoxMode)mode style:(AKFormCellTextBoxStyle)style;
+- (AKFormCellTextBoxLabelStyle)labelStyleForTextBoxCell;
+- (AKFormCellTextBoxHeightStyle)heightStyleForTextBoxCell;
+- (CGFloat)labelWidthForTextBoxCell;
+- (CGFloat)heightForTextBoxCell;
+- (UIFont *)labelFontForTextBoxMode:(AKFormCellTextBoxMode)mode;
+- (UIFont *)textBoxFontForTextBoxMode:(AKFormCellTextBoxMode)mode;
+- (UIColor *)labelTextColorForTextBoxMode:(AKFormCellTextBoxMode)mode;
+- (UIColor *)textBoxTextColorForTextBoxMode:(AKFormCellTextBoxMode)mode;
 @end
 
 @protocol AKFormCellTextBoxDelegate <AKFormCellDelegate>
-- (void)didBeginEditingOnTextFieldCell:(AKFormCellTextBox *)cell;
-- (BOOL)shouldReturnOnTextFieldCell:(AKFormCellTextBox *)cell;
+- (void)didBeginEditingOnTextBoxCell:(AKFormCellTextBox *)cell;
+- (BOOL)shouldReturnOnTextBoxCell:(AKFormCellTextBox *)cell;
 @end
 
-@interface AKFormCellTextBox : AKFormCell <UITextFieldDelegate>
+@interface AKFormCellTextBox : AKFormCell <UITextViewDelegate>
 
 @property(nonatomic, strong) UILabel *label;
-@property(nonatomic, strong) UITextField *textField;
+@property(nonatomic, strong) UITextView *textView;
 @property(nonatomic, weak) id<AKFormCellTextBoxDelegate> delegate;
 
 - (instancetype)initWithStyleProvider:(id<AKFormCellTextBoxStyleProvider>)styleProvider;

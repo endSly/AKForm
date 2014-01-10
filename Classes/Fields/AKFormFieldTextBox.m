@@ -35,7 +35,6 @@
         self.autocorrectionType = UITextAutocorrectionTypeNo;
         self.spellCheckingType = UITextSpellCheckingTypeNo;
         self.returnKeyType = UIReturnKeyNext;
-        self.clearButtonMode = UITextFieldViewModeNever;
         self.secureTextEntry = NO;
     }
     return self;
@@ -58,17 +57,19 @@
     cell.delegate = self.delegate;
     cell.valueDelegate = self;
     
-    cell.textField.keyboardType = self.keyboardType;
-    cell.textField.autocapitalizationType = self.autocapitalizationType;
-    cell.textField.autocorrectionType = self.autocorrectionType;
-    cell.textField.spellCheckingType = self.spellCheckingType;
-    cell.textField.returnKeyType = self.returnKeyType;
-    cell.textField.clearButtonMode = self.clearButtonMode;
-    cell.textField.secureTextEntry = self.secureTextEntry;
+    cell.textView.keyboardType = self.keyboardType;
+    cell.textView.autocapitalizationType = self.autocapitalizationType;
+    cell.textView.autocorrectionType = self.autocorrectionType;
+    cell.textView.spellCheckingType = self.spellCheckingType;
+    cell.textView.returnKeyType = self.returnKeyType;
+    cell.textView.secureTextEntry = self.secureTextEntry;
     
-    cell.textField.placeholder = self.placeholder;
+    if ([self.value stringValue] && [self.value stringValue].length > 0) {
+        cell.textView.text = [self.value stringValue];
+    } else {
+        cell.textView.text = self.placeholder;
+    }
     
-    cell.textField.text = [self.value stringValue];
     cell.label.text = self.title;
     
     //now rearrange the layout!

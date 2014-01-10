@@ -8,10 +8,12 @@
 
 #import "AKFormCellTextBox.h"
 
-#define DEFAULT_STYLE                   AKFormCellTextBoxStyleLabelWithStaticWidth1
+#define DEFAULT_LABEL_STYLE     AKFormCellTextBoxLabelStyleOnLeftLeftAligned
+#define DEFAULT_HEIGHT_STYLE    AKFormCellTextBoxHeightStyleAutomatic
 
 @interface AKFormCellTextBox()
-@property(nonatomic, assign) AKFormCellTextBoxStyle style;
+@property(nonatomic, assign) AKFormCellTextBoxLabelStyle labelStyle;
+@property(nonatomic, assign) AKFormCellTextBoxHeightStyle heightStyle;
 @property(nonatomic, assign) AKFormCellTextBoxMode mode;
 @property(nonatomic, weak) id<AKFormCellTextBoxStyleProvider> styleProvider;
 - (void)tappedCell:(id)sender;
@@ -29,7 +31,7 @@
     if (self) {
         
         self.styleProvider = styleProvider;
-        [self styleTextField];
+        [self styleTextBox];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -37,10 +39,10 @@
         [self styleLabel];
         [self.contentView addSubview:self.label];
         
-        self.textField = [[UITextField alloc] init];
-        self.textField.delegate = self;
-        [self styleTextField];
-        [self.contentView addSubview:self.textField];
+        self.textView = [[UITextView alloc] init];
+        self.textView.delegate = self;
+        [self styleTextBox];
+        [self.contentView addSubview:self.textView];
         
         [self styleTextAlignments];
         [self setupInitialStyle];
@@ -72,7 +74,7 @@
     [super layoutSubviews];
     [self styleTextAlignments];
     [self styleLabel];
-    [self styleTextField];
+    [self styleTextBox];
     [self styleFrames];
 }
 
@@ -86,7 +88,7 @@
 {
     _mode = mode;
     [self styleLabel];
-    [self styleTextField];
+    [self styleTextBox];
     [self layoutSubviews];
 }
 
@@ -96,7 +98,7 @@
 
 - (void)tappedCell:(id)sender
 {
-    [self.textField becomeFirstResponder];
+    [self.textView becomeFirstResponder];
 }
 
 ///---------------------------------------------------------------------------------------
@@ -116,29 +118,20 @@
 
 - (void)styleTextAlignments
 {
-    switch (self.style) {
-        case AKFormCellTextBoxStyleLabelWithDynamicWidth:
+    switch (self.labelStyle) {
+        case AKFormCellTextBoxLabelStyleOnLeftLeftAligned:
             self.label.textAlignment = NSTextAlignmentLeft;
-            self.textField.textAlignment = NSTextAlignmentRight;
             break;
-        case AKFormCellTextBoxStyleLabelWithStaticWidth1:
-            self.label.textAlignment = NSTextAlignmentLeft;
-            self.textField.textAlignment = NSTextAlignmentLeft;
-            break;
-        case AKFormCellTextBoxStyleLabelWithStaticWidth2:
+        case AKFormCellTextBoxLabelStyleOnLeftRightAligned:
             self.label.textAlignment = NSTextAlignmentRight;
-            self.textField.textAlignment = NSTextAlignmentLeft;
             break;
-        case AKFormCellTextBoxStyleLabelWithStaticWidth3:
+        case AKFormCellTextBoxLabelStyleOnTop:
             self.label.textAlignment = NSTextAlignmentLeft;
-            self.textField.textAlignment = NSTextAlignmentRight;
-            break;
-        case AKFormCellTextBoxStyleNoLabel:
-            self.textField.textAlignment = NSTextAlignmentLeft;
             break;
         default:
             break;
     }
+    self.textView.textAlignment = NSTextAlignmentLeft;
 }
 
 ///---------------------------------------------------------------------------------------
@@ -147,41 +140,48 @@
 
 - (void)styleFrames
 {
-    CGFloat labelWidth;
+    CGFloat labelWidth, textBoxX, textBoxWidth;
     CGRect contentFrame = [self contentFrame];
-    switch (self.style) {
-        case AKFormCellTextBoxStyleLabelWithStaticWidth1:
-        case AKFormCellTextBoxStyleLabelWithStaticWidth2:
-        case AKFormCellTextBoxStyleLabelWithStaticWidth3:
-            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextFieldCell)]) {
-                labelWidth = [self.styleProvider labelWidthForTextFieldCell];
+    switch (self.labelStyle) {
+        case AKFormCellTextBoxLabelStyleOnLeftLeftAligned:
+        case AKFormCellTextBoxLabelStyleOnLeftRightAligned:
+            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextBoxCell)]) {
+                labelWidth = [self.styleProvider labelWidthForTextBoxCell];
             } else {
                 labelWidth = DEFAULT_TITLE_WIDTH;
             }
             labelWidth = MAX(MINIMUM_TITLE_WIDTH, labelWidth);
             CGFloat maxLabelWidth = contentFrame.size.width - PADDING_HORIZONTAL - MINIMUM_VALUE_WIDTH;
             labelWidth = MIN(labelWidth, maxLabelWidth);
-            self.label.frame = CGRectMake(contentFrame.origin.x, contentFrame.origin.y, labelWidth, contentFrame.size.height);
-            break;
-        case AKFormCellTextBoxStyleLabelWithDynamicWidth:
-            [self.label sizeToFit];
-            CGFloat maximumLabelWidth = contentFrame.size.width - (MINIMUM_VALUE_WIDTH + PADDING_HORIZONTAL);
-            self.label.frame = CGRectMake(contentFrame.origin.x, contentFrame.origin.y,
-                                          MIN(self.label.frame.size.width, maximumLabelWidth),
-                                          MAX(self.label.frame.size.height, contentFrame.size.height));
             
+            textBoxX = self.label.frame.size.width;
             break;
-        case AKFormCellTextBoxStyleNoLabel:
-            self.label.frame = CGRectZero;
+            
+        case AKFormCellTextBoxLabelStyleOnTop:
+            labelWidth = contentFrame.size.width;
+            textBoxX = 0;
             break;
     }
-    CGFloat textFieldX = self.label.frame.size.width;
-    if (self.style != AKFormCellTextBoxStyleNoLabel) {
-        textFieldX += PADDING_HORIZONTAL;
+
+    [self.label sizeToFit];
+    CGFloat labelHeight = MAX(self.label.frame.size.height, contentFrame.size.height);
+    self.label.frame = CGRectMake(contentFrame.origin.x,
+                                  contentFrame.origin.y,
+                                  labelWidth,
+                                  labelHeight);
+
+    CGFloat textBoxHeight = contentFrame.size.height;
+    textBoxWidth = contentFrame.size.width;
+    if (self.labelStyle != AKFormCellTextBoxLabelStyleOnTop && self.label.frame.size.width > 0.f) {
+        textBoxX += PADDING_HORIZONTAL;
+        textBoxWidth = contentFrame.size.width - textBoxX;
+        textBoxHeight = contentFrame.size.height - labelHeight - PADDING_VERTICAL;
     }
-    CGFloat textFieldWidth = MAX(MINIMUM_VALUE_WIDTH, contentFrame.size.width - textFieldX);
-    self.textField.frame = CGRectMake(contentFrame.origin.x + textFieldX, contentFrame.origin.y,
-                                      textFieldWidth, contentFrame.size.height);
+    
+    self.textView.frame = CGRectMake(contentFrame.origin.x + textBoxX,
+                                     contentFrame.origin.y,
+                                     textBoxWidth,
+                                     textBoxHeight);
 }
 
 /**
@@ -191,34 +191,18 @@
 - (void)styleLabel
 {
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:style:)]) {
-        UIFont *font = [self.styleProvider labelFontForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForTextBoxMode:)]) {
+        UIFont *font = [self.styleProvider labelFontForTextBoxMode:self.mode];
         self.label.font = font;
     } else {
-        switch (self.mode) {
-            case AKFormCellTextBoxModeEditing:
-            case AKFormCellTextBoxModeEmpty:
-            case AKFormCellTextBoxModeFilled:
-            case AKFormCellTextBoxModeReadOnly:
-            case AKFormCellTextBoxModeInvalid:
-                self.label.font = DEFAULT_FONT_TITLE;
-                break;
-        }
+        self.label.font = DEFAULT_FONT_TITLE;
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:style:)]) {
-        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForTextBoxMode:)]) {
+        self.label.textColor = [self.styleProvider labelTextColorForTextBoxMode:self.mode];
     } else {
-        switch (self.mode) {
-            case AKFormCellTextBoxModeEditing:
-            case AKFormCellTextBoxModeEmpty:
-            case AKFormCellTextBoxModeFilled:
-            case AKFormCellTextBoxModeReadOnly:
-            case AKFormCellTextBoxModeInvalid:
-                self.label.textColor = DEFAULT_TEXTCOLOR_TITLE;
-                break;
-        }
+        self.label.textColor = DEFAULT_TEXTCOLOR_TITLE;
     }
 }
 
@@ -226,50 +210,40 @@
  *  Styles the text field by asking the delegate for the font and textColor, or
  *  resorting to using defaults.
  */
-- (void)styleTextField
+- (void)styleTextBox
 {
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForTextFieldCell)]) {
-        self.style = [self.styleProvider styleForTextFieldCell];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelStyleForTextBoxCell)]) {
+        self.labelStyle = [self.styleProvider labelStyleForTextBoxCell];
     } else {
-        self.style = DEFAULT_STYLE;
+        self.labelStyle = DEFAULT_LABEL_STYLE;
     }
-    
-    //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldFontForMode:style:)]) {
-        self.textField.font = [self.styleProvider textFieldFontForMode:self.mode style:self.style];
+
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell)]) {
+        self.heightStyle = [self.styleProvider heightStyleForTextBoxCell];
     } else {
-        switch (self.mode) {
-            case AKFormCellTextBoxModeEditing:
-            case AKFormCellTextBoxModeEmpty:
-            case AKFormCellTextBoxModeFilled:
-            case AKFormCellTextBoxModeReadOnly:
-            case AKFormCellTextBoxModeInvalid:
-                self.label.font = DEFAULT_FONT_VALUE;
-                break;
-        }
+        self.heightStyle = DEFAULT_HEIGHT_STYLE;
+    }
+
+    //font
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textBoxFontForTextBoxMode:)]) {
+        self.textView.font = [self.styleProvider textBoxFontForTextBoxMode:self.mode];
+    } else {
+        self.textView.font = DEFAULT_FONT_VALUE;
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldTextColorForMode:style:)]) {
-        self.textField.textColor = [self.styleProvider textFieldTextColorForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textBoxTextColorForTextBoxMode:)]) {
+        self.textView.textColor = [self.styleProvider textBoxTextColorForTextBoxMode:self.mode];
     } else {
-        switch (self.mode) {
-            case AKFormCellTextBoxModeEditing:
-            case AKFormCellTextBoxModeEmpty:
-            case AKFormCellTextBoxModeFilled:
-            case AKFormCellTextBoxModeReadOnly:
-            case AKFormCellTextBoxModeInvalid:
-                self.textField.textColor = DEFAULT_TEXTCOLOR_VALUE;
-                break;
-        }
+        self.textView.textColor = DEFAULT_TEXTCOLOR_VALUE;
     }
 }
 
 - (void)updateMode
 {
-    if ([self.textField isFirstResponder]) {
+    if ([self.textView isFirstResponder]) {
         [self setMode:AKFormCellTextBoxModeEditing];
-    } else if (self.textField.text.length > 0) {
+    } else if (self.textView.text.length > 0) {
         [self setMode:AKFormCellTextBoxModeFilled];
     } else {
         [self setMode:AKFormCellTextBoxModeEmpty];
@@ -280,30 +254,21 @@
 #pragma mark - (Private) Text Field Delegate
 ///---------------------------------------------------------------------------------------
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [self updateMode];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didBeginEditingOnTextFieldCell:)]) {
-        [self.delegate didBeginEditingOnTextFieldCell:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didBeginEditingOnTextBoxCell:)]) {
+        [self.delegate didBeginEditingOnTextBoxCell:self];
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textViewDidEndEditing:(UITextView *)textView
 {
     [self updateMode];
     
     if (self.valueDelegate && [self.valueDelegate respondsToSelector:@selector(didInputValue:)]) {
-        AKFormValue *value = [AKFormValue value:textField.text withType:AKFormValueString];
+        AKFormValue *value = [AKFormValue value:textView.text withType:AKFormValueString];
         [self.valueDelegate didInputValue:value];
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(shouldReturnOnTextFieldCell:)]) {
-        return [self.delegate shouldReturnOnTextFieldCell:self];
-    } else {
-        return YES;
     }
 }
 
