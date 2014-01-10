@@ -35,22 +35,53 @@
 
 - (void)createForm
 {
-    [self addInputStylesSection];
+    [self addSingleSection];
+    [self addMultipleSection];
 }
 
-- (void)addInputStylesSection
+- (void)addSingleSection
 {
     NSMutableArray *fields = [NSMutableArray array];
 
     AKFormFieldTextBox *textBox = [AKFormFieldTextBox fieldWithKey:@"textbox"
-                                                             title:@"Text Box"
+                                                             title:@"Alone"
                                                        placeholder:@"optional"
                                                           delegate:self
                                                      styleProvider:self];
     [fields addObject:textBox];
 
     AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
-    section.headerTitle = @"TEXT BOXES";
+    section.headerTitle = @"SINGLE TEXT BOX";
+    [self addSection:section];
+}
+
+- (void)addMultipleSection
+{
+    NSMutableArray *fields = [NSMutableArray array];
+    
+    AKFormFieldTextBox *textBox1 = [AKFormFieldTextBox fieldWithKey:@"textbox"
+                                                             title:@"First"
+                                                       placeholder:@"this is the first one"
+                                                          delegate:self
+                                                     styleProvider:self];
+    [fields addObject:textBox1];
+
+    AKFormFieldTextBox *textBox2 = [AKFormFieldTextBox fieldWithKey:@"textbox"
+                                                              title:@"Second"
+                                                        placeholder:@"this is the second one"
+                                                           delegate:self
+                                                      styleProvider:self];
+    [fields addObject:textBox2];
+
+    AKFormFieldTextBox *textBox3 = [AKFormFieldTextBox fieldWithKey:@"textbox"
+                                                              title:@"Third"
+                                                        placeholder:@"this is the third one"
+                                                           delegate:self
+                                                      styleProvider:self];
+    [fields addObject:textBox3];
+    
+    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
+    section.headerTitle = @"MULTIPLE TEXT BOXES";
     [self addSection:section];
 }
 
