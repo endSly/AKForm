@@ -11,7 +11,7 @@
 #import <NSDate+Helper.h>
 #import <NSString+CJStringValidator.h>
 
-#import <MHPrettyDate.h>
+#import <MHPrettyDate/MHPrettyDate.h>
 
 @implementation AKFormFieldDate
 
