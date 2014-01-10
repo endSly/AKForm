@@ -622,7 +622,7 @@
 
 #pragma mark - Hide / Show Fields
 
-- (void)hideFields:(NSArray *)fieldsToHide inSection:(AKFormSection *)section forSwitchCell:(AKFormCellSwitch *)switchCell
+- (void)hideFields:(NSArray *)fieldsToHide inSection:(AKFormSection *)section forSwitchCell:(AKFormCellSwitch *)switchCell expectingShow:(BOOL)expectingShow
 {
     //first we need to resign first responder
     [self.view endEditing:YES];
@@ -667,8 +667,10 @@
 
     [CATransaction begin];
     [CATransaction setCompletionBlock: ^{
-//        [[NSNotificationCenter defaultCenter] postNotificationName:AKNOTIFICATION_CELLS_DELETED object:nil];
-        switchCell.switchControl.userInteractionEnabled = YES;
+        //only renable the switchControl if we're not expecting cells to be shown
+        if (!expectingShow) {
+            switchCell.switchControl.userInteractionEnabled = YES;
+        }
     }];
 
     //delete fields BEFORE deleting the section
@@ -780,12 +782,12 @@
     }
 }
 
-- (void)hideFieldsInMapTable:(NSMapTable *)fieldsToHide forSwitchCell:(AKFormCellSwitch *)switchCell
+- (void)hideFieldsInMapTable:(NSMapTable *)fieldsToHide forSwitchCell:(AKFormCellSwitch *)switchCell expectingShow:(BOOL)expectingShow
 {
     NSArray *keys = [[fieldsToHide keyEnumerator] allObjects];
     for (AKFormSection *section in keys) {
         NSArray *fields = [fieldsToHide objectForKey:section];
-        [self hideFields:fields inSection:section forSwitchCell:switchCell];
+        [self hideFields:fields inSection:section forSwitchCell:switchCell expectingShow:expectingShow];
     }
 }
 
@@ -855,19 +857,28 @@
     }
     
     CGFloat showDelay = 0.3;
-    
+
     if (on) {
-        if (aField.fieldsToHideOnOn && aField.fieldsToHideOnOn.count > 0) {
-            [self hideFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell];
+        
+        BOOL expectingHide = aField.fieldsToHideOnOn && aField.fieldsToHideOnOn.count > 0;
+        BOOL expectingShow = aField.fieldsToShowOnOn && aField.fieldsToShowOnOn.count > 0;
+        
+        if (expectingHide) {
+            [self hideFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell expectingShow:expectingShow];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, showDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
             });
         } else {
             [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
         }
+        
     } else {
-        if (aField.fieldsToShowOnOn && aField.fieldsToShowOnOn.count > 0) {
-            [self hideFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell];
+
+        BOOL expectingHide = aField.fieldsToShowOnOn && aField.fieldsToShowOnOn.count > 0;
+        BOOL expectingShow = aField.fieldsToHideOnOn && aField.fieldsToHideOnOn.count > 0;
+
+        if (expectingHide) {
+            [self hideFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell expectingShow:expectingShow];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, showDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell inSection:switchSection];
             });
