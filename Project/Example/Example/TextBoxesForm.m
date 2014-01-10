@@ -36,6 +36,7 @@
 - (void)createForm
 {
     [self addSingleSection];
+    return;
     [self addMultipleSection];
     [self addSingleSection];
     [self addMultipleSection];
@@ -79,6 +80,7 @@
                                                         placeholder:@"this is the second one"
                                                            delegate:self
                                                       styleProvider:self];
+    textBox2.clearOnInsertion = YES;
     [fields addObject:textBox2];
 
     AKFormFieldTextBox *textBox3 = [AKFormFieldTextBox fieldWithKey:@"textbox"

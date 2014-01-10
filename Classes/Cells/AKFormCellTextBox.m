@@ -247,9 +247,10 @@
 
 - (void)updateMode
 {
+    NSString *stringValue = [[self.valueDelegate inputValue] stringValue];
     if ([self.textView isFirstResponder]) {
         [self setMode:AKFormCellTextBoxModeEditing];
-    } else if (self.textView.text.length > 0) {
+    } else if (stringValue && stringValue.length > 0) {
         [self setMode:AKFormCellTextBoxModeFilled];
     } else {
         [self setMode:AKFormCellTextBoxModeEmpty];
@@ -270,6 +271,10 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    if (self.mode == AKFormCellTextBoxModeEmpty || self.clearsOnInsertion == YES) {
+        self.textView.text = @"";
+    }
+    
     [self updateMode];
     if (self.delegate && [self.delegate respondsToSelector:@selector(didBeginEditingOnTextBoxCell:)]) {
         [self.delegate didBeginEditingOnTextBoxCell:self];
@@ -278,11 +283,19 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    [self updateMode];
-    
     if (self.valueDelegate && [self.valueDelegate respondsToSelector:@selector(didInputValue:)]) {
         AKFormValue *value = [AKFormValue value:textView.text withType:AKFormValueString];
         [self.valueDelegate didInputValue:value];
+    }
+
+    [self updateMode];
+    
+    if (self.mode == AKFormCellTextBoxModeEmpty) {
+        self.textView.text = self.placeholderString;
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didEndEditingOnTextBoxCell:)]) {
+        [self.delegate didEndEditingOnTextBoxCell:self];
     }
 }
 

@@ -17,6 +17,7 @@
 @property(nonatomic) UITextSpellCheckingType spellCheckingType;
 @property(nonatomic) UIReturnKeyType returnKeyType;
 @property(nonatomic) BOOL secureTextEntry;
+@property(nonatomic) BOOL clearOnInsertion;
 
 @property(nonatomic, weak) id<AKFormCellTextBoxDelegate> delegate;
 @property(nonatomic, weak) id<AKFormCellTextBoxStyleProvider> styleProvider;

@@ -440,7 +440,7 @@
                 CGFloat neededHeight = newSize.height;
                 
                 CGFloat cellHeight = originY + neededHeight + PADDING_VERTICAL;
-                NSLog(@"Cell height is %lf", cellHeight);
+                NSLog(@"Cell height is %lf + %lf + %lf = %lf", originY, neededHeight, PADDING_HORIZONTAL, cellHeight);
                 return cellHeight;
 //                CGRect newFrame = c.textView.frame;
 //                newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
@@ -866,6 +866,10 @@
 #pragma mark -
 #pragma mark - Text Box Cell Delegate
 
+- (void)didEndEditingOnTextBoxCell:(AKFormCellTextBox *)cell
+{
+}
+
 - (void)didBeginEditingOnTextBoxCell:(AKFormCellTextBox *)cell
 {
     [self collapseCurrentlyExpandedField];
@@ -875,9 +879,17 @@
 {
     BOOL isAutomatic = cell.styleProvider && [cell.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell)] && [cell.styleProvider heightStyleForTextBoxCell] == AKFormCellTextBoxHeightStyleAutomatic;
     if (isAutomatic) {
-        [self.tableView beginUpdates];
-        [self.tableView endUpdates];
-        [cell layoutSubviews];
+
+        CGFloat proposedHeight = [self.tableView.delegate tableView:self.tableView heightForRowAtIndexPath:[self.tableView indexPathForCell:cell]];
+        if (cell.frame.size.height != proposedHeight) {
+            [self.tableView beginUpdates];
+            [self.tableView endUpdates];
+            [cell layoutSubviews];
+
+            //scroll the tableview while the cell is expanding
+            NSIndexPath *ip = [self.tableView indexPathForCell:cell];
+            [self.tableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
     }
 }
 

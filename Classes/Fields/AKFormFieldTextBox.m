@@ -36,6 +36,7 @@
         self.spellCheckingType = UITextSpellCheckingTypeNo;
         self.returnKeyType = UIReturnKeyNext;
         self.secureTextEntry = NO;
+        self.clearOnInsertion = NO;
     }
     return self;
 }
@@ -63,6 +64,7 @@
     cell.textView.spellCheckingType = self.spellCheckingType;
     cell.textView.returnKeyType = self.returnKeyType;
     cell.textView.secureTextEntry = self.secureTextEntry;
+    cell.clearsOnInsertion = self.clearOnInsertion;
     
     if ([self.value stringValue] && [self.value stringValue].length > 0) {
         cell.textView.text = [self.value stringValue];
@@ -71,6 +73,8 @@
     }
     
     cell.label.text = self.title;
+    
+    cell.placeholderString = self.placeholder;
     
     self.cell = cell;
     
