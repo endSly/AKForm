@@ -185,6 +185,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bI2-bP-n1s" kind="push" id="Amr-DG-yuS"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -367,7 +370,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEj-G3-4G2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-79" y="-1803"/>
+            <point key="canvasLocation" x="-1055" y="-3027"/>
         </scene>
         <!--Text Fields Form-->
         <scene sceneID="r0Z-dI-roT">
@@ -393,7 +396,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSO-En-pvt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="-1797"/>
+            <point key="canvasLocation" x="-294" y="-2957"/>
         </scene>
         <!--Date Picker Fields Form Container-->
         <scene sceneID="MuS-fa-VRA">
@@ -792,6 +795,104 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="857-Fu-WaN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1594" y="-13"/>
+        </scene>
+        <!--Text Boxes Form Container-->
+        <scene sceneID="E8B-6x-0P2">
+            <objects>
+                <viewController id="bI2-bP-n1s" customClass="TextBoxesFormContainer" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DMU-72-qNW"/>
+                        <viewControllerLayoutGuide type="bottom" id="dnb-ts-MbN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X7n-Ub-QpQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-Jb-MPv">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="PFX-VI-mcy" kind="embed" identifier="form_embed" id="SMI-0L-jqk"/>
+                                </connections>
+                            </containerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="za7-cP-gFq">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem enabled="NO" title="Label Width" id="ttB-A2-vpx">
+                                        <color key="tintColor" red="0.90196079019999997" green="0.49019607900000001" blue="0.17254902420000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="s26-Az-D6q">
+                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="RZK-na-YIr">
+                                            <rect key="frame" x="118" y="5" width="196" height="34"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="sliderValueDidChange:" destination="bI2-bP-n1s" eventType="valueChanged" id="4Hh-UO-aXg"/>
+                                            </connections>
+                                        </slider>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ony-17-h47">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="2Sh-rr-cVy">
+                            <rect key="frame" x="90" y="7" width="140" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="1"/>
+                                <segment title="2"/>
+                                <segment title="3"/>
+                                <segment title="4"/>
+                            </segments>
+                            <color key="tintColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="segmentedControlDidChangeSelectedSegmentIndex:" destination="bI2-bP-n1s" eventType="valueChanged" id="SBX-jj-eO1"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="Validate" id="tOE-GX-mn9">
+                            <connections>
+                                <action selector="pressedValidate:" destination="bI2-bP-n1s" id="7ZE-ts-g0I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="2Sh-rr-cVy" id="ngX-MS-FjW"/>
+                        <outlet property="slider" destination="RZK-na-YIr" id="h6K-O4-yym"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="llx-2a-vTv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="164" y="-1969"/>
+        </scene>
+        <!--Text Boxes Form-->
+        <scene sceneID="S0b-HX-4VG">
+            <objects>
+                <tableViewController id="PFX-VI-mcy" customClass="TextBoxesForm" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="PUZ-8p-V1B">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="PFX-VI-mcy" id="3Mk-lD-wgh"/>
+                            <outlet property="delegate" destination="PFX-VI-mcy" id="McS-xp-hVw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Ng7-eN-ktC">
+                        <barButtonItem key="rightBarButtonItem" title="next" id="ptO-Bv-yHn">
+                            <connections>
+                                <action selector="completeForm:" destination="PFX-VI-mcy" id="k6m-ew-7oZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9SO-Wo-Vua" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="578" y="-1941"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
