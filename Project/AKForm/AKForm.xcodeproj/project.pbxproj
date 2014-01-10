@@ -36,14 +36,10 @@
 		1A9B223118361C16000A7C34 /* AKFormCellPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21F518361C16000A7C34 /* AKFormCellPickerView.m */; };
 		1A9B223218361C16000A7C34 /* AKFormCellTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21F618361C16000A7C34 /* AKFormCellTextField.h */; };
 		1A9B223318361C16000A7C34 /* AKFormCellTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21F718361C16000A7C34 /* AKFormCellTextField.m */; };
-		1A9B223418361C16000A7C34 /* CSFormBaseCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21F818361C16000A7C34 /* CSFormBaseCell.h */; };
-		1A9B223518361C16000A7C34 /* CSFormBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21F918361C16000A7C34 /* CSFormBaseCell.m */; };
 		1A9B223618361C16000A7C34 /* AKFormCellSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21FA18361C16000A7C34 /* AKFormCellSwitch.h */; };
 		1A9B223718361C16000A7C34 /* AKFormCellSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21FB18361C16000A7C34 /* AKFormCellSwitch.m */; };
 		1A9B223818361C16000A7C34 /* AKFormCellTextBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21FC18361C16000A7C34 /* AKFormCellTextBox.h */; };
 		1A9B223918361C16000A7C34 /* AKFormCellTextBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21FD18361C16000A7C34 /* AKFormCellTextBox.m */; };
-		1A9B223A18361C16000A7C34 /* CSFormToggleCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B21FE18361C16000A7C34 /* CSFormToggleCell.h */; };
-		1A9B223B18361C16000A7C34 /* CSFormToggleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B21FF18361C16000A7C34 /* CSFormToggleCell.m */; };
 		1A9B223E18361C16000A7C34 /* AKFormFieldExpandable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B220318361C16000A7C34 /* AKFormFieldExpandable.h */; };
 		1A9B223F18361C16000A7C34 /* AKFormFieldExpandable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B220418361C16000A7C34 /* AKFormFieldExpandable.m */; };
 		1A9B224018361C16000A7C34 /* AKFormFieldDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B220518361C16000A7C34 /* AKFormFieldDate.h */; };
@@ -58,8 +54,6 @@
 		1A9B224918361C16000A7C34 /* AKFormFieldModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B220E18361C16000A7C34 /* AKFormFieldModal.m */; };
 		1A9B224A18361C16000A7C34 /* AKFormFieldModalPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B220F18361C16000A7C34 /* AKFormFieldModalPicker.h */; };
 		1A9B224B18361C16000A7C34 /* AKFormFieldModalPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B221018361C16000A7C34 /* AKFormFieldModalPicker.m */; };
-		1A9B224C18361C16000A7C34 /* AKFormFieldSegmented.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B221118361C16000A7C34 /* AKFormFieldSegmented.h */; };
-		1A9B224D18361C16000A7C34 /* AKFormFieldSegmented.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B221218361C16000A7C34 /* AKFormFieldSegmented.m */; };
 		1A9B224E18361C16000A7C34 /* AKFormFieldSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B221318361C16000A7C34 /* AKFormFieldSwitch.h */; };
 		1A9B224F18361C16000A7C34 /* AKFormFieldSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B221418361C16000A7C34 /* AKFormFieldSwitch.m */; };
 		1A9B225018361C16000A7C34 /* AKFormFieldTextBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B221518361C16000A7C34 /* AKFormFieldTextBox.h */; };
@@ -107,14 +101,10 @@
 		1A9B21F518361C16000A7C34 /* AKFormCellPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormCellPickerView.m; sourceTree = "<group>"; };
 		1A9B21F618361C16000A7C34 /* AKFormCellTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormCellTextField.h; sourceTree = "<group>"; };
 		1A9B21F718361C16000A7C34 /* AKFormCellTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormCellTextField.m; sourceTree = "<group>"; };
-		1A9B21F818361C16000A7C34 /* CSFormBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFormBaseCell.h; sourceTree = "<group>"; };
-		1A9B21F918361C16000A7C34 /* CSFormBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormBaseCell.m; sourceTree = "<group>"; };
 		1A9B21FA18361C16000A7C34 /* AKFormCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormCellSwitch.h; sourceTree = "<group>"; };
 		1A9B21FB18361C16000A7C34 /* AKFormCellSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormCellSwitch.m; sourceTree = "<group>"; };
 		1A9B21FC18361C16000A7C34 /* AKFormCellTextBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormCellTextBox.h; sourceTree = "<group>"; };
 		1A9B21FD18361C16000A7C34 /* AKFormCellTextBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormCellTextBox.m; sourceTree = "<group>"; };
-		1A9B21FE18361C16000A7C34 /* CSFormToggleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFormToggleCell.h; sourceTree = "<group>"; };
-		1A9B21FF18361C16000A7C34 /* CSFormToggleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFormToggleCell.m; sourceTree = "<group>"; };
 		1A9B220318361C16000A7C34 /* AKFormFieldExpandable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldExpandable.h; sourceTree = "<group>"; };
 		1A9B220418361C16000A7C34 /* AKFormFieldExpandable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldExpandable.m; sourceTree = "<group>"; };
 		1A9B220518361C16000A7C34 /* AKFormFieldDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldDate.h; sourceTree = "<group>"; };
@@ -129,8 +119,6 @@
 		1A9B220E18361C16000A7C34 /* AKFormFieldModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldModal.m; sourceTree = "<group>"; };
 		1A9B220F18361C16000A7C34 /* AKFormFieldModalPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldModalPicker.h; sourceTree = "<group>"; };
 		1A9B221018361C16000A7C34 /* AKFormFieldModalPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldModalPicker.m; sourceTree = "<group>"; };
-		1A9B221118361C16000A7C34 /* AKFormFieldSegmented.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldSegmented.h; sourceTree = "<group>"; };
-		1A9B221218361C16000A7C34 /* AKFormFieldSegmented.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldSegmented.m; sourceTree = "<group>"; };
 		1A9B221318361C16000A7C34 /* AKFormFieldSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldSwitch.h; sourceTree = "<group>"; };
 		1A9B221418361C16000A7C34 /* AKFormFieldSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldSwitch.m; sourceTree = "<group>"; };
 		1A9B221518361C16000A7C34 /* AKFormFieldTextBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldTextBox.h; sourceTree = "<group>"; };
@@ -254,10 +242,6 @@
 				1A9B21FD18361C16000A7C34 /* AKFormCellTextBox.m */,
 				1A9B21FA18361C16000A7C34 /* AKFormCellSwitch.h */,
 				1A9B21FB18361C16000A7C34 /* AKFormCellSwitch.m */,
-				1A9B21F818361C16000A7C34 /* CSFormBaseCell.h */,
-				1A9B21F918361C16000A7C34 /* CSFormBaseCell.m */,
-				1A9B21FE18361C16000A7C34 /* CSFormToggleCell.h */,
-				1A9B21FF18361C16000A7C34 /* CSFormToggleCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -287,8 +271,6 @@
 				1A9B221818361C16000A7C34 /* AKFormFieldToggle.m */,
 				1A9B221318361C16000A7C34 /* AKFormFieldSwitch.h */,
 				1A9B221418361C16000A7C34 /* AKFormFieldSwitch.m */,
-				1A9B221118361C16000A7C34 /* AKFormFieldSegmented.h */,
-				1A9B221218361C16000A7C34 /* AKFormFieldSegmented.m */,
 			);
 			path = Fields;
 			sourceTree = "<group>";
@@ -305,14 +287,12 @@
 				1A9B223018361C16000A7C34 /* AKFormCellPickerView.h in Headers */,
 				1A9B224818361C16000A7C34 /* AKFormFieldModal.h in Headers */,
 				1AB6EF7C18423442001C312B /* AKFormFieldLabelled.h in Headers */,
-				1A9B224C18361C16000A7C34 /* AKFormFieldSegmented.h in Headers */,
 				1A9B222A18361C16000A7C34 /* AKFormCellDatePicker.h in Headers */,
 				1A9B222C18361C16000A7C34 /* AKFormCellImage.h in Headers */,
 				1A9B223818361C16000A7C34 /* AKFormCellTextBox.h in Headers */,
 				1A9B223218361C16000A7C34 /* AKFormCellTextField.h in Headers */,
 				1A9B224E18361C16000A7C34 /* AKFormFieldSwitch.h in Headers */,
 				1A9B223618361C16000A7C34 /* AKFormCellSwitch.h in Headers */,
-				1A9B223418361C16000A7C34 /* CSFormBaseCell.h in Headers */,
 				1AA5B6771836FEC400421A67 /* AKForm.h in Headers */,
 				1A9B225218361C16000A7C34 /* AKFormFieldToggle.h in Headers */,
 				1A9B222E18361C16000A7C34 /* AKFormCellLabel.h in Headers */,
@@ -322,7 +302,6 @@
 				1A9B224018361C16000A7C34 /* AKFormFieldDate.h in Headers */,
 				1A9B224418361C16000A7C34 /* AKFormFieldImage.h in Headers */,
 				1A9B221E18361C16000A7C34 /* AKFormMetadata.h in Headers */,
-				1A9B223A18361C16000A7C34 /* CSFormToggleCell.h in Headers */,
 				1A9B222018361C16000A7C34 /* AKFormMetadataCollection.h in Headers */,
 				1A9B221A18361C16000A7C34 /* AKFormController.h in Headers */,
 				1A9B222618361C16000A7C34 /* AKFormValidator.h in Headers */,
@@ -426,15 +405,12 @@
 				1A9B223718361C16000A7C34 /* AKFormCellSwitch.m in Sources */,
 				1A9B222318361C16000A7C34 /* AKFormSection.m in Sources */,
 				1A9B221D18361C16000A7C34 /* AKFormField.m in Sources */,
-				1A9B223B18361C16000A7C34 /* CSFormToggleCell.m in Sources */,
 				1A9B223118361C16000A7C34 /* AKFormCellPickerView.m in Sources */,
-				1A9B224D18361C16000A7C34 /* AKFormFieldSegmented.m in Sources */,
 				1A9B221F18361C16000A7C34 /* AKFormMetadata.m in Sources */,
 				1AB6EF7D18423442001C312B /* AKFormFieldLabelled.m in Sources */,
 				1A9B224B18361C16000A7C34 /* AKFormFieldModalPicker.m in Sources */,
 				1A9B222518361C16000A7C34 /* AKFormValue.m in Sources */,
 				1A9B222118361C16000A7C34 /* AKFormMetadataCollection.m in Sources */,
-				1A9B223518361C16000A7C34 /* CSFormBaseCell.m in Sources */,
 				1A9B222B18361C16000A7C34 /* AKFormCellDatePicker.m in Sources */,
 				1A9B223918361C16000A7C34 /* AKFormCellTextBox.m in Sources */,
 				1A9B223F18361C16000A7C34 /* AKFormFieldExpandable.m in Sources */,

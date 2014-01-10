@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <HexColors/HexColor.h>
+
 #import "AKFormSection.h"
 
 #import "AKFormField.h"
@@ -19,9 +21,8 @@
 #import "AKFormFieldModalPicker.h"
 #import "AKFormFieldTextBox.h"
 #import "AKFormFieldSwitch.h"
-#import "AKFormFieldSegmented.h"
 
-@interface AKFormController : UITableViewController <AKFormCellTextFieldDelegate, AKFormFieldSwitchDelegate, AKFormFieldSegmentedDelegate, AKFormCellImageStyleProvider, AKFormCellTextBoxDelegate>
+@interface AKFormController : UITableViewController <AKFormCellTextFieldDelegate, AKFormFieldSwitchDelegate, AKFormCellImageStyleProvider, AKFormCellTextBoxDelegate>
 
 - (void)pressedCancelOnModalField:(id)sender;
 - (void)pressedDoneOnModalField:(id)sender;
