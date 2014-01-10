@@ -8,6 +8,6 @@ pod 'UIImage-Resize'
 pod 'NSDate+Helper'
 pod 'URBMediaFocusViewController@arkuana'
 pod 'GKImagePicker@arkuana'
-#pod 'MHPrettyDate', :git => "https://github.com/bobjustbob/MHPrettyDate.git"
+pod 'CJStringValidator'
 
-pod 'CJStringValidator', :git => "https://github.com/arkuana/CJStringValidator.git"
+#pod 'MHPrettyDate', :git => "https://github.com/bobjustbob/MHPrettyDate.git"

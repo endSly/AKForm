@@ -95,16 +95,32 @@
             return NO;
         }
         
-        if (alphanumeric && ![password isAlphanumeric]) {
+        if (alphanumeric && ![self isAlphanumeric:password]) {
             return NO;
         }
         
-        if (bothCases && ![password hasBothCases]) {
+        if (bothCases && ![self hasBothCases:password]) {
             return NO;
         }
         
         return YES;
     };
+}
+
++ (BOOL)isAlphanumeric:(NSString *)string
+{
+    NSString *regex = @"^.*(?=.*?[a-zA-Z])(?=.*?[0-9]).+$";
+    NSPredicate *regExPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [regExPredicate evaluateWithObject:string];
+}
+
++ (BOOL)hasBothCases:(NSString *)string
+{
+    NSString *regex = @"^.*(?=.*?[a-z])(?=.*?[A-Z]).+$";
+    NSPredicate *regExPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [regExPredicate evaluateWithObject:string];
 }
 
 + (ValidationBlock)requiredEmailBlock
