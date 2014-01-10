@@ -11,15 +11,17 @@
 #define HEX_COLOR_GREY_PLACEHOLDER  @"#ccccd1"
 #define HEX_COLOR_RED               @"#790c06"
 
-@interface TextBoxesForm () <AKFormCellTextFieldStyleProvider>
+@interface TextBoxesForm () <AKFormCellTextBoxStyleProvider>
 - (IBAction)completeForm:(id)sender;
 - (void)setLabelWidth:(CGFloat)labelWidth;
-- (void)setTextFieldStyle:(AKFormCellTextFieldStyle)textFieldStyle;
+- (void)setTextBoxLabelStyle:(AKFormCellTextBoxLabelStyle)textBoxLabelStyle;
+- (void)setTextBoxHeightStyle:(AKFormCellTextBoxHeightStyle)textBoxHeightStyle;
 @end
 
 @implementation TextBoxesForm {
     CGFloat _labelWidth;
-    AKFormCellTextFieldStyle _textFieldStyle;
+    AKFormCellTextBoxHeightStyle _textBoxHeightStyle;
+    AKFormCellTextBoxLabelStyle _textBoxLabelStyle;
 }
 
 - (void)viewDidLoad
@@ -34,129 +36,21 @@
 - (void)createForm
 {
     [self addInputStylesSection];
-    [self addValidatorsSection];
-    [self addLabelStringLengthsSection];
-}
-
-- (void)addLabelStringLengthsSection
-{
-    NSMutableArray *fields = [NSMutableArray array];
-    
-    NSArray *labels = @[@"Label", @"Another label", @"A longer label", @"An even longer label", @"This label is far too long", @"This label is even longer than the far longer one" ];
-    for (NSString *label in labels) {
-        AKFormFieldTextField *field = [AKFormFieldTextField fieldWithKey:label
-                                                         title:label
-                                                   placeholder:@"optional"
-                                                      delegate:self
-                                                 styleProvider:self];
-        [fields addObject:field];
-    }
-    
-    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
-    section.headerTitle = @"LABEL STRING LENGTHS";
-    [self addSection:section];
 }
 
 - (void)addInputStylesSection
 {
     NSMutableArray *fields = [NSMutableArray array];
 
-    //Number Field
-    AKFormFieldTextField *numberField = [AKFormFieldTextField fieldWithKey:@"number"
-                                                           title:@"Number"
-                                                     placeholder:@"optional"
-                                                        delegate:self
-                                                   styleProvider:self];
-    numberField.keyboardType = UIKeyboardTypeDecimalPad;
-    [fields addObject:numberField];
-
-    //Secure Field
-    AKFormFieldTextField *secureField = [AKFormFieldTextField fieldWithKey:@"secure"
-                                                           title:@"Secure"
-                                                     placeholder:@"optional"
-                                                        delegate:self
-                                                   styleProvider:self];
-    secureField.secureTextEntry = YES;
-    [fields addObject:secureField];
-
-    //The Works Field
-    AKFormFieldTextField *theWorksField = [AKFormFieldTextField fieldWithKey:@"the_works"
-                                                             title:@"The Works"
+    AKFormFieldTextBox *textBox = [AKFormFieldTextBox fieldWithKey:@"textbox"
+                                                             title:@"Text Box"
                                                        placeholder:@"optional"
                                                           delegate:self
                                                      styleProvider:self];
-    theWorksField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    theWorksField.autocorrectionType = UITextAutocorrectionTypeYes;
-    theWorksField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    theWorksField.returnKeyType = UIReturnKeySend;
-    [fields addObject:theWorksField];
+    [fields addObject:textBox];
 
     AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
-    section.headerTitle = @"INPUT STYLES";
-    [self addSection:section];
-}
-
-- (void)addValidatorsSection
-{
-    NSMutableArray *fields = [NSMutableArray array];
-
-    //Required Field
-    AKFormFieldTextField *requiredField = [AKFormFieldTextField fieldWithKey:@"label"
-                                                             title:@"Label"
-                                                       placeholder:@"required"
-                                                          delegate:self
-                                                     styleProvider:self];
-    AKFormValidator *requiredValidator = [AKFormValidator requiredValidator:@"Please enter a value"];
-    requiredField.validators = @[requiredValidator];
-    [fields addObject:requiredField];
-    
-    //Email Field
-    AKFormFieldTextField *emailField = [AKFormFieldTextField fieldWithKey:@"email"
-                                                          title:@"Email"
-                                                    placeholder:@"required email"
-                                                       delegate:self
-                                                  styleProvider:self];
-    AKFormValidator *emailValidator = [AKFormValidator emailValidator:@"Please enter a valid email"];
-    emailField.validators = @[emailValidator];
-    [fields addObject:emailField];
-
-    //Password Field
-    AKFormFieldTextField *passwordField = [AKFormFieldTextField fieldWithKey:@"password"
-                                                             title:@"Password"
-                                                       placeholder:@"password"
-                                                          delegate:self
-                                                     styleProvider:self];
-    AKFormValidator *passwordValidator = [AKFormValidator passwordStrengthValidator:@"Please enter a password of at least 6 characters with at least 1 uppercase, lowercase, numerical and symbolic character"
-                                                                      minimumLength:6
-                                                                       alphanumeric:YES
-                                                                         hasSymbols:YES
-                                                                          bothCases:YES];
-    passwordField.validators = @[passwordValidator];
-    [fields addObject:passwordField];
-    
-    //Password Confirmation Field
-    AKFormFieldTextField *passwordConfirmField = [AKFormFieldTextField fieldWithKey:@"confirm password" title:@"Confirm"
-                                                              placeholder:@"confirm password"
-                                                                 delegate:self
-                                                            styleProvider:self];
-    AKFormValidator *passwordConfirmValidator = [[AKFormValidator alloc] init];
-    passwordConfirmValidator.failMessage = @"Please make sure the password confirmation matches";
-    passwordConfirmValidator.failMessageTitle = @"Password Mismatch";
-    
-    passwordConfirmValidator.validationBlock = ^BOOL(AKFormValue *value) {
-        if (value && [value isString]
-            && passwordField.value
-            && [passwordField.value isString]) {
-            return [[value stringValue] isEqualToString:[passwordField.value stringValue]];
-        }
-        return NO;
-    };
-    passwordConfirmField.validators = @[passwordConfirmValidator];
-    [fields addObject:passwordConfirmField];
-    
-
-    AKFormSection *section = [[AKFormSection alloc] initWithFields:fields];
-    section.headerTitle = @"VALIDATORS";
+    section.headerTitle = @"TEXT BOXES";
     [self addSection:section];
 }
 
@@ -188,9 +82,15 @@
     [self.tableView reloadData];
 }
 
-- (void)setTextFieldStyle:(AKFormCellTextFieldStyle)textFieldStyle
+- (void)setTextBoxHeightStyle:(AKFormCellTextBoxHeightStyle)textBoxHeightStyle
 {
-    _textFieldStyle = textFieldStyle;
+    _textBoxHeightStyle = textBoxHeightStyle;
+    [self.tableView reloadData];
+}
+
+- (void)setTextBoxLabelStyle:(AKFormCellTextBoxLabelStyle)textBoxLabelStyle
+{
+    _textBoxLabelStyle = textBoxLabelStyle;
     [self.tableView reloadData];
 }
 
@@ -199,59 +99,76 @@
     return _labelWidth;
 }
 
-- (AKFormCellTextFieldStyle)styleForTextFieldCell
+- (AKFormCellTextBoxLabelStyle)labelStyleForTextBoxCell
 {
-    return _textFieldStyle;
+    return _textBoxLabelStyle;
 }
 
-- (UIFont *)labelFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style
+- (AKFormCellTextBoxHeightStyle)heightStyleForTextBoxCell
+{
+    return _textBoxHeightStyle;
+}
+
+- (UIFont *)labelFontForTextBoxMode:(AKFormCellTextBoxMode)mode
 {
     switch (mode) {
-        case AKFormCellTextFieldModeEmpty:
-        case AKFormCellTextFieldModeFilled:
-        case AKFormCellTextFieldModeReadOnly:
+        case AKFormCellTextBoxModeEmpty:
+        case AKFormCellTextBoxModeFilled:
+        case AKFormCellTextBoxModeReadOnly:
             return [UIFont systemFontOfSize:17.f];
             break;
-        case AKFormCellTextFieldModeEditing:
-        case AKFormCellTextFieldModeInvalid:
+        case AKFormCellTextBoxModeEditing:
+        case AKFormCellTextBoxModeInvalid:
             return [UIFont boldSystemFontOfSize:17.f];
             break;
     }
 }
 
-- (UIColor *)labelTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style
+- (UIColor *)labelTextColorForMode:(AKFormCellImageMode)mode
 {
-    if (mode == AKFormCellTextFieldModeInvalid) {
+    if (mode == AKFormCellTextBoxModeInvalid) {
         return [UIColor colorWithHexString:HEX_COLOR_RED];
     } else {
         return [UIColor darkGrayColor];
     }
 }
 
-- (UIFont *)textFieldFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style
+- (UIFont *)textBoxFontForTextBoxMode:(AKFormCellTextBoxMode)mode
 {
     return [UIFont systemFontOfSize:17.f];
 }
 
-- (UIColor *)textFieldTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style
+- (UIColor *)textBoxTextColorForTextBoxMode:(AKFormCellTextBoxMode)mode
 {
     switch (mode) {
-        case AKFormCellTextFieldModeEmpty:
+        case AKFormCellTextBoxModeEmpty:
             return [UIColor lightGrayColor];
-        case AKFormCellTextFieldModeFilled:
-        case AKFormCellTextFieldModeReadOnly:
+        case AKFormCellTextBoxModeFilled:
+        case AKFormCellTextBoxModeReadOnly:
             return [UIColor grayColor];
             break;
-        case AKFormCellTextFieldModeEditing:
+        case AKFormCellTextBoxModeEditing:
             return [UIColor colorWithHexString:@"#E67D2C"];
-        case AKFormCellTextFieldModeInvalid:
+        case AKFormCellTextBoxModeInvalid:
             return [UIColor colorWithHexString:HEX_COLOR_RED];
             break;
     }
 }
 
+- (CGFloat)heightForTextBoxCell
+{
+    switch (_textBoxHeightStyle) {
+        case AKFormCellTextBoxHeightStyleAutomatic:
+            return 44.f;
+            break;
+        case AKFormCellTextBoxHeightStyleManual:
+            return 100.f;
+            break;
+    }
+}
 
 @end
+
 
 
 #define MIN_LABEL_WIDTH 30.f
@@ -271,6 +188,8 @@
     [self.segmentedControl setSelectedSegmentIndex:1];
     [self.segmentedControl setSelectedSegmentIndex:2];
     [self.segmentedControl setSelectedSegmentIndex:3];
+    [self.segmentedControl setSelectedSegmentIndex:4];
+    [self.segmentedControl setSelectedSegmentIndex:5];
     [self.segmentedControl setSelectedSegmentIndex:0];
     [self segmentedControlDidChangeSelectedSegmentIndex:self.segmentedControl];
 }
@@ -281,17 +200,28 @@
     self.slider.enabled = YES;
     switch (segmentedControl.selectedSegmentIndex) {
         case 0:
-            [self.form setTextFieldStyle:AKFormCellTextFieldStyleLabelWithStaticWidth1];
+            [self.form setTextBoxLabelStyle:AKFormCellTextBoxLabelStyleOnLeftLeftAligned];
+            [self.form setTextBoxHeightStyle:AKFormCellTextBoxHeightStyleAutomatic];
             break;
         case 1:
-            [self.form setTextFieldStyle:AKFormCellTextFieldStyleLabelWithStaticWidth2];
+            [self.form setTextBoxLabelStyle:AKFormCellTextBoxLabelStyleOnLeftRightAligned];
+            [self.form setTextBoxHeightStyle:AKFormCellTextBoxHeightStyleAutomatic];
             break;
         case 2:
-            [self.form setTextFieldStyle:AKFormCellTextFieldStyleLabelWithStaticWidth3];
+            [self.form setTextBoxLabelStyle:AKFormCellTextBoxLabelStyleOnTop];
+            [self.form setTextBoxHeightStyle:AKFormCellTextBoxHeightStyleAutomatic];
             break;
-        default:
-            [self.form setTextFieldStyle:AKFormCellTextFieldStyleLabelWithDynamicWidth];
-            self.slider.enabled = NO;
+        case 3:
+            [self.form setTextBoxLabelStyle:AKFormCellTextBoxLabelStyleOnLeftLeftAligned];
+            [self.form setTextBoxHeightStyle:AKFormCellTextBoxHeightStyleManual];
+            break;
+        case 4:
+            [self.form setTextBoxLabelStyle:AKFormCellTextBoxLabelStyleOnLeftRightAligned];
+            [self.form setTextBoxHeightStyle:AKFormCellTextBoxHeightStyleManual];
+            break;
+        case 5:
+            [self.form setTextBoxLabelStyle:AKFormCellTextBoxLabelStyleOnTop];
+            [self.form setTextBoxHeightStyle:AKFormCellTextBoxHeightStyleManual];
             break;
     }
 }

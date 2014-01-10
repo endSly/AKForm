@@ -401,7 +401,11 @@
                 return [self heightForImageCell];
             }
         } else if ([field isKindOfClass:[AKFormFieldTextBox class]]) {
-//            return [(AKFormFieldTextBox *)field textViewHeight] + (CELL_PADDING_VERTICAL * 2.0);
+            AKFormFieldTextBox *textBoxField = (AKFormFieldTextBox *)field;
+            if (textBoxField.styleProvider &&
+                [textBoxField.styleProvider respondsToSelector:@selector(heightForTextBoxCell)]) {
+                return [textBoxField.styleProvider heightForTextBoxCell];
+            }
         }
     }
     return CELL_HEIGHT_DEFAULT;
