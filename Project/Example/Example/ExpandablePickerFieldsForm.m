@@ -35,6 +35,16 @@
 {
     [self addStandardPickers];
     [self addMultiComponentPickers];
+    [self addStandardPickers];
+    [self addMultiComponentPickers];
+    [self addStandardPickers];
+    [self addMultiComponentPickers];
+    [self addStandardPickers];
+    [self addMultiComponentPickers];
+    [self addStandardPickers];
+    [self addMultiComponentPickers];
+    [self addStandardPickers];
+    [self addMultiComponentPickers];
 }
 
 - (void)addMultiComponentPickers

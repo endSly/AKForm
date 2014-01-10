@@ -296,9 +296,14 @@
 //    }
     [self.tableView insertRowsAtIndexPaths:@[indexPathToInsert]
                           withRowAnimation:_expandRowInsertAnimation];
-    [self.tableView scrollToRowAtIndexPath:indexPathToInsert
-                          atScrollPosition:UITableViewScrollPositionNone
-                                  animated:YES];
+    
+    if ([self.tableView cellForRowAtIndexPath:indexPathToInsert]) {
+        [self.tableView scrollToRowAtIndexPath:indexPathToInsert
+                              atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    } else if ([self.tableView cellForRowAtIndexPath:indexPath]) {
+        [self.tableView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 - (BOOL)isIndexPathExpansion:(NSIndexPath *)indexPath
@@ -420,6 +425,9 @@
 
     AKFormField *field = [self fieldForIndexPath:indexPath];
     if ([field isKindOfClass:[AKFormFieldExpandable class]]) {
+        
+        [tableView beginUpdates];
+        
         //if a field is already expanded
         if ([self currentlyExpandedField]) {
             if ([indexPath isEqual:[self indexPathOfCurrentlyExpandedField]]) {
@@ -437,6 +445,9 @@
         } else {
             [self expandFieldAtIndexPath:indexPath];
         }
+        
+        [tableView endUpdates];
+
     } else if ([field isKindOfClass:[AKFormFieldText class]]) {
     } else if ([field isKindOfClass:[AKFormFieldModalPicker class]]) {
         self.modalField = (AKFormFieldModalPicker *)field;
