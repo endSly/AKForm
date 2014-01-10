@@ -192,11 +192,25 @@
     return nil;
 }
 
+- (AKFormSection *)currentlyExpandedSection
+{
+    for (AKFormSection *section in self.sections) {
+        AKFormFieldExpandable *expandedField = [section expandedField];
+        if (expandedField) {
+            return section;
+        }
+    }
+    return nil;
+}
+
 - (NSIndexPath *)indexPathOfCurrentlyExpandedField
 {
     AKFormFieldExpandable *expandedField = [self currentlyExpandedField];
+    AKFormSection *expandedSection = [self currentlyExpandedSection];
     if (expandedField && expandedField.expandedCell) {
-        return [self.tableView indexPathForCell:expandedField.cell];
+        NSIndexPath *indexPath = [self indexPathForField:expandedField inSection:expandedSection];
+//        NSIndexPath *indexPath = [self.tableView indexPathForCell:expandedField.cell];
+        return indexPath;
     } else {
         return nil;
     }
@@ -252,7 +266,8 @@
 //        } else {
 //            rowAnimation = _toggleRowDeleteAnimation;
 //        }
-        [self.tableView deleteRowsAtIndexPaths:@[[self indexPathAfter:indexPath]]
+        NSIndexPath *indexPathToDelete = [self indexPathAfter:indexPath];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPathToDelete]
                               withRowAnimation:_expandRowDeleteAnimation];
         return indexPath;
     }
