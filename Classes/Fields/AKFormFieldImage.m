@@ -23,8 +23,9 @@
                    imageSize:(CGSize)imageSize
               thumbnailStyle:(AKFormCellImageThumbnailStyle)thumbnailStyle
               formController:(AKFormController *)formController
+               styleProvider:(id<AKFormCellImageStyleProvider>)styleProvider
 {
-    return [[AKFormFieldImage alloc] initWithKey:key title:title placeholderText:placeholderText placeholderImageName:placeholderImageName imageSize:imageSize thumbnailStyle:thumbnailStyle formController:formController];
+    return [[AKFormFieldImage alloc] initWithKey:key title:title placeholderText:placeholderText placeholderImageName:placeholderImageName imageSize:imageSize thumbnailStyle:thumbnailStyle formController:formController styleProvider:styleProvider];
 }
 
 - (instancetype)initWithKey:(NSString *)key
@@ -34,6 +35,7 @@
                   imageSize:(CGSize)imageSize
              thumbnailStyle:(AKFormCellImageThumbnailStyle)thumbnailStyle
              formController:(AKFormController *)formController
+            styleProvider:(id<AKFormCellImageStyleProvider>)styleProvider
 {
     self = [super initWithKey:key title:title placeholder:placeholderText];
     if (self) {
@@ -41,6 +43,7 @@
         self.imageSize = imageSize;
         self.thumbnailStyle = thumbnailStyle;
         self.placeholderImageName = placeholderImageName;
+        self.styleProvider = styleProvider;
     }
     return self;
 }
@@ -62,7 +65,8 @@
 
     cell.valueDelegate = self;
     cell.delegate = self;
-
+    cell.styleProvider = self.styleProvider;
+    
     cell.imageSize = self.imageSize;
     cell.thumbnailStyle = self.thumbnailStyle;
     cell.placeholderImageName = self.placeholderImageName;

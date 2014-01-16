@@ -21,6 +21,8 @@
 @property(nonatomic, strong) NSString *placeholderImageName;
 @property(nonatomic, weak) AKFormController *formController;
 
+@property(nonatomic, weak) id<AKFormCellImageStyleProvider> styleProvider;
+
 /// Things to Note
 /// Image thumbnail will allow as much space as possible for the label while making sure it is still visible,
 // so just make sure your labels aren't too long
@@ -50,7 +52,8 @@
         placeholderImageName:(NSString *)placeholderImageName
                    imageSize:(CGSize)imageSize
               thumbnailStyle:(AKFormCellImageThumbnailStyle)thumbnailStyle
-              formController:(AKFormController *)formController;
+              formController:(AKFormController *)formController
+               styleProvider:(id<AKFormCellImageStyleProvider>)styleProvider;
 
 - (void)select;
 
