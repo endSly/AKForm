@@ -33,10 +33,10 @@ typedef NS_ENUM(NSInteger, AKFormCellImageMode) {
 
 @protocol AKFormCellImageStyleProvider <NSObject>
 @optional
-- (AKFormCellImageLabelStyle)labelStyleForImageCell;
-- (CGFloat)heightForImageCell;
-- (UIFont *)labelFontForMode:(AKFormCellImageMode)mode;
-- (UIColor *)labelTextColorForMode:(AKFormCellImageMode)mode;
+- (AKFormCellImageLabelStyle)labelStyleForImageCell:(AKFormCellImage *)cell;
+- (CGFloat)heightForImageCell:(AKFormCellImage *)cell;
+- (UIFont *)labelFontForMode:(AKFormCellImageMode)mode forImageCell:(AKFormCellImage *)cell;
+- (UIColor *)labelTextColorForMode:(AKFormCellImageMode)mode forImageCell:(AKFormCellImage *)cell;
 @end
 
 @protocol AKFormCellImageDelegate <NSObject>
@@ -59,6 +59,7 @@ typedef NS_ENUM(NSInteger, AKFormCellImageMode) {
 @property(nonatomic, strong) UIImageView *thumbnail;
 @property(nonatomic, strong) NSString *placeholderImageName;
 @property(nonatomic, weak) id<AKFormCellImageDelegate> delegate;
+@property(nonatomic, weak) id<AKFormCellImageStyleProvider> styleProvider;
 
 - (instancetype)initWithStyleProvider:(id<AKFormCellImageStyleProvider>)styleProvider;
 

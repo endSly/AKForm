@@ -94,8 +94,8 @@
 
 - (void)setStyle
 {
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForSwitchCell)]) {
-        self.style = [self.styleProvider styleForSwitchCell];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForSwitchCell:)]) {
+        self.style = [self.styleProvider styleForSwitchCell:self];
     } else {
         self.style = DEFAULT_STYLE;
     }
@@ -154,8 +154,8 @@
         case AKFormCellSwitchStyleLabelWithStaticWidth1:
         case AKFormCellSwitchStyleLabelWithStaticWidth2:
         case AKFormCellSwitchStyleLabelWithStaticWidth3:
-            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForSwitchCell)]) {
-                labelWidth = [self.styleProvider labelWidthForSwitchCell];
+            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForSwitchCell:)]) {
+                labelWidth = [self.styleProvider labelWidthForSwitchCell:self];
             } else {
                 labelWidth = DEFAULT_TITLE_WIDTH;
             }
@@ -197,8 +197,8 @@
 - (void)styleLabel
 {
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:style:)]) {
-        self.label.font = [self.styleProvider labelFontForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:style:forSwitchCell:)]) {
+        self.label.font = [self.styleProvider labelFontForMode:self.mode style:self.style forSwitchCell:self];
     } else {
         switch (self.mode) {
             case AKFormCellSwitchModeEditable:
@@ -209,8 +209,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:style:)]) {
-        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:style:forSwitchCell:)]) {
+        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode style:self.style forSwitchCell:self];
     } else {
         switch (self.mode) {
             case AKFormCellSwitchModeEditable:
@@ -223,8 +223,8 @@
 
 - (void)styleSwitch
 {
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(switchTintColor)]) {
-        self.switchControl.onTintColor = [self.styleProvider switchTintColor];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(tintColorForSwitchCell:)]) {
+        self.switchControl.onTintColor = [self.styleProvider tintColorForSwitchCell:self];
     }
 }
 

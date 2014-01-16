@@ -26,16 +26,16 @@ typedef NS_ENUM(NSInteger, AKFormCellSwitchMode) {
 
 @protocol AKFormCellSwitchStyleProvider <NSObject>
 @optional
-- (AKFormCellSwitchStyle)styleForSwitchCell;
-- (CGFloat)labelWidthForSwitchCell;
-- (CGFloat)heightForSwitchCell;
-- (UIColor *)switchTintColor;
-- (UIFont *)labelFontForMode:(AKFormCellSwitchMode)mode style:(AKFormCellSwitchStyle)style;
-- (UIColor *)labelTextColorForMode:(AKFormCellSwitchMode)mode style:(AKFormCellSwitchStyle)style;
-- (UITableViewRowAnimation)rowAnimationDeleteForSwitchCell;
-- (UITableViewRowAnimation)rowAnimationInsertForSwitchCell;
-- (UITableViewRowAnimation)sectionAnimationDeleteForSwitchCell;
-- (UITableViewRowAnimation)sectionAnimationInsertForSwitchCell;
+- (AKFormCellSwitchStyle)styleForSwitchCell:(AKFormCellSwitch *)cell;
+- (CGFloat)labelWidthForSwitchCell:(AKFormCellSwitch *)cell;
+- (CGFloat)heightForSwitchCell:(AKFormCellSwitch *)cell;
+- (UIColor *)tintColorForSwitchCell:(AKFormCellSwitch *)cell;
+- (UIFont *)labelFontForMode:(AKFormCellSwitchMode)mode style:(AKFormCellSwitchStyle)style forSwitchCell:(AKFormCellSwitch *)cell;
+- (UIColor *)labelTextColorForMode:(AKFormCellSwitchMode)mode style:(AKFormCellSwitchStyle)style forSwitchCell:(AKFormCellSwitch *)cell;
+- (UITableViewRowAnimation)rowAnimationDeleteForSwitchCell:(AKFormCellSwitch *)cell;
+- (UITableViewRowAnimation)rowAnimationInsertForSwitchCell:(AKFormCellSwitch *)cell;
+- (UITableViewRowAnimation)sectionAnimationDeleteForSwitchCell:(AKFormCellSwitch *)cell;
+- (UITableViewRowAnimation)sectionAnimationInsertForSwitchCell:(AKFormCellSwitch *)cell;
 @end
 
 @protocol AKFormFieldSwitchDelegate;

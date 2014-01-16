@@ -177,12 +177,12 @@
     return _labelWidth;
 }
 
-- (AKFormCellLabelStyle)styleForLabelCell
+- (AKFormCellLabelStyle)styleForLabelCell:(AKFormCellLabel *)cell
 {
     return _labelCellStyle;
 }
 
-- (UIFont *)titleLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
+- (UIFont *)titleLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style forLabelCell:(AKFormCellLabel *)cell
 {
     switch (mode) {
         case AKFormCellTextFieldModeEmpty:
@@ -197,7 +197,7 @@
     }
 }
 
-- (UIFont *)valueLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
+- (UIFont *)valueLabelFontForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style forLabelCell:(AKFormCellLabel *)cell
 {
     if (style == AKFormCellLabelStyleTwoLines) {
         return [UIFont systemFontOfSize:13.f];
@@ -206,7 +206,7 @@
     }
 }
 
-- (UIColor *)titleLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
+- (UIColor *)titleLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style forLabelCell:(AKFormCellLabel *)cell
 {
     if (mode == AKFormCellTextFieldModeInvalid) {
         return [UIColor colorWithHexString:HEX_COLOR_RED];
@@ -215,7 +215,7 @@
     }
 }
 
-- (UIColor *)valueLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style
+- (UIColor *)valueLabelTextColorForMode:(AKFormCellLabelMode)mode style:(AKFormCellLabelStyle)style forLabelCell:(AKFormCellLabel *)cell
 {
     switch (mode) {
         case AKFormCellTextFieldModeEmpty:

@@ -130,7 +130,7 @@
     }
 }
 
-- (CGFloat)heightForImageCell
+- (CGFloat)heightForImageCell:(AKFormCellImage *)cell
 {
     return _height;
 }

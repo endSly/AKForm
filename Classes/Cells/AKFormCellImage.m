@@ -26,7 +26,6 @@
 @interface AKFormCellImage()
 @property(nonatomic, assign) AKFormCellImageLabelStyle labelStyle;
 @property(nonatomic, assign) AKFormCellImageMode mode;
-@property(nonatomic, weak) id<AKFormCellImageStyleProvider> styleProvider;
 @end
 
 @implementation AKFormCellImage
@@ -232,16 +231,16 @@
 - (void)styleLabel
 {
     if (self.styleProvider
-        && [self.styleProvider respondsToSelector:@selector(labelStyleForImageCell)]) {
-        self.labelStyle = [self.styleProvider labelStyleForImageCell];
+        && [self.styleProvider respondsToSelector:@selector(labelStyleForImageCell:)]) {
+        self.labelStyle = [self.styleProvider labelStyleForImageCell:self];
     } else {
         self.labelStyle = DEFAULT_LABEL_STYLE;
     }
     [self styleTextAlignments];
     
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:)]) {
-        self.label.font = [self.styleProvider labelFontForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:forImageCell:)]) {
+        self.label.font = [self.styleProvider labelFontForMode:self.mode forImageCell:self];
     } else {
         switch (self.mode) {
             case AKFormCellImageModeEmpty:
@@ -253,8 +252,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:)]) {
-        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:forImageCell:)]) {
+        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode forImageCell:self];
     } else {
         switch (self.mode) {
             case AKFormCellImageModeEmpty:

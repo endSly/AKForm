@@ -382,10 +382,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AKFormField *field = [self fieldForIndexPath:indexPath];
+    
     if ([field isKindOfClass:[AKFormFieldTextField class]]) {
         AKFormFieldTextField *textField = (AKFormFieldTextField *)field;
-        if (textField.styleProvider && [textField.styleProvider respondsToSelector:@selector(heightForTextFieldCell)]) {
-            return [textField.styleProvider heightForTextFieldCell];
+        if (textField.styleProvider && [textField.styleProvider respondsToSelector:@selector(heightForTextFieldCell:)]) {
+            return [textField.styleProvider heightForTextFieldCell:(AKFormCellTextField *)textField.cell];
         }
     } else {
         if ([field isKindOfClass:[AKFormFieldExpandable class]]) {
@@ -396,20 +397,22 @@
                 //if this is the label cell
                 AKFormFieldExpandable *expandableField = (AKFormFieldExpandable *)field;
                 if (expandableField.styleProvider &&
-                    [expandableField.styleProvider respondsToSelector:@selector(heightForLabelCell)]) {
-                    return [expandableField.styleProvider heightForLabelCell];
+                    [expandableField.styleProvider respondsToSelector:@selector(heightForLabelCell:)]) {
+                    return [expandableField.styleProvider heightForLabelCell:(AKFormCellLabel *)expandableField.cell];
                 }
             }
         } else if ([field isKindOfClass:[AKFormFieldImage class]]) {
-//            AKFormFieldImage *imageField = (AKFormFieldImage *)field;
-            if ([self respondsToSelector:@selector(heightForImageCell)]) {
-                return [self heightForImageCell];
+            AKFormFieldImage *imageField = (AKFormFieldImage *)field;
+            AKFormCellImage *imageCell = (AKFormCellImage *)imageField.cell;
+            
+            if ([imageCell.styleProvider respondsToSelector:@selector(heightForImageCell:)]) {
+                return [imageCell.styleProvider heightForImageCell:(AKFormCellImage *)[tableView cellForRowAtIndexPath:indexPath]];
             }
         } else if ([field isKindOfClass:[AKFormFieldTextBox class]]) {
             AKFormFieldTextBox *f = (AKFormFieldTextBox *)field;
-            if (f.styleProvider && [f.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell)] && [f.styleProvider heightStyleForTextBoxCell] == AKFormCellTextBoxHeightStyleManual) {
-                if (f.styleProvider && [f.styleProvider respondsToSelector:@selector(heightForTextBoxCell)]) {
-                    return [f.styleProvider heightForTextBoxCell];
+            if (f.styleProvider && [f.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell:)] && [f.styleProvider heightStyleForTextBoxCell:(AKFormCellTextBox *)f.cell] == AKFormCellTextBoxHeightStyleManual) {
+                if (f.styleProvider && [f.styleProvider respondsToSelector:@selector(heightForTextBoxCell:)]) {
+                    return [f.styleProvider heightForTextBoxCell:(AKFormCellTextBox *)f.cell];
                 } else {
                     return CELL_HEIGHT_DEFAULT_TEXTVIEW;
                 }
@@ -718,8 +721,8 @@
 
     //delete fields BEFORE deleting the section
     UITableViewRowAnimation rowAnimation;
-    if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(rowAnimationDeleteForSwitchCell)]) {
-        rowAnimation = [switchCell.styleProvider rowAnimationDeleteForSwitchCell];
+    if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(rowAnimationDeleteForSwitchCell:)]) {
+        rowAnimation = [switchCell.styleProvider rowAnimationDeleteForSwitchCell:switchCell];
     } else {
         rowAnimation = _toggleRowDeleteAnimation;
     }
@@ -733,8 +736,8 @@
         NSUInteger sectionIndex = [self removeSection:section];
 
         UITableViewRowAnimation rowAnimation;
-        if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(sectionAnimationDeleteForSwitchCell)]) {
-            rowAnimation = [switchCell.styleProvider sectionAnimationDeleteForSwitchCell];
+        if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(sectionAnimationDeleteForSwitchCell:)]) {
+            rowAnimation = [switchCell.styleProvider sectionAnimationDeleteForSwitchCell:switchCell];
         } else {
             rowAnimation = _toggleSectionDeleteAnimation;
         }
@@ -757,8 +760,8 @@
     if (![self haveSection:section]) {
         NSInteger sectionIndex = [self insertSection:section afterSection:switchSection];
         UITableViewRowAnimation rowAnimation;
-        if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(sectionAnimationInsertForSwitchCell)]) {
-            rowAnimation = [switchCell.styleProvider sectionAnimationInsertForSwitchCell];
+        if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(sectionAnimationInsertForSwitchCell:)]) {
+            rowAnimation = [switchCell.styleProvider sectionAnimationInsertForSwitchCell:switchCell];
         } else {
             rowAnimation = _toggleSectionInsertAnimation;
         }
@@ -800,8 +803,8 @@
     }];
 
     UITableViewRowAnimation rowAnimation;
-    if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(rowAnimationInsertForSwitchCell)]) {
-        rowAnimation = [switchCell.styleProvider rowAnimationInsertForSwitchCell];
+    if (switchCell.styleProvider && [switchCell.styleProvider respondsToSelector:@selector(rowAnimationInsertForSwitchCell:)]) {
+        rowAnimation = [switchCell.styleProvider rowAnimationInsertForSwitchCell:switchCell];
     } else {
         rowAnimation = _toggleRowInsertAnimation;
     }
@@ -875,7 +878,7 @@
 
 - (void)textViewDidChangeOnTextBoxCell:(AKFormCellTextBox *)cell
 {
-    BOOL isAutomatic = cell.styleProvider && [cell.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell)] && [cell.styleProvider heightStyleForTextBoxCell] == AKFormCellTextBoxHeightStyleAutomatic;
+    BOOL isAutomatic = cell.styleProvider && [cell.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell:)] && [cell.styleProvider heightStyleForTextBoxCell:cell] == AKFormCellTextBoxHeightStyleAutomatic;
     if (isAutomatic) {
 
         CGFloat proposedHeight = [self.tableView.delegate tableView:self.tableView heightForRowAtIndexPath:[self.tableView indexPathForCell:cell]];

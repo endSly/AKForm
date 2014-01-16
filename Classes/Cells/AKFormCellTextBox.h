@@ -33,14 +33,14 @@ typedef NS_ENUM(NSInteger, AKFormCellTextBoxMode) {
 
 @protocol AKFormCellTextBoxStyleProvider <NSObject>
 @optional
-- (AKFormCellTextBoxLabelStyle)labelStyleForTextBoxCell;
-- (AKFormCellTextBoxHeightStyle)heightStyleForTextBoxCell;
-- (CGFloat)labelWidthForTextBoxCell;
-- (CGFloat)heightForTextBoxCell;
-- (UIFont *)labelFontForTextBoxMode:(AKFormCellTextBoxMode)mode;
-- (UIFont *)textBoxFontForTextBoxMode:(AKFormCellTextBoxMode)mode;
-- (UIColor *)labelTextColorForTextBoxMode:(AKFormCellTextBoxMode)mode;
-- (UIColor *)textBoxTextColorForTextBoxMode:(AKFormCellTextBoxMode)mode;
+- (AKFormCellTextBoxLabelStyle)labelStyleForTextBoxCell:(AKFormCellTextBox *)cell;
+- (AKFormCellTextBoxHeightStyle)heightStyleForTextBoxCell:(AKFormCellTextBox *)cell;
+- (CGFloat)labelWidthForTextBoxCell:(AKFormCellTextBox *)cell;
+- (CGFloat)heightForTextBoxCell:(AKFormCellTextBox *)cell;
+- (UIFont *)labelFontForTextBoxMode:(AKFormCellTextBoxMode)mode forTextBoxCell:(AKFormCellTextBox *)cell;
+- (UIFont *)textBoxFontForTextBoxMode:(AKFormCellTextBoxMode)mode forTextBoxCell:(AKFormCellTextBox *)cell;
+- (UIColor *)labelTextColorForTextBoxMode:(AKFormCellTextBoxMode)mode forTextBoxCell:(AKFormCellTextBox *)cell;
+- (UIColor *)textBoxTextColorForTextBoxMode:(AKFormCellTextBoxMode)mode forTextBoxCell:(AKFormCellTextBox *)cell;
 @end
 
 @protocol AKFormCellTextBoxDelegate <AKFormCellDelegate>

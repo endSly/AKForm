@@ -153,8 +153,8 @@
         case AKFormCellTextFieldStyleLabelWithStaticWidth1:
         case AKFormCellTextFieldStyleLabelWithStaticWidth2:
         case AKFormCellTextFieldStyleLabelWithStaticWidth3:
-            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextFieldCell)]) {
-                labelWidth = [self.styleProvider labelWidthForTextFieldCell];
+            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextFieldCell:)]) {
+                labelWidth = [self.styleProvider labelWidthForTextFieldCell:self];
             } else {
                 labelWidth = DEFAULT_TITLE_WIDTH;
             }
@@ -191,8 +191,8 @@
 - (void)styleLabel
 {
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:style:)]) {
-        UIFont *font = [self.styleProvider labelFontForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForMode:style:forTextFieldCell:)]) {
+        UIFont *font = [self.styleProvider labelFontForMode:self.mode style:self.style forTextFieldCell:self];
         self.label.font = font;
     } else {
         switch (self.mode) {
@@ -207,8 +207,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:style:)]) {
-        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForMode:style:forTextFieldCell:)]) {
+        self.label.textColor = [self.styleProvider labelTextColorForMode:self.mode style:self.style forTextFieldCell:self];
     } else {
         switch (self.mode) {
             case AKFormCellTextFieldModeEditing:
@@ -228,15 +228,15 @@
  */
 - (void)styleTextField
 {
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForTextFieldCell)]) {
-        self.style = [self.styleProvider styleForTextFieldCell];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(styleForTextFieldCell:)]) {
+        self.style = [self.styleProvider styleForTextFieldCell:self];
     } else {
         self.style = DEFAULT_STYLE;
     }
 
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldFontForMode:style:)]) {
-        self.textField.font = [self.styleProvider textFieldFontForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldFontForMode:style:forTextFieldCell:)]) {
+        self.textField.font = [self.styleProvider textFieldFontForMode:self.mode style:self.style forTextFieldCell:self];
     } else {
         switch (self.mode) {
             case AKFormCellTextFieldModeEditing:
@@ -250,8 +250,8 @@
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldTextColorForMode:style:)]) {
-        self.textField.textColor = [self.styleProvider textFieldTextColorForMode:self.mode style:self.style];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textFieldTextColorForMode:style:forTextFieldCell:)]) {
+        self.textField.textColor = [self.styleProvider textFieldTextColorForMode:self.mode style:self.style forTextFieldCell:self];
     } else {
         switch (self.mode) {
             case AKFormCellTextFieldModeEditing:

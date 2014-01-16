@@ -30,13 +30,13 @@ typedef NS_ENUM(NSInteger, AKFormCellTextFieldMode) {
 
 @protocol AKFormCellTextFieldStyleProvider <NSObject>
 @optional
-- (AKFormCellTextFieldStyle)styleForTextFieldCell;
-- (CGFloat)labelWidthForTextFieldCell;
-- (CGFloat)heightForTextFieldCell;
-- (UIFont *)labelFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style;
-- (UIFont *)textFieldFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style;
-- (UIColor *)labelTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style;
-- (UIColor *)textFieldTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style;
+- (AKFormCellTextFieldStyle)styleForTextFieldCell:(AKFormCellTextField *)cell;
+- (CGFloat)labelWidthForTextFieldCell:(AKFormCellTextField *)cell;
+- (CGFloat)heightForTextFieldCell:(AKFormCellTextField *)cell;
+- (UIFont *)labelFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style forTextFieldCell:(AKFormCellTextField *)cell;
+- (UIFont *)textFieldFontForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style forTextFieldCell:(AKFormCellTextField *)cell;
+- (UIColor *)labelTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style forTextFieldCell:(AKFormCellTextField *)cell;
+- (UIColor *)textFieldTextColorForMode:(AKFormCellTextFieldMode)mode style:(AKFormCellTextFieldStyle)style forTextFieldCell:(AKFormCellTextField *)cell;
 @end
 
 @protocol AKFormCellTextFieldDelegate <AKFormCellDelegate>

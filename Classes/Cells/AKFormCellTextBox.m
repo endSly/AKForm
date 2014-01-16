@@ -144,8 +144,8 @@
     switch (self.labelStyle) {
         case AKFormCellTextBoxLabelStyleOnLeftLeftAligned:
         case AKFormCellTextBoxLabelStyleOnLeftRightAligned:
-            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextBoxCell)]) {
-                labelWidth = [self.styleProvider labelWidthForTextBoxCell];
+            if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelWidthForTextBoxCell:)]) {
+                labelWidth = [self.styleProvider labelWidthForTextBoxCell:self];
             } else {
                 labelWidth = DEFAULT_TITLE_WIDTH;
             }
@@ -197,16 +197,16 @@
 - (void)styleLabel
 {
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForTextBoxMode:)]) {
-        UIFont *font = [self.styleProvider labelFontForTextBoxMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelFontForTextBoxMode:forTextBoxCell:)]) {
+        UIFont *font = [self.styleProvider labelFontForTextBoxMode:self.mode forTextBoxCell:self];
         self.label.font = font;
     } else {
         self.label.font = DEFAULT_FONT_TITLE;
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForTextBoxMode:)]) {
-        self.label.textColor = [self.styleProvider labelTextColorForTextBoxMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelTextColorForTextBoxMode:forTextBoxCell:)]) {
+        self.label.textColor = [self.styleProvider labelTextColorForTextBoxMode:self.mode forTextBoxCell:self];
     } else {
         self.label.textColor = DEFAULT_TEXTCOLOR_TITLE;
     }
@@ -218,28 +218,28 @@
  */
 - (void)styleTextBox
 {
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelStyleForTextBoxCell)]) {
-        self.labelStyle = [self.styleProvider labelStyleForTextBoxCell];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(labelStyleForTextBoxCell:)]) {
+        self.labelStyle = [self.styleProvider labelStyleForTextBoxCell:self];
     } else {
         self.labelStyle = DEFAULT_LABEL_STYLE;
     }
 
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell)]) {
-        self.heightStyle = [self.styleProvider heightStyleForTextBoxCell];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(heightStyleForTextBoxCell:)]) {
+        self.heightStyle = [self.styleProvider heightStyleForTextBoxCell:self];
     } else {
         self.heightStyle = DEFAULT_HEIGHT_STYLE;
     }
 
     //font
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textBoxFontForTextBoxMode:)]) {
-        self.textView.font = [self.styleProvider textBoxFontForTextBoxMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textBoxFontForTextBoxMode:forTextBoxCell:)]) {
+        self.textView.font = [self.styleProvider textBoxFontForTextBoxMode:self.mode forTextBoxCell:self];
     } else {
         self.textView.font = DEFAULT_FONT_VALUE;
     }
     
     //color
-    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textBoxTextColorForTextBoxMode:)]) {
-        self.textView.textColor = [self.styleProvider textBoxTextColorForTextBoxMode:self.mode];
+    if (self.styleProvider && [self.styleProvider respondsToSelector:@selector(textBoxTextColorForTextBoxMode:forTextBoxCell:)]) {
+        self.textView.textColor = [self.styleProvider textBoxTextColorForTextBoxMode:self.mode forTextBoxCell:self];
     } else {
         self.textView.textColor = DEFAULT_TEXTCOLOR_VALUE;
     }
