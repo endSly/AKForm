@@ -79,7 +79,8 @@
                                             placeholderImageName:[NSString stringWithFormat:@"Placeholder%d", i+1]
                                                        imageSize:imageSize
                                                   thumbnailStyle:((NSNumber *)thumbnailSizes[i]).integerValue
-                                                  formController:self];
+                                                  formController:self
+                                                   styleProvider:self];
         NSString *failMessage = [NSString stringWithFormat:@"Please choose image %d", i+1];
         AKFormValidator *validator = [AKFormValidator requiredValidator:failMessage];
         field.validators = @[validator];

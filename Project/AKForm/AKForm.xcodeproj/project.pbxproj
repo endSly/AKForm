@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A04AC87188E46FF0018FD27 /* AKFormFieldButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A04AC85188E46FF0018FD27 /* AKFormFieldButton.h */; };
+		1A04AC88188E46FF0018FD27 /* AKFormFieldButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A04AC86188E46FF0018FD27 /* AKFormFieldButton.m */; };
+		1A04AC8B188E47630018FD27 /* AKFormCellButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A04AC89188E47630018FD27 /* AKFormCellButton.h */; };
+		1A04AC8C188E47630018FD27 /* AKFormCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A04AC8A188E47630018FD27 /* AKFormCellButton.m */; };
 		1A2B8F18183468B400E1A5BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8F17183468B400E1A5BB /* UIKit.framework */; };
 		1A2B8F1A183468BA00E1A5BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8F19183468BA00E1A5BB /* Foundation.framework */; };
 		1A2B8FF71834953300E1A5BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8FF61834953300E1A5BB /* Accelerate.framework */; };
@@ -68,6 +72,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A04AC85188E46FF0018FD27 /* AKFormFieldButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormFieldButton.h; sourceTree = "<group>"; };
+		1A04AC86188E46FF0018FD27 /* AKFormFieldButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormFieldButton.m; sourceTree = "<group>"; };
+		1A04AC89188E47630018FD27 /* AKFormCellButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKFormCellButton.h; sourceTree = "<group>"; };
+		1A04AC8A188E47630018FD27 /* AKFormCellButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKFormCellButton.m; sourceTree = "<group>"; };
 		1A2B8F17183468B400E1A5BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		1A2B8F19183468BA00E1A5BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		1A2B8F5C183475B300E1A5BB /* AKForm.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = AKForm.podspec; path = ../../AKForm.podspec; sourceTree = "<group>"; };
@@ -228,6 +236,8 @@
 			children = (
 				1A9B21EC18361C16000A7C34 /* AKFormCell.h */,
 				1A9B21ED18361C16000A7C34 /* AKFormCell.m */,
+				1A04AC89188E47630018FD27 /* AKFormCellButton.h */,
+				1A04AC8A188E47630018FD27 /* AKFormCellButton.m */,
 				1A9B21EE18361C16000A7C34 /* AKFormCellDatePicker.h */,
 				1A9B21EF18361C16000A7C34 /* AKFormCellDatePicker.m */,
 				1A9B21F018361C16000A7C34 /* AKFormCellImage.h */,
@@ -249,6 +259,8 @@
 		1A9B220018361C16000A7C34 /* Fields */ = {
 			isa = PBXGroup;
 			children = (
+				1A04AC85188E46FF0018FD27 /* AKFormFieldButton.h */,
+				1A04AC86188E46FF0018FD27 /* AKFormFieldButton.m */,
 				1AB6EF7A18423442001C312B /* AKFormFieldLabelled.h */,
 				1AB6EF7B18423442001C312B /* AKFormFieldLabelled.m */,
 				1A9B220318361C16000A7C34 /* AKFormFieldExpandable.h */,
@@ -283,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A9B222418361C16000A7C34 /* AKFormValue.h in Headers */,
+				1A04AC8B188E47630018FD27 /* AKFormCellButton.h in Headers */,
 				1A9B224218361C16000A7C34 /* AKFormFieldExpandablePicker.h in Headers */,
 				1A9B223018361C16000A7C34 /* AKFormCellPickerView.h in Headers */,
 				1A9B224818361C16000A7C34 /* AKFormFieldModal.h in Headers */,
@@ -307,6 +320,7 @@
 				1A9B222618361C16000A7C34 /* AKFormValidator.h in Headers */,
 				1A9B223E18361C16000A7C34 /* AKFormFieldExpandable.h in Headers */,
 				1A9B224618361C16000A7C34 /* AKFormFieldTextField.h in Headers */,
+				1A04AC87188E46FF0018FD27 /* AKFormFieldButton.h in Headers */,
 				1A9B224A18361C16000A7C34 /* AKFormFieldModalPicker.h in Headers */,
 				1A9B221C18361C16000A7C34 /* AKFormField.h in Headers */,
 			);
@@ -403,6 +417,7 @@
 				1A9B225318361C16000A7C34 /* AKFormFieldToggle.m in Sources */,
 				1A9B225118361C16000A7C34 /* AKFormFieldTextBox.m in Sources */,
 				1A9B223718361C16000A7C34 /* AKFormCellSwitch.m in Sources */,
+				1A04AC8C188E47630018FD27 /* AKFormCellButton.m in Sources */,
 				1A9B222318361C16000A7C34 /* AKFormSection.m in Sources */,
 				1A9B221D18361C16000A7C34 /* AKFormField.m in Sources */,
 				1A9B223118361C16000A7C34 /* AKFormCellPickerView.m in Sources */,
@@ -423,6 +438,7 @@
 				1A9B222918361C16000A7C34 /* AKFormCell.m in Sources */,
 				1A9B224F18361C16000A7C34 /* AKFormFieldSwitch.m in Sources */,
 				1A9B224318361C16000A7C34 /* AKFormFieldExpandablePicker.m in Sources */,
+				1A04AC88188E46FF0018FD27 /* AKFormFieldButton.m in Sources */,
 				1A9B222F18361C16000A7C34 /* AKFormCellLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

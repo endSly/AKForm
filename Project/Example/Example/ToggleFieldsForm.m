@@ -104,7 +104,8 @@
                                              placeholderImageName:@"Placeholder1"
                                                         imageSize:CGSizeMake(320, 320)
                                                    thumbnailStyle:AKFormCellImageThumbnailStyleCircle
-                                                   formController:self];
+                                                   formController:self
+                                                    styleProvider:self];
     [fields addObject:imageField];
 
     //Date Field
