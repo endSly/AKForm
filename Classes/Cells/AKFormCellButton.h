@@ -8,7 +8,7 @@
 
 #import "AKFormCell.h"
 
-#define CELL_IDENTIFIER_TEXTFIELD       @"buttonCell"
+#define CELL_IDENTIFIER_BUTTON       @"buttonCell"
 
 typedef NS_ENUM(NSInteger, AKFormCellButtonStyle) {
     AKFormCellButtonStyleLabelCentered,
@@ -45,5 +45,6 @@ typedef NS_ENUM(NSInteger, AKFormCellButtonMode) {
 @property(nonatomic, weak) id<AKFormCellButtonDelegate> delegate;
 
 - (instancetype)initWithStyleProvider:(id<AKFormCellButtonStyleProvider>)styleProvider;
+- (void)setIconImage:(UIImage *)image;
 
 @end

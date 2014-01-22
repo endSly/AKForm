@@ -10,6 +10,8 @@
 
 #define DEFAULT_STYLE                   AKFormCellButtonStyleLabelCentered
 
+#define PADDING_HORIZONAL_ICON          5.f
+
 @interface AKFormCellButton()
 @property(nonatomic, assign) AKFormCellButtonStyle style;
 @property(nonatomic, assign) AKFormCellButtonMode mode;
@@ -26,7 +28,7 @@
 
 - (instancetype)initWithStyleProvider:(id<AKFormCellButtonStyleProvider>)styleProvider
 {
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER_TEXTFIELD];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER_BUTTON];
     if (self) {
 
         self.styleProvider = styleProvider;
@@ -49,8 +51,8 @@
         [self styleTextAlignments];
         [self setupInitialStyle];
         
-        UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCell:)];
-        [self.contentView addGestureRecognizer:tgr];
+//        UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedCell:)];
+//        [self.contentView addGestureRecognizer:tgr];
     }
     return self;
 }
@@ -136,6 +138,13 @@
     }
 }
 
+- (void)setIconImage:(UIImage *)image
+{
+    CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    self.icon.frame = frame;
+    [self.icon setImage:image];
+}
+
 ///---------------------------------------------------------------------------------------
 #pragma mark - (Private) Repeated Style Helpers
 ///---------------------------------------------------------------------------------------
@@ -151,17 +160,17 @@
     
     CGRect contentFrame = [self contentFrame];
     
-    if (self.icon.frame.size.width > 0 && self.icon.frame.size.height > 0) {
+    BOOL haveIcon = self.icon.image.size.width > 0;
+    if (haveIcon) {
         //fit icon
         iconHeight = contentFrame.size.height;
-        iconWidth = (self.icon.frame.size.height / self.icon.frame.size.width) / contentFrame.size.height;
+        iconWidth = (self.icon.image.size.width * contentFrame.size.height) / self.icon.image.size.height;
         self.icon.frame = CGRectMake(0, 0, iconWidth, iconHeight);
     } else {
         iconHeight = 0.f;
         iconWidth = 0.f;
     }
 
-    BOOL haveIcon = self.icon.frame.size.width > 0;
     BOOL haveDetail = self.detailLabel.frame.size.width > 0;
 
     [self.label sizeToFit];
@@ -171,33 +180,53 @@
     detailLabelHeight = self.detailLabel.frame.size.height;
     detailLabelWidth = self.detailLabel.frame.size.width;
     
+    CGFloat largestWidth = MAX(labelWidth, detailLabelWidth);
+    CGFloat height = MAX(iconHeight, labelHeight + detailLabelHeight);
+    height = MIN(height, contentFrame.size.height);
+    
+    //TODO - test image in centered position, and then finish other styles
     switch (self.style) {
+        case AKFormCellButtonStyleLabelCentered:
         case AKFormCellButtonStyleLabelLeft:
-            //size the container view
-            self.containerView.frame = CGRectMake(0, 0,
-                                                  iconWidth + MAX(labelWidth, detailLabelWidth),
-                                                  MAX(iconHeight, labelHeight + detailLabelHeight));
-            //position the elements
+        case AKFormCellButtonStyleLabelRight:
+            //position the sub elements
             if (haveIcon) {
-                self.label.frame = CGRectMake(iconWidth, 0, labelWidth, labelHeight);
+                self.containerView.frame = CGRectMake(PADDING_HORIZONTAL, PADDING_VERTICAL,
+                                                      iconWidth + largestWidth + PADDING_HORIZONAL_ICON,
+                                                      height);
+                self.label.frame = CGRectMake(iconWidth + PADDING_HORIZONAL_ICON, 0, largestWidth, labelHeight);
                 if (haveDetail) {
-                    self.detailLabel.frame = CGRectMake(iconWidth, labelHeight, detailLabelWidth, detailLabelHeight);
+                    self.detailLabel.frame = CGRectMake(iconWidth + PADDING_HORIZONAL_ICON, labelHeight, largestWidth, detailLabelHeight);
                 }
             } else {
-                self.label.frame = CGRectMake(0, 0, labelWidth, labelHeight);
+                self.containerView.frame = CGRectMake(PADDING_HORIZONTAL, PADDING_VERTICAL,
+                                                      iconWidth + largestWidth,
+                                                      height);
+                self.label.frame = CGRectMake(0, 0, largestWidth, labelHeight);
                 if (haveDetail) {
-                    self.detailLabel.frame = CGRectMake(0, labelHeight, detailLabelWidth, detailLabelHeight);
+                    self.detailLabel.frame = CGRectMake(0, labelHeight, largestWidth, detailLabelHeight);
                 }
             }
-            
-            //center the contentView
-            self.containerView.center = CGPointMake(CGRectGetMidX(contentFrame), CGRectGetMidY(contentFrame));
-            
-            break;
-        case AKFormCellButtonStyleLabelRight:
-        case AKFormCellButtonStyleLabelCentered:
             break;
     }
+    
+    self.containerView.center = CGPointMake(CGRectGetMidX(contentFrame), CGRectGetMidY(contentFrame));
+    CGFloat newX = self.containerView.frame.origin.x;
+    
+    switch (self.style) {
+        case AKFormCellButtonStyleLabelCentered:
+            break;
+        case AKFormCellButtonStyleLabelLeft:
+            newX = PADDING_HORIZONTAL;
+            break;
+        case AKFormCellButtonStyleLabelRight:
+            newX = contentFrame.size.width - self.containerView.frame.size.width + PADDING_HORIZONTAL;
+            break;
+    }
+    self.containerView.frame = CGRectMake(newX,
+                                          self.containerView.frame.origin.y,
+                                          self.containerView.frame.size.width,
+                                          self.containerView.frame.size.height);
 }
 
 /**

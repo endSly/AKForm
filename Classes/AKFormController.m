@@ -509,6 +509,9 @@
     } else if ([field isKindOfClass:[AKFormFieldImage class]]) {
         AKFormFieldImage *imageField = (AKFormFieldImage *)field;
         [imageField select];
+    } else if ([field isKindOfClass:[AKFormFieldButton class]]) {
+        AKFormFieldButton *buttonField = (AKFormFieldButton *)field;
+        [buttonField.delegate didPressButtonCell:(AKFormCellButton *)buttonField.cell];
     }
 }
 

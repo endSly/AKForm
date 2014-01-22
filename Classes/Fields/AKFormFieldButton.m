@@ -39,6 +39,7 @@
         
         self.title = title;
         self.subtitle = subtitle;
+        self.image = image;
         
         self.selectionStyle = UITableViewCellSelectionStyleDefault;
         self.accessoryType = UITableViewCellAccessoryNone;
@@ -55,7 +56,7 @@
  */
 - (UITableViewCell *)cellForTableView:(UITableView *)tableView
 {
-    AKFormCellButton *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_TEXTFIELD];
+    AKFormCellButton *cell = [tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER_BUTTON];
     if (!cell) {
         cell = [[AKFormCellButton alloc] initWithStyleProvider:self.styleProvider];
     }
@@ -63,12 +64,13 @@
     cell.delegate = self.delegate;
     cell.valueDelegate = self;
     
-    cell.selectionStyle = self.selectionStyle;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.accessoryType = self.accessoryType;
     
     cell.label.text = self.title;
     cell.detailLabel.text = self.subtitle;
-    [cell.icon setImage:self.image];
+    
+    [cell setIconImage:self.image];
     
     //now rearrange the layout!
     [cell layoutSubviews];

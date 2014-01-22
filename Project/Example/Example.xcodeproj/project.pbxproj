@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A04AC8F188E61D20018FD27 /* ButtonFieldsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A04AC8E188E61D20018FD27 /* ButtonFieldsForm.m */; };
 		1A1E488D187FCC4D00E6B69E /* TextBoxesForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1E488C187FCC4D00E6B69E /* TextBoxesForm.m */; };
 		1A2B8F161834669100E1A5BB /* libAKForm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8F151834669100E1A5BB /* libAKForm.a */; };
 		1A2B8FF9183496C000E1A5BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B8FF8183496C000E1A5BB /* Accelerate.framework */; };
@@ -28,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		101DC3B1278A40B48E5B9F2E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A04AC8D188E61D20018FD27 /* ButtonFieldsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonFieldsForm.h; sourceTree = "<group>"; };
+		1A04AC8E188E61D20018FD27 /* ButtonFieldsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonFieldsForm.m; sourceTree = "<group>"; };
 		1A1E488B187FCC4D00E6B69E /* TextBoxesForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBoxesForm.h; sourceTree = "<group>"; };
 		1A1E488C187FCC4D00E6B69E /* TextBoxesForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBoxesForm.m; sourceTree = "<group>"; };
 		1A2B8F151834669100E1A5BB /* libAKForm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAKForm.a; path = "../AKForm/build/Debug-iphoneos/libAKForm.a"; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 		1A9B216318361498000A7C34 /* Field Types */ = {
 			isa = PBXGroup;
 			children = (
+				1A04AC8D188E61D20018FD27 /* ButtonFieldsForm.h */,
+				1A04AC8E188E61D20018FD27 /* ButtonFieldsForm.m */,
 				1AA5B67A1837C3CE00421A67 /* TextFieldsForm.h */,
 				1AA5B67B1837C3CE00421A67 /* TextFieldsForm.m */,
 				1A1E488B187FCC4D00E6B69E /* TextBoxesForm.h */,
@@ -264,6 +269,7 @@
 				1A5AAA9F183455CB00CEA9D7 /* main.m in Sources */,
 				1ABEAA6E1839BA3700F03350 /* DatePickerFieldsForm.m in Sources */,
 				1A1E488D187FCC4D00E6B69E /* TextBoxesForm.m in Sources */,
+				1A04AC8F188E61D20018FD27 /* ButtonFieldsForm.m in Sources */,
 				1AA5B67C1837C3CE00421A67 /* TextFieldsForm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

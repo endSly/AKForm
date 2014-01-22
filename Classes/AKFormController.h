@@ -21,6 +21,7 @@
 #import "AKFormFieldModalPicker.h"
 #import "AKFormFieldTextBox.h"
 #import "AKFormFieldSwitch.h"
+#import "AKFormFieldButton.h"
 
 #define HEIGHT_STANDARD_PICKER  216.f
 #define CELL_HEIGHT_DEFAULT             44.f
