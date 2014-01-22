@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "AKForm"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "A refreshing iOS 7 form framework with the works."
 
   s.description  = <<-DESC
