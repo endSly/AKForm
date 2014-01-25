@@ -273,7 +273,7 @@
         switch (self.mode) {
             case AKFormCellButtonModeEnabled:
             case AKFormCellButtonModeDisabled:
-                self.label.font = DEFAULT_FONT_VALUE;
+                self.detailLabel.font = DEFAULT_FONT_VALUE;
                 break;
         }
     }
