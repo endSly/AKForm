@@ -244,7 +244,7 @@
             case AKFormCellTextFieldModeFilled:
             case AKFormCellTextFieldModeReadOnly:
             case AKFormCellTextFieldModeInvalid:
-                self.label.font = DEFAULT_FONT_VALUE;
+                self.textField.font = DEFAULT_FONT_VALUE;
                 break;
         }
     }
