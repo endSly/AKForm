@@ -403,10 +403,8 @@
             }
         } else if ([field isKindOfClass:[AKFormFieldImage class]]) {
             AKFormFieldImage *imageField = (AKFormFieldImage *)field;
-            AKFormCellImage *imageCell = (AKFormCellImage *)imageField.cell;
-            
-            if ([imageCell.styleProvider respondsToSelector:@selector(heightForImageCell:)]) {
-                return [imageCell.styleProvider heightForImageCell:imageCell];
+            if (imageField.styleProvider && [imageField.styleProvider respondsToSelector:@selector(heightForImageCell:)]) {
+                return [imageField.styleProvider heightForImageCell:nil];
             }
         } else if ([field isKindOfClass:[AKFormFieldTextBox class]]) {
             AKFormFieldTextBox *f = (AKFormFieldTextBox *)field;
