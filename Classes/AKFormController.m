@@ -406,7 +406,7 @@
             AKFormCellImage *imageCell = (AKFormCellImage *)imageField.cell;
             
             if ([imageCell.styleProvider respondsToSelector:@selector(heightForImageCell:)]) {
-                return [imageCell.styleProvider heightForImageCell:(AKFormCellImage *)[tableView cellForRowAtIndexPath:indexPath]];
+                return [imageCell.styleProvider heightForImageCell:imageCell];
             }
         } else if ([field isKindOfClass:[AKFormFieldTextBox class]]) {
             AKFormFieldTextBox *f = (AKFormFieldTextBox *)field;
@@ -442,6 +442,7 @@
                 
                 CGFloat cellHeight = originY + neededHeight + PADDING_VERTICAL;
                 NSLog(@"Cell height is %lf + %lf + %lf = %lf", originY, neededHeight, PADDING_HORIZONTAL, cellHeight);
+                
                 return cellHeight;
 //                CGRect newFrame = c.textView.frame;
 //                newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
