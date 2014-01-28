@@ -947,8 +947,10 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, showDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
             });
-        } else {
+        } else if (expectingShow) {
             [self showFieldsInMapTable:aField.fieldsToShowOnOn forSwitchCell:switchCell inSection:switchSection];
+        } else {
+            switchCell.switchControl.userInteractionEnabled = YES;
         }
         
     } else {
@@ -961,8 +963,10 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, showDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell inSection:switchSection];
             });
-        } else {
+        } else if (expectingShow) {
             [self showFieldsInMapTable:aField.fieldsToHideOnOn forSwitchCell:switchCell inSection:switchSection];
+        } else {
+            switchCell.switchControl.userInteractionEnabled = YES;
         }
     }
 }
