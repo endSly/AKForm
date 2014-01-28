@@ -676,6 +676,7 @@
     [self.view endEditing:YES];
     
     if (!fieldsToHide || ![self haveSection:section]) {
+        switchCell.switchControl.userInteractionEnabled = YES;
         return;
     }
     
@@ -753,6 +754,7 @@
 - (void)showFields:(NSArray *)fieldsToShow inSection:(AKFormSection *)section forSwitchCell:(AKFormCellSwitch *)switchCell inSection:(AKFormSection *)switchSection
 {
     if (!fieldsToShow) {
+        switchCell.switchControl.userInteractionEnabled = YES;
         return;
     }
     
