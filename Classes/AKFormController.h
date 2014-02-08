@@ -37,6 +37,9 @@
 
 - (void)addSection:(AKFormSection *)section;
 
+- (void)removeAllSections;
+- (NSInteger)removeSection:(AKFormSection *)section
+
 - (AKFormValidator *)failedValidator;
 - (NSMutableDictionary *)populateUserInfo:(NSMutableDictionary *)userInfo;
 - (NSIndexPath *)indexPathForField:(AKFormField *)aField;

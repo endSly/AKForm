@@ -126,6 +126,11 @@
     }
 }
 
+- (void)removeAllSections
+{
+    self.sections = [NSMutableArray array];
+}
+
 - (NSInteger)removeSection:(AKFormSection *)section
 {
     NSUInteger index = [self.sections indexOfObject:section];
